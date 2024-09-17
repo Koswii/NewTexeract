@@ -338,7 +338,7 @@ section.homePageContainer.mid{
     margin-top: 3%;
 }
 .hmpcm1Contents img{
-    height: 2.5vw;
+    height: 2vw;
     filter: grayscale(100%);
     margin: 2% 4%;
     transition: 400ms ease;

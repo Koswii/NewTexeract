@@ -52,7 +52,19 @@ const wordList = [
     'cloud', 'sun', 'rain', 'snow', 'wind', 'fog', 'storm', 'haze', 'frost', 'mist',
     'chair', 'lamp', 'stool', 'desk', 'couch', 'rug', 'fan', 'table', 'clock', 'shelf',
     'plane', 'train', 'car', 'bus', 'bike', 'taxi', 'ship', 'boat', 'raft', 'truck',
-    'fish', 'shrimp', 'crab', 'salmon', 'trout', 'clam', 'lobster', 'squid', 'cod', 'eel'
+    'fish', 'shrimp', 'crab', 'salmon', 'trout', 'clam', 'lobster', 'squid', 'cod', 'eel',
+    'balloon', 'blanket', 'mustard', 'eyelash', 'airport', 'factory', 'thunder', 'rainbow', 'diamond', 'harvest',
+    'emerald', 'festival', 'horizon', 'journal', 'leopard', 'spinach', 'yogurt', 'lettuce', 'capture', 'oatmeal',
+    'package', 'soldier', 'plastic', 'caramel', 'sunrise', 'pottery', 'fortune', 'brother', 'dolphin', 'picture',
+    'blanket', 'fortune', 'justice', 'mission', 'shallow', 'venture', 'protein', 'stretch', 'antique', 'archive',
+    'boulder', 'cousins', 'dancing', 'fiction', 'giraffe', 'hostage', 'lantern', 'monster', 'passion', 'pioneer',
+    'running', 'shuttle', 'teacher', 'uniform', 'victory', 'warning', 'wildcat', 'zombie', 'butters', 'cabbage',
+    'channel', 'delight', 'desktop', 'dragons', 'gallery', 'gateway', 'grammar', 'healthy', 'horizon', 'illusion',
+    'justice', 'library', 'monster', 'opinion', 'organic', 'painting', 'pattern', 'planet', 'pottery', 'rainbow',
+    'rockets', 'sandwich', 'silence', 'stadium', 'sunrise', 'treetop', 'venture', 'village', 'whisper', 'wolfpack',
+    'algebra', 'biscuit', 'circuit', 'compass', 'crystal', 'diagram', 'diamond', 'fantasy', 'giraffe', 'granite',
+    'hatchet', 'journal', 'kangaro', 'luggage', 'mystery', 'napkins', 'optical', 'pioneer', 'planter', 'plunger',
+    'reactor', 'shallow', 'species', 'treetop', 'uniform', 'upscale', 'vulture', 'warning', 'warrior', 'whistle'
 ];
 
 const CreateWallet = () => {
@@ -76,17 +88,37 @@ const CreateWallet = () => {
     const [xeraPasswordErrorResponse1, setXERAPasswordErrorResponse1] = useState('');
     const [xeraPasswordResponse, setXERAPasswordResponse] = useState(false);
 
+    const [userInputs, setUserInputs] = useState(Array(12).fill(''));
+    const [isConfirmed, setIsConfirmed] = useState(false);
+
 
     const generateSeedPhrase = () => {
         let selectedWords = [];
         const wordListCopy = [...wordList];
         for (let i = 0; i < 12; i++) {
-          const randomIndex = Math.floor(Math.random() * wordListCopy.length);
-          selectedWords.push({ number: i + 1, word: wordListCopy[randomIndex] });
-          wordListCopy.splice(randomIndex, 1);
+            const randomIndex = Math.floor(Math.random() * wordListCopy.length);
+            selectedWords.push({ number: i + 1, word: wordListCopy[randomIndex] });
+            wordListCopy.splice(randomIndex, 1);
         }
         setSeedPhrase(selectedWords);
     };
+    const handleInputChange = (index, e) => {
+        const { value } = e.target;
+        setUserInputs(prevInputs => {
+            const newInputs = [...prevInputs];
+            newInputs[index] = value;
+            return newInputs;
+        });
+    };
+    const handleConfirm = () => {
+        const indicesToCheck = [3, 6, 7]; // 4th, 7th, and 8th words (0-based indices)
+        const isMatch = indicesToCheck.every(index => seedPhrase[index].word === userInputs[index]);
+        setIsConfirmed(isMatch);
+        console.log(isMatch);
+        console.log([xeraUsername, xeraPassword]);
+    };
+
+    const indicesToCheck = [3, 6, 7]; // 4th, 7th, and 8th words (0-based indices)
     const handleCloseCreate = () => {
         setViewWalletCreate(false)
         setViewCreateAccount(true)
@@ -100,8 +132,10 @@ const CreateWallet = () => {
 
     const handleCheckUsername = (e) => {
         const userUsername = e.target.value;
-        
+        // Regular expression to check for non-alphanumeric characters
+        const specialCharRegex = /[^a-zA-Z0-9]/;
         setXERAUsername(userUsername);
+
         // Always check for empty input first
         if (userUsername.length === 0) {
             setXERAUsernameError(true);
@@ -109,6 +143,13 @@ const CreateWallet = () => {
             setXERAUsernameErrorResponse('Username cannot be empty');
             setXERAUsernameErrorResponse1('');
         } 
+        // Check if username contains special characters
+        else if (specialCharRegex.test(userUsername)) {
+            setXERAUsernameError(true);
+            setXERAUsernameResponse(false);
+            setXERAUsernameErrorResponse('No special characters or symbols');
+            setXERAUsernameErrorResponse1('');
+        }
         // Check if the username is too short
         else if (userUsername.length < 5) {
             setXERAUsernameError(true);
@@ -179,6 +220,7 @@ const CreateWallet = () => {
         setViewCreateAccount(false)
         setViewSeedPhrase(false)
         setViewVerifyWallet(true)
+        
     }
 
 
@@ -220,7 +262,7 @@ const CreateWallet = () => {
                                 </label>
                                 <input 
                                     className={(xeraUsernameError && xeraUsernameErrorResponse) ? 'error' : ''} 
-                                    id={(xeraUsernameErrorResponse1 || xeraUsernameResponse) ? 'correct' : ''}
+                                    id={(xeraUsernameErrorResponse1 || xeraUsernameResponse) ? 'correctUsername' : 'wrongUsername'}
                                     type="text" 
                                     placeholder='Ex. Loki' 
                                     value={xeraUsername}
@@ -234,7 +276,7 @@ const CreateWallet = () => {
                                 </label>
                                 <input 
                                     className={(xeraPasswordError && xeraPasswordErrorResponse) ? 'error' : ''} 
-                                    id={(xeraPasswordErrorResponse1 || xeraPasswordResponse) ? 'correct' : ''}
+                                    id={(xeraPasswordErrorResponse1 || xeraPasswordResponse) ? 'correctPassword' : 'wrongPassword'}
                                     type="password"  
                                     placeholder='********' 
                                     value={xeraPassword}
@@ -254,6 +296,29 @@ const CreateWallet = () => {
                             ))}
                         </div>
                     </div>}
+                    {viewVerifyWallet && <div className="ncwcc verifyWallet">
+                        <h6>VERIFY SEED PHRASE<br />TO PROCEED</h6>
+                        <p>Complete the seed phrase, and your XERA Wallet will be ready to go.</p>
+                        <div className='ncwccsp'>
+                            {seedPhrase.map((data, index) => (
+                                <div key={index}>
+                                    <h5>
+                                        <span>{data.number}.</span>
+                                        {indicesToCheck.includes(index) ? (
+                                            <input
+                                                type="text"
+                                                value={userInputs[index]}
+                                                onChange={(e) => handleInputChange(index, e)}
+                                                placeholder={`Word ${data.number}`}
+                                            />
+                                        ) : (
+                                            data.word
+                                        )}
+                                    </h5>
+                                </div>
+                            ))}
+                        </div>
+                    </div>}
                 </div>
                 <div className="ncwcNote">
                     <p>Creating a XERA Wallet allows you to access all the features of the Texeract Network</p>
@@ -269,7 +334,7 @@ const CreateWallet = () => {
                         <button className='active' onClick={handlePage3}>Next</button>
                     </>}
                     {viewVerifyWallet && <>
-                        <button>Create</button>
+                        <button onClick={handleConfirm}>Create</button>
                     </>}
                 </div>
             </div>
