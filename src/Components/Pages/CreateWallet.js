@@ -75,7 +75,6 @@ const CreateWallet = () => {
     const [xeraPasswordErrorResponse, setXERAPasswordErrorResponse] = useState('');
     const [xeraPasswordErrorResponse1, setXERAPasswordErrorResponse1] = useState('');
     const [xeraPasswordResponse, setXERAPasswordResponse] = useState(false);
-    const [disableNext, setDisabledNext] = useState(false);
 
 
     const generateSeedPhrase = () => {
@@ -100,57 +99,64 @@ const CreateWallet = () => {
     }
 
     const handleCheckUsername = (e) => {
-        const userUsername = e.target.value
-        if (userUsername.length < 4){
-            setXERAUsernameError(true)
-            setXERAUsernameResponse(false)
-            setXERAUsernameErrorResponse('Username too short')
-            setXERAUsernameErrorResponse1('')
-            setDisabledNext(true)
-
-        } else {
-            setXERAUsernameError(false)
-            setXERAUsernameResponse(true)
-            setXERAUsernameErrorResponse('')
-            setXERAUsernameErrorResponse1('')
-            setXERAUsername(userUsername)
+        const userUsername = e.target.value;
+        
+        setXERAUsername(userUsername);
+        // Always check for empty input first
+        if (userUsername.length === 0) {
+            setXERAUsernameError(true);
+            setXERAUsernameResponse(false);
+            setXERAUsernameErrorResponse('Username cannot be empty');
+            setXERAUsernameErrorResponse1('');
+        } 
+        // Check if the username is too short
+        else if (userUsername.length < 5) {
+            setXERAUsernameError(true);
+            setXERAUsernameResponse(false);
+            setXERAUsernameErrorResponse('Username too short');
+            setXERAUsernameErrorResponse1('');
+        } 
+        // Valid username
+        else {
+            setXERAUsernameError(false);
+            setXERAUsernameResponse(true);
+            setXERAUsernameErrorResponse('');
+            setXERAUsernameErrorResponse1('');
         }
-    }
-
-
+    };
     const handleCheckPassword = (e) => {
-        const userPassword = e.target.value
-
-
-        if (userPassword.length === 0){
-            setXERAPasswordError(true)
-            setXERAPasswordResponse(false)
-            setXERAPasswordErrorResponse('')
-            setXERAPasswordErrorResponse1('')
-            setDisabledNext(true)
-
+        const userPassword = e.target.value;
+    
+        setXERAPassword(userPassword);
+        // Always check for empty input first
+        if (userPassword.length === 0) {
+            setXERAPasswordError(true);
+            setXERAPasswordResponse(false);
+            setXERAPasswordErrorResponse('Password cannot be empty');
+            setXERAPasswordErrorResponse1('');
+        } 
+        // Check if the password is too short
+        else if (userPassword.length < 8) {
+            setXERAPasswordError(true);
+            setXERAPasswordResponse(false);
+            setXERAPasswordErrorResponse('At least 8-16 characters required');
+            setXERAPasswordErrorResponse1('');
+        } 
+        // Check for valid password length but still too short
+        else if (userPassword.length >= 8 && userPassword.length < 12) {
+            setXERAPasswordError(false);
+            setXERAPasswordResponse(true);
+            setXERAPasswordErrorResponse('');
+            setXERAPasswordErrorResponse1('Password too short');
+        } 
+        // Valid password
+        else {
+            setXERAPasswordError(false);
+            setXERAPasswordResponse(true);
+            setXERAPasswordErrorResponse('');
+            setXERAPasswordErrorResponse1('');
         }
-
-
-        if (userPassword.length < 8){
-            setXERAPasswordError(true)
-            setXERAPasswordErrorResponse('At least 8-16 Characters')
-            setXERAPasswordErrorResponse1('')
-            setDisabledNext(true)
-
-        } else if ( userPassword.length === 8 || userPassword.length === 9 || userPassword.length === 10) {
-            setXERAPasswordError(true)
-            setXERAPasswordErrorResponse('')
-            setXERAPasswordErrorResponse1('Password too short')
-            setXERAPassword(userPassword)
-        } else {
-            setXERAPasswordError(false)
-            setXERAPasswordResponse(true)
-            setXERAPasswordErrorResponse('')
-            setXERAPasswordErrorResponse1('')
-            setXERAPassword(userPassword)
-        }
-    }
+    };
 
 
     const handleDefaultPage = () => {
@@ -159,10 +165,15 @@ const CreateWallet = () => {
         setViewVerifyWallet(false)
     }
     const handlePage2 = () => {
-        setViewCreateAccount(false)
-        setViewSeedPhrase(true)
-        setViewVerifyWallet(false)
-        generateSeedPhrase();
+        if (xeraUsername && xeraPassword && !xeraUsernameError && !xeraPasswordError) {
+            setViewCreateAccount(false);
+            setViewSeedPhrase(true);
+            setViewVerifyWallet(false);
+            generateSeedPhrase();
+        } else {
+            // Ensure it doesn't allow proceeding if there are validation errors
+            console.log('Validation failed. Cannot proceed.');
+        }
     }
     const handlePage3 = () => {
         setViewCreateAccount(false)
@@ -212,19 +223,21 @@ const CreateWallet = () => {
                                     id={(xeraUsernameErrorResponse1 || xeraUsernameResponse) ? 'correct' : ''}
                                     type="text" 
                                     placeholder='Ex. Loki' 
+                                    value={xeraUsername}
                                     onChange={handleCheckUsername}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="">Password 
                                     {(xeraPasswordError && xeraPasswordErrorResponse) && <span id='passErrorResponse'>{xeraPasswordErrorResponse}</span>}
-                                    {(xeraPasswordError && xeraPasswordErrorResponse1) && <span id='passErrorResponse1'>{xeraPasswordErrorResponse1}</span>}
+                                    {(xeraPasswordErrorResponse1) && <span id='passErrorResponse1'>{xeraPasswordErrorResponse1}</span>}
                                 </label>
                                 <input 
                                     className={(xeraPasswordError && xeraPasswordErrorResponse) ? 'error' : ''} 
                                     id={(xeraPasswordErrorResponse1 || xeraPasswordResponse) ? 'correct' : ''}
                                     type="password"  
                                     placeholder='********' 
+                                    value={xeraPassword}
                                     onChange={handleCheckPassword}
                                 />
                             </div>
@@ -247,11 +260,9 @@ const CreateWallet = () => {
                 </div>
                 <div className="ncwcButtons">
                     {viewCreateAccount && <>
-                        <button 
-                            className={(xeraUsername && xeraPassword) ? 'active':''} 
-                            onClick={handlePage2} 
-                            disabled={!disableNext}>Next
-                        </button>
+                        {((xeraUsername && xeraPassword && !xeraUsernameError && !xeraPasswordError)) ?
+                        <button className='active' onClick={handlePage2}>Next</button> :
+                        <button disabled>Next</button>}
                     </>}
                     {viewSeedPhrase && <>
                         <button className='active' onClick={handleDefaultPage}>Prev</button>
