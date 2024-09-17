@@ -1,0 +1,293 @@
+h1, h2, h3, h4, h5, h6, p{
+    color: white;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
+p{
+    font-size: 0.9vw;
+}
+h1{
+    font-size: 10vw;
+}
+h2{
+    font-size: 5vw;
+}
+h3{
+    font-size: 4vw;
+}
+h4{
+    font-size: 2vw;
+}
+h5{
+    font-size: 1.5vw;
+}
+h6{
+    font-size: 1vw;
+}
+
+
+.mainContainer.createWallet{
+    height: auto;
+    width: 100%;
+    background: black;
+}
+
+.navContainerWallet{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navWalletContent{
+    height: auto;
+    width: 25%;
+    border-radius: 1vw;
+    padding: 2%;
+    background: url('../assets/imgs/dashboadBG05.png') no-repeat center;
+    background-size: cover;
+    box-shadow: 0 0 10px rgb(75, 75, 75);
+    animation: fade-in-down 800ms ease;
+    position: relative;
+}
+.navWalletContent button#closeCreateWallet{
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+    position: absolute;
+    top: 1vw;
+    right: 1vw;
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+.ncwcHeader{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ncwcHeader img{
+    height: 3vw;
+    margin-right: 3%;
+}
+.ncwcHeader p{
+    color: gray;
+    font-size: 0.7vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.ncwcNavDots{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 7%;
+}
+.ncwcNavDots span{
+    height: 1vw;
+    width: 1vw;
+    opacity: 50%;
+    background: gray;
+    border-radius: 50%;
+}
+.ncwcNavDots span.active{
+    background: skyblue;
+    opacity: 100%;
+    transition: 400ms ease;
+}
+.ncwcNavDots hr{
+    width: 25%;
+    border: solid 2px gray;
+    opacity: 30%;
+}
+.ncwcNavDots img{
+    height: 1vw;
+    width: 1vw;
+    transition: 400ms ease;
+}
+.ncwcNavContent{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ncwcNavContent p{
+    width: 25%;
+    margin: 0.5vw;
+    font-size: 0.5vw;
+    text-align: center;
+    opacity: 50%;
+}
+.ncwcNavContent p.active{
+    opacity: 100%;
+    transition: 400ms ease;
+}
+.ncwcContents{
+    height: 40vh;
+    width: 100%;
+    margin: 5% 0;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 0.8vw;
+    padding: 10% 5%;
+}
+.ncwcc{
+    height: auto;
+    width: 100%;
+}
+.ncwcContents .ncwcc h6{
+    text-align: center;
+    font-size: 0.9vw;
+}
+.ncwcContents .ncwcc p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    text-align: center;
+    margin: 5% 0;
+    padding: 0 5%;
+}
+.ncwcc.createAccount{
+    height: auto;
+    width: 100%;
+}
+.ncwcccaContent{
+    padding: 0 10%;
+    margin-top: 10%;
+}
+.ncwcccaContent label{
+    color: gray;
+    font-size: 0.7vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ncwcccaContent label span{
+    font-size: 0.6vw;
+    font-style: italic;
+}
+.ncwcccaContent label span#passErrorResponse,
+.ncwcccaContent label span#nameErrorResponse{
+    color: red;
+    transition: 400ms ease;
+}
+.ncwcccaContent label span#passErrorResponse1{
+    color: orange;
+    transition: 400ms ease;
+}
+.ncwcccaContent input{
+    height: auto;
+    width: 100%;
+    border: solid 2px white;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 0.7vw;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-top: 1%;
+}
+.ncwcccaContent input.error{
+    border: solid 2px red;
+    transition: 400ms ease;
+}
+.ncwcccaContent input#correct{
+    border: solid 2px skyblue;
+    transition: 400ms ease;
+}
+.ncwcccaContent div{
+    position: relative;
+    width: 100%;
+    margin-bottom: 5%;
+}
+.ncwcccaContent div label#errorResponse{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.ncwccsp{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.ncwccsp div{
+    width: 40%;
+    margin: 1.5% 2%;
+}
+.ncwccsp div h5{
+    font-size: 0.9vw;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+}
+.ncwccsp div h5 span{
+    font-size: 0.7vw;
+    font-weight: 400;
+    margin-right: 10%;
+    color: gray;
+}
+
+
+
+
+
+
+.ncwcNote{
+    height: auto;
+    width: 100%;
+    margin-bottom: 5%;
+}
+.ncwcNote p{
+    font-size: 0.5vw;
+    text-align: center;
+}
+
+.ncwcButtons{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ncwcButtons button{
+    width: 35%;
+    padding: 8px 5px;
+    border: solid 2px white;
+    border-radius: 50px;
+    background: none;
+    color: white;
+    outline: none;
+    font-size: 0.7vw;
+    font-family: 'Lexend Peta', sans-serif;
+    cursor: not-allowed;
+    opacity: 50%;
+    transition: 400ms ease;
+    margin: 0 2%;
+}
+.ncwcButtons button.active{
+    opacity: 100%;
+    transition: 400ms ease;
+    cursor: pointer;
+}
+.ncwcButtons button.active:hover{
+    background: white;
+    color: black;
+    transition: 400ms ease;
+}

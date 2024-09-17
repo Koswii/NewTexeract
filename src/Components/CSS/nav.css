@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@300;400;500;600;700;800;900&display=swap');
+
+
+/* font-family: "Montserrat", sans-serif;*/
+h6{
+    font-family: "Montserrat", sans-serif;
+}
+
+nav{
+    height: auto;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 997;
+}
+.mainNavContainer{
+    height: auto;
+    width: 100%;
+    position: relative;
+}
+
+
+.navContainerFull{
+    height: auto;
+    width: 92%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    margin-top: 3.5vw;
+    border-radius: 1.5vw;
+    border-top-right-radius: 0;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    animation: fade-out 2s ease;
+    transition: 400ms ease;
+}
+.navContainerFull.active{
+    animation: fade-in-down2 2s ease;
+}
+.navcContentf.left{
+    height: 20vw;
+    width: 30%;
+    box-shadow: 0 0 20px gray;
+    border-radius: 1vw;
+    background: url('../assets/imgs/ExtraBG01.jpg') no-repeat center;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+    padding: 1% 2%;
+}
+.navccflImage{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navccflImage img{
+    height: 15vw;
+}
+.navcContentf.left h5{
+    font-weight: 600;
+    font-size: 1.2vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.navccflPhase{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navccflPhase div img{
+    height: 3vw;
+}
+.navccflPhase div p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+
+.navcContentf.right{
+    height: auto;
+    width: 68%;
+    padding: 2% 0;
+}
+.navccfrSoon{
+    height: auto;
+    width: 100%;
+    background: red;
+    padding: 2%;
+    text-align: center;
+    border-radius: 1vw;
+}
+.navccfrSelections{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+.navccfrs{
+    height: auto;
+    width: 30%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.navContainer{
+    height: 8vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 7%;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+.navContainer.mobile{
+    display: none;
+}
+
+/* Website */
+
+.navContent.left{
+    height: auto;
+    width: 20%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.navContent.left a{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-decoration: none;
+}
+.navContent.left a img{
+    height: 3vw;
+}
+.navContent.right{
+    height: auto;
+    width: 60%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.navContent.right button.navCrBtn{
+    font-size: 0.7vw;
+    padding: 9px 3%;
+    border: solid 2px white;
+    box-shadow: 0 0 10px gray;
+    border-radius: 50px;
+    background: white;
+    color: black;
+    margin-left: 1.5%;
+    transition: 400ms ease;
+    cursor: pointer;
+}
+.navContent.right button.navCrBtn:hover{
+    background: black;
+    border: solid 2px black;
+    transition: 400ms ease;
+}
+.navContent.right button.active{
+    background: black;
+    border: solid 2px black;
+}
+.navContent.right button.navCrBtn.active p{
+    color: white;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.navContent.right button.navCrBtn p{
+    color: white;
+    font-size: 0.6vw;
+    font-weight: 400;
+    width: 7.5vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.navContent.right button.navCrBtn:hover p{
+    color: black;
+    transition: 400ms ease;
+}
+.navContent.right button.navCrBtn.connect{
+    padding: 2.3px;
+    padding-left: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    color: white;
+}
+.navContent.right button.navCrBtn.connect:hover{
+    background: white;
+    transition: 400ms ease;
+}
+.navContent.right button.navCrBtn.connect .faIcons{
+    border: solid 1px white;
+    padding: 3%;
+    font-size: 1.5vw;
+    border-radius: 50%;
+}
+.navContent.right button.navCrBtn.connect:hover .faIcons{
+    color: black;
+    border: solid 1px black;
+    transition: 400ms ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
