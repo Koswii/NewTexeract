@@ -48,6 +48,100 @@ h6{
     justify-content: center;
     align-items: center;
 }
+
+
+
+
+
+
+
+.navWalletSuccess{
+    height: auto;
+    width: 25%;
+    border-radius: 1vw;
+    padding: 2%;
+    background: url('../assets/imgs/dashboadBG05.png') no-repeat center;
+    background-size: cover;
+    box-shadow: 0 0 10px rgb(75, 75, 75);
+    animation: fade-in-down 800ms ease;
+    position: relative;
+}
+.navWalletSuccess button#closeCreateWallet{
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+    position: absolute;
+    top: 1vw;
+    right: 1vw;
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+.nwsContainer{
+    height: auto;
+    width: 100%;
+}
+.nwsContainer img{
+    height: 8vw;
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 10%;
+}
+.nwsContainer h6{
+    font-size: 0.9vw;
+    text-align: center;
+}
+.nwsContainer h6 span{
+    font-weight: 600;
+    font-size: 0.7vw;
+    font-family: "Montserrat", sans-serif;
+}
+.nwsContainer button{
+    width: 50%;
+    background: none;
+    outline: none;
+    color: white;
+    border: solid 2px white;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 2% auto;
+    margin-top: 5%;
+    font-size: 0.7vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.nwsContainer button .faIcons{
+    margin-right: 5%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .navWalletContent{
     height: auto;
     width: 25%;
@@ -313,3 +407,24 @@ h6{
     color: black;
     transition: 400ms ease;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

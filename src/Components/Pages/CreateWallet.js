@@ -3,6 +3,9 @@ import "../CSS/createWallet.css";
 import { 
     FaTimes
 } from 'react-icons/fa';
+import { 
+    TbDownload 
+} from "react-icons/tb";
 import { XERAWalletData } from '../Pages/XERAWalletDataContext';
 const wordList = [
     'apple', 'grape', 'mango', 'berry', 'peach', 'plum', 'lemon', 'fig', 'pear', 'kiwi',
@@ -72,9 +75,11 @@ const CreateWallet = () => {
       viewWalletCreate, 
       setViewWalletCreate
     } = XERAWalletData();
-    const [createWalletModal, setCreateWalletModal] = useState(true)
-    const [successCreateModal, setSuccessCreateModal] = useState(false)
+    const [createWalletModal, setCreateWalletModal] = useState(true);
+    const [successCreateModal, setSuccessCreateModal] = useState(false);
 
+    const [privateKey, setPrivateKey] = useState('');
+    const [publicKey, setPublicKey] = useState('');
 
     const [seedPhrase, setSeedPhrase] = useState([]);
     const [viewCreateAccount, setViewCreateAccount] = useState(true);
@@ -109,6 +114,26 @@ const CreateWallet = () => {
         }
         setSeedPhrase(selectedWords);
     };
+    const generateRandomKey = (length) => {
+        let randomKey = '';
+        const characters = 'abcdef0123456789'; // Hexadecimal characters
+    
+        for (let i = 0; i < length; i++) {
+          randomKey += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+    
+        return randomKey;
+    };
+    const generateKeys = () => {
+        const privateKeyLength = 64 - 4; // Total length minus "XERA" (4 chars)
+        const publicKeyLength = 42 - 4;  // Total length minus "XERA" (4 chars)
+    
+        const newPrivateKey = 'XERA' + generateRandomKey(privateKeyLength);
+        const newPublicKey = 'XERA' + generateRandomKey(publicKeyLength);
+    
+        setPrivateKey(newPrivateKey);
+        setPublicKey(newPublicKey);
+    };
     const handleInputChange = (index, e) => {
         const { value } = e.target;
         setUserInputs(prevInputs => {
@@ -129,14 +154,52 @@ const CreateWallet = () => {
             setSeedError(false);
             setSeedComplete(true);
             setIsConfirmed(isMatch);
-            console.log(isMatch);
-            console.log([xeraUsername, xeraPassword]);
+            submitWalletDetails();
         }
+    };
+    const submitWalletDetails = async () => {
+        const seedKeys = {};
+        seedPhrase.forEach((item, index) => {
+            seedKeys[`seedKey${index + 1}`] = item.word;
+        });
+
+        const formWalletDetails = {
+            username: xeraUsername,
+            password: xeraPassword,
+            referral: xeraReferrer,
+            privateAddress: privateKey,
+            publicAddress: publicKey,
+            ...seedKeys,
+        };
+
+        // const jsonWalletDetails = JSON.stringify(formWalletDetails);
+        // console.log(jsonWalletDetails);
+
+        setSuccessCreateModal(true)
+        setCreateWalletModal(false)
+    };
+    const handleDownloadXERAWallet = () => {
+        const username = xeraUsername; // Example values, replace with actual data
+        const privateAddress = privateKey;
+        const publicAddress = publicKey;
+        
+        // Format the text content without seed keys
+        let textContent = `Username: ${username}\nPrivate Key: ${privateAddress}\nPublic Key: ${publicAddress}\n`;
+
+        // Create a Blob from the text content
+        const blob = new Blob([textContent], { type: 'text/plain' });
+
+        // Create a download link and trigger it programmatically
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'xera-wallet-details.txt';
+        link.click();
     };
 
     const indicesToCheck = [3, 6, 7]; // 4th, 7th, and 8th words (0-based indices)
     const handleCloseCreate = () => {
         setViewWalletCreate(false)
+        setSuccessCreateModal(false)
         setViewCreateAccount(true)
         setViewSeedPhrase(false)
         setViewVerifyWallet(false)
@@ -215,7 +278,6 @@ const CreateWallet = () => {
         }
     };
 
-
     const handleDefaultPage = () => {
         setViewCreateAccount(true)
         setViewSeedPhrase(false)
@@ -227,6 +289,7 @@ const CreateWallet = () => {
             setViewSeedPhrase(true);
             setViewVerifyWallet(false);
             generateSeedPhrase();
+            generateKeys();
         } else {
             // Ensure it doesn't allow proceeding if there are validation errors
             console.log('Validation failed. Cannot proceed.');
@@ -236,14 +299,22 @@ const CreateWallet = () => {
         setViewCreateAccount(false)
         setViewSeedPhrase(false)
         setViewVerifyWallet(true)
-        
     }
+    
+    
 
 
     return (
         <>
             <div className='navContainerWallet'>
-
+                {successCreateModal && <div className="navWalletSuccess">
+                    <button id='closeCreateWallet' onClick={handleCloseCreate}><FaTimes className='faIcons'/></button>
+                    <div className="nwsContainer">
+                        <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                        <h6>XERA WALLET<br /><span>CREATED SUCCESSFULLY</span></h6>
+                        <button onClick={handleDownloadXERAWallet}><TbDownload className='faIcons'/> XERA WALLET</button>
+                    </div>
+                </div>}
                 {createWalletModal && <div className="navWalletContent">
                     <button id='closeCreateWallet' onClick={handleCloseCreate}><FaTimes className='faIcons'/></button>
                     <div className="ncwcHeader">
@@ -276,7 +347,6 @@ const CreateWallet = () => {
                                 <div>
                                     <label htmlFor="">Username 
                                         {(xeraUsernameError && xeraUsernameErrorResponse) && <span id='nameErrorResponse'>{xeraUsernameErrorResponse}</span>}
-                                        {/* <span>Username already Exist</span> */}
                                     </label>
                                     <input 
                                         className={(xeraUsernameError && xeraUsernameErrorResponse) ? 'error' : ''} 
