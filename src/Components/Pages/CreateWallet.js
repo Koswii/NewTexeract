@@ -192,7 +192,7 @@ const CreateWallet = () => {
         // Create a download link and trigger it programmatically
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'xera-wallet-details.txt';
+        link.download = `${username}-xera-wallet.txt`;
         link.click();
     };
 
