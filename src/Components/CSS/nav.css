@@ -180,7 +180,6 @@ nav{
 }
 .navContent.right button.navCrBtn:hover{
     background: black;
-    border: solid 2px black;
     transition: 400ms ease;
 }
 .navContent.right button.active{

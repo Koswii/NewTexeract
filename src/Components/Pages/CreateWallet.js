@@ -72,12 +72,17 @@ const CreateWallet = () => {
       viewWalletCreate, 
       setViewWalletCreate
     } = XERAWalletData();
+    const [createWalletModal, setCreateWalletModal] = useState(true)
+    const [successCreateModal, setSuccessCreateModal] = useState(false)
+
+
     const [seedPhrase, setSeedPhrase] = useState([]);
     const [viewCreateAccount, setViewCreateAccount] = useState(true);
     const [viewSeedPhrase, setViewSeedPhrase] = useState(false);
     const [viewVerifyWallet, setViewVerifyWallet] = useState(false);
     const [xeraUsername, setXERAUsername] = useState('');
     const [xeraPassword, setXERAPassword] = useState('');
+    const [xeraReferrer, setXERAReferrer] = useState('');
     
     const [xeraUsernameError, setXERAUsernameError] = useState(false);
     const [xeraUsernameErrorResponse, setXERAUsernameErrorResponse] = useState('');
@@ -90,6 +95,8 @@ const CreateWallet = () => {
 
     const [userInputs, setUserInputs] = useState(Array(12).fill(''));
     const [isConfirmed, setIsConfirmed] = useState(false);
+    const [seedError, setSeedError] = useState(false);
+    const [seedComplete, setSeedComplete] = useState(false);
 
 
     const generateSeedPhrase = () => {
@@ -113,9 +120,18 @@ const CreateWallet = () => {
     const handleConfirm = () => {
         const indicesToCheck = [3, 6, 7]; // 4th, 7th, and 8th words (0-based indices)
         const isMatch = indicesToCheck.every(index => seedPhrase[index].word === userInputs[index]);
-        setIsConfirmed(isMatch);
-        console.log(isMatch);
-        console.log([xeraUsername, xeraPassword]);
+
+        if(isMatch === false) {
+            setSeedError(true);
+            setSeedComplete(false);
+            
+        } else {
+            setSeedError(false);
+            setSeedComplete(true);
+            setIsConfirmed(isMatch);
+            console.log(isMatch);
+            console.log([xeraUsername, xeraPassword]);
+        }
     };
 
     const indicesToCheck = [3, 6, 7]; // 4th, 7th, and 8th words (0-based indices)
@@ -151,7 +167,7 @@ const CreateWallet = () => {
             setXERAUsernameErrorResponse1('');
         }
         // Check if the username is too short
-        else if (userUsername.length < 5) {
+        else if (userUsername.length < 4) {
             setXERAUsernameError(true);
             setXERAUsernameResponse(false);
             setXERAUsernameErrorResponse('Username too short');
@@ -225,120 +241,129 @@ const CreateWallet = () => {
 
 
     return (
-        <div className='navContainerWallet'>
-            <div className="navWalletContent">
-                <button id='closeCreateWallet' onClick={handleCloseCreate}><FaTimes className='faIcons'/></button>
-                <div className="ncwcHeader">
-                    <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-                    <span>
-                        <h6>CREATE XERA WALLET</h6>
-                        <p>TEXERACT NETWORK</p>
-                    </span>
-                </div>
-                <div className="ncwcNavDots">
-                    <span className={viewCreateAccount ? 'active' : ''}></span>
-                    <hr />
-                    <span className={viewSeedPhrase ? 'active' : ''}></span>
-                    <hr />
-                    {viewVerifyWallet ?
-                        <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />:
-                        <span></span>
-                    }
-                </div>
-                <div className="ncwcNavContent">
-                    <p className={viewCreateAccount ? 'active' : ''}>Create Account</p>
-                    <p className={viewSeedPhrase ? 'active' : ''}>Seed Phrase</p>
-                    <p className={viewVerifyWallet ? 'active' : ''}>Verify Wallet</p>
-                </div>
-                <div className="ncwcContents">
-                    {viewCreateAccount && <div className='ncwcc createAccount'>
-                        <h6>CREATE ACCOUNT</h6>
-                        <p>This account will only allow you to check and view your current balance and transactions.</p>
-                        <div className='ncwcccaContent'>
-                            <div>
-                                <label htmlFor="">Username 
-                                    {(xeraUsernameError && xeraUsernameErrorResponse) && <span id='nameErrorResponse'>{xeraUsernameErrorResponse}</span>}
-                                    {/* <span>Username already Exist</span> */}
-                                </label>
-                                <input 
-                                    className={(xeraUsernameError && xeraUsernameErrorResponse) ? 'error' : ''} 
-                                    id={(xeraUsernameErrorResponse1 || xeraUsernameResponse) ? 'correctUsername' : 'wrongUsername'}
-                                    type="text" 
-                                    placeholder='Ex. Loki' 
-                                    value={xeraUsername}
-                                    onChange={handleCheckUsername}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="">Password 
-                                    {(xeraPasswordError && xeraPasswordErrorResponse) && <span id='passErrorResponse'>{xeraPasswordErrorResponse}</span>}
-                                    {(xeraPasswordErrorResponse1) && <span id='passErrorResponse1'>{xeraPasswordErrorResponse1}</span>}
-                                </label>
-                                <input 
-                                    className={(xeraPasswordError && xeraPasswordErrorResponse) ? 'error' : ''} 
-                                    id={(xeraPasswordErrorResponse1 || xeraPasswordResponse) ? 'correctPassword' : 'wrongPassword'}
-                                    type="password"  
-                                    placeholder='********' 
-                                    value={xeraPassword}
-                                    onChange={handleCheckPassword}
-                                />
-                            </div>
-                        </div>
-                    </div>}
-                    {viewSeedPhrase && <div className="ncwcc seedPhrase">
-                        <h6>WRITE DOWN YOUR <br /> SECRET RECOVERY PHRASE</h6>
-                        <p>Please store this seed phrase securely. Do not share it with anyone.</p>
-                        <div className='ncwccsp'>
-                            {seedPhrase.map((data, i) => (
-                                <div key={i}>
-                                    <h5><span>{data.number}.</span> {data.word}</h5>
+        <>
+            <div className='navContainerWallet'>
+
+                {createWalletModal && <div className="navWalletContent">
+                    <button id='closeCreateWallet' onClick={handleCloseCreate}><FaTimes className='faIcons'/></button>
+                    <div className="ncwcHeader">
+                        <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                        <span>
+                            <h6>CREATE XERA WALLET</h6>
+                            <p>TEXERACT NETWORK</p>
+                        </span>
+                    </div>
+                    <div className="ncwcNavDots">
+                        <span className={viewCreateAccount ? 'active' : ''}></span>
+                        <hr />
+                        <span className={viewSeedPhrase ? 'active' : ''}></span>
+                        <hr />
+                        {viewVerifyWallet ?
+                            <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />:
+                            <span></span>
+                        }
+                    </div>
+                    <div className="ncwcNavContent">
+                        <p className={viewCreateAccount ? 'active' : ''}>Create Account</p>
+                        <p className={viewSeedPhrase ? 'active' : ''}>Seed Phrase</p>
+                        <p className={viewVerifyWallet ? 'active' : ''}>Verify Wallet</p>
+                    </div>
+                    <div className="ncwcContents">
+                        {viewCreateAccount && <div className='ncwcc createAccount'>
+                            <h6>CREATE ACCOUNT</h6>
+                            <p>This account will only allow you to check and view your current balance and transactions.</p>
+                            <div className='ncwcccaContent'>
+                                <div>
+                                    <label htmlFor="">Username 
+                                        {(xeraUsernameError && xeraUsernameErrorResponse) && <span id='nameErrorResponse'>{xeraUsernameErrorResponse}</span>}
+                                        {/* <span>Username already Exist</span> */}
+                                    </label>
+                                    <input 
+                                        className={(xeraUsernameError && xeraUsernameErrorResponse) ? 'error' : ''} 
+                                        id={(xeraUsernameErrorResponse1 || xeraUsernameResponse) ? 'correctUsername' : 'wrongUsername'}
+                                        type="text" 
+                                        placeholder='Ex. Loki' 
+                                        value={xeraUsername}
+                                        onChange={handleCheckUsername}
+                                    />
                                 </div>
-                            ))}
-                        </div>
-                    </div>}
-                    {viewVerifyWallet && <div className="ncwcc verifyWallet">
-                        <h6>VERIFY SEED PHRASE<br />TO PROCEED</h6>
-                        <p>Complete the seed phrase, and your XERA Wallet will be ready to go.</p>
-                        <div className='ncwccsp'>
-                            {seedPhrase.map((data, index) => (
-                                <div key={index}>
-                                    <h5>
-                                        <span>{data.number}.</span>
-                                        {indicesToCheck.includes(index) ? (
-                                            <input
-                                                type="text"
-                                                value={userInputs[index]}
-                                                onChange={(e) => handleInputChange(index, e)}
-                                                placeholder={`Word ${data.number}`}
-                                            />
-                                        ) : (
-                                            data.word
-                                        )}
-                                    </h5>
+                                <div>
+                                    <label htmlFor="">Password 
+                                        {(xeraPasswordError && xeraPasswordErrorResponse) && <span id='passErrorResponse'>{xeraPasswordErrorResponse}</span>}
+                                        {(xeraPasswordErrorResponse1) && <span id='passErrorResponse1'>{xeraPasswordErrorResponse1}</span>}
+                                    </label>
+                                    <input 
+                                        className={(xeraPasswordError && xeraPasswordErrorResponse) ? 'error' : ''} 
+                                        id={(xeraPasswordErrorResponse1 || xeraPasswordResponse) ? 'correctPassword' : 'wrongPassword'}
+                                        type="password"  
+                                        placeholder='********' 
+                                        value={xeraPassword}
+                                        onChange={handleCheckPassword}
+                                    />
                                 </div>
-                            ))}
-                        </div>
-                    </div>}
-                </div>
-                <div className="ncwcNote">
-                    <p>Creating a XERA Wallet allows you to access all the features of the Texeract Network</p>
-                </div>
-                <div className="ncwcButtons">
-                    {viewCreateAccount && <>
-                        {((xeraUsername && xeraPassword && !xeraUsernameError && !xeraPasswordError)) ?
-                        <button className='active' onClick={handlePage2}>Next</button> :
-                        <button disabled>Next</button>}
-                    </>}
-                    {viewSeedPhrase && <>
-                        <button className='active' onClick={handleDefaultPage}>Prev</button>
-                        <button className='active' onClick={handlePage3}>Next</button>
-                    </>}
-                    {viewVerifyWallet && <>
-                        <button onClick={handleConfirm}>Create</button>
-                    </>}
-                </div>
+                                <div>
+                                    <label htmlFor="">Referrer (Optional)</label>
+                                    <input type="text" placeholder='Ex. Sylvie' onChange={(e) => setXERAReferrer(e.target.value)}/>
+                                </div>
+                            </div>
+                        </div>}
+                        {viewSeedPhrase && <div className="ncwcc seedPhrase">
+                            <h6>WRITE DOWN YOUR <br /> SECRET RECOVERY PHRASE</h6>
+                            <p>Please store this seed phrase securely. Do not share it with anyone.</p>
+                            <div className='ncwccsp'>
+                                {seedPhrase.map((data, i) => (
+                                    <div key={i}>
+                                        <h5><span>{data.number}.</span> {data.word}</h5>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>}
+                        {viewVerifyWallet && <div className="ncwcc verifyWallet">
+                            <h6>VERIFY SEED PHRASE<br />TO PROCEED</h6>
+                            <p>Complete the seed phrase, and your XERA Wallet will be ready to go.</p>
+                            <div className='ncwccsp'>
+                                {seedPhrase.map((data, index) => (
+                                    <div key={index}>
+                                        <h5>
+                                            <span>{data.number}.</span>
+                                            {indicesToCheck.includes(index) ? (
+                                                <input
+                                                    type="text"
+                                                    className={seedError ? 'active' : ''}
+                                                    id={seedComplete && 'correctSeed'}
+                                                    value={userInputs[index]}
+                                                    onChange={(e) => handleInputChange(index, e)}
+                                                    placeholder={`Word ${data.number}`}
+                                                />
+                                            ) : (
+                                                data.word
+                                            )}
+                                        </h5>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>}
+                    </div>
+                    <div className="ncwcNote">
+                        <p>Creating a XERA Wallet allows you to access all the features of the Texeract Network</p>
+                    </div>
+                    <div className="ncwcButtons">
+                        {viewCreateAccount && <>
+                            {((xeraUsername && xeraPassword && !xeraUsernameError && !xeraPasswordError)) ?
+                            <button className='active' onClick={handlePage2}>Next</button> :
+                            <button disabled>Next</button>}
+                        </>}
+                        {viewSeedPhrase && <>
+                            <button className='active' onClick={handleDefaultPage}>Prev</button>
+                            <button className='active' onClick={handlePage3}>Next</button>
+                        </>}
+                        {viewVerifyWallet && <>
+                            <button className='active' onClick={handleConfirm}>Create</button>
+                        </>}
+                    </div>
+                </div>}
             </div>
-        </div>
+        </>
     )
 }
 

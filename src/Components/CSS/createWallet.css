@@ -166,7 +166,7 @@ h6{
 }
 .ncwcccaContent{
     padding: 0 10%;
-    margin-top: 10%;
+    margin-top: 7%;
 }
 .ncwcccaContent label{
     color: gray;
@@ -258,9 +258,16 @@ h6{
     color: white;
     padding: 2px 10px;
     border-radius: 5px;
+    transition: 400ms ease;
 }
-
-
+.ncwccsp div input.active{
+    border: solid 2px red;
+    transition: 400ms ease;
+}
+.ncwccsp div input#correctSeed{
+    border: solid 2px skyblue;
+    transition: 400ms ease;
+}
 
 
 
