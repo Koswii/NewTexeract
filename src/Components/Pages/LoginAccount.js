@@ -22,6 +22,8 @@ const LoginAccount = () => {
         setViewLoginAccount
     } = XERAWalletData();
 
+    
+    const XERALoginBasicAccountAPI = process.env.REACT_APP_XERA_USER_LOGIN_BASIC_API;
     const [viewDefaultLogin, setViewDefaultLogin] = useState(true);
     const [viewXeraWalletLogin, setViewXeraWalletLogin] = useState(false);
     const [viewSeedLogin, setViewSeedLogin] = useState(true);
@@ -47,7 +49,9 @@ const LoginAccount = () => {
 
     const [insertUsername, setInsertUsername] = useState('')
     const [insertPassword, setInsertPassword] = useState('')
-    const [viewPassword, setViewPassword] = useState(false)
+    const [viewPassword, setViewPassword] = useState(false);
+    const [viewLoginResponse, setViewLoginResponse] = useState(false);
+    const [viewLoginMessage, setViewLoginMessage] = useState('');
 
     const handleCloseLogin = () => {
         setViewLoginAccount(false);
@@ -62,6 +66,45 @@ const LoginAccount = () => {
         setViewWalletCreate(true);
         setViewLoginAccount(false);
     }
+
+    const handleUserLoginBasic = (e) => {
+        e.preventDefault();
+      
+        if (!insertUsername || !insertPassword) {
+                setViewLoginResponse(true);
+                setViewLoginMessage('Please fill in all fields.');
+            return;
+        }
+      
+        fetch(XERALoginBasicAccountAPI, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: insertUsername,
+            password: insertPassword,
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success === true) {
+            console.log(data);
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('loginState', 'basic');
+            localStorage.setItem('myXeraAddress', data.xera_wallet);
+            setViewLoginResponse(false);
+            setViewLoginMessage('');
+            window.location.reload();
+          } else {
+            setViewLoginResponse(true);
+            setViewLoginMessage(data.message);
+          }
+        })
+        .catch(error => console.error('Error:', error));
+    };
+
+
 
 
     return (
@@ -99,7 +142,7 @@ const LoginAccount = () => {
                             </div>
                         </div>
                         <div className="nclccLoginBtn">
-                            <button className={(insertUsername && insertPassword) ? 'active' : ''}>LOGIN</button>
+                            <button className={(insertUsername && insertPassword) ? 'active' : ''} onClick={handleUserLoginBasic}>LOGIN</button>
                         </div>
                         <div className="nclccSlice">
                             <hr />
@@ -110,9 +153,9 @@ const LoginAccount = () => {
                             <button onClick={handleViewPrivateLogin}>LOGIN XERA WALLET</button>
                             <button id='nclccConnectWallet'>CONNECT WALLET</button>
                         </div>
-                        {/* <div className="nclccXeraError">
-                            <p>Username doesn't Exist</p>
-                        </div> */}
+                        {viewLoginResponse && <div className="nclccXeraError">
+                            <p>{viewLoginMessage}</p>
+                        </div>}
                         <div className="nclccCreateWallet">
                             <p onClick={handleCreateWallet}>I don't have XERA Wallet yet.</p>
                         </div>

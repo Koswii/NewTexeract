@@ -6,6 +6,11 @@ const XERAWalletDataContext = createContext();
 export const XERAWalletDataProvider = ({ children }) => {
     const XERACreateWalletAccountAPI = process.env.REACT_APP_XERA_USER_LIST_API;
     const XERAWalletsListAPI = process.env.REACT_APP_XERA_USER_WALLETS_LIST_API;
+    
+    const LoginWallet = localStorage.getItem('myXeraAddress');
+    const LoginState = localStorage.getItem('isLoggedIn');
+    const LoginType = localStorage.getItem('loginState');
+
     const [viewWalletCreate, setViewWalletCreate] = useState(false);
     const [viewLoginAccount, setViewLoginAccount] = useState(false);
     const [xeraUserList, setXeraUserList] = useState([]);
@@ -54,6 +59,9 @@ export const XERAWalletDataProvider = ({ children }) => {
 
     return (
         <XERAWalletDataContext.Provider value={{ 
+            LoginWallet,
+            LoginState,
+            LoginType,
             viewWalletCreate, 
             setViewWalletCreate,
             viewLoginAccount, 

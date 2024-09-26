@@ -253,7 +253,41 @@ nav{
 
 
 
-
+.navContent.right a.navCrBtn.account{
+    width: 17%;
+    font-size: 0.7vw;
+    padding: 2.3px;
+    padding-right: 15px;
+    border: solid 2px white;
+    border-radius: 50px;
+    transition: 400ms ease;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.navContent.right a.navCrBtn.account .faIcons{
+    font-size: 1.5vw;
+    border-radius: 50%;
+    color: white;
+}
+.navContent.right a.navCrBtn.account p{
+    color: white;
+    font-size: 0.6vw;
+    font-weight: 400;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.navContent.right a.navCrBtn.account:hover{
+    background: white;
+    transition: 400ms ease;
+    box-shadow: 0 0 10px gray;
+}
+.navContent.right a.navCrBtn.account:hover .faIcons,
+.navContent.right a.navCrBtn.account:hover p{
+    color: black;
+    transition: 400ms ease;
+}
 
 
 

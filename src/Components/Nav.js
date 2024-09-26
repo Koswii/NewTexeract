@@ -23,8 +23,20 @@ import CreateWallet from './Pages/CreateWallet';
 import LoginAccount from './Pages/LoginAccount';
 import { XERAWalletData } from './Pages/XERAWalletDataContext';
 
+
+
+const TextSlicer = ({ text = '', maxLength }) => {
+  const truncatedText = text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+  return (
+    <>{truncatedText}</>
+  );
+};
+
 const Nav = () => {
   const {
+    LoginWallet,
+    LoginState,
+    LoginType,
     viewWalletCreate, 
     setViewWalletCreate,
     viewLoginAccount, 
@@ -42,8 +54,6 @@ const Nav = () => {
   const handleHideFullNav = () => {
     setViewFullNavigation(false)
   }
-
-
   const handleViewCreateWallet = () => {
     setViewWalletCreate(true)
   }
@@ -98,8 +108,15 @@ const Nav = () => {
             {/* {!viewFullNavigation ? 
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleViewFullNav}><p>EXPLORE</p></button>:
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleHideFullNav}><p>EXPLORE</p></button>} */}
-            <button className='navCrBtn connect' onClick={handleViewCreateWallet}><p>CREATE WALLET</p><TbWallet className='faIcons'/></button>
-            <button className='navCrBtn login' onClick={handleViewLoginWallet}><TbUserCircle  className='faIcons'/></button>
+            {(!LoginState && LoginWallet === null) ? <>
+              <button className='navCrBtn connect' onClick={handleViewCreateWallet}><p>CREATE WALLET</p><TbWallet className='faIcons'/></button>
+              <button className='navCrBtn login' onClick={handleViewLoginWallet}><TbUserCircle className='faIcons'/></button>
+            </>:<>
+              <Link className='navCrBtn account'>
+                <TbUserCircle className='faIcons'/>
+                <p><TextSlicer text={`${LoginWallet}`} maxLength={10} /></p>
+              </Link>
+            </>}
           </div>
         </div>
       </div>
