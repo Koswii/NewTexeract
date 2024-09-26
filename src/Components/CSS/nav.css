@@ -228,7 +228,27 @@ nav{
 
 
 
-
+.navContent.right button.navCrBtn.login{
+    padding: 0;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    color: white;
+    transition: 400ms ease;
+}
+.navContent.right button.navCrBtn.login .faIcons{
+    padding: 3%;
+    font-size: 2vw;
+    border-radius: 50%;
+    transition: 400ms ease;
+}
+.navContent.right button.navCrBtn.login:hover .faIcons{
+    color: black;
+    background: white;
+    transition: 400ms ease;
+}
 
 
 

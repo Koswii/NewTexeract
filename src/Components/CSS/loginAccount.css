@@ -1,0 +1,389 @@
+h1, h2, h3, h4, h5, h6, p{
+    color: white;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
+p{
+    font-size: 0.9vw;
+}
+h1{
+    font-size: 10vw;
+}
+h2{
+    font-size: 5vw;
+}
+h3{
+    font-size: 4vw;
+}
+h4{
+    font-size: 2vw;
+}
+h5{
+    font-size: 1.5vw;
+}
+h6{
+    font-size: 1vw;
+}
+
+
+.mainContainer.createWallet{
+    height: auto;
+    width: 100%;
+    background: black;
+}
+
+.navContainerLogin{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+.navLoginContent{
+    height: auto;
+    width: 25%;
+    border-radius: 1vw;
+    padding: 2%;
+    background: url('../assets/imgs/dashboadBG05.png') no-repeat center;
+    background-size: cover;
+    box-shadow: 0 0 10px rgb(75, 75, 75);
+    animation: fade-in-down 800ms ease;
+    position: relative;
+}
+.navLoginContent button#closeLoginAccount{
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+    position: absolute;
+    top: 1vw;
+    right: 1vw;
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+.nclcHeader{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nclcHeader img{
+    height: 3vw;
+    margin-right: 3%;
+}
+.nclcHeader p{
+    color: gray;
+    font-size: 0.7vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+
+
+
+.nclcContents{
+    height: 30vw;
+    width: 100%;
+    margin-top: 5%;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 0.8vw;
+    padding: 10% 5%;
+    position: relative;
+}
+.nclccBasics{
+    height: auto;
+    width: 100%;
+    padding: 0 10%;
+}
+.nclccBasics div{
+    margin-bottom: 5%;
+}
+.nclccBasics div span{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1%;
+}
+.nclccBasics div p{
+    font-size: 0.7vw;
+    color: gray;
+    font-style: italic;
+}
+.nclccBasics div p#nclccnNote{
+    font-size: 0.5vw;
+    color: gray;
+    text-align: center;
+}
+.nclccBasics div input{
+    height: auto;
+    width: 100%;
+    border: solid 2px white;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 0.7vw;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-top: 1%;
+}
+.nclccBasics div button.xeraPassword{
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9vw;
+}
+.nclccLoginBtn{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nclccLoginBtn button{
+    width: 50%;
+    padding: 8px 5px;
+    border: solid 2px white;
+    border-radius: 50px;
+    background: none;
+    color: white;
+    outline: none;
+    font-size: 0.7vw;
+    font-family: 'Lexend Peta', sans-serif;
+    cursor: not-allowed;
+    opacity: 50%;
+    transition: 400ms ease;
+}
+.nclccLoginBtn button.active{
+    opacity: 100%;
+    transition: 400ms ease;
+    cursor: pointer;
+}
+.nclccLoginBtn button.active:hover{
+    background: white;
+    color: black;
+    transition: 400ms ease;
+}
+.nclccSlice{
+    height: auto;
+    width: 100%;
+    padding: 0 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5% 0;
+}
+.nclccSlice p{
+    font-size: 0.7vw;
+}
+.nclccSlice hr{
+    width: 40%;
+}
+.nclccXeraWallet{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10%;
+    margin-bottom: 10%;
+}
+.nclccXeraWallet button{
+    height: auto;
+    width: 100%;
+    border: solid 2px white;
+    font-family: 'Lexend Peta', sans-serif;
+    outline: none;
+    color: white;
+    font-size: 0.7vw;
+    padding: 8px 5px;
+    border-radius: 10px;
+    margin: 1% 0;
+    color: black;
+    cursor: pointer;
+}
+.nclccXeraWallet button#nclccConnectWallet{
+    opacity: 50%;
+    cursor: not-allowed;
+}
+.nclccXeraError{
+    height: auto;
+    width: 100%;
+    text-align: center;
+}
+.nclccXeraError p{
+    color: red;
+    font-size: 0.7vw;
+}
+.nclccCreateWallet{
+    height: auto;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 2vw;
+    left: 0;
+}
+.nclccCreateWallet p{
+    color: gray;
+    opacity: 50%;
+    transition: 400ms ease;
+    font-size: 0.7vw;
+    cursor: pointer;
+}
+.nclccCreateWallet p:hover{
+    color: white;
+    opacity: 100%;
+    transition: 400ms ease;
+}
+
+
+
+.nclccBack{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: absolute;
+    top: 1vw;
+    left: 1vw;
+}
+.nclccBack button{
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 2vw;
+    line-height: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.nclccNav{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+    margin: 10% 0;
+}
+.nclccNav button{
+    width: 48%;
+    border: none;
+    padding-bottom: 8px;
+    font-family: 'Lexend Peta', sans-serif;
+    outline: none;
+    background: none;
+    font-size: 0.7vw;
+    color: white;
+    opacity: 30%;
+    cursor: pointer;
+    transition: 400ms ease;
+    border-bottom: solid 2px transparent;
+}
+.nclccNav button.active{
+    opacity: 100%;
+    transition: 400ms ease;
+    border-bottom: solid 2px white;
+}
+.nclccnBody{
+    height: auto;
+    width: 100%;
+    padding: 0 10%;
+}
+.nclccnBody p{
+    text-align: center;
+    font-size: 0.7vw;
+}
+.nclccnbInputs{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5% 0;
+}
+.nclccnbInputs div{
+    height: auto;
+    width: 48%;
+    border: solid 2px white;
+    padding: 2% 3%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2% 0;
+}
+.nclccnbInputs div h6{
+    font-size: 0.9vw;
+}
+.nclccnbInputs div input{
+    width: 70%;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 0.7vw;
+    color: white;
+}
+.nclccnbTextArea{
+    height: auto;
+    width: 100%;
+    margin: 5% 0;
+}
+.nclccnbTextArea textarea{
+    height: 5vw;
+    width: 100%;
+    border: solid 2px white;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 0.7vw;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-top: 1%;
+    resize: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

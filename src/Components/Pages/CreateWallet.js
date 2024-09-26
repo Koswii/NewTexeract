@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "../CSS/createWallet.css";
+import axios from 'axios';
 import { 
     FaTimes
 } from 'react-icons/fa';
@@ -72,8 +73,10 @@ const wordList = [
 
 const CreateWallet = () => {
     const {
-      viewWalletCreate, 
-      setViewWalletCreate
+        viewWalletCreate, 
+        setViewWalletCreate,
+        viewLoginAccount, 
+        setViewLoginAccount
     } = XERAWalletData();
     const [createWalletModal, setCreateWalletModal] = useState(true);
     const [successCreateModal, setSuccessCreateModal] = useState(false);
@@ -102,6 +105,8 @@ const CreateWallet = () => {
     const [isConfirmed, setIsConfirmed] = useState(false);
     const [seedError, setSeedError] = useState(false);
     const [seedComplete, setSeedComplete] = useState(false);
+
+    const XERACreateWalletAccountAPI = process.env.REACT_APP_XERA_USER_REGISTER_API;
 
 
     const generateSeedPhrase = () => {
@@ -175,8 +180,21 @@ const CreateWallet = () => {
         // const jsonWalletDetails = JSON.stringify(formWalletDetails);
         // console.log(jsonWalletDetails);
 
-        setSuccessCreateModal(true)
-        setCreateWalletModal(false)
+        try {
+            const submitWalletResponse = await axios.post(XERACreateWalletAccountAPI, formWalletDetails);
+            const responseMessage = submitWalletResponse.data;
+    
+            if (responseMessage.success) {
+                console.log(responseMessage.message);
+                setSuccessCreateModal(true)
+                setCreateWalletModal(false)
+            } else {
+                console.log(responseMessage.message);
+            }
+    
+        } catch (error) {
+            console.error(error);
+        }
     };
     const handleDownloadXERAWallet = () => {
         const username = xeraUsername; // Example values, replace with actual data

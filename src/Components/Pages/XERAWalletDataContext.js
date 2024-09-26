@@ -5,8 +5,12 @@ const XERAWalletDataContext = createContext();
 
 export const XERAWalletDataProvider = ({ children }) => {
     const [viewWalletCreate, setViewWalletCreate] = useState(false);
+    const [viewLoginAccount, setViewLoginAccount] = useState(false);
 
-    if(viewWalletCreate == true){
+    if(
+        viewWalletCreate == true ||
+        viewLoginAccount == true
+    ){
         window.document.body.style.overflow = 'hidden';
     } else{
         window.document.body.style.overflow = 'auto';
@@ -15,7 +19,9 @@ export const XERAWalletDataProvider = ({ children }) => {
     return (
         <XERAWalletDataContext.Provider value={{ 
             viewWalletCreate, 
-            setViewWalletCreate
+            setViewWalletCreate,
+            viewLoginAccount, 
+            setViewLoginAccount
             }}>
             {children}
         </XERAWalletDataContext.Provider>

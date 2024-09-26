@@ -14,17 +14,21 @@ import {
 import { 
   TbArrowBadgeDown,
   TbWallet,
+  TbUserCircle,
   TbSquareRoundedArrowDown,
   TbSquareRoundedArrowDownFilled 
 } from "react-icons/tb";
 import { Link } from 'react-router-dom';
 import CreateWallet from './Pages/CreateWallet';
+import LoginAccount from './Pages/LoginAccount';
 import { XERAWalletData } from './Pages/XERAWalletDataContext';
 
 const Nav = () => {
   const {
     viewWalletCreate, 
-    setViewWalletCreate
+    setViewWalletCreate,
+    viewLoginAccount, 
+    setViewLoginAccount
   } = XERAWalletData();
   const [viewFullNavigation, setViewFullNavigation] = useState(false);
 
@@ -42,6 +46,9 @@ const Nav = () => {
 
   const handleViewCreateWallet = () => {
     setViewWalletCreate(true)
+  }
+  const handleViewLoginWallet = () => {
+    setViewLoginAccount(true)
   }
 
 
@@ -76,6 +83,7 @@ const Nav = () => {
           </div>
         </div>}
         {viewWalletCreate && <CreateWallet />}
+        {viewLoginAccount && <LoginAccount />}
 
 
 
@@ -91,6 +99,7 @@ const Nav = () => {
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleViewFullNav}><p>EXPLORE</p></button>:
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleHideFullNav}><p>EXPLORE</p></button>} */}
             <button className='navCrBtn connect' onClick={handleViewCreateWallet}><p>CREATE WALLET</p><TbWallet className='faIcons'/></button>
+            <button className='navCrBtn login' onClick={handleViewLoginWallet}><TbUserCircle  className='faIcons'/></button>
           </div>
         </div>
       </div>
