@@ -73,6 +73,7 @@ const wordList = [
 
 const CreateWallet = () => {
     const {
+        xeraUserList,
         viewWalletCreate, 
         setViewWalletCreate,
         viewLoginAccount, 
@@ -185,7 +186,7 @@ const CreateWallet = () => {
             const responseMessage = submitWalletResponse.data;
     
             if (responseMessage.success) {
-                console.log(responseMessage.message);
+                // console.log(responseMessage.message);
                 setSuccessCreateModal(true)
                 setCreateWalletModal(false)
             } else {
@@ -231,6 +232,7 @@ const CreateWallet = () => {
         const userUsername = e.target.value;
         // Regular expression to check for non-alphanumeric characters
         const specialCharRegex = /[^a-zA-Z0-9]/;
+        const userNameExist = xeraUserList.find(user => user.username === userUsername)
         setXERAUsername(userUsername);
 
         // Always check for empty input first
@@ -252,6 +254,13 @@ const CreateWallet = () => {
             setXERAUsernameError(true);
             setXERAUsernameResponse(false);
             setXERAUsernameErrorResponse('Username too short');
+            setXERAUsernameErrorResponse1('');
+        } 
+        // Check if the username existing
+        else if (userNameExist) {
+            setXERAUsernameError(true);
+            setXERAUsernameResponse(false);
+            setXERAUsernameErrorResponse('Username already exists');
             setXERAUsernameErrorResponse1('');
         } 
         // Valid username
