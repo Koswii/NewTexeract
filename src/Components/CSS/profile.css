@@ -1,0 +1,188 @@
+h1, h2, h3, h4, h5, h6, p{
+    color: white;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
+p{
+    font-size: 0.9vw;
+}
+h1{
+    font-size: 10vw;
+}
+h2{
+    font-size: 5vw;
+}
+h3{
+    font-size: 4vw;
+}
+h4{
+    font-size: 2vw;
+}
+h5{
+    font-size: 1.5vw;
+}
+h6{
+    font-size: 1vw;
+}
+
+
+.mainContainer.profile{
+    height: 100vh;
+    width: 100%;
+    background: black;
+}
+
+/*----- Landing Section -----*/
+
+
+.profilePageContainer{
+    height: 100%;
+    width: 100%;
+    padding: 4vw 7%;
+    padding-top: 12vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    background: 
+        linear-gradient(black 5%, transparent),
+        linear-gradient(transparent, black 95%),
+        url('../assets/imgs/dashboadBG04.png') no-repeat center;
+    background-size: cover;
+}
+.profilePageContent.left{
+    height: 100%;
+    width: 65%;
+    border-radius: 1vw;
+    overflow: hidden;
+    /* background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); */
+    padding: 2%;
+}
+.prfpclHeader{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+.prfpchead.left{
+    height: auto;
+    width: 45%;
+}
+.prfpchlImg{
+    height: 10vw;
+    width: 10vw;
+    background: black;
+    border: solid 2px gray;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 5%;
+}
+.prfpchlImg img{
+    height: 100%;
+}
+.prfpchead.left h6{
+    font-size: 2.5vw;
+}
+.prfpchead.left p{
+    font-size: 0.7vw;
+    color: gray;
+}
+
+
+
+
+.prfpchead.right{
+    height: auto;
+    text-align: right;
+    width: 53%;
+}
+.prfpchead.right p#prfpchrBal{
+    font-size: 0.7vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.prfpchead.right h5{
+    font-size: 5vw;
+    line-height: 4.8vw;
+    margin-top: 5%;
+}
+.prfpchrStats{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10%;
+}
+.prfpchrStats div{
+    height: auto;
+    width: 30%;
+    padding: 2% 3%;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+.prfpchrStats div#prfpchrsPoints{
+    width: 67%;
+}
+.prfpchrStats div p{
+    color: gray;
+    font-size: 0.7vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.prfpchrStats div h6{
+    font-size: 1.5vw;
+}
+
+
+
+.prfpclContents{
+    height: auto;
+    width: 100%;
+    margin-top: 10%;
+}
+.prfpclcAnnouncements{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.prfpclcAnnouncements div{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.prfpclcAnnouncements div a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20%;
+}
+.prfpclContents hr{
+    margin: 1% 0;
+}
+
+
+
+
+
+
+
+.profilePageContent.right{
+    height: 100%;
+    width: 30%;
+    border-radius: 1vw;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 2%;
+}

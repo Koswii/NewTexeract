@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import './App.css';
 
 
@@ -8,6 +8,7 @@ import ScrollToTop from './Components/Pages/ScrollToTop';
 import { XERAWalletDataProvider } from './Components/Pages/XERAWalletDataContext';
 
 import Home from './Components/Pages/Home'
+import Profile from './Components/Pages/Profile';
 
 
 
@@ -18,7 +19,6 @@ function App() {
   const LoginState = localStorage.getItem('isLoggedIn');
   const LoginType = localStorage.getItem('loginState');
 
-
   return (
     <XERAWalletDataProvider>
       <Router>
@@ -27,6 +27,9 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Home/>}/>
+          {(LoginWallet && LoginState) &&
+            <Route path={`/p/${LoginWallet}`} element={<Profile/>}/>
+          }
 
 
         </Routes>

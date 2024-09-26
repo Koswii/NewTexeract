@@ -62,6 +62,26 @@ const Nav = () => {
   }
 
 
+  useEffect(() => {
+    if (!LoginState) return;
+    const keysToWatch = [
+      'myXeraAddress',
+      'isLoggedIn',
+      'loginState',
+    ];
+    const handleStorageChange = (event) => {
+      if (keysToWatch.includes(event.key)) {
+        setTimeout(() => {
+          keysToWatch.forEach((key) => localStorage.removeItem(key));
+        }, 1000);
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [])
+
 
 
   return (
@@ -112,7 +132,7 @@ const Nav = () => {
               <button className='navCrBtn connect' onClick={handleViewCreateWallet}><p>CREATE WALLET</p><TbWallet className='faIcons'/></button>
               <button className='navCrBtn login' onClick={handleViewLoginWallet}><TbUserCircle className='faIcons'/></button>
             </>:<>
-              <Link className='navCrBtn account'>
+              <Link className='navCrBtn account' to={`/p/${LoginWallet}`}>
                 <TbUserCircle className='faIcons'/>
                 <p><TextSlicer text={`${LoginWallet}`} maxLength={10} /></p>
               </Link>
