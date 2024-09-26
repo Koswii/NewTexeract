@@ -5,21 +5,33 @@ const XERAWalletDataContext = createContext();
 
 export const XERAWalletDataProvider = ({ children }) => {
     const XERACreateWalletAccountAPI = process.env.REACT_APP_XERA_USER_LIST_API;
+    const XERAWalletsListAPI = process.env.REACT_APP_XERA_USER_WALLETS_LIST_API;
     const [viewWalletCreate, setViewWalletCreate] = useState(false);
     const [viewLoginAccount, setViewLoginAccount] = useState(false);
     const [xeraUserList, setXeraUserList] = useState([]);
+    const [xeraWalletsList, setXeraWalletsList] = useState([]);
 
 
     const fetchUserList = async () => {
         try {
-            // const intervalId = setInterval(async () => {
+            const intervalId = setInterval(async () => {
                 const response = await axios.get(XERACreateWalletAccountAPI);
                 const userListData = response.data;
                 setXeraUserList(userListData);
-                console.log(userListData);
-                
-            // }, 1000);
-            // return () => clearInterval(intervalId);
+            }, 10000);
+            return () => clearInterval(intervalId);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const fetchUserWalletsList = async () => {
+        try {
+            const intervalId = setInterval(async () => {
+                const response = await axios.get(XERAWalletsListAPI);
+                const userWalletsListData = response.data;
+                setXeraWalletsList(userWalletsListData);
+            }, 10000);
+            return () => clearInterval(intervalId);
         } catch (error) {
             console.error(error);
         }
@@ -27,6 +39,7 @@ export const XERAWalletDataProvider = ({ children }) => {
 
     useEffect(() => {
         fetchUserList();
+        fetchUserWalletsList();
     }, []);
 
 
@@ -46,7 +59,9 @@ export const XERAWalletDataProvider = ({ children }) => {
             viewLoginAccount, 
             setViewLoginAccount,
             xeraUserList,
-            fetchUserList
+            fetchUserList,
+            xeraWalletsList,
+            fetchUserWalletsList
             }}>
             {children}
         </XERAWalletDataContext.Provider>
