@@ -29,6 +29,13 @@ const Profile = () => {
         xeraUserProfile,
         xeraUserReferrals
     } = XERAWalletData();
+
+    const userProfileName = xeraUserProfile.username
+    const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userProfileName)
+    
+
+
+
     
     return (
         <div className='mainContainer profile'>
@@ -87,7 +94,7 @@ const Profile = () => {
                                     </div>
                                     <div className="prfpchrcsReferrals">
                                         <p>Referral Points</p>
-                                        <h5>{xeraUserReferrals.length}</h5>
+                                        <h5>{userTotalReferral.length}</h5>
                                     </div>
                                 </div>
                             </div>

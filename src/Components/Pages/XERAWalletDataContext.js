@@ -19,8 +19,6 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
     const [xeraWalletsList, setXeraWalletsList] = useState([]);
 
-    const userProfileUsername = xeraUserProfile.username
-
     const fetchUserList = async () => {
         try {
             const intervalId = setInterval(async () => {
@@ -50,26 +48,22 @@ export const XERAWalletDataProvider = ({ children }) => {
             console.error(error);
         }
     };
+    const fetchUserReferralsList = async () => {
+    
+        try {
+            const response = await axios.get(XERAReferralsListAPI);
+            const userReferralsListData = response.data;
+            setXeraUserReferrals(userReferralsListData);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     useEffect(() => {
-        const fetchUserReferralsList = async () => {
-        
-            try {
-                const response = await axios.get(XERAReferralsListAPI);
-                const userReferralsListData = response.data;
-                const userTotalReferral = userReferralsListData.filter(user => user.xera_referral === userProfileUsername)
-                setXeraUserReferrals(userTotalReferral);
-                
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-
         fetchUserList();
         fetchUserWalletsList();
         fetchUserReferralsList();
-    }, [userProfileUsername]);
+    }, []);
 
 
     if(
