@@ -32,6 +32,9 @@ const Profile = () => {
 
     const userProfileName = xeraUserProfile.username
     const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userProfileName)
+
+    console.log(userTotalReferral);
+    
     
 
 
@@ -86,10 +89,13 @@ const Profile = () => {
                                 <div className="prfpchrcStats">
                                     <div className="prfpchrcsFollowers">
                                         <p>Followers</p>
-                                        <h5>0</h5>
+                                        <span>
+
+                                            <h5>{userTotalReferral.length}</h5>
+                                        </span>
                                     </div>
                                     <div className="prfpchrcsReferrals">
-                                        <p>Referral</p>
+                                        <p>Referrals</p>
                                         <h5>{userTotalReferral.length}</h5>
                                     </div>
                                     <div className="prfpchrcsPoints">

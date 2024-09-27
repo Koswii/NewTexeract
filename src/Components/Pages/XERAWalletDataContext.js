@@ -6,6 +6,7 @@ const XERAWalletDataContext = createContext();
 export const XERAWalletDataProvider = ({ children }) => {
     const XERACreateWalletAccountAPI = process.env.REACT_APP_XERA_USER_LIST_API;
     const XERAWalletsListAPI = process.env.REACT_APP_XERA_USER_WALLETS_LIST_API;
+    const XERADisplayListAPI = process.env.REACT_APP_XERA_USER_DISPLAYS_LIST_API;
     const XERAReferralsListAPI = process.env.REACT_APP_XERA_USER_REFERRALS_API;
     
     const LoginWallet = localStorage.getItem('myXeraAddress');
@@ -17,52 +18,61 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [xeraUserList, setXeraUserList] = useState([]);
     const [xeraUserProfile, setXeraUserProfile] = useState([]);
     const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
-    const [xeraWalletsList, setXeraWalletsList] = useState([]);
 
-    const fetchUserList = async () => {
+    const fetchXERAData1 = async () => {
         try {
+            // Set up intervals for the first two APIs
             const intervalId = setInterval(async () => {
-                const response = await axios.get(XERACreateWalletAccountAPI);
-                const userListData = response.data;
-                setXeraUserList(userListData);
-            }, 1000);
+                try {
+                    const [userListResponse, walletsListResponse, displayListResponse] = await Promise.all([
+                        axios.get(XERACreateWalletAccountAPI),
+                        axios.get(XERAWalletsListAPI),
+                        axios.get(XERADisplayListAPI)
+                    ]);
             
-            const response = await axios.get(XERACreateWalletAccountAPI);
-            const profileData = response.data.find(user => user.xera_wallet === LoginWallet);
-            setXeraUserProfile(profileData);
+                    const userListData = userListResponse.data;
+                    const userWalletsListData = walletsListResponse.data;
+                    const displayListData = displayListResponse.data;
             
-            return () => clearInterval(intervalId);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    const fetchUserWalletsList = async () => {
-        try {
-            const intervalId = setInterval(async () => {
-                const response = await axios.get(XERAWalletsListAPI);
-                const userWalletsListData = response.data;
-                setXeraWalletsList(userWalletsListData);
+                    // Combine data based on the same 'xera_wallet'
+                    const combinedData = userListData.map(user => {
+                        const userWallet = userWalletsListData.find(wallet => wallet.xera_wallet === user.xera_wallet);
+                        const displayData = displayListData.find(display => display.xera_wallet === user.xera_wallet);
+                        
+                        return {
+                            ...user,
+                            wallet: userWallet ? userWallet : null, // Attach the matching wallet data
+                            display: displayData ? displayData : null // Attach the matching display data
+                        };
+                    });
+            
+                    // Set the combined data to state
+                    setXeraUserList(combinedData);
+            
+                } catch (error) {
+                    console.error(error);
+                }
             }, 1000);
-            return () => clearInterval(intervalId);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    const fetchUserReferralsList = async () => {
     
-        try {
-            const response = await axios.get(XERAReferralsListAPI);
-            const userReferralsListData = response.data;
+            // Fetch profile data once
+            const userListResponse = await axios.get(XERACreateWalletAccountAPI);
+            const profileData = userListResponse.data.find(user => user.xera_wallet === LoginWallet);
+            setXeraUserProfile(profileData);
+    
+            // Fetch referrals list
+            const referralsResponse = await axios.get(XERAReferralsListAPI);
+            const userReferralsListData = referralsResponse.data;
             setXeraUserReferrals(userReferralsListData);
+    
+            return () => clearInterval(intervalId);
         } catch (error) {
             console.error(error);
         }
     };
+    
 
     useEffect(() => {
-        fetchUserList();
-        fetchUserWalletsList();
-        fetchUserReferralsList();
+        fetchXERAData1();
     }, []);
 
 
@@ -86,9 +96,6 @@ export const XERAWalletDataProvider = ({ children }) => {
             viewLoginAccount, 
             setViewLoginAccount,
             xeraUserList,
-            fetchUserList,
-            xeraWalletsList,
-            fetchUserWalletsList,
             xeraUserReferrals,
             }}>
             {children}
