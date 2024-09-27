@@ -88,13 +88,13 @@ const Profile = () => {
                                         <p>Followers</p>
                                         <h5>0</h5>
                                     </div>
+                                    <div className="prfpchrcsReferrals">
+                                        <p>Referral</p>
+                                        <h5>{userTotalReferral.length}</h5>
+                                    </div>
                                     <div className="prfpchrcsPoints">
                                         <p>XERA Points</p>
                                         <h5>0</h5>
-                                    </div>
-                                    <div className="prfpchrcsReferrals">
-                                        <p>Referral Points</p>
-                                        <h5>{userTotalReferral.length}</h5>
                                     </div>
                                 </div>
                             </div>

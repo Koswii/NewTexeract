@@ -104,6 +104,7 @@ const CreateWallet = () => {
 
     const [userInputs, setUserInputs] = useState(Array(12).fill(''));
     const [isConfirmed, setIsConfirmed] = useState(false);
+    const [creationLoader, setCreationLoader] = useState(false);
     const [seedError, setSeedError] = useState(false);
     const [seedComplete, setSeedComplete] = useState(false);
 
@@ -164,6 +165,8 @@ const CreateWallet = () => {
         }
     };
     const submitWalletDetails = async () => {
+        setCreationLoader(true)
+
         const seedKeys = {};
         seedPhrase.forEach((item, index) => {
             seedKeys[`seedKey${index + 1}`] = item.word;
@@ -187,6 +190,7 @@ const CreateWallet = () => {
     
             if (responseMessage.success) {
                 // console.log(responseMessage.message);
+                setCreationLoader(false)
                 setSuccessCreateModal(true)
                 setCreateWalletModal(false)
             } else {
@@ -455,7 +459,11 @@ const CreateWallet = () => {
                             <button className='active' onClick={handlePage3}>Next</button>
                         </>}
                         {viewVerifyWallet && <>
-                            <button className='active' onClick={handleConfirm}>Create</button>
+                            {!creationLoader ? 
+                                <button className='active' onClick={handleConfirm}>Create</button>:
+                                <button className='' disabled>Creating...</button>
+                            }
+                            
                         </>}
                     </div>
                 </div>}
