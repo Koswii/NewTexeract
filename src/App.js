@@ -28,10 +28,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           {(LoginWallet && LoginState) &&
-            <Route path={`/p/${LoginWallet}`} element={<Profile/>}/>
+            <>
+              <Route path={`/p/${LoginWallet}`} element={<Profile/>}/>
+            </>
           }
 
 
+          <Route path="*" element={<Home/>}/>
         </Routes>
         {/* <Footer /> */}
       </div>

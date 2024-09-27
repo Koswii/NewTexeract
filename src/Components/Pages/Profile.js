@@ -9,7 +9,11 @@ import {
     RiTiktokFill,
     RiTelegramFill,
 } from "react-icons/ri";
-
+import { 
+    TbSwitchHorizontal,
+    TbPhotoVideo,
+    TbExchange   
+} from "react-icons/tb";
 
 const TextSlicer = ({ text = '', maxLength }) => {
     const truncatedText = text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
@@ -33,38 +37,41 @@ const Profile = () => {
                         <div className="prfpchead left">
                             <div className='prfpchlImg'>
                                 <img src="" alt="" />
+                                <div className="prfpchlNFT switch">
+                                    <button><TbExchange className='faIcons'/></button>
+                                </div>
+                                <div className="prfpchlNFT rarity">
+                                    <h6>RARITY:</h6>
+                                    <h5>CREATOR</h5>
+                                    <p>NFT ID: XERA00000001</p>
+                                </div>
+                                <div className="prfpchlNFT value">
+                                    <div className="prfpchlnftv left">
+                                        <p>MARKET VALUE</p>
+                                        <h4>0 XERA</h4>
+                                    </div>
+                                    <div className="prfpchlnftv right">
+                                        <button>SEND</button>
+                                        <button>SELL</button>
+                                    </div>
+                                </div>
                             </div>
-                            <h6><TextSlicer text={`${xeraUserProfile.username}`} maxLength={12} /></h6>
-                            <p>{xeraUserProfile.xera_wallet}</p>
                         </div>
                         <div className="prfpchead right">
-                            <p id='prfpchrBal'>MY BALANCE</p>
-                            <h5>0.00</h5>
-                            <h6>XERA COIN</h6>
-                            <div className="prfpchrStats">
-                                <div id='prfpchrsPoints'>
-                                    <p>Points</p>
-                                    <h6>0</h6>
-                                </div>
-                                <div>
-                                    <p>Nodes</p>
-                                    <h6>0</h6>
+                            <div className="prfpchrNav">
+                                <button className='active'>OVERVIEW</button>
+                                <button>NFTs</button>
+                                <button>ON MARKET</button>
+                            </div>
+                            <div className="prfpchrContents">
+                                <h5>{xeraUserProfile.username}</h5>
+                                <h6>{xeraUserProfile.xera_wallet}</h6>
+                                <div className="prfpchrcBalance">
+                                    <h3>0 XERA</h3>
+                                    <p>BALANCE</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="prfpclContents">
-                        <div className='prfpclcAnnouncements'>
-                            <h6>NODE AIRDROP</h6>
-                            <div>
-                                <a href=""><RiFacebookBoxFill className='faIcons'/></a>
-                                <a href=""><RiTwitterXFill className='faIcons'/></a>
-                                <a href=""><RiTiktokFill className='faIcons'/></a>
-                                <a href=""><RiTelegramFill className='faIcons'/></a>
-                            </div>
-                        </div>
-                        <hr />
-                        <p></p>
                     </div>
                 </div>
                 <div className="profilePageContent right">
