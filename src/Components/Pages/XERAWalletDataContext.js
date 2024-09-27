@@ -24,7 +24,7 @@ export const XERAWalletDataProvider = ({ children }) => {
                 const response = await axios.get(XERACreateWalletAccountAPI);
                 const userListData = response.data;
                 setXeraUserList(userListData);
-            }, 10000);
+            }, 1000);
             
             const response = await axios.get(XERACreateWalletAccountAPI);
             const profileData = response.data.find(user => user.xera_wallet === LoginWallet);
@@ -41,7 +41,7 @@ export const XERAWalletDataProvider = ({ children }) => {
                 const response = await axios.get(XERAWalletsListAPI);
                 const userWalletsListData = response.data;
                 setXeraWalletsList(userWalletsListData);
-            }, 10000);
+            }, 1000);
             return () => clearInterval(intervalId);
         } catch (error) {
             console.error(error);

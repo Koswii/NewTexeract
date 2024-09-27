@@ -73,7 +73,8 @@ const Nav = () => {
       if (keysToWatch.includes(event.key)) {
         setTimeout(() => {
           keysToWatch.forEach((key) => localStorage.removeItem(key));
-        }, 1000);
+          window.location.reload();
+        }, 500);
       }
     };
     window.addEventListener('storage', handleStorageChange);
