@@ -26,7 +26,8 @@ const Profile = () => {
         LoginWallet,
         LoginState,
         LoginType,
-        xeraUserProfile
+        xeraUserProfile,
+        xeraUserReferrals
     } = XERAWalletData();
     
     return (
@@ -86,7 +87,7 @@ const Profile = () => {
                                     </div>
                                     <div className="prfpchrcsReferrals">
                                         <p>Referral Points</p>
-                                        <h5>0</h5>
+                                        <h5>{xeraUserReferrals.length}</h5>
                                     </div>
                                 </div>
                             </div>

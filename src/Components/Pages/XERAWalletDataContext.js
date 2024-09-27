@@ -6,6 +6,7 @@ const XERAWalletDataContext = createContext();
 export const XERAWalletDataProvider = ({ children }) => {
     const XERACreateWalletAccountAPI = process.env.REACT_APP_XERA_USER_LIST_API;
     const XERAWalletsListAPI = process.env.REACT_APP_XERA_USER_WALLETS_LIST_API;
+    const XERAReferralsListAPI = process.env.REACT_APP_XERA_USER_REFERRALS_API;
     
     const LoginWallet = localStorage.getItem('myXeraAddress');
     const LoginState = localStorage.getItem('isLoggedIn');
@@ -15,8 +16,10 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [viewLoginAccount, setViewLoginAccount] = useState(false);
     const [xeraUserList, setXeraUserList] = useState([]);
     const [xeraUserProfile, setXeraUserProfile] = useState([]);
+    const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
     const [xeraWalletsList, setXeraWalletsList] = useState([]);
 
+    const userProfileUsername = xeraUserProfile.username
 
     const fetchUserList = async () => {
         try {
@@ -49,9 +52,24 @@ export const XERAWalletDataProvider = ({ children }) => {
     };
 
     useEffect(() => {
+        const fetchUserReferralsList = async () => {
+        
+            try {
+                const response = await axios.get(XERAReferralsListAPI);
+                const userReferralsListData = response.data;
+                const userTotalReferral = userReferralsListData.filter(user => user.xera_referral === userProfileUsername)
+                setXeraUserReferrals(userTotalReferral);
+                
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+
         fetchUserList();
         fetchUserWalletsList();
-    }, []);
+        fetchUserReferralsList();
+    }, [userProfileUsername]);
 
 
     if(
@@ -76,7 +94,8 @@ export const XERAWalletDataProvider = ({ children }) => {
             xeraUserList,
             fetchUserList,
             xeraWalletsList,
-            fetchUserWalletsList
+            fetchUserWalletsList,
+            xeraUserReferrals,
             }}>
             {children}
         </XERAWalletDataContext.Provider>
