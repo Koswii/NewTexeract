@@ -3,6 +3,7 @@ import "../CSS/profile.css";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { XERAWalletData } from './XERAWalletDataContext';
+import { TelegramData } from './TelegramDataContext';
 import { 
     RiFacebookBoxFill,
     RiTwitterXFill,
@@ -33,6 +34,40 @@ const formatNumberToK = (num) => {
 const NumberFormatter = ({ number }) => {
     return <>{formatNumberToK(number)}</>;
 };
+const ScrambleTextUsername = ({ targetText, scrambleSpeed = 50, revealSpeed = 200 }) => {
+    const [scrambledText, setScrambledText] = useState('');
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
+    const scramble = (text) => {
+      return text
+        .split('')
+        .map((char) => (Math.random() > 0.5 ? characters[Math.floor(Math.random() * characters.length)] : char))
+        .join('');
+    };
+    useEffect(() => {
+      let iteration = 0;
+      let interval;
+      const scrambleInterval = () => {
+        interval = setInterval(() => {
+          setScrambledText((prev) => {
+            const progress = iteration / targetText.length;
+            const newText = targetText
+              .split('')
+              .map((char, i) => (i < progress * targetText.length ? char : characters[Math.floor(Math.random() * characters.length)]))
+              .join('');
+            iteration++;
+            if (iteration > targetText.length * 2) clearInterval(interval);
+            return newText;
+          });
+        }, scrambleSpeed);
+      };
+      scrambleInterval();
+      return () => clearInterval(interval);
+    }, [targetText, scrambleSpeed]);
+    return <h5 style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '1.5vw', fontWeight: '700', color: 'white' }}>{scrambledText}</h5>;
+};
+
+
+
 const Profile = () => {
     const {
         LoginWallet,
@@ -43,6 +78,14 @@ const Profile = () => {
         xeraUserReferrals,
         xeraUserFollowings
     } = XERAWalletData();
+    const {
+        telegramID, 
+        setTelegramID,
+        telegramUsername,
+        checkTelegramMembership,
+        telegramStatus,
+        joinedTelegram
+    } = TelegramData();
 
     const userProfileName = xeraUserProfile.username
     const userFollowers = xeraUserList.map(user => {
@@ -57,7 +100,7 @@ const Profile = () => {
     
     return (
         <div className='mainContainer profile'>
-            <section className="profilePageContainer">
+            <section className="profilePageContainer top">
                 <div className="profilePageContent left">
                     <div className="prfpclHeader">
                         <div className="prfpchead left">
@@ -73,7 +116,7 @@ const Profile = () => {
                                 </div>
                                 <div className="prfpchlNFT value">
                                     <div className="prfpchlnftv left">
-                                        <p>MARKET VALUE</p>
+                                        <p>Market Value</p>
                                         <div>
                                             <h4>0</h4>
                                             <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
@@ -94,7 +137,10 @@ const Profile = () => {
                             </div>
                             <div className="prfpchrContents">
                                 <div className="prfpchrcProfile">
-                                    <h5>{xeraUserProfile.username}</h5>
+                                    {!xeraUserProfile.username ?
+                                        <ScrambleTextUsername targetText='Texeract Network' scrambleSpeed={80} revealSpeed={200} />:
+                                        <ScrambleTextUsername targetText={`${xeraUserProfile.username}`} scrambleSpeed={80} revealSpeed={200} />
+                                    }
                                     <h6>{xeraUserProfile.xera_wallet}</h6>
                                 </div>
                                 <div className="prfpchrcBalance">
@@ -169,6 +215,29 @@ const Profile = () => {
                                 </div>
                             </div> */}
                         </>
+                    </div>
+                </div>
+            </section>
+            <section className="profilePageContainer mid">
+                <div className="ppContentMidAirdrop">
+                    <div className="ppcmAirdrop left">
+                        <h6>AIRDROP TASK</h6>
+                        <div className="ppcmalContainer">
+                            <div className="ppcmalcContent">
+                                
+                            </div>
+                        </div>
+                        {/* <input
+                            type="text"
+                            placeholder="Enter Telegram USER ID"
+                            value={telegramID}
+                            onChange={(e) => setTelegramID(e.target.value)}
+                        />
+                        <button onClick={checkTelegramMembership}>Check Membership</button>
+                        <p>{telegramStatus}</p> */}
+                    </div>
+                    <div className="ppcmAirdrop right">
+
                     </div>
                 </div>
             </section>

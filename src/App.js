@@ -6,6 +6,7 @@ import Nav from './Components/Nav'
 // import Footer from './Components/Pages/footer';
 import ScrollToTop from './Components/Pages/ScrollToTop';
 import { XERAWalletDataProvider } from './Components/Pages/XERAWalletDataContext';
+import { TelegramDataProvider } from './Components/Pages/TelegramDataContext';
 
 import Home from './Components/Pages/Home'
 import Profile from './Components/Pages/Profile';
@@ -21,24 +22,26 @@ function App() {
 
   return (
     <XERAWalletDataProvider>
-      <Router>
-      <div>
-        <ScrollToTop />
-        <Nav />
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          {(LoginWallet && LoginState) &&
-            <>
-              <Route path={`/p/${LoginWallet}`} element={<Profile/>}/>
-            </>
-          }
+      <TelegramDataProvider>
+        <Router>
+        <div>
+          <ScrollToTop />
+          <Nav />
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            {(LoginWallet && LoginState) &&
+              <>
+                <Route path={`/p/${LoginWallet}`} element={<Profile/>}/>
+              </>
+            }
 
 
-          <Route path="*" element={<Home/>}/>
-        </Routes>
-        {/* <Footer /> */}
-      </div>
-      </Router>
+            <Route path="*" element={<Home/>}/>
+          </Routes>
+          {/* <Footer /> */}
+        </div>
+        </Router>
+      </TelegramDataProvider>
     </XERAWalletDataProvider>
   );
 }

@@ -31,24 +31,25 @@ h6{
     height: auto;
     width: 100%;
     background: black;
+    padding-bottom: 10vw;
 }
 
 /*----- Landing Section -----*/
 
 
-.profilePageContainer{
+.profilePageContainer.top{
     height: auto;
     width: 100%;
-    padding: 4vw 7%;
+    padding: 2vw 7%;
     padding-top: 12vh;
     display: flex;
     justify-content: space-between;
     align-items: start;
     position: relative;
     background: 
-        /* linear-gradient(black 0%, transparent), */
-        linear-gradient(transparent, black 95%),
-        url('../assets/imgs/dashboadBG04.png') no-repeat center;
+        linear-gradient(black 0%, transparent),
+        linear-gradient(transparent, black 100%),
+        url('../assets/imgs/dashboadBG04.png') no-repeat top;
     background-size: cover;
 }
 .profilePageContent.left{
@@ -117,8 +118,9 @@ h6{
     font-size: 0.7vw;
 }
 .prfpchlNFT.rarity p{
-    font-size: 0.7vw;
+    font-size: 0.6vw;
     color: gray;
+    font-family: 'Lexend Peta', sans-serif;
 }
 
 
@@ -263,8 +265,10 @@ h6{
     position: relative;
 }
 .prfpchrcs p{
-    font-size: 0.7vw;
+    font-family: 'Lexend Peta', sans-serif;
+    font-size: 0.6vw;
     color: gray;
+    margin-bottom: 2%;
 }
 .prfpchrcs.Followers div{
     height: auto;
@@ -275,7 +279,6 @@ h6{
 .prfpchrcs.Followers div span{
     height: auto;
     width: 37%;
-    /* margin-right: 3%; */
     display: flex;
     justify-content: left;
     align-items: center;
@@ -419,3 +422,32 @@ h6{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+.profilePageContainer.mid{
+    height: auto;
+    width: 100%;
+    padding: 2vw 7%;
+    position: relative;
+}
+.ppContentMidAirdrop{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+.ppcmAirdrop.left{
+    height: auto;
+    padding: 2%;
+    width: 65%;
+}
