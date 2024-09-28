@@ -16,9 +16,10 @@ import {
   TbWallet,
   TbUserCircle,
   TbSquareRoundedArrowDown,
-  TbSquareRoundedArrowDownFilled 
+  TbSquareRoundedArrowDownFilled,
+  TbLogout  
 } from "react-icons/tb";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CreateWallet from './Pages/CreateWallet';
 import LoginAccount from './Pages/LoginAccount';
 import { XERAWalletData } from './Pages/XERAWalletDataContext';
@@ -33,6 +34,7 @@ const TextSlicer = ({ text = '', maxLength }) => {
 };
 
 const Nav = () => {
+  const navigate = useNavigate ();
   const {
     LoginWallet,
     LoginState,
@@ -43,6 +45,7 @@ const Nav = () => {
     setViewLoginAccount
   } = XERAWalletData();
   const [viewFullNavigation, setViewFullNavigation] = useState(false);
+  const XERALoginBasicAccountAPI = process.env.REACT_APP_XERA_USER_LOGOUT_API;
 
   const handleViewFullNav = () => {
     setViewFullNavigation(true);
@@ -60,7 +63,28 @@ const Nav = () => {
   const handleViewLoginWallet = () => {
     setViewLoginAccount(true)
   }
-
+  const handleUserLogout = () => {
+    if (!LoginState) return;
+    fetch(XERALoginBasicAccountAPI, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        localStorage.removeItem('myXeraAddress');
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('loginState');
+        navigate('/')
+        window.location.reload();
+      } else {
+        console.log(data.message)
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  };
 
   useEffect(() => {
     if (!LoginState) return;
@@ -73,7 +97,7 @@ const Nav = () => {
       if (keysToWatch.includes(event.key)) {
         setTimeout(() => {
           keysToWatch.forEach((key) => localStorage.removeItem(key));
-          window.location.reload();
+          handleUserLogout();
         }, 500);
       }
     };
@@ -137,6 +161,7 @@ const Nav = () => {
                 <TbUserCircle className='faIcons'/>
                 <p><TextSlicer text={`${LoginWallet}`} maxLength={10} /></p>
               </Link>
+              <button className='navCrBtn logout' onClick={handleUserLogout}><TbLogout className='faIcons'/></button>
             </>}
           </div>
         </div>

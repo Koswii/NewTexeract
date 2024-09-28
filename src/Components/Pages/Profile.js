@@ -21,24 +21,39 @@ const TextSlicer = ({ text = '', maxLength }) => {
       <>{truncatedText}</>
     );
 };
+const formatNumberToK = (num) => {
+    if (typeof num !== 'number' || isNaN(num)) {
+      return '';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(num % 1000 === 0 ? 0 : 1) + 'K';
+    }
+    return num.toString();
+};
+const NumberFormatter = ({ number }) => {
+    return <>{formatNumberToK(number)}</>;
+};
 const Profile = () => {
     const {
         LoginWallet,
         LoginState,
         LoginType,
+        xeraUserList,
         xeraUserProfile,
-        xeraUserReferrals
+        xeraUserReferrals,
+        xeraUserFollowings
     } = XERAWalletData();
 
     const userProfileName = xeraUserProfile.username
+    const userFollowers = xeraUserList.map(user => {
+        const follower = xeraUserFollowings.find(wallet => wallet.xera_wallet === user.xera_wallet);
+        return {
+            ...user, following: follower ? follower : ''
+        }
+    })
     const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userProfileName)
-
-    console.log(userTotalReferral);
+    const userTotalFollowers = userFollowers.filter(user => user.following.following === userProfileName)
     
-    
-
-
-
     
     return (
         <div className='mainContainer profile'>
@@ -61,7 +76,7 @@ const Profile = () => {
                                         <p>MARKET VALUE</p>
                                         <div>
                                             <h4>0</h4>
-                                            <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                            <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
                                         </div>
                                     </div>
                                     <div className="prfpchlnftv right">
@@ -87,20 +102,31 @@ const Profile = () => {
                                     <p>BALANCE</p>
                                 </div>
                                 <div className="prfpchrcStats">
-                                    <div className="prfpchrcsFollowers">
+                                    <div className="prfpchrcs Followers">
                                         <p>Followers</p>
-                                        <span>
-
-                                            <h5>{userTotalReferral.length}</h5>
-                                        </span>
+                                        <div>
+                                            {userTotalFollowers.length >= 3 &&
+                                                <span>
+                                                    {userTotalFollowers.slice(0, 3).map((data, i) => (
+                                                        <>
+                                                            {data.display.xera_nft_meta ?
+                                                                <img key={i} src="" alt="" />:
+                                                                <img key={i} src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                                            }
+                                                        </>
+                                                    ))}
+                                                </span>
+                                            }
+                                            <h5><NumberFormatter number={userTotalFollowers.length}/></h5>
+                                        </div>
                                     </div>
-                                    <div className="prfpchrcsReferrals">
+                                    <div className="prfpchrcs Referrals">
                                         <p>Referrals</p>
-                                        <h5>{userTotalReferral.length}</h5>
+                                        <h5><NumberFormatter number={userTotalFollowers.length}/></h5>
                                     </div>
-                                    <div className="prfpchrcsPoints">
+                                    <div className="prfpchrcs Points">
                                         <p>XERA Points</p>
-                                        <h5>0</h5>
+                                        <h5><NumberFormatter number={0}/></h5>
                                     </div>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ export const XERAWalletDataProvider = ({ children }) => {
     const XERACreateWalletAccountAPI = process.env.REACT_APP_XERA_USER_LIST_API;
     const XERAWalletsListAPI = process.env.REACT_APP_XERA_USER_WALLETS_LIST_API;
     const XERADisplayListAPI = process.env.REACT_APP_XERA_USER_DISPLAYS_LIST_API;
+    const XERAFollowingListAPI = process.env.REACT_APP_XERA_USER_FOLLOWING_LIST_API;
     const XERAReferralsListAPI = process.env.REACT_APP_XERA_USER_REFERRALS_API;
     
     const LoginWallet = localStorage.getItem('myXeraAddress');
@@ -18,6 +19,7 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [xeraUserList, setXeraUserList] = useState([]);
     const [xeraUserProfile, setXeraUserProfile] = useState([]);
     const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
+    const [xeraUserFollowings, setXeraUserFollowings] = useState([]);
 
     const fetchXERAData1 = async () => {
         try {
@@ -41,7 +43,7 @@ export const XERAWalletDataProvider = ({ children }) => {
                         
                         return {
                             ...user,
-                            wallet: userWallet ? userWallet : null, // Attach the matching wallet data
+                            wallets: userWallet ? userWallet : null, // Attach the matching wallet data
                             display: displayData ? displayData : null // Attach the matching display data
                         };
                     });
@@ -63,6 +65,11 @@ export const XERAWalletDataProvider = ({ children }) => {
             const referralsResponse = await axios.get(XERAReferralsListAPI);
             const userReferralsListData = referralsResponse.data;
             setXeraUserReferrals(userReferralsListData);
+
+            // Fetch followings list
+            const followingsResponse = await axios.get(XERAFollowingListAPI);
+            const userFollowingsListData = followingsResponse.data;
+            setXeraUserFollowings(userFollowingsListData);
     
             return () => clearInterval(intervalId);
         } catch (error) {
@@ -97,6 +104,7 @@ export const XERAWalletDataProvider = ({ children }) => {
             setViewLoginAccount,
             xeraUserList,
             xeraUserReferrals,
+            xeraUserFollowings,
             }}>
             {children}
         </XERAWalletDataContext.Provider>

@@ -252,6 +252,24 @@ nav{
 
 
 
+.navContent.right button.navCrBtn.logout{
+    padding: 0;
+    box-shadow: 0 0 0;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    color: white;
+    transition: 400ms ease;
+}
+.navContent.right button.navCrBtn.logout .faIcons{
+    padding: 3%;
+    font-size: 2vw;
+    transition: 400ms ease;
+}
+
+
 
 .navContent.right a.navCrBtn.account{
     width: 17%;
