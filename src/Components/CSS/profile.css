@@ -49,7 +49,7 @@ h6{
     background: 
         linear-gradient(black 0%, transparent),
         linear-gradient(transparent, black 100%),
-        url('../assets/imgs/dashboadBG04.png') no-repeat top;
+        url('../assets/imgs/dashboadBG04.png') no-repeat center;
     background-size: cover;
 }
 .profilePageContent.left{
@@ -451,3 +451,125 @@ h6{
     padding: 2%;
     width: 65%;
 }
+.ppcmalContainer{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+}
+.ppcmalcContent{
+    height: 15vw;
+    width: 24%;
+    border-radius: 1vw;
+    overflow: hidden;
+    filter: grayscale(1);
+    box-shadow: 0 0 5px rgb(50, 50, 50);
+    padding: 2%;
+    position: relative;
+}
+.ppcmalcContent.active{
+    filter: grayscale(0);
+    box-shadow: 0 0 10px rgb(65, 65, 65);
+}
+.ppcmalcContent.create{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/wallet.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.telegram{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/telegram.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.xtwitter{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/xtwitter.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.binding{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/binding.png') no-repeat center;
+    background-size: cover;
+}
+
+.ppcmalcContent button#airdropTaskInfo{
+    position: absolute;
+    top: 0.5vw;
+    right: 0.5vw;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+
+
+
+.ppcmalccTitle{
+    height: auto;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 3% 10%;
+    position: absolute;
+    top: 0.5vw;
+    left: 0.5vw;
+    border-radius: 50px;
+}
+.ppcmalccTitle p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.ppcmalccTask{
+    height: auto;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1vw;
+}
+.ppcmalccTask p{
+    width: 65%;
+    padding: 3% 10%;
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    background: skyblue;
+    color: black;
+    text-align: center;
+    border-radius: 0.5vw;
+    margin-top: 5%;
+}
+.ppcmalccTask button{
+    width: 65%;
+    padding: 3% 10%;
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    background: skyblue;
+    color: black;
+    text-align: center;
+    border-radius: 0.5vw;
+    margin-top: 5%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+

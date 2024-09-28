@@ -13,7 +13,8 @@ import {
 import { 
     TbSwitchHorizontal,
     TbPhotoVideo,
-    TbExchange   
+    TbExchange,
+    TbInfoCircle    
 } from "react-icons/tb";
 
 const TextSlicer = ({ text = '', maxLength }) => {
@@ -221,10 +222,50 @@ const Profile = () => {
             <section className="profilePageContainer mid">
                 <div className="ppContentMidAirdrop">
                     <div className="ppcmAirdrop left">
-                        <h6>AIRDROP TASK</h6>
+                        <h5>AIRDROP TASK</h5>
                         <div className="ppcmalContainer">
-                            <div className="ppcmalcContent">
-                                
+                            <div className="ppcmalcContent create active">
+                                <button id='airdropTaskInfo'><TbInfoCircle className='faIcons'/></button>
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 1</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6>CREATE A<br />XERA WALLET</h6>
+                                    <p>COMPLETED</p>
+                                </div>
+                            </div>
+                            <div className="ppcmalcContent telegram">
+                                <button id='airdropTaskInfo'><TbInfoCircle className='faIcons'/></button>
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 2</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6>JOIN TELEGRAM<br />COMMUNITY</h6>
+                                    <button>EXECUTE</button>
+                                </div>
+
+                            </div>
+                            <div className="ppcmalcContent xtwitter">
+                                <button id='airdropTaskInfo'><TbInfoCircle className='faIcons'/></button>
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 3</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6>VISIT AND<br />FOLLOW X</h6>
+                                    <button>EXECUTE</button>
+                                </div>
+
+                            </div>
+                            <div className="ppcmalcContent binding">
+                                <button id='airdropTaskInfo'><TbInfoCircle className='faIcons'/></button>
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 4</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6>BIND ANY<br />CRYTO WALLET</h6>
+                                    <button>EXECUTE</button>
+                                </div>
+
                             </div>
                         </div>
                         {/* <input
