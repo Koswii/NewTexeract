@@ -9,16 +9,17 @@ export const XERAWalletDataProvider = ({ children }) => {
     const XERADisplayListAPI = process.env.REACT_APP_XERA_USER_DISPLAYS_LIST_API;
     const XERAFollowingListAPI = process.env.REACT_APP_XERA_USER_FOLLOWING_LIST_API;
     const XERAReferralsListAPI = process.env.REACT_APP_XERA_USER_REFERRALS_API;
+    const XERAAirdropListAPI = process.env.REACT_APP_XERA_USER_AIRDROP_API;
     
-    const LoginWallet = localStorage.getItem('myXeraAddress');
-    const LoginState = localStorage.getItem('isLoggedIn');
-    const LoginType = localStorage.getItem('loginState');
+    const userLoggedStorageData = localStorage.getItem('userData');
+    const userLoggedData = JSON.parse(userLoggedStorageData);
 
     const [viewWalletCreate, setViewWalletCreate] = useState(false);
     const [viewLoginAccount, setViewLoginAccount] = useState(false);
     const [xeraUserList, setXeraUserList] = useState([]);
     const [xeraUserProfile, setXeraUserProfile] = useState([]);
     const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
+    const [xeraUserAirdrops, setXeraUserAirdrops] = useState([]);
     const [xeraUserFollowings, setXeraUserFollowings] = useState([]);
 
     const fetchXERAData1 = async () => {
@@ -58,13 +59,18 @@ export const XERAWalletDataProvider = ({ children }) => {
     
             // Fetch profile data once
             const userListResponse = await axios.get(XERACreateWalletAccountAPI);
-            const profileData = userListResponse.data.find(user => user.xera_wallet === LoginWallet);
+            const profileData = userListResponse.data.find(user => user.xera_wallet === userLoggedData.userLoggedData);
             setXeraUserProfile(profileData);
     
             // Fetch referrals list
             const referralsResponse = await axios.get(XERAReferralsListAPI);
             const userReferralsListData = referralsResponse.data;
             setXeraUserReferrals(userReferralsListData);
+
+            // Fetch airdrops list
+            const airdropsResponse = await axios.get(XERAAirdropListAPI);
+            const userAirdropsListData = airdropsResponse.data;
+            setXeraUserAirdrops(userAirdropsListData);
 
             // Fetch followings list
             const followingsResponse = await axios.get(XERAFollowingListAPI);
@@ -94,9 +100,7 @@ export const XERAWalletDataProvider = ({ children }) => {
 
     return (
         <XERAWalletDataContext.Provider value={{ 
-            LoginWallet,
-            LoginState,
-            LoginType,
+            userLoggedData,
             xeraUserProfile,
             viewWalletCreate, 
             setViewWalletCreate,
@@ -104,6 +108,7 @@ export const XERAWalletDataProvider = ({ children }) => {
             setViewLoginAccount,
             xeraUserList,
             xeraUserReferrals,
+            xeraUserAirdrops,
             xeraUserFollowings,
             }}>
             {children}

@@ -36,9 +36,7 @@ const TextSlicer = ({ text = '', maxLength }) => {
 const Nav = () => {
   const navigate = useNavigate ();
   const {
-    LoginWallet,
-    LoginState,
-    LoginType,
+    userLoggedData,
     viewWalletCreate, 
     setViewWalletCreate,
     viewLoginAccount, 
@@ -64,7 +62,7 @@ const Nav = () => {
     setViewLoginAccount(true)
   }
   const handleUserLogout = () => {
-    if (!LoginState) return;
+    if (!userLoggedData) return;
     fetch(XERALoginBasicAccountAPI, {
       method: 'POST',
       headers: {
@@ -74,9 +72,7 @@ const Nav = () => {
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        localStorage.removeItem('myXeraAddress');
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('loginState');
+        localStorage.removeItem('userData');
         navigate('/')
         window.location.reload();
       } else {
@@ -87,11 +83,9 @@ const Nav = () => {
   };
 
   useEffect(() => {
-    if (!LoginState) return;
+    if (!userLoggedData) return;
     const keysToWatch = [
-      'myXeraAddress',
-      'isLoggedIn',
-      'loginState',
+      'userData',
     ];
     const handleStorageChange = (event) => {
       if (keysToWatch.includes(event.key)) {
@@ -153,13 +147,13 @@ const Nav = () => {
             {/* {!viewFullNavigation ? 
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleViewFullNav}><p>EXPLORE</p></button>:
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleHideFullNav}><p>EXPLORE</p></button>} */}
-            {(!LoginState && LoginWallet === null) ? <>
+            {(userLoggedData === null) ? <>
               <button className='navCrBtn connect' onClick={handleViewCreateWallet}><p>CREATE WALLET</p><TbWallet className='faIcons'/></button>
               <button className='navCrBtn login' onClick={handleViewLoginWallet}><TbUserCircle className='faIcons'/></button>
             </>:<>
-              <Link className='navCrBtn account' to={`/p/${LoginWallet}`}>
+              <Link className='navCrBtn account' to={`/p/${userLoggedData.myXeraAddress}`}>
                 <TbUserCircle className='faIcons'/>
-                <p><TextSlicer text={`${LoginWallet}`} maxLength={10} /></p>
+                <p><TextSlicer text={`${userLoggedData.myXeraAddress}`} maxLength={10} /></p>
               </Link>
               <button className='navCrBtn logout' onClick={handleUserLogout}><TbLogout className='faIcons'/></button>
             </>}

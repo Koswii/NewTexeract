@@ -89,10 +89,14 @@ const LoginAccount = () => {
         .then(response => response.json())
         .then(data => {
           if (data.success === true) {
-            console.log(data);
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('loginState', 'basic');
-            localStorage.setItem('myXeraAddress', data.xera_wallet);
+            const combinedUserData = {
+                isLoggedIn: 'true',
+                loginState: 'basic',
+                myXeraUsername: data.username,
+                myXeraAddress: data.xera_wallet
+            };
+            
+            localStorage.setItem('userData', JSON.stringify(combinedUserData));
             setViewLoginResponse(false);
             setViewLoginMessage('');
             window.location.reload();

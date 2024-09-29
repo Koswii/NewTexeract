@@ -16,9 +16,9 @@ import Profile from './Components/Pages/Profile';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
-  const LoginWallet = localStorage.getItem('myXeraAddress');
-  const LoginState = localStorage.getItem('isLoggedIn');
-  const LoginType = localStorage.getItem('loginState');
+  const userLoggedStorageData = localStorage.getItem('userData');
+  const userLoggedData = JSON.parse(userLoggedStorageData)
+  
 
   return (
     <XERAWalletDataProvider>
@@ -29,9 +29,9 @@ function App() {
           <Nav />
           <Routes>
             <Route path="/" element={<Home/>}/>
-            {(LoginWallet && LoginState) &&
+            {(userLoggedData) &&
               <>
-                <Route path={`/p/${LoginWallet}`} element={<Profile/>}/>
+                <Route path={`/p/${userLoggedData.myXeraAddress}`} element={<Profile/>}/>
               </>
             }
 

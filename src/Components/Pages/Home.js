@@ -15,6 +15,7 @@ import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight
 } from "react-icons/fa";
+import { XERAWalletData } from './XERAWalletDataContext';
 
 
 
@@ -26,6 +27,12 @@ const ContentSlicer = ({ text = '', maxLength }) => {
   );
 };
 const Home = () => {
+  const {
+    LoginWallet,
+    LoginState,
+    LoginType,
+    setViewWalletCreate
+  } = XERAWalletData();
   const [hasScrolled, setHasScrolled] = useState(false);
   const [viewXERATopics, setViewXERATopics] = useState(false)
   const [viewTopicContent, setViewTopicContent] = useState(null)
@@ -54,7 +61,9 @@ const Home = () => {
 
   // console.log(learnAbout);
 
-
+  const handleViewCreateWallet = () => {
+    setViewWalletCreate(true)
+  }
 
 
 
@@ -72,7 +81,10 @@ const Home = () => {
             <h5>TEXERACT NETWORK</h5>
             <p>THE BLOCK FOR INTERCHAIN SPACE</p>
             <div className="homepct1Btns">
-              <Link>Get Started</Link>
+              {!LoginWallet ? 
+                <Link onClick={handleViewCreateWallet}>Get Started</Link>:
+                <Link to={`/p/${LoginWallet}`}>Get Started</Link>
+              }
               <Link>Learn More</Link>
             </div>
           </div>

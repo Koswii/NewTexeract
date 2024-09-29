@@ -5,6 +5,9 @@ import axios from 'axios';
 import { XERAWalletData } from './XERAWalletDataContext';
 import { TelegramData } from './TelegramDataContext';
 import { 
+    FaTimes
+} from 'react-icons/fa';
+import { 
     RiFacebookBoxFill,
     RiTwitterXFill,
     RiTiktokFill,
@@ -14,7 +17,8 @@ import {
     TbSwitchHorizontal,
     TbPhotoVideo,
     TbExchange,
-    TbInfoCircle    
+    TbInfoCircle,
+    TbCircleCheckFilled     
 } from "react-icons/tb";
 
 const TextSlicer = ({ text = '', maxLength }) => {
@@ -66,18 +70,46 @@ const ScrambleTextUsername = ({ targetText, scrambleSpeed = 50, revealSpeed = 20
     }, [targetText, scrambleSpeed]);
     return <h5 style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '1.5vw', fontWeight: '700', color: 'white' }}>{scrambledText}</h5>;
 };
+// const ScrambleTextAirdrop = ({ targetText, scrambleSpeed = 80, revealSpeed = 200 }) => {
+//     const [scrambledText, setScrambledText] = useState([]);
+//     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
+  
+//     useEffect(() => {
+//       const lines = targetText.split('\n'); // Split text by line breaks
+//       const scrambleLines = lines.map(() => ''); // Initialize scrambled text for each line
+//       let iteration = 0;
+  
+//       const scrambleInterval = setInterval(() => {
+//         setScrambledText((prev) => {
+//           return lines.map((line, index) => {
+//             const progress = iteration / (targetText.length * 2);
+//             const scrambled = line
+//               .split('')
+//               .map((char, i) => (i < progress * line.length ? char : characters[Math.floor(Math.random() * characters.length)]))
+//               .join('');
+//             return scrambled;
+//           });
+//         });
+  
+//         iteration++;
+//         if (iteration > targetText.length * 2) clearInterval(scrambleInterval);
+//       }, scrambleSpeed);
+  
+//       return () => clearInterval(scrambleInterval);
+//     }, [targetText, scrambleSpeed]);
 
+//     return <h6 style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '1vw', fontWeight: '700', color: 'white',textAlign: 'left', whiteSpace: 'pre-line' }}>{scrambledText.join('\n')}</h6>;
+// };
 
 
 const Profile = () => {
     const {
-        LoginWallet,
-        LoginState,
-        LoginType,
+        userLoggedData,
         xeraUserList,
         xeraUserProfile,
         xeraUserReferrals,
-        xeraUserFollowings
+        xeraUserAirdrops,
+        xeraUserFollowings,
     } = XERAWalletData();
     const {
         telegramID, 
@@ -85,18 +117,60 @@ const Profile = () => {
         telegramUsername,
         checkTelegramMembership,
         telegramStatus,
+        verifyingLoader,
         joinedTelegram
     } = TelegramData();
 
-    const userProfileName = xeraUserProfile.username
+    const [viewCreateWalleteDetails, setViewCreateWalletDetails] = useState(false);
+    const [viewTelegramDetails, setViewTelegramDetails] = useState(false);
+    const [viewXDetails, setViewXDetails] = useState(false);
+    const [viewBindDetails, setViewBindDetails] = useState(false);
+
     const userFollowers = xeraUserList.map(user => {
         const follower = xeraUserFollowings.find(wallet => wallet.xera_wallet === user.xera_wallet);
         return {
             ...user, following: follower ? follower : ''
         }
     })
-    const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userProfileName)
-    const userTotalFollowers = userFollowers.filter(user => user.following.following === userProfileName)
+    const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userLoggedData.myXeraUsername)
+    const userTotalFollowers = userFollowers.filter(user => user.following.following === userLoggedData.myXeraUsername)
+
+
+    const userAirdropPhase1 = xeraUserAirdrops.filter(user => user.username === userLoggedData.myXeraUsername)
+    const userAirdropTelegram = userAirdropPhase1.find(telegram => telegram.xera_telegram_id)
+
+
+
+    const handleAirdropTask1 = () => {
+        setViewCreateWalletDetails(true)
+        setViewTelegramDetails(false)
+        setViewXDetails(false)
+        setViewBindDetails(false)
+    }
+    const handleAirdropTask2 = () => {
+        setViewCreateWalletDetails(false)
+        setViewTelegramDetails(true)
+        setViewXDetails(false)
+        setViewBindDetails(false)
+    }
+    const handleAirdropTask3 = () => {
+        setViewCreateWalletDetails(false)
+        setViewTelegramDetails(false)
+        setViewXDetails(true)
+        setViewBindDetails(false)
+    }
+    const handleAirdropTask4 = () => {
+        setViewCreateWalletDetails(false)
+        setViewTelegramDetails(false)
+        setViewXDetails(false)
+        setViewBindDetails(true)
+    }
+    const handleCloseAirdropDetails = () => {
+        setViewCreateWalletDetails(false)
+        setViewTelegramDetails(false)
+        setViewXDetails(false)
+        setViewBindDetails(false)
+    }
     
     
     return (
@@ -138,11 +212,8 @@ const Profile = () => {
                             </div>
                             <div className="prfpchrContents">
                                 <div className="prfpchrcProfile">
-                                    {!xeraUserProfile.username ?
-                                        <ScrambleTextUsername targetText='Texeract Network' scrambleSpeed={80} revealSpeed={200} />:
-                                        <ScrambleTextUsername targetText={`${xeraUserProfile.username}`} scrambleSpeed={80} revealSpeed={200} />
-                                    }
-                                    <h6>{LoginWallet}</h6>
+                                    <ScrambleTextUsername targetText={`${ userLoggedData.myXeraUsername}`} scrambleSpeed={80} revealSpeed={200} />
+                                    <h6>{userLoggedData.myXeraAddress}</h6>
                                 </div>
                                 <div className="prfpchrcBalance">
                                     <h3>0 XERA</h3>
@@ -151,25 +222,25 @@ const Profile = () => {
                                 <div className="prfpchrcStats">
                                     <div className="prfpchrcs Followers">
                                         <p>Followers</p>
-                                        <div>
+                                        <div className='prfpchrcsf'>
                                             {userTotalFollowers.length >= 3 &&
-                                                <span>
+                                                <div>
                                                     {userTotalFollowers.slice(0, 3).map((data, i) => (
-                                                        <>
+                                                        <span key={i}>
                                                             {data.display.xera_nft_meta ?
                                                                 <img key={i} src="" alt="" />:
                                                                 <img key={i} src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
                                                             }
-                                                        </>
+                                                        </span>
                                                     ))}
-                                                </span>
+                                                </div>
                                             }
                                             <h5><NumberFormatter number={userTotalFollowers.length}/></h5>
                                         </div>
                                     </div>
                                     <div className="prfpchrcs Referrals">
                                         <p>Referrals</p>
-                                        <h5><NumberFormatter number={userTotalFollowers.length}/></h5>
+                                        <h5><NumberFormatter number={userTotalReferral.length}/></h5>
                                     </div>
                                     <div className="prfpchrcs Points">
                                         <p>XERA Points</p>
@@ -224,8 +295,8 @@ const Profile = () => {
                     <div className="ppcmAirdrop left">
                         <h5>AIRDROP TASK</h5>
                         <div className="ppcmalContainer">
-                            <div className="ppcmalcContent create active">
-                                <button id='airdropTaskInfo'><TbInfoCircle className='faIcons'/></button>
+                            <div className={userLoggedData.myXeraAddress ? "ppcmalcContent create active" : "ppcmalcContent create"}>
+                                <button id='airdropTaskInfo' onClick={handleAirdropTask1}><TbInfoCircle className='faIcons'/></button>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 1</p>
                                 </div>
@@ -233,31 +304,90 @@ const Profile = () => {
                                     <h6>CREATE A<br />XERA WALLET</h6>
                                     <p>COMPLETED</p>
                                 </div>
+                                <div className={!viewCreateWalleteDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
+                                    <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button>
+                                    <h6>CREATE A<br />XERA WALLET</h6>
+                                    {userLoggedData.myXeraAddress ?
+                                        <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>:
+                                        <p id='ppcmalccdStatus'>TASK 1</p>
+                                    }
+                                    <p id='ppcmalccdDesription'>Create your own XERA Wallet to securely store and manage all your future transactions.</p>
+                                </div>
                             </div>
-                            <div className="ppcmalcContent telegram">
-                                <button id='airdropTaskInfo'><TbInfoCircle className='faIcons'/></button>
+                            <div className={(userAirdropTelegram || joinedTelegram) ? "ppcmalcContent telegram active" : "ppcmalcContent telegram"}>
+                                <button id='airdropTaskInfo' onClick={handleAirdropTask2}><TbInfoCircle className='faIcons'/></button>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 2</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6>JOIN TELEGRAM<br />COMMUNITY</h6>
-                                    <button>EXECUTE</button>
+                                    {userAirdropTelegram ?
+                                        <>
+                                            <p>COMPLETED</p>
+                                        </>:<>
+                                            {joinedTelegram ?
+                                                <p>COMPLETED</p>:
+                                                <a href='https://t.me/TexeractNetworkCommunity' target='blank'>
+                                                    <button>EXECUTE</button>
+                                                </a>
+                                            }
+                                    </>
+                                    }
                                 </div>
-
+                                <div className={!viewTelegramDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
+                                    <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button>
+                                    <h6>JOIN TELEGRAM<br />COMMUNITY</h6>
+                                    {userAirdropTelegram ?
+                                        <>
+                                            <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>
+                                        </>:<>
+                                            {joinedTelegram ?
+                                                <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>:
+                                                <p id='ppcmalccdStatus'>TASK 2</p>
+                                            }
+                                        </>
+                                    }
+                                    <p id='ppcmalccdDesription'>Join the Texeract Official Telegram Community for updates and user interactions.</p>
+                                    {!userAirdropTelegram &&
+                                        <>
+                                            {!joinedTelegram && <>
+                                                <div className="ppcmalccInputs">
+                                                    <input type="number" placeholder='INSERT USER ID' value={telegramID} onChange={(e) => setTelegramID(e.target.value)}/>
+                                                    {!verifyingLoader ?
+                                                        <button onClick={checkTelegramMembership}>VERIFY ACCOUNT</button>:
+                                                        <button>VERIFYING...</button>
+                                                    }
+                                                </div>
+                                                <p id='ppcmalccdError'>{telegramStatus}</p>
+                                            </>}
+                                        </>
+                                    }
+                                </div>
                             </div>
                             <div className="ppcmalcContent xtwitter">
-                                <button id='airdropTaskInfo'><TbInfoCircle className='faIcons'/></button>
+                                <button id='airdropTaskInfo' onClick={handleAirdropTask3}><TbInfoCircle className='faIcons'/></button>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 3</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6>VISIT AND<br />FOLLOW X</h6>
-                                    <button>EXECUTE</button>
+                                    <a href='https://twitter.com/TexeractNetwork' target='blank'>
+                                        <button>EXECUTE</button>
+                                    </a>
                                 </div>
-
+                                <div className={!viewXDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
+                                    <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button>
+                                    <h6>VISIT AND<br />FOLLOW X</h6>
+                                    <p id='ppcmalccdStatus'>TASK 3</p>
+                                    <p id='ppcmalccdDesription'>Stay updated and connected—follow Texeract Network on X (Twitter).</p>
+                                    <div className="ppcmalccInputs">
+                                        <input type="number" placeholder='INSERT USERNAME'/>
+                                        <button>VERIFY ACCOUNT</button>
+                                    </div>
+                                </div>
                             </div>
                             <div className="ppcmalcContent binding">
-                                <button id='airdropTaskInfo'><TbInfoCircle className='faIcons'/></button>
+                                <button id='airdropTaskInfo' onClick={handleAirdropTask4}><TbInfoCircle className='faIcons'/></button>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 4</p>
                                 </div>
@@ -265,9 +395,15 @@ const Profile = () => {
                                     <h6>BIND ANY<br />CRYTO WALLET</h6>
                                     <button>EXECUTE</button>
                                 </div>
-
+                                <div className={!viewBindDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
+                                    <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button>
+                                    <h6>BIND ANY<br />CRYTO WALLET</h6>
+                                    <p id='ppcmalccdStatus'>TASK 4</p>
+                                    <p id='ppcmalccdDesription'>Connect your crypto wallet to seamlessly transact across any blockchain network.</p>
+                                </div>
                             </div>
                         </div>
+                        {/* <p>{telegramStatus}</p> */}
                         {/* <input
                             type="text"
                             placeholder="Enter Telegram USER ID"

@@ -270,13 +270,13 @@ h6{
     color: gray;
     margin-bottom: 2%;
 }
-.prfpchrcs.Followers div{
+.prfpchrcsf{
     height: auto;
     width: 100%;
     display: flex;
     justify-content: left;
 }
-.prfpchrcs.Followers div span{
+.prfpchrcsf div{
     height: auto;
     width: 37%;
     display: flex;
@@ -284,15 +284,20 @@ h6{
     align-items: center;
     /* position: relative; */
 }
-.prfpchrcs.Followers div span img{
+.prfpchrcsf div span{
     height: 1.5vw;
     width: 1.5vw;
     background: white;
     border-radius: 50%;
     margin-left: -20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* position: absolute; */
 }
-
+.prfpchrcsf div span img{
+    height: 100%;
+}
 
 
 
@@ -467,7 +472,13 @@ h6{
     filter: grayscale(1);
     box-shadow: 0 0 5px rgb(50, 50, 50);
     padding: 2%;
+    transition: 400ms ease;
     position: relative;
+}
+.ppcmalcContent:hover{
+    filter: grayscale(0);
+    box-shadow: 0 0 10px rgb(65, 65, 65);
+    transition: 400ms ease;
 }
 .ppcmalcContent.active{
     filter: grayscale(0);
@@ -552,7 +563,6 @@ h6{
     padding: 3% 10%;
     font-size: 0.6vw;
     font-family: 'Lexend Peta', sans-serif;
-    background: skyblue;
     color: black;
     text-align: center;
     border-radius: 0.5vw;
@@ -560,7 +570,133 @@ h6{
     border: none;
     outline: none;
     cursor: pointer;
+    transition: 400ms ease;
+} 
+.ppcmalccTask button:hover{
+    background: skyblue;
+    color: black;
+    transition: 400ms ease;
 }
+.ppcmalccTask a{
+    text-decoration: none;
+}
+
+.ppcmalccDetails{
+    position: absolute;
+    height: 15vw;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    top: 15vw;
+    left: 0;
+    border-radius: 1vw;
+    padding: 1vw;
+    transition: 400ms ease;
+}
+.ppcmalccDetails.active{
+    top: 0;
+    transition: 400ms ease;
+}
+.ppcmalccDetails button#ppcmalccdClose{
+    position: absolute;
+    top: 0.5vw;
+    right: 0.5vw;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+.ppcmalccDetails h6{
+    font-size: 0.9vw;
+}
+.ppcmalccDetails p#ppcmalccdStatus{
+    height: 0.9vw;
+    width: 100%;
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    margin: 2% 0;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    color: gray;
+}
+.ppcmalccDetails p#ppcmalccdStatus .faIcons{
+    margin-right: 2%;
+    color: skyblue;
+    font-size: 0.9vw;
+}
+.ppcmalccDetails span{
+    color: white;
+    font-size: 0.6vw;
+    line-height: 0.4vw;
+}
+.ppcmalccDetails p#ppcmalccdDesription{
+    font-size: 0.6vw;
+    color: gray;
+    margin: 7% 0;
+}
+.ppcmalccDetails p#ppcmalccdError{
+    font-size: 0.6vw;
+    color: white;
+    margin-top: 5%;
+    text-align: center;
+}
+
+
+.ppcmalccInputs{
+    height: auto;
+    width: 100%;
+}
+.ppcmalccInputs input{
+    height: auto;
+    width: 100%;
+    border: solid 2px white;
+    font-family: 'Lexend Peta', sans-serif;
+    text-align: center;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 0.6vw;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+.ppcmalccInputs input[type="number"]::-webkit-outer-spin-button,
+.ppcmalccInputs input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.ppcmalccInputs input[type="number"] {
+    -moz-appearance: textfield;
+}
+.ppcmalccInputs button{
+    height: auto;
+    width: 100%;
+    padding: 4% 10%;
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    color: black;
+    text-align: center;
+    border-radius: 0.5vw;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 400ms ease;
+}
+.ppcmalccInputs button:hover{
+    background: skyblue;
+    transition: 400ms ease;
+}
+
+
+
+
+
+
 
 
 
