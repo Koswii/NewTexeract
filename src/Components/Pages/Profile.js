@@ -192,12 +192,12 @@ const Profile = () => {
                     </div>
                     <div className="prfpcrUserNodes">
                         <>
-                            {/* <div className="prfpcrunEmpty">
+                            <div className="prfpcrunEmpty">
                                 <p>No Nodes Available</p>
-                            </div> */}
+                            </div>
                         </>
                         <>
-                            <div className="prfpcrunNode">
+                            {/* <div className="prfpcrunNode">
                                 <div className="prfpcrunn left">
                                     <h6>XERA MICRO NODE</h6>
                                     <p>PHASE 1 AIRDROP REWARD</p>
@@ -205,7 +205,7 @@ const Profile = () => {
                                 <div className="prfpcrunn right">
                                     <button id='prfpcrunnrClaim'>CLAIM</button>
                                 </div>
-                            </div>
+                            </div> */}
                             {/* <div className="prfpcrunNode">
                                 <div className="prfpcrunn left">
                                     <h6>XERA PICO NODE</h6>
