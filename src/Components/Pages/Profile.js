@@ -142,7 +142,7 @@ const Profile = () => {
                                         <ScrambleTextUsername targetText='Texeract Network' scrambleSpeed={80} revealSpeed={200} />:
                                         <ScrambleTextUsername targetText={`${xeraUserProfile.username}`} scrambleSpeed={80} revealSpeed={200} />
                                     }
-                                    <h6>{xeraUserProfile.xera_wallet}</h6>
+                                    <h6>{LoginWallet}</h6>
                                 </div>
                                 <div className="prfpchrcBalance">
                                     <h3>0 XERA</h3>
