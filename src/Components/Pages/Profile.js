@@ -136,6 +136,9 @@ const Profile = () => {
     const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userLoggedData.myXeraUsername)
     const userTotalFollowers = userFollowers.filter(user => user.following.following === userLoggedData.myXeraUsername)
 
+    // console.log(userTotalFollowers);
+    
+
 
 
     const handleAirdropTask1 = () => {

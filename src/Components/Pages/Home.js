@@ -28,9 +28,7 @@ const ContentSlicer = ({ text = '', maxLength }) => {
 };
 const Home = () => {
   const {
-    LoginWallet,
-    LoginState,
-    LoginType,
+    userLoggedData,
     setViewWalletCreate
   } = XERAWalletData();
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -81,9 +79,9 @@ const Home = () => {
             <h5>TEXERACT NETWORK</h5>
             <p>THE BLOCK FOR INTERCHAIN SPACE</p>
             <div className="homepct1Btns">
-              {!LoginWallet ? 
+              {!userLoggedData ? 
                 <Link onClick={handleViewCreateWallet}>Get Started</Link>:
-                <Link to={`/p/${LoginWallet}`}>Get Started</Link>
+                <Link to={`/p/${userLoggedData.myXeraAddress}`}>Get Started</Link>
               }
               <Link>Learn More</Link>
             </div>

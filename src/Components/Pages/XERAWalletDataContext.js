@@ -27,24 +27,25 @@ export const XERAWalletDataProvider = ({ children }) => {
             // Set up intervals for the first two APIs
             const intervalId = setInterval(async () => {
                 try {
-                    const [userListResponse, walletsListResponse, displayListResponse] = await Promise.all([
+                    // const [userListResponse, walletsListResponse, displayListResponse] = await Promise.all([
+                        const [userListResponse, displayListResponse] = await Promise.all([
                         axios.get(XERACreateWalletAccountAPI),
-                        axios.get(XERAWalletsListAPI),
+                        // axios.get(XERAWalletsListAPI),
                         axios.get(XERADisplayListAPI)
                     ]);
             
                     const userListData = userListResponse.data;
-                    const userWalletsListData = walletsListResponse.data;
+                    // const userWalletsListData = walletsListResponse.data;
                     const displayListData = displayListResponse.data;
             
                     // Combine data based on the same 'xera_wallet'
                     const combinedData = userListData.map(user => {
-                        const userWallet = userWalletsListData.find(wallet => wallet.xera_wallet === user.xera_wallet);
+                        // const userWallet = userWalletsListData.find(wallet => wallet.xera_wallet === user.xera_wallet);
                         const displayData = displayListData.find(display => display.xera_wallet === user.xera_wallet);
                         
                         return {
                             ...user,
-                            wallets: userWallet ? userWallet : null, // Attach the matching wallet data
+                            // wallets: userWallet ? userWallet : null, // Attach the matching wallet data
                             display: displayData ? displayData : null // Attach the matching display data
                         };
                     });
@@ -67,10 +68,16 @@ export const XERAWalletDataProvider = ({ children }) => {
             const userReferralsListData = referralsResponse.data;
             setXeraUserReferrals(userReferralsListData);
 
+            // Fetch followings list
+            const followingsResponse = await axios.get(XERAFollowingListAPI);
+            const userFollowingsListData = followingsResponse.data;
+            setXeraUserFollowings(userFollowingsListData);
+
             // Fetch airdrops list
             const airdropsResponse = await axios.get(XERAAirdropListAPI);
             const userAirdropsListData = airdropsResponse.data;
             setXeraUserAirdrops(userAirdropsListData);
+
 
             // Proceed only if data is present
             if (userAirdropsListData && userLoggedData.myXeraUsername) {
@@ -84,12 +91,6 @@ export const XERAWalletDataProvider = ({ children }) => {
                 }
             }
 
-            
-
-            // Fetch followings list
-            const followingsResponse = await axios.get(XERAFollowingListAPI);
-            const userFollowingsListData = followingsResponse.data;
-            setXeraUserFollowings(userFollowingsListData);
     
             return () => clearInterval(intervalId);
         } catch (error) {
