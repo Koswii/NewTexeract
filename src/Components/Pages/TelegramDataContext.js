@@ -10,7 +10,6 @@ export const TelegramDataProvider = ({ children }) => {
     const [telegramID, setTelegramID] = useState('');
     const [telegramUsername, setTelegramUsername] = useState('');
     const [telegramStatus, setTelegramStatus] = useState('');
-    const [joinedTelegram, setJoinedTelegram] = useState(false);
     const [verifyingLoader, setVerifyingLoader] = useState(false);
     const botToken = '7718108921:AAEWL7qcrnA2nwMsn1fc-rBALXie9Ulwrlw'; // Your Telegram bot token
     const chatId = '-1002441033567'; // The group or channel chat_id
@@ -35,9 +34,9 @@ export const TelegramDataProvider = ({ children }) => {
     
             if (responseMessage.success) {
                 // console.log(responseMessage.message);
+                localStorage.setItem('telegramTask', 'completed')
                 setTelegramStatus(responseMessage.message);
                 setVerifyingLoader(false);
-                setJoinedTelegram(true);
                 setTelegramID('');
             } else {
                 // console.log(responseMessage.message);
@@ -60,7 +59,6 @@ export const TelegramDataProvider = ({ children }) => {
             // Ensure the user_id is a numeric ID (not username)
             if (!telegramID) {
                 setVerifyingLoader(false);
-                setJoinedTelegram(false);
                 setTelegramStatus('User ID is required');
                 return;
             }
@@ -86,7 +84,6 @@ export const TelegramDataProvider = ({ children }) => {
             console.log(telegramID);
             console.error('Error checking membership:', error);
             setTelegramStatus('Error or user is not in the group.');
-            setJoinedTelegram(false);
             setVerifyingLoader(false);
         }
     };
@@ -100,7 +97,6 @@ export const TelegramDataProvider = ({ children }) => {
             telegramUsername,
             telegramStatus,
             verifyingLoader,
-            joinedTelegram
             }}>
             {children}
         </TelegramDataContext.Provider>

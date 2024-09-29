@@ -118,9 +118,10 @@ const Profile = () => {
         checkTelegramMembership,
         telegramStatus,
         verifyingLoader,
-        joinedTelegram
     } = TelegramData();
 
+    
+    const userTelegramStatus = localStorage.getItem('telegramTask');
     const [viewCreateWalleteDetails, setViewCreateWalletDetails] = useState(false);
     const [viewTelegramDetails, setViewTelegramDetails] = useState(false);
     const [viewXDetails, setViewXDetails] = useState(false);
@@ -134,10 +135,6 @@ const Profile = () => {
     })
     const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userLoggedData.myXeraUsername)
     const userTotalFollowers = userFollowers.filter(user => user.following.following === userLoggedData.myXeraUsername)
-
-
-    const userAirdropPhase1 = xeraUserAirdrops.filter(user => user.username === userLoggedData.myXeraUsername)
-    const userAirdropTelegram = userAirdropPhase1.find(telegram => telegram.xera_telegram_id)
 
 
 
@@ -314,54 +311,38 @@ const Profile = () => {
                                     <p id='ppcmalccdDesription'>Create your own XERA Wallet to securely store and manage all your future transactions.</p>
                                 </div>
                             </div>
-                            <div className={(userAirdropTelegram || joinedTelegram) ? "ppcmalcContent telegram active" : "ppcmalcContent telegram"}>
+                            <div className={(userTelegramStatus) ? "ppcmalcContent telegram active" : "ppcmalcContent telegram"}>
                                 <button id='airdropTaskInfo' onClick={handleAirdropTask2}><TbInfoCircle className='faIcons'/></button>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 2</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6>JOIN TELEGRAM<br />COMMUNITY</h6>
-                                    {userAirdropTelegram ?
-                                        <>
-                                            <p>COMPLETED</p>
-                                        </>:<>
-                                            {joinedTelegram ?
-                                                <p>COMPLETED</p>:
-                                                <a href='https://t.me/TexeractNetworkCommunity' target='blank'>
-                                                    <button>EXECUTE</button>
-                                                </a>
-                                            }
-                                    </>
+                                    {userTelegramStatus ?
+                                        <p>COMPLETED</p>:
+                                        <a href='https://t.me/TexeractNetworkCommunity' target='blank'>
+                                            <button>EXECUTE</button>
+                                        </a>
                                     }
                                 </div>
                                 <div className={!viewTelegramDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
                                     <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button>
                                     <h6>JOIN TELEGRAM<br />COMMUNITY</h6>
-                                    {userAirdropTelegram ?
-                                        <>
-                                            <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>
-                                        </>:<>
-                                            {joinedTelegram ?
-                                                <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>:
-                                                <p id='ppcmalccdStatus'>TASK 2</p>
-                                            }
-                                        </>
+                                    {userTelegramStatus ?
+                                        <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>:
+                                        <p id='ppcmalccdStatus'>TASK 2</p>
                                     }
                                     <p id='ppcmalccdDesription'>Join the Texeract Official Telegram Community for updates and user interactions.</p>
-                                    {!userAirdropTelegram &&
-                                        <>
-                                            {!joinedTelegram && <>
-                                                <div className="ppcmalccInputs">
-                                                    <input type="number" placeholder='INSERT USER ID' value={telegramID} onChange={(e) => setTelegramID(e.target.value)}/>
-                                                    {!verifyingLoader ?
-                                                        <button onClick={checkTelegramMembership}>VERIFY ACCOUNT</button>:
-                                                        <button>VERIFYING...</button>
-                                                    }
-                                                </div>
-                                                <p id='ppcmalccdError'>{telegramStatus}</p>
-                                            </>}
-                                        </>
-                                    }
+                                    {!userTelegramStatus && <>
+                                        <div className="ppcmalccInputs">
+                                            <input type="number" placeholder='INSERT USER ID' value={telegramID} onChange={(e) => setTelegramID(e.target.value)}/>
+                                            {!verifyingLoader ?
+                                                <button onClick={checkTelegramMembership}>VERIFY ACCOUNT</button>:
+                                                <button>VERIFYING...</button>
+                                            }
+                                        </div>
+                                        <p id='ppcmalccdError'>{telegramStatus}</p>
+                                    </>}
                                 </div>
                             </div>
                             <div className="ppcmalcContent xtwitter">

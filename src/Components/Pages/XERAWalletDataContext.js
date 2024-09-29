@@ -72,6 +72,20 @@ export const XERAWalletDataProvider = ({ children }) => {
             const userAirdropsListData = airdropsResponse.data;
             setXeraUserAirdrops(userAirdropsListData);
 
+            // Proceed only if data is present
+            if (userAirdropsListData && userLoggedData.myXeraUsername) {
+                // Filter and find based on username
+                const userAirdropPhase1 = userAirdropsListData.filter(user => user.username === userLoggedData.myXeraUsername);
+                const userTelegramVerify = userAirdropPhase1.find(telegram => telegram.xera_telegram_id);
+
+                // If the condition is met, set the localStorage item
+                if (userTelegramVerify) {
+                localStorage.setItem('telegramTask', 'completed');
+                }
+            }
+
+            
+
             // Fetch followings list
             const followingsResponse = await axios.get(XERAFollowingListAPI);
             const userFollowingsListData = followingsResponse.data;
