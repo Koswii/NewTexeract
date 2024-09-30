@@ -14,6 +14,8 @@ export const XERAWalletDataProvider = ({ children }) => {
     const userLoggedStorageData = localStorage.getItem('userData');
     const userLoggedData = JSON.parse(userLoggedStorageData);
 
+    const [windowReload, setWindowReload] = useState(false);
+
     const [viewWalletCreate, setViewWalletCreate] = useState(false);
     const [viewLoginAccount, setViewLoginAccount] = useState(false);
     const [xeraUserList, setXeraUserList] = useState([]);
@@ -25,39 +27,57 @@ export const XERAWalletDataProvider = ({ children }) => {
     const fetchXERAData1 = async () => {
         try {
             // Set up intervals for the first two APIs
-            const intervalId = setInterval(async () => {
-                try {
-                    // const [userListResponse, walletsListResponse, displayListResponse] = await Promise.all([
-                        const [userListResponse, displayListResponse] = await Promise.all([
-                        axios.get(XERACreateWalletAccountAPI),
-                        // axios.get(XERAWalletsListAPI),
-                        axios.get(XERADisplayListAPI)
-                    ]);
-            
-                    const userListData = userListResponse.data;
-                    // const userWalletsListData = walletsListResponse.data;
-                    const displayListData = displayListResponse.data;
-            
-                    // Combine data based on the same 'xera_wallet'
-                    const combinedData = userListData.map(user => {
-                        // const userWallet = userWalletsListData.find(wallet => wallet.xera_wallet === user.xera_wallet);
-                        const displayData = displayListData.find(display => display.xera_wallet === user.xera_wallet);
-                        
-                        return {
-                            ...user,
-                            // wallets: userWallet ? userWallet : null, // Attach the matching wallet data
-                            display: displayData ? displayData : null // Attach the matching display data
-                        };
-                    });
-            
-                    // Set the combined data to state
-                    setXeraUserList(combinedData);
-            
-                } catch (error) {
-                    console.error(error);
-                }
-            }, 1000);
+            if (!userLoggedData) {
+                    const intervalId = setInterval(async () => {
+                    try {
+                        // const [userListResponse, walletsListResponse, displayListResponse] = await Promise.all([
+                            const [userListResponse, displayListResponse] = await Promise.all([
+                            axios.get(XERACreateWalletAccountAPI),
+                            // axios.get(XERAWalletsListAPI),
+                            axios.get(XERADisplayListAPI)
+                        ]);
+                
+                        const userListData = userListResponse.data;
+                        // const userWalletsListData = walletsListResponse.data;
+                        const displayListData = displayListResponse.data;
+                
+                        // Combine data based on the same 'xera_wallet'
+                        const combinedData = userListData.map(user => {
+                            // const userWallet = userWalletsListData.find(wallet => wallet.xera_wallet === user.xera_wallet);
+                            const displayData = displayListData.find(display => display.xera_wallet === user.xera_wallet);
+                            
+                            return {
+                                ...user,
+                                // wallets: userWallet ? userWallet : null, // Attach the matching wallet data
+                                display: displayData ? displayData : null // Attach the matching display data
+                            };
+                        });
+                
+                        // Set the combined data to state
+                        setXeraUserList(combinedData);
+                
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }, 1000);
+                
+                return () => clearInterval(intervalId);
+            }
     
+            const [baseListResponse, displayListResponse] = await Promise.all([
+                axios.get(XERACreateWalletAccountAPI),
+                axios.get(XERADisplayListAPI)
+            ]);
+            const userListData = baseListResponse.data;
+            const displayListData = displayListResponse.data;
+            const combinedData = userListData.map(user => {
+                const displayData = displayListData.find(display => display.xera_wallet === user.xera_wallet);
+                return {
+                    ...user,
+                    display: displayData ? displayData.xera_nft_meta : null // Attach the matching display data
+                };
+            });
+
             // Fetch profile data once
             const userListResponse = await axios.get(XERACreateWalletAccountAPI);
             const profileData = userListResponse.data.find(user => user.xera_wallet === userLoggedData.userLoggedData);
@@ -71,7 +91,13 @@ export const XERAWalletDataProvider = ({ children }) => {
             // Fetch followings list
             const followingsResponse = await axios.get(XERAFollowingListAPI);
             const userFollowingsListData = followingsResponse.data;
-            setXeraUserFollowings(userFollowingsListData);
+            const userFollowers = combinedData.map(user => {
+                const follower = userFollowingsListData.find(wallet => wallet.xera_wallet === user.xera_wallet);
+                return {
+                    ...user, following: follower ? follower.following : ''
+                }
+            })
+            setXeraUserFollowings(userFollowers);
 
             // Fetch airdrops list
             const airdropsResponse = await axios.get(XERAAirdropListAPI);
@@ -91,16 +117,23 @@ export const XERAWalletDataProvider = ({ children }) => {
                 }
             }
 
-    
-            return () => clearInterval(intervalId);
         } catch (error) {
             console.error(error);
         }
     };
+
     
 
     useEffect(() => {
+        setWindowReload(true);
+        const timeoutId = setTimeout(() => {
+            setWindowReload(false);
+        }, 5000);
+
         fetchXERAData1();
+
+        
+        return () => clearTimeout(timeoutId);
     }, []);
 
 
@@ -115,6 +148,7 @@ export const XERAWalletDataProvider = ({ children }) => {
 
     return (
         <XERAWalletDataContext.Provider value={{ 
+            windowReload,
             userLoggedData,
             xeraUserProfile,
             viewWalletCreate, 

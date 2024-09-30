@@ -34,6 +34,26 @@ h6{
     padding-bottom: 10vw;
 }
 
+
+.profileReload{
+    height: 100vh;
+    width: 100%;
+    background: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    text-align: center;
+}
+.profileReload img{
+    height: 10vw;
+    animation: elastic-spin 2s infinite ease;
+}
+
+
 /*----- Landing Section -----*/
 
 

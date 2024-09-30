@@ -104,6 +104,7 @@ const ScrambleTextUsername = ({ targetText, scrambleSpeed = 50, revealSpeed = 20
 
 const Profile = () => {
     const {
+        windowReload,
         userLoggedData,
         xeraUserList,
         xeraUserProfile,
@@ -127,17 +128,9 @@ const Profile = () => {
     const [viewXDetails, setViewXDetails] = useState(false);
     const [viewBindDetails, setViewBindDetails] = useState(false);
 
-    const userFollowers = xeraUserList.map(user => {
-        const follower = xeraUserFollowings.find(wallet => wallet.xera_wallet === user.xera_wallet);
-        return {
-            ...user, following: follower ? follower : ''
-        }
-    })
     const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userLoggedData.myXeraUsername)
-    const userTotalFollowers = userFollowers.filter(user => user.following.following === userLoggedData.myXeraUsername)
+    const userTotalFollowers = xeraUserFollowings.filter(user => user.following === userLoggedData.myXeraUsername)
 
-    // console.log(userTotalFollowers);
-    
 
 
 
@@ -172,9 +165,15 @@ const Profile = () => {
         setViewBindDetails(false)
     }
     
+
     
     return (
         <div className='mainContainer profile'>
+            {windowReload && <div className="profileReload">
+                <div>
+                    <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                </div>
+            </div>}
             <section className="profilePageContainer top">
                 <div className="profilePageContent left">
                     <div className="prfpclHeader">
@@ -387,15 +386,6 @@ const Profile = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* <p>{telegramStatus}</p> */}
-                        {/* <input
-                            type="text"
-                            placeholder="Enter Telegram USER ID"
-                            value={telegramID}
-                            onChange={(e) => setTelegramID(e.target.value)}
-                        />
-                        <button onClick={checkTelegramMembership}>Check Membership</button>
-                        <p>{telegramStatus}</p> */}
                     </div>
                     <div className="ppcmAirdrop right">
 
