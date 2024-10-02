@@ -74,6 +74,7 @@ const Nav = () => {
       if (data.success) {
         localStorage.removeItem('userData');
         localStorage.removeItem('telegramTask');
+        localStorage.removeItem('twitterTask');
         navigate('/')
         window.location.reload();
       } else {
@@ -88,6 +89,7 @@ const Nav = () => {
     const keysToWatch = [
       'userData',
       'telegramTask',
+      'twitterTask',
     ];
     const handleStorageChange = (event) => {
       if (keysToWatch.includes(event.key)) {

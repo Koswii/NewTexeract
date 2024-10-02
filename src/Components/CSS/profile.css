@@ -480,9 +480,10 @@ h6{
     height: auto;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2%;
+    margin-top: 1%;
 }
 .ppcmalcContent{
     height: 15vw;
@@ -494,6 +495,7 @@ h6{
     padding: 2%;
     transition: 400ms ease;
     position: relative;
+    margin-top: 1.5%;
 }
 .ppcmalcContent:hover{
     filter: grayscale(0);
@@ -578,6 +580,9 @@ h6{
     border-radius: 0.5vw;
     margin-top: 5%;
 }
+.ppcmalccTask p#pendingTask{
+    background: orange;
+}
 .ppcmalccTask button{
     width: 65%;
     padding: 3% 10%;
@@ -648,6 +653,9 @@ h6{
     color: skyblue;
     font-size: 0.9vw;
 }
+.ppcmalccDetails p#ppcmalccdStatus .faIcons.pending{
+    color: orange;
+}
 .ppcmalccDetails span{
     color: white;
     font-size: 0.6vw;
@@ -717,6 +725,73 @@ h6{
 
 
 
+
+
+
+
+
+
+.ppcmalcContent.hidden{
+    background: rgba(20, 20, 20, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.ppcmalcContent.hidden h6{
+    font-size: 2vw;
+    opacity: 50%;
+}
+.ppcmalcContent.hidden p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+
+
+
+
+.ppcmAirdrop.right{
+    height: 100%;
+    width: 30%;
+    border-radius: 1vw;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 2%;
+}
+.ppcmAirdrop.right h5{
+    height: 1.5vw;
+    font-size: 0.9vw;
+}
+.ppcmarContainer{
+    height: auto;
+    width: 100%;
+    margin-top: 5%;
+}
+.ppcmarcRefLeader{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 2%;
+    margin: 1% 0;
+}
+.ppcmarcRefLeader span{
+    height: 2.5vw;
+    width: 2.5vw;
+    overflow: hidden;
+    border-radius: 50%;
+    background: white;
+    margin-right: 3%;
+}
+.ppcmarcRefLeader span img{
+    height: 100%;
+}
 
 
 

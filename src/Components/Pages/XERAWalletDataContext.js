@@ -21,6 +21,7 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [xeraUserList, setXeraUserList] = useState([]);
     const [xeraUserProfile, setXeraUserProfile] = useState([]);
     const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
+    const [xeraReferralCounts, setReferralCounts] = useState([]);
     const [xeraUserAirdrops, setXeraUserAirdrops] = useState([]);
     const [xeraUserFollowings, setXeraUserFollowings] = useState([]);
 
@@ -104,16 +105,46 @@ export const XERAWalletDataProvider = ({ children }) => {
             const userAirdropsListData = airdropsResponse.data;
             setXeraUserAirdrops(userAirdropsListData);
 
+            
+            const referralTaskCounts = userAirdropsListData.reduce((acc, task) => {
+                if (task.xera_task === 'Referral Task') {
+                  acc[task.username] = (acc[task.username] || 0) + 1;
+                }
+                return acc;
+            }, {});
+            // Convert the result into an array of objects for display
+            const referralCountArray = Object.keys(referralTaskCounts)
+            .map(username => ({
+              username,
+              referrals: referralTaskCounts[username]
+            }))
+            .filter(user => user.referrals > 0)  // Filter out users with 0 referrals
+            .sort((a, b) => b.referrals - a.referrals); // Sort by referrals
+            const refSumDetails = referralCountArray.map(user => {
+                const userBasic = combinedData.find(ref => ref.username === user.username)
+                return {
+                    ...user, userBasic
+                }
+            })
+            setReferralCounts(refSumDetails);
+            
+
 
             // Proceed only if data is present
             if (userAirdropsListData && userLoggedData.myXeraUsername) {
                 // Filter and find based on username
                 const userAirdropPhase1 = userAirdropsListData.filter(user => user.username === userLoggedData.myXeraUsername);
                 const userTelegramVerify = userAirdropPhase1.find(telegram => telegram.xera_telegram_id);
+                const userTwitterVerify = userAirdropPhase1.find(telegram => telegram.xera_twitter_username);
 
                 // If the condition is met, set the localStorage item
                 if (userTelegramVerify) {
-                localStorage.setItem('telegramTask', 'completed');
+                    localStorage.setItem('telegramTask', 'completed');
+                }
+
+                // If the condition is met, set the localStorage item
+                if (userTwitterVerify) {
+                    localStorage.setItem('twitterTask', 'pending');
                 }
             }
 
@@ -157,6 +188,7 @@ export const XERAWalletDataProvider = ({ children }) => {
             setViewLoginAccount,
             xeraUserList,
             xeraUserReferrals,
+            xeraReferralCounts,
             xeraUserAirdrops,
             xeraUserFollowings,
             }}>
