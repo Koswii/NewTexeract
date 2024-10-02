@@ -768,9 +768,11 @@ h6{
     font-size: 0.9vw;
 }
 .ppcmarContainer{
-    height: auto;
+    height: 31.5vw;
     width: 100%;
     margin-top: 5%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .ppcmarcRefLeader{
     height: auto;
@@ -778,8 +780,16 @@ h6{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1% 2%;
+    padding: 2% 3%;
     margin: 1% 0;
+    border-radius: 0.5vw;
+    border: solid 2px transparent;
+}
+.ppcmarcRefLeader:nth-child(odd) {
+    background: rgba(80, 80, 80, 0.5);
+}
+.ppcmarcRefLeader:nth-child(even) {
+    background: rgba(80, 80, 80, 0.3);
 }
 .ppcmarcRefLeader span{
     height: 2.5vw;
@@ -787,13 +797,27 @@ h6{
     overflow: hidden;
     border-radius: 50%;
     background: white;
-    margin-right: 3%;
+    margin: 0 3%;
 }
 .ppcmarcRefLeader span img{
     height: 100%;
 }
-
-
+.ppcmarcrlLeader{
+    width: 10%;
+    text-align: center;
+}
+.ppcmarcrlName{
+    width: 55%;
+}
+.ppcmarcrlName p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+.ppcmarcrlCount{
+    width: 15%;
+    text-align: center;
+}
 
 
 

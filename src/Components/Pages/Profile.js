@@ -482,14 +482,26 @@ const Profile = () => {
                     <div className="ppcmAirdrop right">
                         <h5>REFERRAL LEADERBOARD</h5>
                         <div className="ppcmarContainer">
-                            <div className="ppcmarcRefLeader">
-                                <span>
-                                    <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-                                </span>
-                                <div>
-                                    <h6></h6>
+                            {xeraReferralCounts.slice(0, 19).map((data, i) => (
+                                <div className="ppcmarcRefLeader" key={i}>
+                                    <div className="ppcmarcrlLeader">
+                                        <h5>{i+1}</h5>
+                                    </div>
+                                    <span>
+                                        {data.userBasic.display ? 
+                                            <img src="" alt="" />:
+                                            <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                        }
+                                    </span>
+                                    <div className='ppcmarcrlName'>
+                                        <h6>{data.userBasic.username}</h6>
+                                        <p><TextSlicer text={`${data.userBasic.xera_wallet}`} maxLength={18} /></p>
+                                    </div>
+                                    <div className='ppcmarcrlCount'>
+                                        <h5>{data.referrals}</h5>
+                                    </div>
                                 </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>
