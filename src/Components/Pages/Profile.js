@@ -20,7 +20,8 @@ import {
     TbInfoCircle,
     TbCircleCheckFilled,
     TbHourglassEmpty,
-    TbLock      
+    TbLock,
+    TbArrowUpRight,      
 } from "react-icons/tb";
 
 const TextSlicer = ({ text = '', maxLength }) => {
@@ -28,6 +29,20 @@ const TextSlicer = ({ text = '', maxLength }) => {
     return (
       <>{truncatedText}</>
     );
+};
+const TextFormatter = ({ text = '' }) => {
+    const formattedText = text
+        .split('')
+        .map((char, index) => {
+            if (index === 0 || char === char.toUpperCase()) {
+                return char; // Show the first and uppercase letters
+            } else {
+                return '*';  // Replace everything else with '*'
+            }
+        })
+        .join('');
+
+    return <>{formattedText}</>;
 };
 const formatNumberToK = (num) => {
     if (typeof num !== 'number' || isNaN(num)) {
@@ -480,7 +495,11 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="ppcmAirdrop right">
-                        <h5>REFERRAL LEADERBOARD</h5>
+                        <div className="ppcmarTitle">
+                            <h5>REFERRAL LEADERBOARD</h5>
+                            {/* <Link><TbArrowUpRight className="faIcons"/></Link> */}
+                            <Link><TbArrowUpRight className="faIcons"/></Link>
+                        </div>
                         <div className="ppcmarContainer">
                             {xeraReferralCounts.slice(0, 19).map((data, i) => (
                                 <div className="ppcmarcRefLeader" key={i}>
@@ -494,11 +513,11 @@ const Profile = () => {
                                         }
                                     </span>
                                     <div className='ppcmarcrlName'>
-                                        <h6>{data.userBasic.username}</h6>
+                                        <h6><TextFormatter text={`${data.userBasic.username}`} /></h6>
                                         <p><TextSlicer text={`${data.userBasic.xera_wallet}`} maxLength={18} /></p>
                                     </div>
                                     <div className='ppcmarcrlCount'>
-                                        <h5>{data.referrals}</h5>
+                                        <h5><NumberFormatter number={data.referrals}/></h5>
                                     </div>
                                 </div>
                             ))}
