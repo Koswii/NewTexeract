@@ -200,24 +200,44 @@ const Profile = () => {
         setViewTelegramDetails(false)
         setViewXDetails(false)
         setViewBindDetails(false)
+
+        const timeoutId = setTimeout(() => {
+            setViewCreateWalletDetails(false);
+        }, 5000);
+        return () => clearTimeout(timeoutId);
     }
     const handleAirdropTask2 = () => {
         setViewCreateWalletDetails(false)
         setViewTelegramDetails(true)
         setViewXDetails(false)
         setViewBindDetails(false)
+        
+        const timeoutId = setTimeout(() => {
+            setViewTelegramDetails(false);
+        }, 5000);
+        return () => clearTimeout(timeoutId);
     }
     const handleAirdropTask3 = () => {
         setViewCreateWalletDetails(false)
         setViewTelegramDetails(false)
         setViewXDetails(true)
         setViewBindDetails(false)
+        
+        const timeoutId = setTimeout(() => {
+            setViewXDetails(false);
+        }, 5000);
+        return () => clearTimeout(timeoutId);
     }
     const handleAirdropTask4 = () => {
         setViewCreateWalletDetails(false)
         setViewTelegramDetails(false)
         setViewXDetails(false)
         setViewBindDetails(true)
+        
+        const timeoutId = setTimeout(() => {
+            setViewBindDetails(false);
+        }, 5000);
+        return () => clearTimeout(timeoutId);
     }
     const handleCloseAirdropDetails = () => {
         setViewCreateWalletDetails(false)
@@ -498,7 +518,6 @@ const Profile = () => {
                     <div className="ppcmAirdrop right">
                         <div className="ppcmarTitle">
                             <h5>REFERRAL LEADERBOARD</h5>
-                            {/* <Link><TbArrowUpRight className="faIcons"/></Link> */}
                             <Link><TbArrowUpRight className="faIcons"/></Link>
                         </div>
                         <div className="ppcmarContainer">
@@ -645,6 +664,26 @@ const Profile = () => {
                                     </div>
                                 ))}
                             </>}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="profilePageContainer mid">
+                <div className="ppContentMidTransactions">
+                    <h5>TRANSACTION HISTORY</h5>
+                    <div className="ppcmTransactionsContainer">
+                        <div className="ppcmtcTitle">
+                            <span id='ppcmtctBlock'><h6>BLOCK</h6></span>
+                            <span id='ppcmtctTxHash'><h6>TX HASH</h6></span>
+                            <span id='ppcmtctSender'><h6>SENDER</h6></span>
+                            <span id='ppcmtctReceiver'><h6>RECEIVER</h6></span>
+                            <span id='ppcmtctAsset'><h6>ASSET</h6></span>
+                            <span id='ppcmtctInfo'><h6>INFO</h6></span>
+                        </div>
+                        <div className="ppcmtcTransaction">
+                            <div className="ppcmtctEmpty">
+                                <p>No Transaction Yet</p>
+                            </div>
                         </div>
                     </div>
                 </div>

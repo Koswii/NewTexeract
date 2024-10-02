@@ -67,9 +67,8 @@ h6{
     align-items: start;
     position: relative;
     background: 
-        linear-gradient(black 0%, transparent),
         linear-gradient(transparent, black 100%),
-        url('../assets/imgs/dashboadBG04.png') no-repeat center;
+        url('../assets/imgs/profileBG.png') no-repeat top;
     background-size: cover;
 }
 .profilePageContent.left{
@@ -475,6 +474,8 @@ h6{
     height: auto;
     padding: 2%;
     width: 65%;
+    background: rgb(20, 20, 20, 0.5);
+    border-radius: 1vw;
 }
 .ppcmalContainer{
     height: auto;
@@ -719,18 +720,6 @@ h6{
     background: skyblue;
     transition: 400ms ease;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 .ppcmalcContent.hidden{
     background: rgba(20, 20, 20, 0.5);
     backdrop-filter: blur(5px);
@@ -758,7 +747,7 @@ h6{
     width: 30%;
     border-radius: 1vw;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgb(20, 20, 20, 0.5);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     padding: 2%;
@@ -864,6 +853,88 @@ h6{
 .ppcmarcrlCount h5{
     font-size: 0.9vw;
 }
+
+
+
+
+
+
+
+
+
+.ppContentMidTransactions{
+    height: auto;
+    width: 100%;
+    padding: 2%;
+    border: solid 2px rgba(20, 20, 20, 0.5);
+    border-radius: 1vw;
+}
+.ppcmtcTitle{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1% 0;
+    margin-top: 2%;
+}
+.ppcmtcTitle span{
+    text-align: center;
+    padding: 0.5%;
+}
+.ppcmtcTitle span#ppcmtctBlock{
+    width: 10%;
+}
+.ppcmtcTitle span#ppcmtctTxHash{
+    width: 20%;
+}
+.ppcmtcTitle span#ppcmtctSender{
+    width: 20%;
+}
+.ppcmtcTitle span#ppcmtctReceiver{
+    width: 20%;
+}
+.ppcmtcTitle span#ppcmtctAsset{
+    width: 10%;
+}
+.ppcmtcTitle span#ppcmtctInfo{
+    width: 20%;
+}
+.ppcmtcTitle span h6{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.ppcmtcTransaction{
+    height: 20vw;
+    border-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.ppcmtctEmpty{
+    height: 100%;
+    width: 100%;
+    border-radius: 0.5vw;
+    background: rgb(20, 20, 20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ppcmtctEmpty p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
