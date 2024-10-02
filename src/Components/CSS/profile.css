@@ -918,6 +918,11 @@ h6{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+.ppcmtctEmpty h6{
+    font-size: 2vw;
+    opacity: 50%;
 }
 .ppcmtctEmpty p{
     font-size: 0.6vw;

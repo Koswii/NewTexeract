@@ -21,7 +21,8 @@ import {
     TbCircleCheckFilled,
     TbHourglassEmpty,
     TbLock,
-    TbArrowUpRight,      
+    TbArrowUpRight,
+    TbReceiptOff,      
 } from "react-icons/tb";
 
 const TextSlicer = ({ text = '', maxLength }) => {
@@ -682,7 +683,10 @@ const Profile = () => {
                         </div>
                         <div className="ppcmtcTransaction">
                             <div className="ppcmtctEmpty">
-                                <p>No Transaction Yet</p>
+                                <span>
+                                    <h6><TbReceiptOff className='faIcons'/></h6>
+                                    <p>No Transaction Yet</p>
+                                </span>
                             </div>
                         </div>
                     </div>
