@@ -121,6 +121,7 @@ const ScrambleTextUsername = ({ targetText, scrambleSpeed = 50, revealSpeed = 20
 
 const Profile = () => {
     const {
+        dataLoading,
         windowReload,
         userLoggedData,
         xeraUserList,
@@ -501,26 +502,149 @@ const Profile = () => {
                             <Link><TbArrowUpRight className="faIcons"/></Link>
                         </div>
                         <div className="ppcmarContainer">
-                            {xeraReferralCounts.slice(0, 19).map((data, i) => (
-                                <div className="ppcmarcRefLeader" key={i}>
-                                    <div className="ppcmarcrlLeader">
-                                        <h5>{i+1}</h5>
-                                    </div>
-                                    <span>
-                                        {data.userBasic.display ? 
-                                            <img src="" alt="" />:
-                                            <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-                                        }
-                                    </span>
-                                    <div className='ppcmarcrlName'>
-                                        <h6><TextFormatter text={`${data.userBasic.username}`} /></h6>
-                                        <p><TextSlicer text={`${data.userBasic.xera_wallet}`} maxLength={18} /></p>
-                                    </div>
-                                    <div className='ppcmarcrlCount'>
-                                        <h5><NumberFormatter number={data.referrals}/></h5>
-                                    </div>
+                            {(dataLoading) ? <>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
                                 </div>
-                            ))}
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                                <div className="ppcmarcRefLeaderLoading">
+                                    <div className="ppcmarcrlLeader"></div>
+                                    <span></span>
+                                    <div className="ppcmarcrlName"></div>
+                                    <div className="ppcmarcrlCount"></div>
+                                </div>
+                            </>:<>
+                                {xeraReferralCounts.slice(0, 19).map((data, i) => (
+                                    <div className="ppcmarcRefLeader" key={i}>
+                                        <div className="ppcmarcrlLeader">
+                                            <h5>{i+1}</h5>
+                                        </div>
+                                        <span>
+                                            {data.userBasic.display ? 
+                                                <img src="" alt="" />:
+                                                <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                            }
+                                        </span>
+                                        <div className='ppcmarcrlName'>
+                                            <h6><TextFormatter text={`${data.userBasic.username}`} /></h6>
+                                            <p><TextSlicer text={`${data.userBasic.xera_wallet}`} maxLength={18} /></p>
+                                        </div>
+                                        <div className='ppcmarcrlCount'>
+                                            <h5><NumberFormatter number={data.referrals}/></h5>
+                                        </div>
+                                    </div>
+                                ))}
+                            </>}
                         </div>
                     </div>
                 </div>

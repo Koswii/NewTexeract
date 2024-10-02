@@ -524,3 +524,23 @@ section.homePageContainer.mid{
     from { opacity: 0; }
     to { opacity: 1; }
 }
+@keyframes b2 {
+    100%  {background-position:100% 0,100% 100%,0 100%,0 0,center}
+}
+@keyframes l1 {
+    0% {background-position: right}
+}
+@keyframes l2 {
+    to{transform: rotate(.5turn)}
+}
+@keyframes spinner113{ 
+    100%{transform: rotate(1turn)}
+}
+@keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+}

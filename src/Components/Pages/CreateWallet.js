@@ -308,6 +308,17 @@ const CreateWallet = () => {
             setXERAPasswordErrorResponse1('');
         }
     };
+    const handleCheckReferral = (e) => {
+        const userReferrer = e.target.value
+        setXERAReferrer(userReferrer)
+
+        if(userReferrer === xeraUsername){
+            setXERAUsernameError(true);
+            setXERAUsernameResponse(false);
+            setXERAUsernameErrorResponse('No Self Referral');
+            setXERAUsernameErrorResponse1('');
+        }
+    }
 
     const handleDefaultPage = () => {
         setViewCreateAccount(true)
@@ -385,7 +396,7 @@ const CreateWallet = () => {
                                         type="text" 
                                         placeholder='Ex. Loki' 
                                         value={xeraUsername}
-                                        onChange={handleCheckUsername}
+                                        onChange={handleCheckUsername} maxLength={25}
                                     />
                                 </div>
                                 <div>
@@ -404,7 +415,12 @@ const CreateWallet = () => {
                                 </div>
                                 <div>
                                     <label htmlFor="">Referrer (Optional)</label>
-                                    <input type="text" placeholder='Ex. Sylvie' onChange={(e) => setXERAReferrer(e.target.value)}/>
+                                    <input 
+                                        type="text" 
+                                        placeholder='Ex. Sylvie' 
+                                        value={xeraReferrer}
+                                        onChange={handleCheckReferral}
+                                    />
                                 </div>
                             </div>
                         </div>}

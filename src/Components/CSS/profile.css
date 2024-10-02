@@ -797,6 +797,34 @@ h6{
     border-radius: 0.5vw;
     border: solid 2px transparent;
 }
+.ppcmarcRefLeaderLoading{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 3%;
+    margin: 1% 0;
+    border-radius: 0.5vw;
+    border: solid 2px transparent;
+    background: 
+      linear-gradient(90deg,#0001 33%,#0005 50%,#0001 66%)
+      #808080;
+    background-size:300% 100%;
+    animation: l1 1s infinite linear;
+}
+.ppcmarcRefLeaderLoading span{
+    height: 2.5vw;
+    width: 2.5vw;
+    overflow: hidden;
+    border-radius: 50%;
+    background: 
+      linear-gradient(90deg,#0001 33%,#0005 50%,#0001 66%)
+      #585858;
+    background-size:300% 100%;
+    animation: l1 1s infinite linear;
+    margin: 0 3%;
+}
 .ppcmarcRefLeader:nth-child(odd) {
     background: rgba(80, 80, 80, 0.5);
 }

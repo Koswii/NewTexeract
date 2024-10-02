@@ -24,8 +24,10 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [xeraReferralCounts, setReferralCounts] = useState([]);
     const [xeraUserAirdrops, setXeraUserAirdrops] = useState([]);
     const [xeraUserFollowings, setXeraUserFollowings] = useState([]);
+    const [dataLoading, setDataLoading] = useState(false);
 
     const fetchXERAData1 = async () => {
+        setDataLoading(true)
         try {
             // Set up intervals for the first two APIs
             if (!userLoggedData) {
@@ -150,6 +152,8 @@ export const XERAWalletDataProvider = ({ children }) => {
 
         } catch (error) {
             console.error(error);
+        } finally {
+            setDataLoading(false);
         }
     };
 
@@ -179,6 +183,7 @@ export const XERAWalletDataProvider = ({ children }) => {
 
     return (
         <XERAWalletDataContext.Provider value={{ 
+            dataLoading,
             windowReload,
             userLoggedData,
             xeraUserProfile,
