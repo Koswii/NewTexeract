@@ -18,6 +18,7 @@ export const XERAWalletDataProvider = ({ children }) => {
 
     const [viewWalletCreate, setViewWalletCreate] = useState(false);
     const [viewLoginAccount, setViewLoginAccount] = useState(false);
+    const [viewConnectWallet, setViewConnectWallet] = useState(false);
     const [xeraUserList, setXeraUserList] = useState([]);
     const [xeraUserProfile, setXeraUserProfile] = useState([]);
     const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
@@ -191,6 +192,8 @@ export const XERAWalletDataProvider = ({ children }) => {
             setViewWalletCreate,
             viewLoginAccount, 
             setViewLoginAccount,
+            viewConnectWallet, 
+            setViewConnectWallet,
             xeraUserList,
             xeraUserReferrals,
             xeraReferralCounts,

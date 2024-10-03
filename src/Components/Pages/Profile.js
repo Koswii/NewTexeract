@@ -122,6 +122,8 @@ const ScrambleTextUsername = ({ targetText, scrambleSpeed = 50, revealSpeed = 20
 
 const Profile = () => {
     const {
+        viewConnectWallet, 
+        setViewConnectWallet,
         dataLoading,
         windowReload,
         userLoggedData,
@@ -140,9 +142,6 @@ const Profile = () => {
         telegramStatus,
         verifyingLoader,
     } = TelegramData();
-
-    console.log(xeraReferralCounts);
-    
     
     const XERAAirdropTwitterAPI = process.env.REACT_APP_XERA_USER_AIRDROP_X_API;
     
@@ -245,6 +244,9 @@ const Profile = () => {
         setViewTelegramDetails(false)
         setViewXDetails(false)
         setViewBindDetails(false)
+    }
+    const handleBindWallet = () => {
+        setViewConnectWallet(true);
     }
     
 
@@ -386,7 +388,7 @@ const Profile = () => {
                                     <p>COMPLETED</p>
                                 </div>
                                 <div className={!viewCreateWalleteDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
-                                    <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button>
+                                    {/* <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button> */}
                                     <h6>CREATE A<br />XERA WALLET</h6>
                                     {userLoggedData.myXeraAddress ?
                                         <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>:
@@ -410,7 +412,7 @@ const Profile = () => {
                                     }
                                 </div>
                                 <div className={!viewTelegramDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
-                                    <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button>
+                                    {/* <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button> */}
                                     <h6>JOIN TELEGRAM<br />COMMUNITY</h6>
                                     {userTelegramStatus ?
                                         <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>:
@@ -447,7 +449,7 @@ const Profile = () => {
                                     }
                                 </div>
                                 <div className={!viewXDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
-                                    <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button>
+                                    {/* <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button> */}
                                     <h6>VISIT AND<br />FOLLOW X</h6>
                                     {userXStatus ?
                                         <p id='ppcmalccdStatus'>
@@ -481,10 +483,10 @@ const Profile = () => {
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6>BIND ANY<br />CRYTO WALLET</h6>
-                                    <button>CONNECT</button>
+                                    <button onClick={handleBindWallet}>CONNECT</button>
                                 </div>
                                 <div className={!viewBindDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
-                                    <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button>
+                                    {/* <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button> */}
                                     <h6>BIND ANY<br />CRYTO WALLET</h6>
                                     <p id='ppcmalccdStatus'>TASK 4</p>
                                     <p id='ppcmalccdDesription'>Connect your crypto wallet to seamlessly transact across any blockchain network.</p>

@@ -166,6 +166,23 @@ nav{
     justify-content: right;
     align-items: center;
 }
+
+
+.navContent.right a.navCrBtn.marketplace{
+    margin-right: 7%;
+    text-decoration: none;
+    cursor: not-allowed;
+    opacity: 50%;
+}
+.navContent.right a.navCrBtn.marketplace p{
+    font-size: 0.6vw;
+    color: white;
+    font-family: 'Lexend Peta', sans-serif;
+}
+
+
+
+
 .navContent.right button.navCrBtn{
     font-size: 0.7vw;
     padding: 9px 3%;

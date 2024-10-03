@@ -22,6 +22,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import CreateWallet from './Pages/CreateWallet';
 import LoginAccount from './Pages/LoginAccount';
+import ConnectWallet from './Pages/ConnectWallet';
 import { XERAWalletData } from './Pages/XERAWalletDataContext';
 
 
@@ -40,7 +41,9 @@ const Nav = () => {
     viewWalletCreate, 
     setViewWalletCreate,
     viewLoginAccount, 
-    setViewLoginAccount
+    setViewLoginAccount,
+    viewConnectWallet, 
+    setViewConnectWallet,
   } = XERAWalletData();
   const [viewFullNavigation, setViewFullNavigation] = useState(false);
   const XERALoginBasicAccountAPI = process.env.REACT_APP_XERA_USER_LOGOUT_API;
@@ -83,6 +86,11 @@ const Nav = () => {
     })
     .catch(error => console.error('Error:', error));
   };
+  const handleConnectWallet = () => {
+    setViewConnectWallet(true);
+  }
+
+
 
   useEffect(() => {
     if (!userLoggedData) return;
@@ -137,7 +145,7 @@ const Nav = () => {
         </div>}
         {viewWalletCreate && <CreateWallet />}
         {viewLoginAccount && <LoginAccount />}
-
+        {viewConnectWallet && <ConnectWallet />}
 
 
         <div className="navContainer website">
@@ -151,6 +159,8 @@ const Nav = () => {
             {/* {!viewFullNavigation ? 
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleViewFullNav}><p>EXPLORE</p></button>:
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleHideFullNav}><p>EXPLORE</p></button>} */}
+
+            <Link className='navCrBtn marketplace'><p>MARKETPLACE</p></Link>
             {(userLoggedData === null) ? <>
               <button className='navCrBtn connect' onClick={handleViewCreateWallet}><p>CREATE WALLET</p><TbWallet className='faIcons'/></button>
               <button className='navCrBtn login' onClick={handleViewLoginWallet}><TbUserCircle className='faIcons'/></button>
