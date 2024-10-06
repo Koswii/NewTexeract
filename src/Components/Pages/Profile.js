@@ -498,8 +498,11 @@ const Profile = () => {
                                 <div className={!viewBindDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
                                     {/* <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button> */}
                                     <h6>BIND ANY<br />CRYTO WALLET</h6>
-                                    <p id='ppcmalccdStatus'>TASK 4</p>
-                                    <p id='ppcmalccdDesription'>Connect your crypto wallet to seamlessly transact across any blockchain network. (ETHEREUM or SOLANA Only)</p>
+                                    {userWalletStatus ?
+                                        <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>:
+                                        <p id='ppcmalccdStatus'>TASK 4</p>
+                                    }
+                                    <p id='ppcmalccdDesription'>Connect your crypto wallet to seamlessly transact across any blockchain network. <br /> (ETHEREUM or SOLANA Only)</p>
                                     {xeraUserWallets.eth_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencyEthereum className='faIcons'/> Ethereum Wallet Address</p>}
                                     {xeraUserWallets.sol_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencySolana className='faIcons'/> Solana Wallet Address</p>}
                                 </div>
