@@ -175,13 +175,14 @@ const Home = () => {
         <div className="homePageContent mid1">
           <p>DEVELOPERS FROM</p>
           <div className="hmpcm1Contents">
-            <img src={require('../assets/imgs/Developers/Consensys.png')} alt="" />
             <img src={require('../assets/imgs/Developers/EthereumFoundation.png')} alt="" />
             <img src={require('../assets/imgs/Developers/SolanaLabs.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/Optimism.png')} alt="" />
             <img src={require('../assets/imgs/Developers/BinanceLabs.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/NearProtocol.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/Consensys.png')} alt="" />
             <img src={require('../assets/imgs/Developers/Alchemy.png')} alt="" />
             <img src={require('../assets/imgs/Developers/Parity.png')} alt="" />
-            <img src={require('../assets/imgs/Developers/NearProtocol.png')} alt="" />
             <img src={require('../assets/imgs/Developers/BlockGeeks.png')} alt="" />
           </div>
         </div>

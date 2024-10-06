@@ -571,7 +571,7 @@ h6{
     padding: 1vw;
 }
 .ppcmalccTask p{
-    width: 65%;
+    width: 70%;
     padding: 3% 10%;
     font-size: 0.6vw;
     font-family: 'Lexend Peta', sans-serif;
@@ -584,8 +584,17 @@ h6{
 .ppcmalccTask p#pendingTask{
     background: orange;
 }
+.ppcmalccTask p#connectedNetwork{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3% 5%;
+}
+.ppcmalccTask p#connectedNetwork .faIcons{
+    width: 15%;
+}
 .ppcmalccTask button{
-    width: 65%;
+    width: 70%;
     padding: 3% 10%;
     font-size: 0.6vw;
     font-family: 'Lexend Peta', sans-serif;

@@ -22,7 +22,9 @@ import {
     TbHourglassEmpty,
     TbLock,
     TbArrowUpRight,
-    TbReceiptOff,      
+    TbReceiptOff,
+    TbCurrencyEthereum,
+    TbCurrencySolana,      
 } from "react-icons/tb";
 
 const TextSlicer = ({ text = '', maxLength }) => {
@@ -129,6 +131,7 @@ const Profile = () => {
         userLoggedData,
         xeraUserList,
         xeraUserProfile,
+        xeraUserWallets,
         xeraUserReferrals,
         xeraReferralCounts,
         xeraUserAirdrops,
@@ -147,6 +150,7 @@ const Profile = () => {
     
     const userTelegramStatus = localStorage.getItem('telegramTask');
     const userXStatus = localStorage.getItem('twitterTask');
+    const userWalletStatus = localStorage.getItem("walletTask");
     const [viewCreateWalleteDetails, setViewCreateWalletDetails] = useState(false);
     const [viewTelegramDetails, setViewTelegramDetails] = useState(false);
     const [twitterUsername, setTwitterUsername] = useState('');
@@ -157,7 +161,7 @@ const Profile = () => {
 
     const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userLoggedData.myXeraUsername)
     const userTotalFollowers = xeraUserFollowings.filter(user => user.following === userLoggedData.myXeraUsername)
-
+    
 
     const submitXUsernameDetails = async () => {
         setXVerifyingLoader(true);
@@ -476,20 +480,28 @@ const Profile = () => {
                                     }
                                 </div>
                             </div>
-                            <div className="ppcmalcContent binding">
+                            <div className={(userWalletStatus) ? "ppcmalcContent binding active" : "ppcmalcContent binding"}>
                                 <button id='airdropTaskInfo' onClick={handleAirdropTask4}><TbInfoCircle className='faIcons'/></button>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 4</p>
                                 </div>
                                 <div className="ppcmalccTask">
-                                    <h6>BIND ANY<br />CRYTO WALLET</h6>
-                                    <button onClick={handleBindWallet}>CONNECT</button>
+                                    <h6>BIND YOUR<br />CRYTO WALLET</h6>
+                                    {userWalletStatus ?
+                                        <>
+                                            {xeraUserWallets.eth_wallet && <p id='connectedNetwork'><TbCurrencyEthereum className='faIcons'/>CONNECTED</p>}
+                                            {xeraUserWallets.sol_wallet && <p id='connectedNetwork'><TbCurrencySolana className='faIcons'/>CONNECTED</p>}
+                                        </>
+                                        :<button onClick={handleBindWallet}>CONNECT</button>
+                                    }
                                 </div>
                                 <div className={!viewBindDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
                                     {/* <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button> */}
                                     <h6>BIND ANY<br />CRYTO WALLET</h6>
                                     <p id='ppcmalccdStatus'>TASK 4</p>
-                                    <p id='ppcmalccdDesription'>Connect your crypto wallet to seamlessly transact across any blockchain network.</p>
+                                    <p id='ppcmalccdDesription'>Connect your crypto wallet to seamlessly transact across any blockchain network. (ETHEREUM or SOLANA Only)</p>
+                                    {xeraUserWallets.eth_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencyEthereum className='faIcons'/> Ethereum Wallet Address</p>}
+                                    {xeraUserWallets.sol_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencySolana className='faIcons'/> Solana Wallet Address</p>}
                                 </div>
                             </div>
                             <div className="ppcmalcContent hidden">

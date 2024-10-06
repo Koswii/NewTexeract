@@ -21,6 +21,7 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [viewConnectWallet, setViewConnectWallet] = useState(false);
     const [xeraUserList, setXeraUserList] = useState([]);
     const [xeraUserProfile, setXeraUserProfile] = useState([]);
+    const [xeraUserWallets, setXeraUserWallets] = useState([]);
     const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
     const [xeraReferralCounts, setReferralCounts] = useState([]);
     const [xeraUserAirdrops, setXeraUserAirdrops] = useState([]);
@@ -42,6 +43,7 @@ export const XERAWalletDataProvider = ({ children }) => {
                         ]);
                 
                         const userListData = userListResponse.data;
+
                         // const userWalletsListData = walletsListResponse.data;
                         const displayListData = displayListResponse.data;
                 
@@ -84,9 +86,9 @@ export const XERAWalletDataProvider = ({ children }) => {
 
             // Fetch profile data once
             const userListResponse = await axios.get(XERACreateWalletAccountAPI);
-            const profileData = userListResponse.data.find(user => user.xera_wallet === userLoggedData.userLoggedData);
+            const profileData = userListResponse.data.find(user => user.xera_wallet === userLoggedData.myXeraAddress);
             setXeraUserProfile(profileData);
-    
+
             // Fetch referrals list
             const referralsResponse = await axios.get(XERAReferralsListAPI);
             const userReferralsListData = referralsResponse.data;
@@ -107,7 +109,6 @@ export const XERAWalletDataProvider = ({ children }) => {
             const airdropsResponse = await axios.get(XERAAirdropListAPI);
             const userAirdropsListData = airdropsResponse.data;
             setXeraUserAirdrops(userAirdropsListData);
-
             
             const referralTaskCounts = userAirdropsListData.reduce((acc, task) => {
                 if (task.xera_task === 'Referral Task') {
@@ -115,11 +116,12 @@ export const XERAWalletDataProvider = ({ children }) => {
                 }
                 return acc;
             }, {});
+
             // Convert the result into an array of objects for display
             const referralCountArray = Object.keys(referralTaskCounts)
             .map(username => ({
-              username,
-              referrals: referralTaskCounts[username]
+                username,
+                referrals: referralTaskCounts[username]
             }))
             .filter(user => user.referrals > 0)  // Filter out users with 0 referrals
             .sort((a, b) => b.referrals - a.referrals); // Sort by referrals
@@ -130,8 +132,6 @@ export const XERAWalletDataProvider = ({ children }) => {
                 }
             })
             setReferralCounts(refSumDetails);
-            
-
 
             // Proceed only if data is present
             if (userAirdropsListData && userLoggedData.myXeraUsername) {
@@ -158,6 +158,18 @@ export const XERAWalletDataProvider = ({ children }) => {
         }
     };
 
+    const fetchXERAData2 = async () => {
+        if(!userLoggedData){
+            return;
+        }
+        // Fetch profile data once
+        const userWalletResponse = await axios.get(XERAWalletsListAPI);
+        const profileWalletData = userWalletResponse.data.find(user => user.xera_wallet === userLoggedData.myXeraAddress);
+        setXeraUserWallets(profileWalletData);
+        if(profileWalletData.eth_wallet || profileWalletData.sol_wallet){
+            localStorage.setItem('walletTask', 'completed');
+        }
+    }
     
 
     useEffect(() => {
@@ -167,6 +179,7 @@ export const XERAWalletDataProvider = ({ children }) => {
         }, 5000);
 
         fetchXERAData1();
+        fetchXERAData2();
 
         
         return () => clearTimeout(timeoutId);
@@ -194,11 +207,13 @@ export const XERAWalletDataProvider = ({ children }) => {
             setViewLoginAccount,
             viewConnectWallet, 
             setViewConnectWallet,
+            xeraUserWallets,
             xeraUserList,
             xeraUserReferrals,
             xeraReferralCounts,
             xeraUserAirdrops,
             xeraUserFollowings,
+            fetchXERAData2,
             }}>
             {children}
         </XERAWalletDataContext.Provider>
