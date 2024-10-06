@@ -236,7 +236,7 @@ const ConnectWallet = () => {
                     <button id='closeConnectWallet' onClick={hideConnectWallet}><FaTimes className='faIcons'/></button>
                     {bindErrorResponse && 
                         <div className="nccwErrorRes">
-                            <p>Error: {bindErrorResponse}</p>
+                            <p>{bindErrorResponse}</p>
                         </div>
                     }
                     <img src={require('../assets/imgs/Airdrop/binding.png')} alt="" />
