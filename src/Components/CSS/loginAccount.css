@@ -343,6 +343,11 @@ h6{
     justify-content: space-between;
     align-items: center;
     margin: 2% 0;
+    transition: 400ms ease;
+}
+.nclccnbInputs div.error{
+    border: solid 2px red;
+    transition: 400ms ease;
 }
 .nclccnbInputs div h6{
     font-size: 0.9vw;
@@ -372,8 +377,12 @@ h6{
     border-radius: 10px;
     margin-top: 1%;
     resize: none;
+    transition: 400ms ease;
 }
-
+.nclccnbTextArea textarea.error{
+    border: solid 2px red;
+    transition: 400ms ease;
+}
 
 
 

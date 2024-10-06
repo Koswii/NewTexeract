@@ -207,7 +207,7 @@ const Profile = () => {
 
         const timeoutId = setTimeout(() => {
             setViewCreateWalletDetails(false);
-        }, 5000);
+        }, 10000);
         return () => clearTimeout(timeoutId);
     }
     const handleAirdropTask2 = () => {
@@ -218,7 +218,7 @@ const Profile = () => {
         
         const timeoutId = setTimeout(() => {
             setViewTelegramDetails(false);
-        }, 5000);
+        }, 10000);
         return () => clearTimeout(timeoutId);
     }
     const handleAirdropTask3 = () => {
@@ -229,7 +229,7 @@ const Profile = () => {
         
         const timeoutId = setTimeout(() => {
             setViewXDetails(false);
-        }, 5000);
+        }, 10000);
         return () => clearTimeout(timeoutId);
     }
     const handleAirdropTask4 = () => {
@@ -240,7 +240,7 @@ const Profile = () => {
         
         const timeoutId = setTimeout(() => {
             setViewBindDetails(false);
-        }, 5000);
+        }, 10000);
         return () => clearTimeout(timeoutId);
     }
     const handleCloseAirdropDetails = () => {
@@ -658,7 +658,7 @@ const Profile = () => {
                                     <div className="ppcmarcrlCount"></div>
                                 </div>
                             </>:<>
-                                {xeraReferralCounts.slice(0, 19).map((data, i) => (
+                                {xeraReferralCounts.slice(0, 20).map((data, i) => (
                                     <div className="ppcmarcRefLeader" key={i}>
                                         <div className="ppcmarcrlLeader">
                                             <h5>{i+1}</h5>
