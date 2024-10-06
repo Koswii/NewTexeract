@@ -164,6 +164,7 @@ const Nav = () => {
 
             <Link className='navCrBtn marketplace'><p>NODES</p></Link>
             <Link className='navCrBtn marketplace'><p>MARKETPLACE</p></Link>
+            <Link className='navCrBtn marketplace'><p>LEADERBOARDS</p></Link>
             {(userLoggedData === null) ? <>
               <button className='navCrBtn connect' onClick={handleViewCreateWallet}><p>CREATE WALLET</p><TbWallet className='faIcons'/></button>
               <button className='navCrBtn login' onClick={handleViewLoginWallet}><TbUserCircle className='faIcons'/></button>

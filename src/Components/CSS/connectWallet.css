@@ -80,6 +80,21 @@ h6{
     font-size: 1.2vw;
     cursor: pointer;
 }
+.nccwErrorRes{
+    position: absolute;
+    top: 1vw;
+    left: 1vw;
+    background: red;
+    height: auto;
+    width: 65%;
+    padding: 2% 3%;
+    border-radius: 10px;
+    transition: 400ms ease;
+}
+.nccwErrorRes p{
+    font-size: 0.6vw;
+    /* font-family: 'Lexend Peta', sans-serif; */
+}
 .navContentConnectWallet img{
     height: 100%;
 }

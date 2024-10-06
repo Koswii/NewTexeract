@@ -24,6 +24,7 @@ const ConnectWallet = () => {
 
     const hideConnectWallet = () => {
         setViewConnectWallet(false)
+        setBindErrorResponse(false)
     }
 
     
@@ -42,6 +43,7 @@ const ConnectWallet = () => {
     const [solBasedWallet, setSolBasedWallet] = useState('');
     const [walletType, setWalletType] = useState(null);
     const [chainId, setChainId] = useState(null);
+    const [bindErrorResponse, setBindErrorResponse] = useState('')
 
 
 
@@ -219,6 +221,7 @@ const ConnectWallet = () => {
                 fetchXERAData2();
             } else {
                 console.log(responseMessage.message);
+                setBindErrorResponse(responseMessage.message)
             }
     
         } catch (error) {
@@ -231,6 +234,11 @@ const ConnectWallet = () => {
             <div className='navContainerConnect'>
                 <div className="navContentConnectWallet">
                     <button id='closeConnectWallet' onClick={hideConnectWallet}><FaTimes className='faIcons'/></button>
+                    {bindErrorResponse && 
+                        <div className="nccwErrorRes">
+                            <p>Error: {bindErrorResponse}</p>
+                        </div>
+                    }
                     <img src={require('../assets/imgs/Airdrop/binding.png')} alt="" />
                     <div className="nwccwaContainer">
                         <h5>CONNECT WALLET TO</h5>
