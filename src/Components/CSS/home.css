@@ -303,7 +303,7 @@ section.homePageContainer.top{
 section.homePageContainer.mid1{
     height: auto;
     width: 100%;
-    padding: 4% 10%;
+    padding: 5% 10%;
 }
 .homePageContent.mid1{
     height: auto;
@@ -353,6 +353,7 @@ section.homePageContainer.mid2{
     height: auto;
     width: 100%;
     padding: 5% 7%;
+    padding-top: 10%;
 }
 .homePageContent.mid2{
     height: 25vw;
@@ -374,7 +375,7 @@ section.homePageContainer.mid2{
 }
 .hpcm2Contents.left h4{
     font-size: 2.2vw;
-    line-height: 2.5vw;
+    line-height: 2.3vw;
     font-family: 'Lexend Peta', sans-serif;
 }
 .hpcm2Contents.left h6{
@@ -411,6 +412,7 @@ section.homePageContainer.mid3{
     height: auto;
     width: 100%;
     padding: 2% 7%;
+    padding-bottom: 5%;
 }
 .homePageContent.mid3{
     height: auto;
@@ -525,15 +527,46 @@ section.homePageContainer.mid3{
 section.homePageContainer.mid4{
     height: auto;
     width: 100%;
-    padding: 4% 7%;
+    padding: 5% 7%;
 }
 .homePageContent.mid4{
     height: auto;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
+    text-align: center;
 }
+.homePageContent.mid4 img{
+    height: 3vw;
+    margin-bottom: 2%;
+}
+.homePageContent.mid4 h4{
+    font-size: 2.2vw;
+    line-height: 2.3vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -171,23 +171,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="homePageContainer mid1">
-        <div className="homePageContent mid1">
-          <p>DEVELOPERS FROM</p>
-          <div className="hmpcm1Contents">
-            <img src={require('../assets/imgs/Developers/EthereumFoundation.png')} alt="" />
-            <img src={require('../assets/imgs/Developers/SolanaLabs.png')} alt="" />
-            <img src={require('../assets/imgs/Developers/Optimism.png')} alt="" />
-            <img src={require('../assets/imgs/Developers/BinanceLabs.png')} alt="" />
-            <img src={require('../assets/imgs/Developers/NearProtocol.png')} alt="" />
-            <img src={require('../assets/imgs/Developers/Consensys.png')} alt="" />
-            <img src={require('../assets/imgs/Developers/Alchemy.png')} alt="" />
-            <img src={require('../assets/imgs/Developers/IBCProtocol.png')} alt="" />
-            <img src={require('../assets/imgs/Developers/Parity.png')} alt="" />
-            <img src={require('../assets/imgs/Developers/BlockGeeks.png')} alt="" />
-          </div>
-        </div>
-      </section>
       <section className="homePageContainer mid2">
         <div className="homePageContent mid2">
           <div className="hpcm2Contents left">
@@ -205,7 +188,24 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="homePageContainer mid3">
+      <section className="homePageContainer mid1">
+        <div className="homePageContent mid1">
+          <p>DEVELOPERS FROM</p>
+          <div className="hmpcm1Contents">
+            <img src={require('../assets/imgs/Developers/EthereumFoundation.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/SolanaLabs.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/Optimism.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/BinanceLabs.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/NearProtocol.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/Consensys.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/Alchemy.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/IBCProtocol.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/Parity.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/BlockGeeks.png')} alt="" />
+          </div>
+        </div>
+      </section>
+      {/* <section className="homePageContainer mid3">
         <div className="homePageContent mid3">
           <div className="hpcm3Contents left">
             <div className="hpcm3cl wallet">
@@ -231,15 +231,17 @@ const Home = () => {
             <div>
               <Link>Deploy DApp</Link>
               <Link>Documentations</Link>
+              <Link>DApps</Link>
             </div>
           </div>
         </div>
-      </section>
-      <section className="homePageContainer mid4">
+      </section> */}
+      {/* <section className="homePageContainer mid4">
         <div className="homePageContent mid4">
-          
+          <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+          <h4>EARN XERA OVERTIME <br /> USING XERA NODES</h4>
         </div>
-      </section>
+      </section> */}
     </div>
   )
 }
