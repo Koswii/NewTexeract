@@ -224,7 +224,7 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: black;
+    background: none;
     color: white;
 }
 .navContent.right button.navCrBtn.connect:hover{
