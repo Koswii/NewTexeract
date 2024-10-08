@@ -300,28 +300,16 @@ section.homePageContainer.top{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-section.homePageContainer.mid{
+section.homePageContainer.mid1{
     height: auto;
     width: 100%;
     padding: 4% 10%;
 }
-
-
 .homePageContent.mid1{
     height: auto;
     width: 100%;
-    padding: 5% 0%;
+    padding: 7% 0%;
+    padding-top: 1%;
 }
 .homePageContent.mid1 p{
     font-family: 'Lexend Peta', sans-serif;
@@ -359,59 +347,171 @@ section.homePageContainer.mid{
 
 
 
-.homePageContent.mid2{
+
+
+section.homePageContainer.mid2{
     height: auto;
     width: 100%;
-    padding: 7% 8%;
-    text-align: center;
+    padding: 5% 7%;
+}
+.homePageContent.mid2{
+    height: 25vw;
+    width: 100%;
     position: relative;
-}
-.homePageContent.mid2 img{
-    height: 27vw;
     display: flex;
-    margin: 2% auto;
+    justify-content: space-between;
+    align-items: center;
+    background: 
+        linear-gradient(black 15%, transparent),
+        url('../assets/imgs/ExtraBG02.jpg') no-repeat center;
+    background-size: cover;
+    border-radius: 1vw;
+    padding: 3% 5%;
 }
-.homePageContent.mid2 h5,
-.homePageContent.mid2 p{
+.hpcm2Contents.left{
+    height: auto;
+    width: 45%;
+}
+.hpcm2Contents.left h4{
+    font-size: 2.2vw;
+    line-height: 2.5vw;
     font-family: 'Lexend Peta', sans-serif;
 }
+.hpcm2Contents.left h6{
+    font-size: 0.8vw;
+    font-family: 'Lexend Peta', sans-serif;
+    font-weight: 600;
+    margin: 3% 0;
+}
+.hpcm2Contents.left p{
+    font-size: 0.7vw;
+}
+.hpcm2Contents.right{
+    height: auto;
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.hpcm2Contents.right img{
+    height: 35vw;
+    animation: bounce2 3s infinite;
+}
 
 
-.hmpcm2Content1,
-.hmpcm2Content2,
-.hmpcm2Content3,
-.hmpcm2Content4{
+
+
+
+
+
+
+
+section.homePageContainer.mid3{
+    height: auto;
+    width: 100%;
+    padding: 2% 7%;
+}
+.homePageContent.mid3{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 5%;
+}
+.hpcm3Contents.left{
+    height: auto;
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hpcm3cl{
+    height: 13vw;
+    width: 47%;
+    border-radius: 0.5vw;
+    border-top-left-radius: 2vw;
+    border-bottom-right-radius: 2vw;
+    background: rgb(20, 20, 20);
+    position: relative;
+    padding: 3%;
+}
+.hpcm3cl span{
     position: absolute;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 5px rgb(55, 55, 55);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 1vw;
-
-}
-.hmpcm2Content1{
-    height: 10vw;
-    width: 25%;
-    top: 5%;
+    top: 15%;
     left: 0;
+    background: red;
+    padding: 2%;
+    padding-right: 7%;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+    z-index: 3;
 }
-.hmpcm2Content2{
-    height: 10vw;
-    width: 27%;
-    top: 7%;
-    right: 0;
+.hpcm3cl span p{
+    font-size: 0.7vw;
 }
-.hmpcm2Content3{
-    height: 10vw;
-    width: 27%;
-    bottom: 8%;
-    right: 0;
+.hpcm3cl img{
+    height: 15vw;
+    position: absolute;
+    top: -40%;
+    right: -15%;
+    z-index: 2;
 }
-.hmpcm2Content4{
+.hpcm3cl img#hpcm3clMint{
     height: 10vw;
-    width: 29%;
-    bottom: 7%;
+    top: -25%;
+    right: -10%;
+}
+.hpcm3cl div{
+    height: auto;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     left: 0;
+    padding: 6%;
+    padding-bottom: 8%;
+    z-index: 3;
+}
+.hpcm3cl div a{
+    text-decoration: none;
+}
+.hpcm3cl div h5{
+    font-size: 0.8vw;
+    font-family: 'Lexend Peta', sans-serif;
+    margin-bottom: 5%;
+}
+.hpcm3cl div p{
+    font-size: 0.6vw;
+}
+
+
+
+.hpcm3Contents.right{
+    height: auto;
+    width: 45%;
+}
+.hpcm3Contents.right h5{
+    font-size: 1.2vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.hpcm3Contents.right p{
+    font-size: 0.6vw;
+    margin-top: 3%;
+    margin-bottom: 5%;
+}
+.hpcm3Contents.right a{
+    padding: 10px 5%;
+    text-decoration: none;
+    color: white;
+    font-size: 0.7vw;
+    border: solid 2px white;
+    border-radius: 50px;
+    font-family: 'Lexend Peta', sans-serif;
+    transition: 400ms ease;
+    cursor: not-allowed;
+    opacity: 50%;
+    margin-right: 2%;
 }
 
 
@@ -422,21 +522,18 @@ section.homePageContainer.mid{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+section.homePageContainer.mid4{
+    height: auto;
+    width: 100%;
+    padding: 4% 7%;
+}
+.homePageContent.mid4{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 
 

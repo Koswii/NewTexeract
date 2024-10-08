@@ -171,7 +171,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="homePageContainer mid">
+      <section className="homePageContainer mid1">
         <div className="homePageContent mid1">
           <p>DEVELOPERS FROM</p>
           <div className="hmpcm1Contents">
@@ -182,26 +182,62 @@ const Home = () => {
             <img src={require('../assets/imgs/Developers/NearProtocol.png')} alt="" />
             <img src={require('../assets/imgs/Developers/Consensys.png')} alt="" />
             <img src={require('../assets/imgs/Developers/Alchemy.png')} alt="" />
+            <img src={require('../assets/imgs/Developers/IBCProtocol.png')} alt="" />
             <img src={require('../assets/imgs/Developers/Parity.png')} alt="" />
             <img src={require('../assets/imgs/Developers/BlockGeeks.png')} alt="" />
           </div>
         </div>
+      </section>
+      <section className="homePageContainer mid2">
         <div className="homePageContent mid2">
-          {/* <img src={require('../assets/imgs/TexeractInterchain.gif')} alt="" /> */}
-          {/* <h5>THE FUTURE OF INTERCHAIN TECHNOLOGY</h5>
-          <p>Transact from different blockchain networks and platforms easily.</p> */}
-          {/* <div className="hmpcm2Content1">
-
+          <div className="hpcm2Contents left">
+              <h4>EMPOWERING THE MULTIVERSE OF BLOCKCHAINS</h4>
+              <h6>SCALABLE SOLUTION ACROSS BLOCKCHAIN NETWORKS</h6>
+              <p>
+                Texeract Network integrates the Inter-Blockchain Communication (IBC) Protocol, 
+                allowing seamless asset and data transfers between independent, decentralized 
+                blockchains. This breakthrough enables users to exchange value freely across 
+                multiple blockchain ecosystems.
+              </p>
           </div>
-          <div className="hmpcm2Content2">
-
+          <div className="hpcm2Contents right">
+            <img src={require('../assets/imgs/TexeractEcosystem.png')} alt="" />
           </div>
-          <div className="hmpcm2Content3">
-
+        </div>
+      </section>
+      <section className="homePageContainer mid3">
+        <div className="homePageContent mid3">
+          <div className="hpcm3Contents left">
+            <div className="hpcm3cl wallet">
+              <span><p>COMING SOON</p></span>
+              <img src={require('../assets/imgs/TexeractBox4.png')} alt="" />
+              <div>
+                <Link><h5>BRIDGE COIN</h5></Link>
+                <p>Bridge any coin and get gas fee rebates, giving you more value with every transaction.</p>
+              </div>
+            </div>
+            <div className="hpcm3cl bridge">
+              <span><p>COMING SOON</p></span>
+              <img id='hpcm3clMint' src={require('../assets/imgs/TexeractBox8.png')} alt="" />
+              <div>
+                <Link><h5>MINT TOKEN</h5></Link>
+                <p>Token minting made easy by just giving only the details and then the token allocation.</p>
+              </div>
+            </div>
           </div>
-          <div className="hmpcm2Content4">
-
-          </div> */}
+          <div className="hpcm3Contents right">
+            <h5>START DEPLOYING DAPPS FROM ASSETS YOU ALREADY OWN!</h5>
+            <p>Unlock the potential of your assets by launching your own dApps and shaping the future of blockchain. Join us in fostering a dynamic community, sparking innovation, and exploring new frontiers in blockchain technology.</p>
+            <div>
+              <Link>Deploy DApp</Link>
+              <Link>Documentations</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="homePageContainer mid4">
+        <div className="homePageContent mid4">
+          
         </div>
       </section>
     </div>
