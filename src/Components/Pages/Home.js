@@ -242,6 +242,13 @@ const Home = () => {
           <h4>EARN XERA OVERTIME <br /> USING XERA NODES</h4>
         </div>
       </section> */}
+      <section className="homePageContainer mid5">
+        <div className="homePageContent mid5">
+          <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+          <h5>STAY CONNECTED FOR MORE</h5>
+          <p>AIRDROP ON-GOING</p>
+        </div>
+      </section>
     </div>
   )
 }

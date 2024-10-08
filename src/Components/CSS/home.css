@@ -308,8 +308,7 @@ section.homePageContainer.mid1{
 .homePageContent.mid1{
     height: auto;
     width: 100%;
-    padding: 7% 0%;
-    padding-top: 1%;
+    padding: 5% 0%;
 }
 .homePageContent.mid1 p{
     font-family: 'Lexend Peta', sans-serif;
@@ -552,10 +551,26 @@ section.homePageContainer.mid4{
 
 
 
-
-
-
-
+section.homePageContainer.mid5{
+    height: auto;
+    width: 100%;
+    padding: 5% 7%;
+}
+.homePageContent.mid5{
+    height: auto;
+    width: 100%;
+    position: relative;
+    text-align: center;
+}
+.homePageContent.mid5 img{
+    height: 5vw;
+    margin-bottom: 1%;
+}
+.homePageContent.mid5 h5{
+    font-size: 1.5vw;
+    font-family: 'Lexend Peta', sans-serif;
+    margin-bottom: 0.5%;
+}
 
 
 
