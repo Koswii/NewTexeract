@@ -113,7 +113,7 @@ const Home = () => {
                 <Link onClick={handleViewCreateWallet}>Get Started</Link>:
                 <Link to={`/p/${userLoggedData.myXeraAddress}`}>Get Started</Link>
               }
-              <Link>Learn More</Link>
+              <Link onClick={handleViewXERATopics}>Learn More</Link>
             </div>
           </div>
           <div className="homepct1LearnContainer">
@@ -171,23 +171,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="homePageContainer mid2">
-        <div className="homePageContent mid2">
-          <div className="hpcm2Contents left">
-              <h4>EMPOWERING THE MULTIVERSE OF BLOCKCHAINS</h4>
-              <h6>SCALABLE SOLUTION ACROSS BLOCKCHAIN NETWORKS</h6>
-              <p>
-                Texeract Network integrates the Inter-Blockchain Communication (IBC) Protocol, 
-                allowing seamless asset and data transfers between independent, decentralized 
-                blockchains. This breakthrough enables users to exchange value freely across 
-                multiple blockchain ecosystems.
-              </p>
-          </div>
-          <div className="hpcm2Contents right">
-            <img src={require('../assets/imgs/TexeractEcosystem.png')} alt="" />
-          </div>
-        </div>
-      </section>
       <section className="homePageContainer mid1">
         <div className="homePageContent mid1">
           <p>DEVELOPERS FROM</p>
@@ -205,7 +188,22 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* <section className="homePageContainer mid3">
+      <section className="homePageContainer mid234">
+        <div className="homePageContent mid2">
+          <div className="hpcm2Contents left">
+              <h4>EMPOWERING THE MULTIVERSE OF BLOCKCHAINS</h4>
+              <h6>SCALABLE SOLUTION ACROSS BLOCKCHAIN NETWORKS</h6>
+              <p>
+                Texeract Network integrates the Inter-Blockchain Communication (IBC) Protocol, 
+                allowing seamless asset and data transfers between independent, decentralized 
+                blockchains. This breakthrough enables users to exchange value freely across 
+                multiple blockchain ecosystems.
+              </p>
+          </div>
+          <div className="hpcm2Contents right">
+            <img src={require('../assets/imgs/TexeractEcosystem.png')} alt="" />
+          </div>
+        </div>
         <div className="homePageContent mid3">
           <div className="hpcm3Contents left">
             <div className="hpcm3cl wallet">
@@ -226,8 +224,8 @@ const Home = () => {
             </div>
           </div>
           <div className="hpcm3Contents right">
-            <h5>START DEPLOYING DAPPS FROM ASSETS YOU ALREADY OWN!</h5>
-            <p>Unlock the potential of your assets by launching your own dApps and shaping the future of blockchain. Join us in fostering a dynamic community, sparking innovation, and exploring new frontiers in blockchain technology.</p>
+            <h6>SCALE YOUR VISION: DEPLOY DAPPS FROM THE ASSETS YOU CONTROL</h6>
+            <p>Maximize your investment by turning your existing resources into powerful applications that grow with you—no need for costly new assets. Take full control of your project's future and deploy faster, smarter, and bigger.</p>
             <div>
               <Link>Deploy DApp</Link>
               <Link>Documentations</Link>
@@ -235,20 +233,31 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section> */}
-      {/* <section className="homePageContainer mid4">
         <div className="homePageContent mid4">
-          <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-          <h4>EARN XERA OVERTIME <br /> USING XERA NODES</h4>
-        </div>
-      </section> */}
-      <section className="homePageContainer mid5">
-        <div className="homePageContent mid5">
-          <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-          <h5>STAY CONNECTED FOR UPDATES</h5>
-          <p>AIRDROP ON-GOING</p>
+          <div className="hpcm4Contents left">
+              <img src={require('../assets/imgs/TexeractWallet.png')} alt="" />
+          </div>
+          <div className="hpcm4Contents right">
+              <h4>SIMPLIFY YOUR CRYPTO JOURNEY</h4>
+              <h6>BROWSER-BASED BLOCKCHAIN WALLET FOR ALL</h6>
+              <p>
+                Access your blockchain wallet from any browser, without the need for extensions or installations. Enjoy a seamless, secure, and user-friendly experience designed for everyone—whether you're a crypto beginner or a seasoned expert.
+              </p>
+          </div>
         </div>
       </section>
+      {/* <section className="homePageContainer mid4">
+        <div className="homePageContent mid4">
+          
+        </div>
+      </section> */}
+      {/* <section className="homePageContainer mid5">
+        <div className="homePageContent mid5">
+          <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+          <h5>STAY CONNECTED FOR MORE UPDATES</h5>
+          <p>AIRDROP ON-GOING</p>
+        </div>
+      </section> */}
     </div>
   )
 }

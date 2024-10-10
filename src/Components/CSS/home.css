@@ -31,6 +31,7 @@ h6{
     height: auto;
     width: 100%;
     background: black;
+    padding-bottom: 10vw;
 }
 
 /*----- Landing Section -----*/
@@ -41,13 +42,6 @@ h6{
 section.homePageContainer.top{
     height: 100vh;
     width: 100%;
-    /* padding: 4vw 7%;
-    padding-top: 10vh; */
-    /* background: 
-        linear-gradient(black 15%, transparent),
-        linear-gradient(transparent, black 100%); */
-        /* url('../assets/imgs/dashboadBG03.png') no-repeat center; */
-    /* background-size: cover; */
     position: relative;
 }
 .homePageContentBG{
@@ -74,7 +68,7 @@ section.homePageContainer.top{
     align-items: center;
     position: relative;
     background: 
-        linear-gradient(black 0%, transparent),
+        linear-gradient(black -50%, transparent),
         linear-gradient(transparent, black 100%),
         url('../assets/imgs/texeractAllBG.png') no-repeat center;
     background-size: cover;
@@ -308,7 +302,6 @@ section.homePageContainer.mid1{
 .homePageContent.mid1{
     height: auto;
     width: 100%;
-    padding: 3% 0%;
 }
 .homePageContent.mid1 p{
     font-family: 'Lexend Peta', sans-serif;
@@ -348,11 +341,15 @@ section.homePageContainer.mid1{
 
 
 
-section.homePageContainer.mid2{
+section.homePageContainer.mid234{
     height: auto;
     width: 100%;
     padding: 5% 7%;
-    padding-top: 10%;
+    background: 
+        linear-gradient(black 0%, transparent),
+        linear-gradient(transparent, black 100%),
+        url('../assets/imgs/ExtraBG03.jpg') no-repeat center;
+    background-size: cover;
 }
 .homePageContent.mid2{
     height: 25vw;
@@ -365,8 +362,10 @@ section.homePageContainer.mid2{
         linear-gradient(black 15%, transparent),
         url('../assets/imgs/ExtraBG02.jpg') no-repeat center;
     background-size: cover;
+    box-shadow: 0 0 20px black;
     border-radius: 1vw;
     padding: 3% 5%;
+    margin-bottom: 7%;
 }
 .hpcm2Contents.left{
     height: auto;
@@ -401,18 +400,6 @@ section.homePageContainer.mid2{
 
 
 
-
-
-
-
-
-
-section.homePageContainer.mid3{
-    height: auto;
-    width: 100%;
-    padding: 2% 7%;
-    padding-bottom: 5%;
-}
 .homePageContent.mid3{
     height: auto;
     width: 100%;
@@ -420,6 +407,7 @@ section.homePageContainer.mid3{
     justify-content: space-between;
     align-items: center;
     padding: 2% 5%;
+    margin-bottom: 7%;
 }
 .hpcm3Contents.left{
     height: auto;
@@ -434,7 +422,10 @@ section.homePageContainer.mid3{
     border-radius: 0.5vw;
     border-top-left-radius: 2vw;
     border-bottom-right-radius: 2vw;
-    background: rgb(20, 20, 20);
+    background: rgba(20, 20, 20, 0.2);
+    box-shadow: 0 0 15px rgb(40, 40, 40);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     position: relative;
     padding: 3%;
 }
@@ -442,8 +433,8 @@ section.homePageContainer.mid3{
     position: absolute;
     top: 15%;
     left: 0;
-    background: red;
-    padding: 2%;
+    background: royalblue;
+    padding: 2% 3%;
     padding-right: 7%;
     border-bottom-right-radius: 50px;
     border-top-right-radius: 50px;
@@ -492,7 +483,7 @@ section.homePageContainer.mid3{
     height: auto;
     width: 45%;
 }
-.hpcm3Contents.right h5{
+.hpcm3Contents.right h6{
     font-size: 1.2vw;
     font-family: 'Lexend Peta', sans-serif;
 }
@@ -520,10 +511,63 @@ section.homePageContainer.mid3{
 
 
 
+.homePageContent.mid4{
+    height: 15vw;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 5%;
+    background: 
+        linear-gradient(transparent, black 100%),
+        url('../assets/imgs/ExtraBG02.jpg') no-repeat top center;
+    background-size: cover;
+    box-shadow: 0 0 20px black;
+    border-radius: 1vw;
+    padding: 3% 5%;
+}
+.hpcm4Contents.left{
+    height: auto;
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hpcm4Contents.left img{
+    height: 25vw;
+}
+.hpcm4Contents.right{
+    height: auto;
+    width: 45%;
+}
+.hpcm4Contents.right h4{
+    font-size: 2.2vw;
+    line-height: 2.3vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.hpcm4Contents.right h6{
+    font-size: 0.8vw;
+    font-family: 'Lexend Peta', sans-serif;
+    font-weight: 600;
+    margin: 3% 0;
+}
+.hpcm4Contents.right p{
+    font-size: 0.7vw;
+}
 
 
 
-section.homePageContainer.mid4{
+
+
+
+
+
+
+
+
+
+
+/* section.homePageContainer.mid4{
     height: auto;
     width: 100%;
     padding: 5% 7%;
@@ -533,16 +577,7 @@ section.homePageContainer.mid4{
     width: 100%;
     position: relative;
     text-align: center;
-}
-.homePageContent.mid4 img{
-    height: 3vw;
-    margin-bottom: 2%;
-}
-.homePageContent.mid4 h4{
-    font-size: 2.2vw;
-    line-height: 2.3vw;
-    font-family: 'Lexend Peta', sans-serif;
-}
+} */
 
 
 
@@ -551,7 +586,7 @@ section.homePageContainer.mid4{
 
 
 
-section.homePageContainer.mid5{
+/* section.homePageContainer.mid5{
     height: auto;
     width: 100%;
     padding: 5% 7%;
@@ -570,7 +605,7 @@ section.homePageContainer.mid5{
     font-size: 1.5vw;
     font-family: 'Lexend Peta', sans-serif;
     margin-bottom: 0.5%;
-}
+} */
 
 
 
