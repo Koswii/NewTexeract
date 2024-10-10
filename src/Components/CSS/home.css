@@ -561,54 +561,63 @@ section.homePageContainer.mid234{
 
 
 
-
-
-
-
-
-
-/* section.homePageContainer.mid4{
+section.homePageContainer.mid5{
     height: auto;
     width: 100%;
-    padding: 5% 7%;
-}
-.homePageContent.mid4{
-    height: auto;
-    width: 100%;
-    position: relative;
-    text-align: center;
-} */
-
-
-
-
-
-
-
-
-/* section.homePageContainer.mid5{
-    height: auto;
-    width: 100%;
-    padding: 5% 7%;
+    padding: 7%;
 }
 .homePageContent.mid5{
     height: auto;
     width: 100%;
-    position: relative;
+    padding: 2% 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 50%;
+}
+.homePageContent.mid5 span{
+    text-align: center;
+    width: 25%;
+}
+.homePageContent.mid5 h4{
+    font-size: 3vw;
+    line-height: 2.5vw;
+    margin-bottom: 5%;
+}
+.homePageContent.mid5 p{
+    font-size: 0.7vw;
+    font-family: 'Lexend Peta', sans-serif;
+    font-weight: 400;
+}
+
+
+
+
+
+
+
+section.homePageContainer.mid6{
+    height: auto;
+    width: 100%;
+    padding: 3% 7%;
+}
+.homePageContent.mid6{
+    height: auto;
+    width: 100%;
+    padding: 0 5%;
     text-align: center;
 }
-.homePageContent.mid5 img{
+.homePageContent.mid6 img{
     height: 5vw;
-    margin-bottom: 1%;
 }
-.homePageContent.mid5 h5{
-    font-size: 1.5vw;
+.homePageContent.mid6 h5{
+    font-size: 1.2vw;
     font-family: 'Lexend Peta', sans-serif;
-    margin-bottom: 0.5%;
-} */
-
-
-
+    margin: 1% 0;
+}
+.homePageContent.mid6 p{
+    font-size: 0.7vw;
+}
 
 
 

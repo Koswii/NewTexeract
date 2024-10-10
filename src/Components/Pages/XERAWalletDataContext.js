@@ -20,6 +20,7 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [viewLoginAccount, setViewLoginAccount] = useState(false);
     const [viewConnectWallet, setViewConnectWallet] = useState(false);
     const [xeraUserList, setXeraUserList] = useState([]);
+    const [xeraUserNumber, setXeraUserNumber] = useState([]);
     const [xeraUserProfile, setXeraUserProfile] = useState([]);
     const [xeraUserWallets, setXeraUserWallets] = useState([]);
     const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
@@ -87,7 +88,9 @@ export const XERAWalletDataProvider = ({ children }) => {
             // Fetch profile data once
             const userListResponse = await axios.get(XERACreateWalletAccountAPI);
             const profileData = userListResponse.data.find(user => user.xera_wallet === userLoggedData.myXeraAddress);
+            setXeraUserNumber(userListResponse.data.length)
             setXeraUserProfile(profileData);
+            
 
             // Fetch referrals list
             const referralsResponse = await axios.get(XERAReferralsListAPI);
@@ -199,6 +202,7 @@ export const XERAWalletDataProvider = ({ children }) => {
         <XERAWalletDataContext.Provider value={{ 
             dataLoading,
             windowReload,
+            xeraUserNumber,
             userLoggedData,
             xeraUserProfile,
             viewWalletCreate, 

@@ -56,8 +56,21 @@ const ScrambleText = ({ targetText, scrambleSpeed = 80, revealSpeed = 200 }) => 
 
     return <h6 style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '1vw', fontWeight: '700', color: 'white',textAlign: 'left', whiteSpace: 'pre-line' }}>{scrambledText.join('\n')}</h6>;
 };
+const formatNumberToK = (num) => {
+  if (typeof num !== 'number' || isNaN(num)) {
+    return '';
+  }
+  if (num >= 1000) {
+    return (num / 1000).toFixed(num % 1000 === 0 ? 0 : 1) + 'K';
+  }
+  return num.toString();
+};
+const NumberFormatter = ({ number }) => {
+  return <>{formatNumberToK(number)}</>;
+};
 const Home = () => {
   const {
+    xeraUserNumber,
     userLoggedData,
     setViewWalletCreate
   } = XERAWalletData();
@@ -92,7 +105,7 @@ const Home = () => {
   const handleViewCreateWallet = () => {
     setViewWalletCreate(true)
   }
-
+  
 
 
   return (
@@ -246,18 +259,33 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* <section className="homePageContainer mid4">
-        <div className="homePageContent mid4">
-          
-        </div>
-      </section> */}
-      {/* <section className="homePageContainer mid5">
+      <section className="homePageContainer mid5">
         <div className="homePageContent mid5">
+          <span>
+            <h4>1000</h4>
+            <p>Sepolia Testnet<br />Participants</p>
+          </span>
+          <span>
+            <h4><NumberFormatter number={xeraUserNumber}/></h4>
+            <p>XERA Wallet<br />Created</p>
+          </span>
+          <span>
+            <h4>8</h4>
+            <p>Supported <br />Networks</p>
+          </span>
+          <span>
+            <h4>4</h4>
+            <p>Upcoming DApp<br />Projects</p>
+          </span>
+        </div>
+      </section>
+      <section className="homePageContainer mid6">
+        <div className="homePageContent mid6">
           <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
           <h5>STAY CONNECTED FOR MORE UPDATES</h5>
           <p>AIRDROP ON-GOING</p>
         </div>
-      </section> */}
+      </section>
     </div>
   )
 }

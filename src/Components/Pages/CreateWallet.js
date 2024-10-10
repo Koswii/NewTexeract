@@ -342,8 +342,7 @@ const CreateWallet = () => {
         setViewSeedPhrase(false)
         setViewVerifyWallet(true)
     }
-    
-    
+
 
 
     return (
