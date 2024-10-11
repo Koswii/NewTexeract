@@ -56,6 +56,7 @@ const Footer = () => {
               <li><Link>Leaderboards</Link></li>
               <li><Link>Tokenomics</Link></li>
               <li><Link>Ecosystem</Link></li>
+              <li><Link>XERAScan</Link></li>
               <li><Link>Whitepaper</Link></li>
               <li><Link>FAQs</Link></li>
             </ul>
