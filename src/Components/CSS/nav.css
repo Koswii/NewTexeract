@@ -326,3 +326,139 @@ nav{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footerContainer{
+    height: auto;
+    width: 100%;
+}
+section.footerContent{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: 3% 7%;
+    padding-bottom: 5%;
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+    background: rgb(10, 10, 10);
+    box-shadow: 0 0 20px rgb(50, 50, 50);
+}
+.fcontent.left{
+    height: auto;
+    width: 40%;
+}
+.fcontent.left div{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.fcontent.left div img{
+    height: 2vw;
+    margin-right: 3%;
+}
+.fcontent.left div h5{
+    font-family: 'Lexend Peta', sans-serif;
+}
+.fcontent.left div input{
+    width: 55%;
+    border: solid 2px white;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 0.7vw;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-right: 1%;
+}
+.fcontent.left div button{
+    width: 20%;
+    border: solid 2px white;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 0.7vw;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: 400ms ease;
+    cursor: pointer;
+}
+.fcontent.left div button:hover{
+    background: white;
+    color: black;
+    transition: 400ms ease;
+}
+.fcontent.left div a{
+    color: white;
+    font-size: 1.5vw;
+    margin-right: 5%;
+    cursor: pointer;
+}
+.fcontent.left p{
+    font-size: 0.7vw;
+    width: 80%;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+
+.fcontent.right{
+    height: auto;
+    width: 55%;
+    display: flex;
+    justify-content: right;
+    align-items: start;
+}
+.fcontent.right div{
+    height: auto;
+    width: 30%;
+    text-align: right;
+    margin-left: 2%;
+}
+.fcontent.right div h6{
+    font-size: 0.9vw;
+    font-family: 'Lexend Peta', sans-serif;
+    margin-bottom: 3%;
+}
+.fcontent.right div ul{
+    list-style: none;
+}
+.fcontent.right div ul li{
+    margin: 2% 0;
+}
+.fcontent.right div a{
+    color: white;
+    font-size: 0.8vw;
+    text-decoration: none;
+    opacity: 50%;
+}
+
+
+
+
+
+section.footerContentBot{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5% 7%;
+    background: rgb(20, 20, 20);
+}
