@@ -205,6 +205,31 @@ h6{
 }
 
 
+.prfpchlNFTEmpty{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.prfpchlNFTEmpty span p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+
+
+
+
+
+
+
+
+
+
 
 .prfpchead.right{
     height: auto;
@@ -249,6 +274,26 @@ h6{
     margin-top: 3%;
     padding: 2%;
     position: relative;
+    transition: 400ms ease;
+}
+.prfpchrcEmpty{
+    height: 100%;
+    width: 100%;
+    border-radius: 0.5vw;
+    background: rgb(20, 20, 20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.prfpchrcEmpty span h6{
+    font-size: 2vw;
+    opacity: 50%;
+}
+.prfpchrcEmpty span p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
 }
 .prfpchrcProfile{
     height: 3vw;

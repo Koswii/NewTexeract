@@ -15,6 +15,7 @@ import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight
 } from "react-icons/fa";
+import UnderDevelopment from './UnderDevelopment';
 import { XERAWalletData } from './XERAWalletDataContext';
 
 
@@ -70,6 +71,8 @@ const NumberFormatter = ({ number }) => {
 };
 const Home = () => {
   const {
+    veiwUnderDevelopment, 
+    setViewUnderDevelopment,
     xeraUserNumber,
     userLoggedData,
     setViewWalletCreate
@@ -79,7 +82,9 @@ const Home = () => {
   const [viewTopicContent, setViewTopicContent] = useState(null)
   const [viewActiveContent, setViewActiveContent] = useState(false)
 
-
+  const handleViewUnderDevelopment = () => {
+    setViewUnderDevelopment(true);
+  }
   const handleViewXERATopics = () => {
     setViewXERATopics(true)
   }
@@ -108,8 +113,12 @@ const Home = () => {
   
 
 
+
   return (
     <div className='mainContainer home'>
+      {veiwUnderDevelopment && <UnderDevelopment/>}
+
+
       <section className="homePageContainer top">
         {/* <div className="homePageContentBG">
           <video autoPlay muted loop>
@@ -223,7 +232,7 @@ const Home = () => {
               <span><p>COMING SOON</p></span>
               <img src={require('../assets/imgs/TexeractBox4.png')} alt="" />
               <div>
-                <Link><h5>BRIDGE COIN</h5></Link>
+                <Link onClick={handleViewUnderDevelopment}><h5>BRIDGE COIN</h5></Link>
                 <p>Bridge any coin and get gas fee rebates, giving you more value with every transaction.</p>
               </div>
             </div>
@@ -231,7 +240,7 @@ const Home = () => {
               <span><p>COMING SOON</p></span>
               <img id='hpcm3clMint' src={require('../assets/imgs/TexeractBox8.png')} alt="" />
               <div>
-                <Link><h5>MINT TOKEN</h5></Link>
+                <Link onClick={handleViewUnderDevelopment}><h5>MINT TOKEN</h5></Link>
                 <p>Token minting made easy by just giving only the details and then the token allocation.</p>
               </div>
             </div>
@@ -240,9 +249,9 @@ const Home = () => {
             <h6>SCALE YOUR VISION: DEPLOY DAPPS FROM THE ASSETS YOU CONTROL</h6>
             <p>Maximize your investment by turning your existing resources into powerful applications that grow with you—no need for costly new assets. Take full control of your project's future and deploy faster, smarter, and bigger.</p>
             <div>
-              <Link>Deploy DApp</Link>
-              <Link>Documentations</Link>
-              <Link>DApps</Link>
+              <Link onClick={handleViewUnderDevelopment}>Deploy DApp</Link>
+              <Link onClick={handleViewUnderDevelopment}>Documentations</Link>
+              <Link onClick={handleViewUnderDevelopment}>DApps</Link>
             </div>
           </div>
         </div>
@@ -266,7 +275,7 @@ const Home = () => {
             <p>Sepolia Testnet<br />Participants</p>
           </span>
           <span>
-            <h4><NumberFormatter number={xeraUserNumber}/></h4>
+            <h4><NumberFormatter number={xeraUserNumber ? xeraUserNumber : 0}/></h4>
             <p>XERA Wallet<br />Created</p>
           </span>
           <span>

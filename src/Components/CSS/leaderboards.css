@@ -1,0 +1,110 @@
+h1, h2, h3, h4, h5, h6, p{
+    color: white;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
+p{
+    font-size: 0.9vw;
+}
+h1{
+    font-size: 10vw;
+}
+h2{
+    font-size: 5vw;
+}
+h3{
+    font-size: 4vw;
+}
+h4{
+    font-size: 2vw;
+}
+h5{
+    font-size: 1.5vw;
+}
+h6{
+    font-size: 1vw;
+}
+
+
+.mainContainer.leaderboards{
+    height: auto;
+    width: 100%;
+    background: black;
+    padding-bottom: 10vw;
+}
+
+
+
+
+
+section.leaderboardsPageContainer.top{
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+.leaderboardsPageContent.top{
+    height: auto;
+    width: 100%;
+    padding: 2vw 7%;
+    padding-top: 12vh;
+}
+.leaderboardsPageContent.top h4{
+    font-family: 'Lexend Peta', sans-serif;
+}
+.lbrdpcTop{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.lbrdpct{
+    height: auto;
+    padding: 2%;
+    background: rgb(20, 20, 20);
+    border-radius: 1vw;
+    margin: 1% 0;
+}
+.lbrdpct.participants,
+.lbrdpct.user,
+.lbrdpct.token{
+    width: 20%;
+}
+.lbrdpct.duration{
+    width: 38%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.lbrdpct h3{
+    font-size: 2vw;
+    font-family: 'Lexend Peta', sans-serif;
+    margin-right: 5%;
+}
+.lbrdpct h2{
+    font-size: 2vw;
+}
+.lbrdpct p{
+    font-size: 0.6vw;
+    opacity: 50%;
+}
+.lbrdpct span{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 3%;
+}
+.lbrdpct img{
+    height: 2vw;
+}
+
+
+
+
+
+
+
+
+

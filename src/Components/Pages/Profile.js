@@ -22,7 +22,9 @@ import {
     TbHourglassEmpty,
     TbLock,
     TbArrowUpRight,
+    TbCube,
     TbReceiptOff,
+    TbShoppingCartOff,
     TbCurrencyEthereum,
     TbCurrencySolana,      
 } from "react-icons/tb";
@@ -146,11 +148,17 @@ const Profile = () => {
         verifyingLoader,
     } = TelegramData();
     
+
+    console.log(xeraReferralCounts);
+    
     const XERAAirdropTwitterAPI = process.env.REACT_APP_XERA_USER_AIRDROP_X_API;
     
     const userTelegramStatus = localStorage.getItem('telegramTask');
     const userXStatus = localStorage.getItem('twitterTask');
     const userWalletStatus = localStorage.getItem("walletTask");
+    const [viewProfileOverview, setViewProfileOverview] = useState(true);
+    const [viewProfileNFTs, setViewProfileNFTs] = useState(false);
+    const [viewProfileOnsale, setViewProfileOnsale] = useState(false);
     const [viewCreateWalleteDetails, setViewCreateWalletDetails] = useState(false);
     const [viewTelegramDetails, setViewTelegramDetails] = useState(false);
     const [twitterUsername, setTwitterUsername] = useState('');
@@ -158,6 +166,25 @@ const Profile = () => {
     const [xAccountStatus, setXAccountStatus] = useState('');
     const [viewXDetails, setViewXDetails] = useState(false);
     const [viewBindDetails, setViewBindDetails] = useState(false);
+
+
+    const handleViewProfileOverview = () => {
+        setViewProfileOverview(true);
+        setViewProfileNFTs(false);
+        setViewProfileOnsale(false);
+    }
+    const handleViewProfileNFTs = () => {
+        setViewProfileOverview(false);
+        setViewProfileNFTs(true);
+        setViewProfileOnsale(false);
+    }
+    const handleViewProfileOnsale = () => {
+        setViewProfileOverview(false);
+        setViewProfileNFTs(false);
+        setViewProfileOnsale(true);
+    }
+
+
 
     const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userLoggedData.myXeraUsername)
     const userTotalFollowers = xeraUserFollowings.filter(user => user.following === userLoggedData.myXeraUsername)
@@ -268,7 +295,7 @@ const Profile = () => {
                         <div className="prfpchead left">
                             <div className='prfpchlImg'>
                                 <img src="" alt="" />
-                                <div className="prfpchlNFT switch">
+                                {/* <div className="prfpchlNFT switch">
                                     <button><TbExchange className='faIcons'/></button>
                                 </div>
                                 <div className="prfpchlNFT rarity">
@@ -288,16 +315,21 @@ const Profile = () => {
                                         <button>SEND</button>
                                         <button>SELL</button>
                                     </div>
+                                </div> */}
+                                <div className="prfpchlNFTEmpty">
+                                    <span>
+                                        <p>No NFT Available</p>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <div className="prfpchead right">
                             <div className="prfpchrNav">
-                                <button className='active'>OVERVIEW</button>
-                                <button>NFTs</button>
-                                <button>ON MARKET</button>
+                                <button className={viewProfileOverview ? 'active' : ''} onClick={handleViewProfileOverview}>OVERVIEW</button>
+                                <button className={viewProfileNFTs ? 'active' : ''} onClick={handleViewProfileNFTs}>NFTs</button>
+                                <button className={viewProfileOnsale ? 'active' : ''} onClick={handleViewProfileOnsale}>ON MARKET</button>
                             </div>
-                            <div className="prfpchrContents">
+                            {viewProfileOverview && <div className="prfpchrContents">
                                 <div className="prfpchrcProfile">
                                     <ScrambleTextUsername targetText={`${ userLoggedData.myXeraUsername}`} scrambleSpeed={80} revealSpeed={200} />
                                     <h6>{userLoggedData.myXeraAddress}</h6>
@@ -334,7 +366,23 @@ const Profile = () => {
                                         <h5><NumberFormatter number={0}/></h5>
                                     </div>
                                 </div>
-                            </div>
+                            </div>}
+                            {viewProfileNFTs && <div className="prfpchrContents">
+                                <div className="prfpchrcEmpty">
+                                    <span>
+                                        <h6><TbCube className='faIcons'/></h6>
+                                        <p>No NFT Available</p>
+                                    </span>
+                                </div>
+                            </div>}
+                            {viewProfileOnsale && <div className="prfpchrContents">
+                                <div className="prfpchrcEmpty">
+                                    <span>
+                                        <h6><TbShoppingCartOff className='faIcons'/></h6>
+                                        <p>No Asset on Market</p>
+                                    </span>
+                                </div>
+                            </div>}
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,7 @@ export const XERAWalletDataProvider = ({ children }) => {
 
     const [windowReload, setWindowReload] = useState(false);
 
+    const [veiwUnderDevelopment, setViewUnderDevelopment] = useState(false);
     const [viewWalletCreate, setViewWalletCreate] = useState(false);
     const [viewLoginAccount, setViewLoginAccount] = useState(false);
     const [viewConnectWallet, setViewConnectWallet] = useState(false);
@@ -200,6 +201,8 @@ export const XERAWalletDataProvider = ({ children }) => {
 
     return (
         <XERAWalletDataContext.Provider value={{ 
+            veiwUnderDevelopment, 
+            setViewUnderDevelopment,
             dataLoading,
             windowReload,
             xeraUserNumber,

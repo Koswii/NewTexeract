@@ -168,13 +168,19 @@ nav{
 }
 
 
-.navContent.right a.navCrBtn.marketplace{
+.navContent.right a.navCrBtn.dapps,
+.navContent.right a.navCrBtn.nodes,
+.navContent.right a.navCrBtn.marketplace,
+.navContent.right a.navCrBtn.leaderboards{
     margin-right: 7%;
     text-decoration: none;
-    cursor: not-allowed;
+    /* cursor: not-allowed; */
     opacity: 50%;
 }
-.navContent.right a.navCrBtn.marketplace p{
+.navContent.right a.navCrBtn.dapps p,
+.navContent.right a.navCrBtn.nodes p,
+.navContent.right a.navCrBtn.marketplace p,
+.navContent.right a.navCrBtn.leaderboards p{
     font-size: 0.6vw;
     color: white;
     font-family: 'Lexend Peta', sans-serif;
@@ -447,8 +453,12 @@ section.footerContent{
     font-size: 0.8vw;
     text-decoration: none;
     opacity: 50%;
+    transition: 400ms ease;
 }
-
+.fcontent.right div a:hover{
+    opacity: 100%;
+    transition: 400ms ease;
+}
 
 
 

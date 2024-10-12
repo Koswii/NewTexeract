@@ -38,7 +38,6 @@ h6{
 
 
 
-
 section.homePageContainer.top{
     height: 100vh;
     width: 100%;
@@ -501,7 +500,6 @@ section.homePageContainer.mid234{
     border-radius: 50px;
     font-family: 'Lexend Peta', sans-serif;
     transition: 400ms ease;
-    cursor: not-allowed;
     opacity: 50%;
     margin-right: 2%;
 }

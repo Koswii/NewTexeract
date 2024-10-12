@@ -9,6 +9,7 @@ import { XERAWalletDataProvider } from './Components/Pages/XERAWalletDataContext
 import { TelegramDataProvider } from './Components/Pages/TelegramDataContext';
 
 import Home from './Components/Pages/Home'
+import Leaderboards from './Components/Pages/Leaderboards';
 import Profile from './Components/Pages/Profile';
 
 
@@ -29,6 +30,7 @@ function App() {
           <Nav />
           <Routes>
             <Route path="/" element={<Home/>}/>
+            <Route path="/Leaderboards" element={<Leaderboards/>}/>
             {(userLoggedData) &&
               <>
                 <Route path={`/p/${userLoggedData.myXeraAddress}`} element={<Profile/>}/>
