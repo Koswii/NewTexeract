@@ -148,9 +148,6 @@ const Profile = () => {
         verifyingLoader,
     } = TelegramData();
     
-
-    console.log(xeraReferralCounts);
-    
     const XERAAirdropTwitterAPI = process.env.REACT_APP_XERA_USER_AIRDROP_X_API;
     
     const userTelegramStatus = localStorage.getItem('telegramTask');
@@ -584,7 +581,7 @@ const Profile = () => {
                     <div className="ppcmAirdrop right">
                         <div className="ppcmarTitle">
                             <h5>REFERRAL LEADERBOARD</h5>
-                            <Link><TbArrowUpRight className="faIcons"/></Link>
+                            <Link to='/Leaderboards'><TbArrowUpRight className="faIcons"/></Link>
                         </div>
                         <div className="ppcmarContainer">
                             {(dataLoading) ? <>

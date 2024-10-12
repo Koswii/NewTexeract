@@ -35,7 +35,7 @@ export const XERAWalletDataProvider = ({ children }) => {
         try {
             // Set up intervals for the first two APIs
             if (!userLoggedData) {
-                    const intervalId = setInterval(async () => {
+                const intervalId = setInterval(async () => {
                     try {
                         // const [userListResponse, walletsListResponse, displayListResponse] = await Promise.all([
                             const [userListResponse, displayListResponse] = await Promise.all([
@@ -57,12 +57,42 @@ export const XERAWalletDataProvider = ({ children }) => {
                             return {
                                 ...user,
                                 // wallets: userWallet ? userWallet : null, // Attach the matching wallet data
-                                display: displayData ? displayData : null // Attach the matching display data
+                                display: displayData ? displayData: null // Attach the matching display data
                             };
                         });
                 
                         // Set the combined data to state
                         setXeraUserList(combinedData);
+                        setXeraUserNumber(combinedData.length)
+
+                        // Fetch airdrops list
+                        const airdropsResponse = await axios.get(XERAAirdropListAPI);
+                        const userAirdropsListData = airdropsResponse.data;
+                        setXeraUserAirdrops(userAirdropsListData);
+                        
+                        const referralTaskCounts = userAirdropsListData.reduce((acc, task) => {
+                            if (task.xera_task === 'Referral Task') {
+                            acc[task.username] = (acc[task.username] || 0) + 1;
+                            }
+                            return acc;
+                        }, {});
+
+                        // Convert the result into an array of objects for display
+                        const referralCountArray = Object.keys(referralTaskCounts)
+                        .map(username => ({
+                            username,
+                            referrals: referralTaskCounts[username]
+                        }))
+                        .filter(user => user.referrals > 0)  // Filter out users with 0 referrals
+                        .sort((a, b) => b.referrals - a.referrals); // Sort by referrals
+                        const refSumDetails = referralCountArray.map(user => {
+                            const userBasic = combinedData.find(ref => ref.username === user.username)
+                            return {
+                                ...user, userBasic
+                            }
+                        })
+                        setReferralCounts(refSumDetails);
+                        
                 
                     } catch (error) {
                         console.error(error);
@@ -89,8 +119,8 @@ export const XERAWalletDataProvider = ({ children }) => {
             // Fetch profile data once
             const userListResponse = await axios.get(XERACreateWalletAccountAPI);
             const profileData = userListResponse.data.find(user => user.xera_wallet === userLoggedData.myXeraAddress);
-            setXeraUserNumber(userListResponse.data.length)
             setXeraUserProfile(profileData);
+            setXeraUserNumber(userListResponse.data.length)
             
 
             // Fetch referrals list

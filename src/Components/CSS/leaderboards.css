@@ -39,7 +39,7 @@ h6{
 
 
 section.leaderboardsPageContainer.top{
-    height: 100vh;
+    height: auto;
     width: 100%;
     position: relative;
 }
@@ -48,23 +48,27 @@ section.leaderboardsPageContainer.top{
     width: 100%;
     padding: 2vw 7%;
     padding-top: 12vh;
+    background: 
+        linear-gradient(transparent, black 100%),
+        url('../assets/imgs/profileBG.png') no-repeat top;
+    background-size: cover;
 }
 .leaderboardsPageContent.top h4{
     font-family: 'Lexend Peta', sans-serif;
 }
-.lbrdpcTop{
+.lbrdpcTop1{
     height: auto;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 1%;
 }
 .lbrdpct{
-    height: auto;
+    height: 7vw;
     padding: 2%;
     background: rgb(20, 20, 20);
     border-radius: 1vw;
-    margin: 1% 0;
 }
 .lbrdpct.participants,
 .lbrdpct.user,
@@ -72,7 +76,7 @@ section.leaderboardsPageContainer.top{
     width: 20%;
 }
 .lbrdpct.duration{
-    width: 38%;
+    width: 37%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -84,6 +88,9 @@ section.leaderboardsPageContainer.top{
 }
 .lbrdpct h2{
     font-size: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .lbrdpct p{
     font-size: 0.6vw;
@@ -99,6 +106,340 @@ section.leaderboardsPageContainer.top{
 .lbrdpct img{
     height: 2vw;
 }
+.lbrdpct.duration div{
+    height: auto;
+    width: 48%;
+}
+.lbrdpct.duration div h6{
+    margin-bottom: 1%;
+}
+.lbrdpctdCountDown{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.lbrdpctdCountDown span{
+    width: 24%;
+    text-align: center;
+    display: block;
+}
+
+
+
+
+
+.lbrdpcTop2{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1%;
+}
+.lbrdpct2.top1{
+    height: 20vw;
+    width: 30%;
+    padding: 2%;
+    background: url('../assets/imgs/dashboadBG05.png') no-repeat center;
+    background-size: cover;
+    box-shadow: 0 0 5px gray;
+    border-radius: 1vw;
+}
+.lbrdpct2t1Header{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.lbrdpct2t1hNFT{
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5%;
+    position: relative;
+}
+.lbrdpct2t1hNFT p{
+    height: 2vw;
+    width: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 0.8vw;
+    background: goldenrod;
+    z-index: 2;
+}
+.lbrdpct2t1hNFT span{
+    height: 5vw;
+    width: 5vw;
+    border-radius: 50%;
+    background: white;
+    overflow: hidden;
+    z-index: 1;
+}
+.lbrdpct2t1hNFT img{
+    height: 100%;
+}
+.lbrdpct2t1hName{
+    height: auto;
+}
+.lbrdpct2t1hName p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+
+
+
+.lbrdpct2t1Contents{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 10% 0;
+}
+.lbrdpct2t1Contents div{
+    width: 30%;
+    margin-right: 3%;
+}
+.lbrdpct2t1Contents p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+.lbrdpct2t1Rewards{
+    height: auto;
+    width: 100%;
+}
+.lbrdpct2t1Rewards div{
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 2%;
+}
+.lbrdpct2t1Rewards div img{
+    height: 2vw;
+    margin-left: 3%;
+}
+.lbrdpct2t1Rewards p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+
+
+
+
+
+
+.lbrdpct2.top2,
+.lbrdpct2.top3{
+    height: 20vw;
+    width: 20%;
+    padding: 3% 2%;
+    background: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 0 5px gray;
+    border-radius: 1vw;
+}
+.lbrdpct2ttHeader{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.lbrdpct2tthNFT{
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5%;
+    position: relative;
+}
+.lbrdpct2tthNFT p{
+    height: 1.5vw;
+    width: 1.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 0.7vw;
+    background: royalblue;
+    z-index: 2;
+}
+.lbrdpct2tthNFT span{
+    height: 3vw;
+    width: 3vw;
+    border-radius: 50%;
+    background: white;
+    overflow: hidden;
+    z-index: 1;
+}
+.lbrdpct2tthNFT img{
+    height: 100%;
+}
+.lbrdpct2tthName{
+    height: auto;
+}
+.lbrdpct2tthName h5{
+    font-size: 1.1vw;
+}
+.lbrdpct2tthName p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+
+
+
+.lbrdpct2ttContents{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 20% 0;
+}
+.lbrdpct2ttContents div{
+    width: 30%;
+    margin-right: 3%;
+}
+.lbrdpct2ttContents p{
+    font-size: 0.5vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+
+
+.lbrdpct2ttRewards{
+    height: auto;
+    width: 100%;
+}
+.lbrdpct2ttRewards div{
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 2%;
+}
+.lbrdpct2ttRewards div img{
+    height: 2vw;
+    margin-left: 3%;
+}
+.lbrdpct2ttRewards p{
+    font-size: 0.5vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+
+
+.lbrdpct2.referral{
+    height: 20vw;
+    width: 27%;
+    padding: 2%;
+    background: rgb(20, 20, 20);
+    border-radius: 1vw;
+    border: solid 2px transparent;
+}
+.lbrdpct2rContainer{
+    height: 14vw;
+    width: 100%;
+    margin-top: 3%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.lbrdpct2rRefLeaderLoading{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 3%;
+    margin: 1% 0;
+    border-radius: 0.5vw;
+    border: solid 2px transparent;
+    background: 
+      linear-gradient(90deg,#0001 33%,#0005 50%,#0001 66%)
+      #808080;
+    background-size:300% 100%;
+    animation: l1 1s infinite linear;
+}
+.lbrdpct2rRefLeaderLoading span{
+    height: 2.5vw;
+    width: 2.5vw;
+    overflow: hidden;
+    border-radius: 50%;
+    background: 
+      linear-gradient(90deg,#0001 33%,#0005 50%,#0001 66%)
+      #585858;
+    background-size:300% 100%;
+    animation: l1 1s infinite linear;
+    margin: 0 3%;
+}
+.lbrdpct2rRefLeader{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 3%;
+    margin: 1% 0;
+    border-radius: 0.5vw;
+    border: solid 2px transparent;
+}
+.lbrdpct2rRefLeader:nth-child(odd) {
+    background: rgba(80, 80, 80, 0.5);
+}
+.lbrdpct2rRefLeader:nth-child(even) {
+    background: rgba(80, 80, 80, 0.3);
+}
+.lbrdpct2rRefLeader span{
+    height: 2.5vw;
+    width: 2.5vw;
+    overflow: hidden;
+    border-radius: 50%;
+    background: white;
+    margin: 0 3%;
+}
+.lbrdpct2rRefLeader span img{
+    height: 100%;
+}
+.lbrdpct2Leader{
+    width: 10%;
+    text-align: center;
+}
+.lbrdpct2Leader h5{
+    font-size: 0.9vw;
+}
+.lbrdpct2rName{
+    width: 55%;
+}
+.lbrdpct2rName p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+.lbrdpct2rCount{
+    width: 15%;
+    text-align: center;
+}
+.lbrdpct2rCount h5{
+    font-size: 0.9vw;
+}
 
 
 
@@ -107,4 +448,76 @@ section.leaderboardsPageContainer.top{
 
 
 
+section.leaderboardsPageContainer.mid{
+    height: auto;
+    width: 100%;
+    position: relative;
+    padding: 2vw 7%;
+    padding-top: 1vw;
+}
+.leaderboardsPageContent.mid{
+    height: auto;
+    width: 100%;
+    background: rgba(20, 20, 20, 0.5);
+    padding: 2%;
+    border-radius: 1vw;
+}
+.leaderboardsPageContent.mid h5{
+    font-family: 'Lexend Peta', sans-serif;
+}
+.ldrbrdspcmHeader{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1% 0;
+}
+.ldrbrdspcmHeader ul{
+    height: auto;
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ldrbrdspcmHeader ul li{
+    padding: 1%;
+}
+.ldrbrdspcmHeader ul li#ldrbrdspcmhRank,
+.ldrbrdspcmHeader ul li#ldrbrdspcmhNodes,
+.ldrbrdspcmHeader ul li#ldrbrdspcmhReferrals{
+    width: 10%;
+    text-align: center;
+}
+.ldrbrdspcmHeader ul li#ldrbrdspcmhParticipants{
+    width: 30%;
+}
+.ldrbrdspcmHeader ul li#ldrbrdspcmhPoints,
+.ldrbrdspcmHeader ul li#ldrbrdspcmhRewards{
+    width: 18%;
+}
+.ldrbrdspcmHeader ul li h6{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
 
+
+.ldrbrdspcmContent{
+    height: 40vw;
+}
+.ldrbrdspcmcEmpty{
+    height: 100%;
+    width: 100%;
+    border-radius: 0.5vw;
+    background: rgb(20, 20, 20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.ldrbrdspcmcEmpty p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}

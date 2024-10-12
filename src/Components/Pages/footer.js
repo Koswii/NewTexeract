@@ -5,6 +5,7 @@ import {
   FaTwitter,
   FaTiktok,
   FaYoutube,
+  FaFacebookF,
   FaDiscord
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -26,15 +27,16 @@ const Footer = () => {
           <div>
             <a><FaTelegramPlane className='faIcons'/></a>
             <a><FaTelegramPlane className='faIcons'/></a>
+            <a><FaFacebookF className='faIcons'/></a>
             <a><FaTwitter className='faIcons'/></a>
             <a><FaTiktok className='faIcons'/></a>
-            <a><FaDiscord className='faIcons'/></a>
           </div>
         </div>
         <div className="fcontent right">
           <div>
             <h6>DEPLOYMENT</h6>
             <ul>
+              <li><Link>TXERA Faucet</Link></li>
               <li><Link>Deploy DApp</Link></li>
               <li><Link>Mint Token</Link></li>
               <li><Link>Mint NFT</Link></li>
@@ -55,7 +57,7 @@ const Footer = () => {
           <div>
             <h6>RESOURCES</h6>
             <ul>
-              <li><Link>Leaderboards</Link></li>
+              <li><Link to='/Leaderboards'>Leaderboards</Link></li>
               <li><Link>Tokenomics</Link></li>
               <li><Link>Ecosystem</Link></li>
               <li><Link>Whitepaper</Link></li>

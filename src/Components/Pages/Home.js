@@ -67,7 +67,7 @@ const formatNumberToK = (num) => {
   return num.toString();
 };
 const NumberFormatter = ({ number }) => {
-  return <>{formatNumberToK(number)}</>;
+  return <>{(number > 0) ? <>{formatNumberToK(number)}</> : 0}</>;
 };
 const Home = () => {
   const {
@@ -105,13 +105,19 @@ const Home = () => {
     topic.Title.toLowerCase().includes(searchTerm)
   );
 
-  // console.log(learnAbout);
+  // console.log(xeraUserNumber);
 
   const handleViewCreateWallet = () => {
     setViewWalletCreate(true)
   }
   
-
+  if(
+    veiwUnderDevelopment == true
+  ){
+      window.document.body.style.overflow = 'hidden';
+  } else{
+      window.document.body.style.overflow = 'auto';
+  }
 
 
   return (
