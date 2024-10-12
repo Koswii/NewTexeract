@@ -110,6 +110,22 @@ const CreateWallet = () => {
 
     const XERACreateWalletAccountAPI = process.env.REACT_APP_XERA_USER_REGISTER_API;
 
+    const [getUserDeviceIP, setGetUserDeviceIP] = useState('')
+
+    useEffect(() => {
+        const fetchIP = async () => {
+          try {
+            const response = await axios.get('https://api.ipify.org?format=json');
+            setGetUserDeviceIP(response.data.ip);
+          } catch (error) {
+            console.error('Error fetching the IP address:', error);
+            setGetUserDeviceIP('Unable to fetch IP');
+          }
+        };
+        fetchIP();
+      }, []);
+
+
 
     const generateSeedPhrase = () => {
         let selectedWords = [];
@@ -178,6 +194,7 @@ const CreateWallet = () => {
             referral: xeraReferrer,
             privateAddress: privateKey,
             publicAddress: publicKey,
+            userIP: getUserDeviceIP,
             ...seedKeys,
         };
 
@@ -195,6 +212,7 @@ const CreateWallet = () => {
                 setCreateWalletModal(false)
             } else {
                 console.log(responseMessage.message);
+                setCreationLoader(false)
             }
     
         } catch (error) {
