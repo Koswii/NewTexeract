@@ -504,7 +504,7 @@ section.leaderboardsPageContainer.mid{
 
 
 .ldrbrdspcmContent{
-    height: 40vw;
+    height: 50vw;
 }
 .ldrbrdspcmcEmpty{
     height: 100%;
@@ -520,4 +520,34 @@ section.leaderboardsPageContainer.mid{
     font-size: 0.6vw;
     font-family: 'Lexend Peta', sans-serif;
     opacity: 50%;
+}
+
+
+
+
+
+
+
+.ldrbrdspcmPage{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: 2%;
+}
+.ldrbrdspcmPage button{
+    height: 1.5vw;
+    width: 1.5vw;
+    font-size: 0.7vw;
+    border-radius: 5px;
+    background: transparent;
+    border: solid 2px white;
+    color: white;
+    opacity: 50%;
+}
+.ldrbrdspcmPage button.active{
+    opacity: 100%;
+    background: white;
+    color: black;
 }

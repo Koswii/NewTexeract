@@ -201,7 +201,7 @@ const Leaderboards = () => {
                             </div>
                         </div>
                         <div className="lbrdpct2 referral">
-                            <h6>REFERRAL LEADERBOARD</h6>
+                            <h6>TOP 20 REFERRER</h6>
                             <div className="lbrdpct2rContainer">
                                 {(dataLoading) ?<>
                                     <div className="lbrdpct2rRefLeaderLoading">
@@ -265,7 +265,7 @@ const Leaderboards = () => {
                                         <div className="ppcmarcrlCount"></div>
                                     </div>
                                 </>:<>
-                                    {xeraReferralCounts.slice(0, 10).map((data, i) => (
+                                    {xeraReferralCounts.slice(0, 20).map((data, i) => (
                                         <div className="lbrdpct2rRefLeader" key={i}>
                                             <div className="lbrdpct2Leader">
                                                 <h5>{i+1}</h5>
@@ -310,6 +310,9 @@ const Leaderboards = () => {
                                 <p>The Ranking has not started yet</p>
                             </span>
                         </div>
+                    </div>
+                    <div className="ldrbrdspcmPage">
+                        <button>1</button>
                     </div>
                 </div>
             </section>

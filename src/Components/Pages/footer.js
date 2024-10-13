@@ -36,7 +36,7 @@ const Footer = () => {
           <div>
             <h6>DEPLOYMENT</h6>
             <ul>
-              <li><Link>TXERA Faucet</Link></li>
+              <li><Link to="/TestnetFaucet">TXERA Faucet</Link></li>
               <li><Link>Deploy DApp</Link></li>
               <li><Link>Mint Token</Link></li>
               <li><Link>Mint NFT</Link></li>

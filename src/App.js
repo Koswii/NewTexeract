@@ -13,6 +13,8 @@ import Leaderboards from './Components/Pages/Leaderboards';
 import Profile from './Components/Pages/Profile';
 
 
+import TestnetFaucet from './Components/Pages/TestnetFaucet';
+
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
@@ -38,6 +40,7 @@ function App() {
             }
 
 
+            <Route path="/TestnetFaucet" element={<TestnetFaucet/>}/>
             <Route path="*" element={<Home/>}/>
           </Routes>
           <Footer />

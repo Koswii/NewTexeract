@@ -1,0 +1,180 @@
+h1, h2, h3, h4, h5, h6, p{
+    color: white;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
+p{
+    font-size: 0.9vw;
+}
+h1{
+    font-size: 10vw;
+}
+h2{
+    font-size: 5vw;
+}
+h3{
+    font-size: 4vw;
+}
+h4{
+    font-size: 2vw;
+}
+h5{
+    font-size: 1.5vw;
+}
+h6{
+    font-size: 1vw;
+}
+
+
+.mainContainer.faucet{
+    height: auto;
+    width: 100%;
+    background: black;
+    padding-bottom: 10vw;
+}
+
+
+
+
+section.faucetPageContainer.top{
+    height: auto;
+    width: 100%;
+    position: relative;
+}
+.faucetPageContent.top{
+    height: 100vh;
+    width: 100%;
+    padding: 2vw 7%;
+    padding-top: 12vh;
+    background: 
+        linear-gradient(transparent, black 100%),
+        url('../assets/imgs/profileBG.png') no-repeat top;
+    background-size: cover;
+}
+.faucetPageContent.top h4{
+    font-family: 'Lexend Peta', sans-serif;
+}
+.fctpcTop{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1%;
+}
+.fctpct{
+    height: auto;
+    padding: 2%;
+    background: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 1vw;
+}
+.fctpct.dashboard{
+    height: 35vw;
+    width: 65%;
+}
+.fctpctTitle{
+    height: auto;
+    width: 100%;
+    margin: 1% 0;
+}
+.fctpctTitle ul{
+    height: auto;
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.fctpctTitle ul li{
+    padding: 1%;
+}
+.fctpctTitle ul li#fctpcttBlock{
+    width: 15%;
+    text-align: center;
+}
+.fctpctTitle ul li#fctpcttHash,
+.fctpctTitle ul li#fctpcttReceiver{
+    width: 33%;
+    text-align: left;
+}
+.fctpctTitle ul li#fctpcttAmount{
+    width: 15%;
+    text-align: center;
+}
+.fctpctTitle ul li h6 {
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.fctpctContainer{
+    height: 26vw;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.fctpctcEmpty{
+    height: 100%;
+    width: 100%;
+    border-radius: 0.5vw;
+    background: rgb(20, 20, 20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.fctpctcEmpty p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+}
+
+
+
+
+.fctpct.mint{
+    height: 35vw;
+    width: 30%;
+    padding: 2% 4%;
+}
+.fctpct.mint img{
+    height: 15vw;
+    display: flex;
+    margin: 15% auto;
+}
+.fctpct.mint p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+    text-align: center;
+}
+.fctpct.mint button{
+    width: 100%;
+    padding: 10px 5%;
+    text-decoration: none;
+    background: none;
+    color: white;
+    font-size: 0.7vw;
+    border: solid 2px white;
+    border-radius: 50px;
+    font-family: 'Lexend Peta', sans-serif;
+    transition: 400ms ease;
+    opacity: 50%;
+    transition: 400ms ease;
+    margin-top: 10%;
+    cursor: pointer;
+}
+.fctpct.mint button:hover{
+    opacity: 100%;
+    background: white;
+    color: black;
+    transition: 400ms ease;
+}
+
+
+
+
+
+
+

@@ -119,11 +119,10 @@ const CreateWallet = () => {
             setGetUserDeviceIP(response.data.ip);
           } catch (error) {
             console.error('Error fetching the IP address:', error);
-            setGetUserDeviceIP('Unable to fetch IP');
           }
         };
         fetchIP();
-      }, []);
+    }, []);
 
 
 
