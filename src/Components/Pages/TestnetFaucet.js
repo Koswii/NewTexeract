@@ -104,6 +104,10 @@ const TestnetFaucet = () => {
             if (responseMessage.success) {
                 setTxResponse(responseMessage.message);
                 fetchXERAAssets();
+                const timeoutId = setTimeout(() => {
+                    setTxResponse("");
+                }, 5000);
+                return () => clearTimeout(timeoutId);
             } else {
                 setTxResponse(responseMessage.message);
                 const timeoutId = setTimeout(() => {
