@@ -192,6 +192,13 @@ section.faucetPageContainer.top{
     opacity: 50%;
     text-align: center;
 }
+.fctpct.mint p#fctpctResponse{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+    text-align: center;
+    margin-top: 5%;
+}
 .fctpct.mint button#claimTXERA{
     width: 100%;
     padding: 10px 5%;

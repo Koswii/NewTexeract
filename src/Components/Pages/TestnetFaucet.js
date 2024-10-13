@@ -36,6 +36,7 @@ const TestnetFaucet = () => {
     const TXERASendReqAPI = process.env.REACT_APP_XERA_ASSET_TXERA_SEND_API;
     const [viewTXERAInfo, setViewTXERAInfo] = useState(false)
     const [txHash, setTxHash] = useState("");
+    const [txResponse, setTxResponse] = useState("");
     const TXERAInfo = viewXERATokenList?.find(token => token.token_symbol === "TXERA") || {};
     const TXERATransactions = viewXERATransactionList?.filter(sender => sender.sender_address === "TXERA Faucet") || {};
 
@@ -101,12 +102,15 @@ const TestnetFaucet = () => {
             const responseMessage = submitTXERARequest.data;
     
             if (responseMessage.success) {
-                console.log(responseMessage.message);
+                setTxResponse(responseMessage.message);
                 fetchXERAAssets();
             } else {
-                console.log(responseMessage.message);
+                setTxResponse(responseMessage.message);
+                const timeoutId = setTimeout(() => {
+                    setTxResponse("");
+                }, 5000);
+                return () => clearTimeout(timeoutId);
             }
-    
         } catch (error) {
             console.error(error);
         }
@@ -183,6 +187,7 @@ const TestnetFaucet = () => {
                                     </div>
                                 </div>
                             </div>
+                            <p id='fctpctResponse'>{txResponse}</p>
                         </div>
                     </div>
                 </div>
