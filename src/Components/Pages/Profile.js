@@ -131,6 +131,7 @@ const Profile = () => {
         dataLoading,
         windowReload,
         userLoggedData,
+        viewXERATransactionList,
         xeraUserList,
         xeraUserProfile,
         xeraUserWallets,

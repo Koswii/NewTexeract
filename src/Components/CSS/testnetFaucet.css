@@ -91,7 +91,8 @@ section.faucetPageContainer.top{
 .fctpctTitle ul li{
     padding: 1%;
 }
-.fctpctTitle ul li#fctpcttBlock{
+.fctpctTitle ul li#fctpcttBlock,
+.fctpctTitle ul li#fctpcttAmount{
     width: 15%;
     text-align: center;
 }
@@ -99,10 +100,6 @@ section.faucetPageContainer.top{
 .fctpctTitle ul li#fctpcttReceiver{
     width: 33%;
     text-align: left;
-}
-.fctpctTitle ul li#fctpcttAmount{
-    width: 15%;
-    text-align: center;
 }
 .fctpctTitle ul li h6 {
     font-size: 0.6vw;
@@ -129,6 +126,48 @@ section.faucetPageContainer.top{
     font-family: 'Lexend Peta', sans-serif;
     opacity: 50%;
 }
+.fctpctcTxDetails{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+.fctpctcTxDetails:nth-child(odd) {
+    background: rgba(80, 80, 80, 0.5);
+}
+.fctpctcTxDetails:nth-child(even) {
+    background: rgba(80, 80, 80, 0.3);
+}
+.fctpctcTxDetails ul{
+    height: auto;
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.fctpctcTxDetails ul li{
+    padding: 1%;
+}
+.fctpctcTxDetails ul li#fctpctcTxBlock,
+.fctpctcTxDetails ul li#fctpctcTxAmount{
+    width: 15%;
+    text-align: center;
+}
+.fctpctcTxDetails ul li#fctpctcTxHash,
+.fctpctcTxDetails ul li#fctpctcTxReceiver{
+    width: 33%;
+    text-align: left;
+}
+.fctpctcTxDetails p{
+    font-size: 0.6vw;
+    opacity: 50%;
+}
+
+
+
 
 
 
@@ -137,19 +176,23 @@ section.faucetPageContainer.top{
     height: 35vw;
     width: 30%;
     padding: 2% 4%;
+    position: relative;
+    overflow: hidden;
+    background: url('../assets/imgs/dashboadBG05.png') no-repeat center;
+    background-size: cover;
 }
-.fctpct.mint img{
+.fctpct.mint img#fctpctTokenLogo{
     height: 15vw;
     display: flex;
     margin: 15% auto;
 }
-.fctpct.mint p{
+.fctpct.mint p#fctpctNote{
     font-size: 0.6vw;
     font-family: 'Lexend Peta', sans-serif;
     opacity: 50%;
     text-align: center;
 }
-.fctpct.mint button{
+.fctpct.mint button#claimTXERA{
     width: 100%;
     padding: 10px 5%;
     text-decoration: none;
@@ -165,12 +208,89 @@ section.faucetPageContainer.top{
     margin-top: 10%;
     cursor: pointer;
 }
-.fctpct.mint button:hover{
+.fctpct.mint button#claimTXERA:hover{
     opacity: 100%;
     background: white;
     color: black;
     transition: 400ms ease;
 }
+
+
+.fctpct.mint button#fctpctTokenInfo{
+    position: absolute;
+    top: 1vw;
+    right: 1vw;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+.fctpctTokenDetails{
+    height: 21.5vw;
+    width: 100%;
+    position: absolute;
+    top: -21.5vw;
+    left: 0;
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 1vw;
+    transition: 400ms ease;
+    padding: 5% 10%;
+}
+.fctpctTokenDetails.active{
+    top: 0;
+}
+.fctpcttdHeader{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.fctpcttdHeader img{
+    height: 3vw;
+    margin-right: 5%;
+}
+.fctpcttdHeader h5{
+    font-size: 1.2vw;
+}
+.fctpcttdHeader h6{
+    font-size: 0.8vw;
+    color: gray;
+}
+
+.fctpcttdInfo{
+    height: auto;
+    width: 100%;
+    margin-top: 10%;
+}
+.fctpcttdInfo h6{
+    margin: 1% 0;
+}
+.fctpcttdi{
+    margin-top: 3%;
+}
+.fctpcttdi p{
+    font-size: 0.7vw;
+    opacity: 50%;
+    margin: 1% 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

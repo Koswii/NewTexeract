@@ -4,6 +4,9 @@ import axios from 'axios';
 const XERAWalletDataContext = createContext();
 
 export const XERAWalletDataProvider = ({ children }) => {
+    const XERATransactionListAPI = process.env.REACT_APP_XERA_ALL_TRANSACTIONS_LIST_API;
+    const XERAAssetTokenListAPI = process.env.REACT_APP_XERA_ASSET_TOKEN_LIST_API;
+
     const XERACreateWalletAccountAPI = process.env.REACT_APP_XERA_USER_LIST_API;
     const XERAWalletsListAPI = process.env.REACT_APP_XERA_USER_WALLETS_LIST_API;
     const XERADisplayListAPI = process.env.REACT_APP_XERA_USER_DISPLAYS_LIST_API;
@@ -15,6 +18,9 @@ export const XERAWalletDataProvider = ({ children }) => {
     const userLoggedData = JSON.parse(userLoggedStorageData);
 
     const [windowReload, setWindowReload] = useState(false);
+
+    const [viewXERATransactionList, setViewXERATransactionList] = useState([])
+    const [viewXERATokenList, setViewXERATokenList] = useState([])
 
     const [veiwUnderDevelopment, setViewUnderDevelopment] = useState(false);
     const [viewWalletCreate, setViewWalletCreate] = useState(false);
@@ -29,6 +35,25 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [xeraUserAirdrops, setXeraUserAirdrops] = useState([]);
     const [xeraUserFollowings, setXeraUserFollowings] = useState([]);
     const [dataLoading, setDataLoading] = useState(false);
+
+
+    const fetchXERAAssets = async () => {
+        // Fetch Texeract Network Transactions
+        const xeraTransactions = await axios.get(XERATransactionListAPI);
+        let sortedTransactions = xeraTransactions.data.sort((a, b) => 
+            new Date(b.transaction_date) - new Date(a.transaction_date) // Descending order
+        );
+        setViewXERATransactionList(sortedTransactions);
+
+
+        // Fetch XERA Token Asset
+        const xeraAssetTokenRes = await axios.get(XERAAssetTokenListAPI);
+        setViewXERATokenList(xeraAssetTokenRes.data);
+        
+        
+    }
+
+
 
     const fetchXERAData1 = async () => {
         setDataLoading(true)
@@ -212,6 +237,7 @@ export const XERAWalletDataProvider = ({ children }) => {
             setWindowReload(false);
         }, 5000);
 
+        fetchXERAAssets();
         fetchXERAData1();
         fetchXERAData2();
 
@@ -235,6 +261,9 @@ export const XERAWalletDataProvider = ({ children }) => {
             setViewUnderDevelopment,
             dataLoading,
             windowReload,
+            fetchXERAAssets,
+            viewXERATransactionList,
+            viewXERATokenList,
             xeraUserNumber,
             userLoggedData,
             xeraUserProfile,

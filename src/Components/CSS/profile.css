@@ -316,6 +316,7 @@ h6{
 .prfpchrcStats{
     height: 5vw;
     width: 100%;
+    padding: 3%;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -346,6 +347,8 @@ h6{
     display: flex;
     justify-content: left;
     align-items: center;
+    padding-left: 5%;
+    margin-right: 10%;
     /* position: relative; */
 }
 .prfpchrcsf div span{
