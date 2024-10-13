@@ -33,7 +33,7 @@ const TestnetFaucet = () => {
                     </div>
                     <div className="fctpct mint">
                         <img src={require('../assets/imgs/TexeractCoinRealistic7.png')} alt="" />
-                        <p>Each account is eligible to claim 2 TXERA tokens every 24 hours, exclusively for Airdrop tasks, DApp deployment, and future development testing.</p>
+                        <p>Each account is eligible to claim 1 TXERA tokens every 12 hours, exclusively for Airdrop tasks, DApp deployment, and future development testing.</p>
                         <button>CLAIM TXERA TOKEN</button>
                     </div>
                 </div>
