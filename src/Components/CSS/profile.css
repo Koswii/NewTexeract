@@ -276,6 +276,74 @@ h6{
     position: relative;
     transition: 400ms ease;
 }
+.prfpchrContents button#prfpchrcAssetBtn{
+    position: absolute;
+    top: 1vw;
+    right: 1vw;
+    font-size: 1.2vw;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+}
+.prfpchrcAssetList{
+    height: 0;
+    width: 30%;
+    position: absolute;
+    top: 2.5vw;
+    right: 1vw;
+    border-radius: 10px;
+    background: rgb(20, 20, 20);
+    padding: 2%;
+    opacity: 0;
+    transition: 400ms ease;
+}
+.prfpchrcAssetList.active{
+    height: 8vw;
+    opacity: 1;
+    transition: 400ms ease;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.prfpchrcAssetList ul{
+    height: auto;
+    width: 100%;
+    list-style: none;
+}
+.prfpchrcAssetList ul li{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 5% 10%;
+    border-radius: 5px;
+    margin: 1% 0;
+    overflow: hidden;
+}
+.prfpchrcAssetList ul li:nth-child(odd) {
+    background: rgba(80, 80, 80, 0.5);
+}
+.prfpchrcAssetList ul li:nth-child(even) {
+    background: rgba(80, 80, 80, 0.3);
+}
+.prfpchrcAssetList ul li h6{
+    margin-right: 5%;
+}
+.prfpchrcAssetList ul li img{
+    height: 1vw;
+}
+.prfpchrcAssetList ul li h6{
+    font-size: 0.7vw;
+    font-weight: 400;
+}
+
+
+
+
+
+
 .prfpchrcEmpty{
     height: 100%;
     width: 100%;
@@ -936,25 +1004,23 @@ h6{
     margin-top: 2%;
 }
 .ppcmtcTitle span{
-    text-align: center;
     padding: 0.5%;
 }
-.ppcmtcTitle span#ppcmtctBlock{
+.ppcmtcTitle span#ppcmtctExternal{
+    width: 3%;
+}
+.ppcmtcTitle span#ppcmtctBlock,
+.ppcmtcTitle span#ppcmtctInfo{
     width: 10%;
-}
-.ppcmtcTitle span#ppcmtctTxHash{
-    width: 20%;
-}
-.ppcmtcTitle span#ppcmtctSender{
-    width: 20%;
-}
-.ppcmtcTitle span#ppcmtctReceiver{
-    width: 20%;
+    text-align: center;
 }
 .ppcmtcTitle span#ppcmtctAsset{
-    width: 10%;
+    width: 15%;
+    text-align: center;
 }
-.ppcmtcTitle span#ppcmtctInfo{
+.ppcmtcTitle span#ppcmtctTxHash,
+.ppcmtcTitle span#ppcmtctSender,
+.ppcmtcTitle span#ppcmtctReceiver{
     width: 20%;
 }
 .ppcmtcTitle span h6{
@@ -963,10 +1029,66 @@ h6{
 }
 .ppcmtcTransaction{
     height: 30vw;
-    border-radius: 10px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
+.ppcmtctContents{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 0.2%;
+}
+.ppcmtctContents:nth-child(odd) {
+    background: rgba(80, 80, 80, 0.5);
+}
+.ppcmtctContents:nth-child(even) {
+    background: rgba(80, 80, 80, 0.3);
+}
+.ppcmtctContents ul{
+    height: auto;
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ppcmtctContents ul li{
+    padding: 0.5%;
+}
+.ppcmtctContents ul li#ppcmtctcExternal{
+    width: 3%;
+    text-align: center;
+}
+.ppcmtctContents ul li#ppcmtctcBlock,
+.ppcmtctContents ul li#ppcmtctcInfo{
+    width: 10%;
+    text-align: center;
+}
+.ppcmtctContents ul li#ppcmtctcAsset{
+    width: 15%;
+    text-align: center;
+}
+.ppcmtctContents ul li#ppcmtctcHash,
+.ppcmtctContents ul li#ppcmtctcSender,
+.ppcmtctContents ul li#ppcmtctcReceiver{
+    width: 20%;
+}
+.ppcmtctContents ul li p{
+    font-size: 0.7vw;
+}
+.ppcmtctContents ul li a{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: not-allowed;
+}
+
+
+
 .ppcmtctEmpty{
     height: 100%;
     width: 100%;

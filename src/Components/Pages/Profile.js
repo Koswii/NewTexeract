@@ -12,6 +12,8 @@ import {
     RiTwitterXFill,
     RiTiktokFill,
     RiTelegramFill,
+    RiArrowDownSFill,
+    RiArrowUpSFill,
 } from "react-icons/ri";
 import { 
     TbSwitchHorizontal,
@@ -26,8 +28,12 @@ import {
     TbReceiptOff,
     TbShoppingCartOff,
     TbCurrencyEthereum,
-    TbCurrencySolana,      
+    TbCurrencySolana,  
+    TbExternalLink,    
 } from "react-icons/tb";
+import { 
+    PiCoins 
+} from "react-icons/pi";
 
 const TextSlicer = ({ text = '', maxLength }) => {
     const truncatedText = text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
@@ -157,6 +163,7 @@ const Profile = () => {
     const [viewProfileOverview, setViewProfileOverview] = useState(true);
     const [viewProfileNFTs, setViewProfileNFTs] = useState(false);
     const [viewProfileOnsale, setViewProfileOnsale] = useState(false);
+    const [viewProfileTokens, setViewProfileTokens] = useState(false);
     const [viewCreateWalleteDetails, setViewCreateWalletDetails] = useState(false);
     const [viewTelegramDetails, setViewTelegramDetails] = useState(false);
     const [twitterUsername, setTwitterUsername] = useState('');
@@ -164,6 +171,22 @@ const Profile = () => {
     const [xAccountStatus, setXAccountStatus] = useState('');
     const [viewXDetails, setViewXDetails] = useState(false);
     const [viewBindDetails, setViewBindDetails] = useState(false);
+    
+    const UserTransactions = viewXERATransactionList?.filter(transactions => (transactions.sender_address ,transactions.receiver_address) === userLoggedData.myXeraAddress) || {};
+
+    // TXERA Balance Only
+    const totalSendTXERA = UserTransactions
+    .filter(tx => tx.transaction_token_id === "XERA0000000000" && tx.sender_address === userLoggedData.myXeraAddress)
+    .reduce((total, tx) => total + parseFloat(tx.transaction_amount), 0);
+
+    const totalReceiveTXERA = UserTransactions
+    .filter(tx => tx.transaction_token_id === "XERA0000000000" && tx.receiver_address === userLoggedData.myXeraAddress)
+    .reduce((total, tx) => total + parseFloat(tx.transaction_amount), 0);
+
+    const totalTXERASum = (totalReceiveTXERA - totalSendTXERA).toFixed(2);
+    
+
+    
 
 
     const handleViewProfileOverview = () => {
@@ -180,6 +203,16 @@ const Profile = () => {
         setViewProfileOverview(false);
         setViewProfileNFTs(false);
         setViewProfileOnsale(true);
+    }
+    const handleViewProfileTokens = () => {
+        setViewProfileTokens(true);
+        const timeoutId = setTimeout(() => {
+            setViewProfileTokens(false);
+        }, 10000);
+        return () => clearTimeout(timeoutId);
+    }
+    const handleHideProfileTokens = () => {
+        setViewProfileTokens(false);
     }
 
 
@@ -221,9 +254,6 @@ const Profile = () => {
             console.error(error);
         }
     };
-
-
-
     const handleAirdropTask1 = () => {
         setViewCreateWalletDetails(true)
         setViewTelegramDetails(false)
@@ -277,6 +307,10 @@ const Profile = () => {
     const handleBindWallet = () => {
         setViewConnectWallet(true);
     }
+
+
+
+
     
 
     
@@ -328,6 +362,21 @@ const Profile = () => {
                                 <button className={viewProfileOnsale ? 'active' : ''} onClick={handleViewProfileOnsale}>ON MARKET</button>
                             </div>
                             {viewProfileOverview && <div className="prfpchrContents">
+                                {!viewProfileTokens ?
+                                <button id='prfpchrcAssetBtn' onClick={handleViewProfileTokens}><PiCoins className='faIcons'/><RiArrowDownSFill className='faIcons'/></button>:
+                                <button id='prfpchrcAssetBtn' onClick={handleHideProfileTokens}><PiCoins className='faIcons'/><RiArrowUpSFill className='faIcons'/></button>}
+                                <div className={viewProfileTokens ? "prfpchrcAssetList active" : "prfpchrcAssetList"}>
+                                    <ul>
+                                        <li>
+                                            <h6>0</h6>
+                                            <img src={require('../assets/imgs/TokenLogos/xera.png')} alt="" />
+                                        </li>
+                                        <li>
+                                            <h6>{totalTXERASum}</h6>
+                                            <img src={require('../assets/imgs/TokenLogos/txera.png')} alt="" />
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div className="prfpchrcProfile">
                                     <ScrambleTextUsername targetText={`${ userLoggedData.myXeraUsername}`} scrambleSpeed={80} revealSpeed={200} />
                                     <h6>{userLoggedData.myXeraAddress}</h6>
@@ -734,7 +783,7 @@ const Profile = () => {
             </section>
             <section className="profilePageContainer mid">
                 <div className="ppContentMidTransactions">
-                    <h5>TRANSACTION HISTORY</h5>
+                    <h5>RECENT TRANSACTIONS</h5>
                     <div className="ppcmTransactionsContainer">
                         <div className="ppcmtcTitle">
                             <span id='ppcmtctBlock'><h6>BLOCK</h6></span>
@@ -742,15 +791,29 @@ const Profile = () => {
                             <span id='ppcmtctSender'><h6>SENDER</h6></span>
                             <span id='ppcmtctReceiver'><h6>RECEIVER</h6></span>
                             <span id='ppcmtctAsset'><h6>ASSET</h6></span>
-                            <span id='ppcmtctInfo'><h6>INFO</h6></span>
+                            <span id='ppcmtctInfo'><h6>COMMAND</h6></span>
+                            <span id='ppcmtctExternal'><h6></h6></span>
                         </div>
                         <div className="ppcmtcTransaction">
-                            <div className="ppcmtctEmpty">
+                            {/* <div className="ppcmtctEmpty">
                                 <span>
                                     <h6><TbReceiptOff className='faIcons'/></h6>
                                     <p>No Transaction Yet</p>
                                 </span>
-                            </div>
+                            </div> */}
+                            {UserTransactions.map((data, i) => (
+                                <div className="ppcmtctContents" key={i}>
+                                    <ul>
+                                        <li id='ppcmtctcBlock'><p>{data.transaction_block}</p></li>
+                                        <li id='ppcmtctcHash'><p><TextSlicer text={`${data.transaction_hash}`} maxLength={30} /></p></li>
+                                        <li id='ppcmtctcSender'><p><TextSlicer text={`${data.sender_address}`} maxLength={30} /></p></li>
+                                        <li id='ppcmtctcReceiver'><p><TextSlicer text={`${data.receiver_address}`} maxLength={30} /></p></li>
+                                        <li id='ppcmtctcAsset'><p>{parseFloat(data.transaction_amount).toFixed(2)} {data.transaction_token}</p></li>
+                                        <li id='ppcmtctcInfo'><p>{data.transaction_command}</p></li>
+                                        <li id='ppcmtctcExternal'><Link><TbExternalLink className='faIcons'/></Link></li>
+                                    </ul>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

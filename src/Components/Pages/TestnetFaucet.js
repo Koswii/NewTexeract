@@ -161,7 +161,7 @@ const TestnetFaucet = () => {
                                         <p>No TXERA Sent</p>
                                     </span>
                                 </div> */}
-                                {TXERATransactions.map((data, i) => (
+                                {TXERATransactions.slice(0, 20).map((data, i) => (
                                     <div className="fctpctcTxDetails" key={i}>
                                         <ul>
                                             <li id='fctpctcTxBlock'><p>{data.transaction_block}</p></li>
@@ -194,10 +194,11 @@ const TestnetFaucet = () => {
                                     <div className="fctpcttdi">
                                         <p><span>Token Name:</span> {TXERAInfo.token_name}</p>
                                         <p><span>Token Symbol:</span> {TXERAInfo.token_symbol}</p>
+                                        <p><span>Token Decimal:</span> {TXERAInfo.token_decimal}</p>
                                         <p><span>Token Owner:</span> {TXERAInfo.token_owner}</p>
                                         <p><span>Token Supply:</span> {TXERAInfo.token_supply}</p>
-                                        <p><span>Circulating Supply:</span> {TXERAInfo.token_circulating} {TXERAInfo.token_symbol}</p>
-                                        <p><span>Token Info:</span></p>
+                                        <p><span>Circulating Supply:</span> {TXERAInfo.token_circulating} {TXERAInfo.token_symbol}</p><br />
+                                        <p><span>Token Detail:</span></p>
                                         <p>{TXERAInfo.token_info}</p>
                                     </div>
                                 </div>

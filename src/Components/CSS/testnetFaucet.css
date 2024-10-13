@@ -235,17 +235,17 @@ section.faucetPageContainer.top{
     cursor: pointer;
 }
 .fctpctTokenDetails{
-    height: 21.5vw;
+    height: 35vw;
     width: 100%;
     position: absolute;
-    top: -21.5vw;
+    top: -35vw;
     left: 0;
     background: rgba(10, 10, 10, 0.9);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-radius: 1vw;
     transition: 400ms ease;
-    padding: 5% 10%;
+    padding: 10%;
 }
 .fctpctTokenDetails.active{
     top: 0;
