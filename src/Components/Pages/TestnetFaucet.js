@@ -55,6 +55,10 @@ const TestnetFaucet = () => {
 
     // Function to hash data using SHA-256
     const hashData = async (data) => {
+        if(!userLoggedData){
+            return;
+        }
+
         const encoder = new TextEncoder();
         const dataString = JSON.stringify(data); // Serialize to string
         const encodedData = encoder.encode(dataString); // Convert to Uint8Array
@@ -69,7 +73,7 @@ const TestnetFaucet = () => {
     const formRequestTXERADetails = {
         txBlock: "Genesis",
         sender: "TXERA Faucet",
-        receiver: userLoggedData.myXeraAddress,
+        receiver: userLoggedData ? userLoggedData.myXeraAddress : '',
         command: "Claim",
         amount: 1,
         token: TXERAInfo.token_symbol,
@@ -79,9 +83,16 @@ const TestnetFaucet = () => {
     };
     // Hash the data on component mount
     useEffect(() => {
+        if(!userLoggedData){
+            return;
+        }
         hashData(formRequestTXERADetails);
     }, []); // Run once on mount
     const claimTXERAToken = async () => {
+        if(!userLoggedData){
+            return;
+        }
+
         const formRequestTXERADetails = {
             txBlock: "Genesis",
             txHash: `XERA${txHash}`,
