@@ -274,11 +274,21 @@ h6{
     margin-top: 3%;
     padding: 2%;
     position: relative;
+    border-radius: 1vw;
     transition: 400ms ease;
+}
+.prfpchrContents.notAvailable{
+    background: rgb(20, 20, 20);
+}
+.prfpchrContents.transactToken{
+    background: url('../assets/imgs/dashboadBG05.png') no-repeat center;
+    background-size: cover;
+    border: solid 2px rgb(20, 20, 20);
+    overflow: hidden;
 }
 .prfpchrContents button#prfpchrcAssetBtn{
     position: absolute;
-    top: 1vw;
+    top: 1.5vw;
     right: 1vw;
     font-size: 1.2vw;
     background: none;
@@ -289,18 +299,19 @@ h6{
 }
 .prfpchrcAssetList{
     height: 0;
-    width: 30%;
+    width: 60%;
     position: absolute;
-    top: 2.5vw;
+    top: 3.5vw;
     right: 1vw;
     border-radius: 10px;
     background: rgb(20, 20, 20);
     padding: 2%;
     opacity: 0;
     transition: 400ms ease;
+    z-index: 5;
 }
 .prfpchrcAssetList.active{
-    height: 8vw;
+    height: 13vw;
     opacity: 1;
     transition: 400ms ease;
     overflow-y: scroll;
@@ -315,12 +326,14 @@ h6{
     height: auto;
     width: 100%;
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
-    padding: 5% 10%;
+    padding: 3% 5%;
     border-radius: 5px;
     margin: 1% 0;
     overflow: hidden;
+    transition: 400ms ease;
+    cursor: pointer;
 }
 .prfpchrcAssetList ul li:nth-child(odd) {
     background: rgba(80, 80, 80, 0.5);
@@ -328,27 +341,39 @@ h6{
 .prfpchrcAssetList ul li:nth-child(even) {
     background: rgba(80, 80, 80, 0.3);
 }
-.prfpchrcAssetList ul li h6{
-    margin-right: 5%;
+.prfpchrcAssetList ul li:hover{
+    background: rgba(80, 80, 80);
+    transition: 400ms ease;
 }
 .prfpchrcAssetList ul li img{
-    height: 1vw;
+    height: 2vw;
 }
 .prfpchrcAssetList ul li h6{
     font-size: 0.7vw;
     font-weight: 400;
 }
-
-
-
-
+.prfpchrcAssetList ul li p{
+    font-size: 0.6vw;
+}
+.prfpchrcAssetList ul li span#prfpchrcaLogo{
+    width: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3%;
+}
+.prfpchrcAssetList ul li span#prfpchrcaDetails{
+    width: 40%;
+}
+.prfpchrcAssetList ul li span#prfpchrcaValue{
+    width: 40%;
+    text-align: right;
+}
 
 
 .prfpchrcEmpty{
     height: 100%;
     width: 100%;
-    border-radius: 0.5vw;
-    background: rgb(20, 20, 20);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -433,6 +458,23 @@ h6{
 .prfpchrcsf div span img{
     height: 100%;
 }
+
+
+.prfpchrcToken{
+    height: 100%;
+    width: 100%;
+    padding: 5% 10%;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -49,8 +49,6 @@ export const XERAWalletDataProvider = ({ children }) => {
         // Fetch XERA Token Asset
         const xeraAssetTokenRes = await axios.get(XERAAssetTokenListAPI);
         setViewXERATokenList(xeraAssetTokenRes.data);
-        
-        
     }
 
 

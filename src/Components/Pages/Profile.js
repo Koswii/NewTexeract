@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import "../CSS/profile.css";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -29,7 +29,9 @@ import {
     TbShoppingCartOff,
     TbCurrencyEthereum,
     TbCurrencySolana,  
-    TbExternalLink,    
+    TbExternalLink,  
+    TbSendOff,
+    TbSend,  
 } from "react-icons/tb";
 import { 
     PiCoins 
@@ -138,6 +140,7 @@ const Profile = () => {
         windowReload,
         userLoggedData,
         viewXERATransactionList,
+        viewXERATokenList,
         xeraUserList,
         xeraUserProfile,
         xeraUserWallets,
@@ -164,6 +167,8 @@ const Profile = () => {
     const [viewProfileNFTs, setViewProfileNFTs] = useState(false);
     const [viewProfileOnsale, setViewProfileOnsale] = useState(false);
     const [viewProfileTokens, setViewProfileTokens] = useState(false);
+    const [tokenBalances, setTokenBalances] = useState([]);
+    const [tokenDetails, setTokenDetails] = useState([]);
     const [viewCreateWalleteDetails, setViewCreateWalletDetails] = useState(false);
     const [viewTelegramDetails, setViewTelegramDetails] = useState(false);
     const [twitterUsername, setTwitterUsername] = useState('');
@@ -174,17 +179,45 @@ const Profile = () => {
     
     const UserTransactions = viewXERATransactionList?.filter(transactions => (transactions.sender_address ,transactions.receiver_address) === userLoggedData.myXeraAddress) || {};
 
-    // TXERA Balance Only
-    const totalSendTXERA = UserTransactions
-    .filter(tx => tx.transaction_token_id === "XERA0000000000" && tx.sender_address === userLoggedData.myXeraAddress)
-    .reduce((total, tx) => total + parseFloat(tx.transaction_amount), 0);
 
-    const totalReceiveTXERA = UserTransactions
-    .filter(tx => tx.transaction_token_id === "XERA0000000000" && tx.receiver_address === userLoggedData.myXeraAddress)
-    .reduce((total, tx) => total + parseFloat(tx.transaction_amount), 0);
-
-    const totalTXERASum = (totalReceiveTXERA - totalSendTXERA).toFixed(2);
+    useEffect(() => {
+        const calculateBalances = () => {
+            const balances = viewXERATokenList.map((token) => {
+                const { token_id } = token;
+        
+                // Calculate total sent for the current token
+                const totalSend = UserTransactions
+                .filter((tx) => 
+                    tx.transaction_token_id === token_id && 
+                    tx.sender_address === userLoggedData.myXeraAddress
+                )
+                .reduce((total, tx) => total + parseFloat(tx.transaction_amount), 0);
+        
+                // Calculate total received for the current token
+                const totalReceive = UserTransactions
+                .filter((tx) => 
+                    tx.transaction_token_id === token_id && 
+                    tx.receiver_address === userLoggedData.myXeraAddress
+                )
+                .reduce((total, tx) => total + parseFloat(tx.transaction_amount), 0);
+        
+                // Calculate net balance
+                const totalBalance = (totalReceive - totalSend).toFixed(2);
+        
+                return { ...token, totalBalance };
+            });
+        
+            // Only update state if balances have changed
+            setTokenBalances((prevBalances) => {
+                const hasChanged = JSON.stringify(prevBalances) !== JSON.stringify(balances);
+                return hasChanged ? balances : prevBalances;
+            });
+        };
     
+        calculateBalances();
+    }, [viewXERATokenList, UserTransactions, userLoggedData]);
+    
+
 
     
 
@@ -215,12 +248,9 @@ const Profile = () => {
         setViewProfileTokens(false);
     }
 
-
-
     const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userLoggedData.myXeraUsername)
     const userTotalFollowers = xeraUserFollowings.filter(user => user.following === userLoggedData.myXeraUsername)
     
-
     const submitXUsernameDetails = async () => {
         setXVerifyingLoader(true);
         if (!twitterUsername) {
@@ -367,14 +397,21 @@ const Profile = () => {
                                 <button id='prfpchrcAssetBtn' onClick={handleHideProfileTokens}><PiCoins className='faIcons'/><RiArrowUpSFill className='faIcons'/></button>}
                                 <div className={viewProfileTokens ? "prfpchrcAssetList active" : "prfpchrcAssetList"}>
                                     <ul>
-                                        <li>
-                                            <h6>0</h6>
-                                            <img src={require('../assets/imgs/TokenLogos/xera.png')} alt="" />
-                                        </li>
-                                        <li>
-                                            <h6>{totalTXERASum}</h6>
-                                            <img src={require('../assets/imgs/TokenLogos/txera.png')} alt="" />
-                                        </li>
+                                        {tokenBalances.map((data, i) => (
+                                            <li key={i}>
+                                                <span id='prfpchrcaLogo'>
+                                                    <img src={require(`../assets/imgs/TokenLogos/${data.token_logo}`)} alt="" />
+                                                </span>
+                                                <span id='prfpchrcaDetails'>
+                                                    <h6>{data.token_name}</h6>
+                                                    <p>{data.totalBalance} {data.token_symbol}</p>
+                                                </span>
+                                                <span id="prfpchrcaValue">
+                                                    <h6>$ {data.token_price}</h6>
+                                                    <p>- %</p>
+                                                </span>
+                                            </li>
+                                        ))}
                                     </ul>
                                 </div>
                                 <div className="prfpchrcProfile">
@@ -414,7 +451,7 @@ const Profile = () => {
                                     </div>
                                 </div>
                             </div>}
-                            {viewProfileNFTs && <div className="prfpchrContents">
+                            {viewProfileNFTs && <div className="prfpchrContents notAvailable">
                                 <div className="prfpchrcEmpty">
                                     <span>
                                         <h6><TbCube className='faIcons'/></h6>
@@ -422,7 +459,7 @@ const Profile = () => {
                                     </span>
                                 </div>
                             </div>}
-                            {viewProfileOnsale && <div className="prfpchrContents">
+                            {viewProfileOnsale && <div className="prfpchrContents notAvailable">
                                 <div className="prfpchrcEmpty">
                                     <span>
                                         <h6><TbShoppingCartOff className='faIcons'/></h6>
@@ -430,6 +467,11 @@ const Profile = () => {
                                     </span>
                                 </div>
                             </div>}
+                            {/* <div className="prfpchrContents transactToken">
+                                <div className="prfpchrcToken">
+                                    
+                                </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

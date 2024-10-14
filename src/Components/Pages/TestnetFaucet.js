@@ -197,7 +197,7 @@ const TestnetFaucet = () => {
                                         <p><span>Token Decimal:</span> {TXERAInfo.token_decimal}</p>
                                         <p><span>Token Owner:</span> {TXERAInfo.token_owner}</p>
                                         <p><span>Token Supply:</span> {TXERAInfo.token_supply}</p>
-                                        <p><span>Circulating Supply:</span> {TXERAInfo.token_circulating} {TXERAInfo.token_symbol}</p><br />
+                                        <p><span>Token Claimed:</span> {TXERAInfo.token_circulating} {TXERAInfo.token_symbol}</p><br />
                                         <p><span>Token Detail:</span></p>
                                         <p>{TXERAInfo.token_info}</p>
                                     </div>
