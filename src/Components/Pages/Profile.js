@@ -468,6 +468,29 @@ const Profile = () => {
                                 </div>
                             </div>}
                             {/* <div className="prfpchrContents transactToken">
+                                {!viewProfileTokens ?
+                                    <button id='prfpchrcAssetBtn' onClick={handleViewProfileTokens}><PiCoins className='faIcons'/><RiArrowDownSFill className='faIcons'/></button>:
+                                    <button id='prfpchrcAssetBtn' onClick={handleHideProfileTokens}><PiCoins className='faIcons'/><RiArrowUpSFill className='faIcons'/></button>
+                                }
+                                <div className={viewProfileTokens ? "prfpchrcAssetList active" : "prfpchrcAssetList"}>
+                                    <ul>
+                                        {tokenBalances.map((data, i) => (
+                                            <li key={i}>
+                                                <span id='prfpchrcaLogo'>
+                                                    <img src={require(`../assets/imgs/TokenLogos/${data.token_logo}`)} alt="" />
+                                                </span>
+                                                <span id='prfpchrcaDetails'>
+                                                    <h6>{data.token_name}</h6>
+                                                    <p>{data.totalBalance} {data.token_symbol}</p>
+                                                </span>
+                                                <span id="prfpchrcaValue">
+                                                    <h6>$ {data.token_price}</h6>
+                                                    <p>- %</p>
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                                 <div className="prfpchrcToken">
                                     
                                 </div>
@@ -837,25 +860,28 @@ const Profile = () => {
                             <span id='ppcmtctExternal'><h6></h6></span>
                         </div>
                         <div className="ppcmtcTransaction">
-                            {/* <div className="ppcmtctEmpty">
-                                <span>
-                                    <h6><TbReceiptOff className='faIcons'/></h6>
-                                    <p>No Transaction Yet</p>
-                                </span>
-                            </div> */}
-                            {UserTransactions.map((data, i) => (
-                                <div className="ppcmtctContents" key={i}>
-                                    <ul>
-                                        <li id='ppcmtctcBlock'><p>{data.transaction_block}</p></li>
-                                        <li id='ppcmtctcHash'><p><TextSlicer text={`${data.transaction_hash}`} maxLength={30} /></p></li>
-                                        <li id='ppcmtctcSender'><p><TextSlicer text={`${data.sender_address}`} maxLength={30} /></p></li>
-                                        <li id='ppcmtctcReceiver'><p><TextSlicer text={`${data.receiver_address}`} maxLength={30} /></p></li>
-                                        <li id='ppcmtctcAsset'><p>{parseFloat(data.transaction_amount).toFixed(2)} {data.transaction_token}</p></li>
-                                        <li id='ppcmtctcInfo'><p>{data.transaction_command}</p></li>
-                                        <li id='ppcmtctcExternal'><Link><TbExternalLink className='faIcons'/></Link></li>
-                                    </ul>
+                            {(UserTransactions.length === 0) ? <>
+                                <div className="ppcmtctEmpty">
+                                    <span>
+                                        <h6><TbReceiptOff className='faIcons'/></h6>
+                                        <p>No Transaction Yet</p>
+                                    </span>
                                 </div>
-                            ))}
+                            </>:<>
+                                {UserTransactions.map((data, i) => (
+                                    <div className="ppcmtctContents" key={i}>
+                                        <ul>
+                                            <li id='ppcmtctcBlock'><p>{data.transaction_block}</p></li>
+                                            <li id='ppcmtctcHash'><p><TextSlicer text={`${data.transaction_hash}`} maxLength={30} /></p></li>
+                                            <li id='ppcmtctcSender'><p><TextSlicer text={`${data.sender_address}`} maxLength={30} /></p></li>
+                                            <li id='ppcmtctcReceiver'><p><TextSlicer text={`${data.receiver_address}`} maxLength={30} /></p></li>
+                                            <li id='ppcmtctcAsset'><p>{parseFloat(data.transaction_amount).toFixed(2)} {data.transaction_token}</p></li>
+                                            <li id='ppcmtctcInfo'><p>{data.transaction_command}</p></li>
+                                            <li id='ppcmtctcExternal'><Link><TbExternalLink className='faIcons'/></Link></li>
+                                        </ul>
+                                    </div>
+                                ))}
+                            </>}
                         </div>
                     </div>
                 </div>

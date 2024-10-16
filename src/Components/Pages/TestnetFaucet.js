@@ -94,7 +94,6 @@ const TestnetFaucet = () => {
         }
 
         const formRequestTXERADetails = {
-            txBlock: "Genesis",
             txHash: `XERA${txHash}`,
             sender: "TXERA Faucet",
             receiver: userLoggedData.myXeraAddress,
@@ -102,7 +101,6 @@ const TestnetFaucet = () => {
             amount: 1,
             token: TXERAInfo.token_symbol,
             tokenId: TXERAInfo.token_id,
-            validator: "XERA Validator",
         };
 
         // const jsonReqTXERADetails = JSON.stringify(formRequestTXERADetails);
@@ -156,21 +154,24 @@ const TestnetFaucet = () => {
                                 </ul>
                             </div>
                             <div className="fctpctContainer">
-                                {/* <div className="fctpctcEmpty">
-                                    <span>
-                                        <p>No TXERA Sent</p>
-                                    </span>
-                                </div> */}
-                                {TXERATransactions.slice(0, 20).map((data, i) => (
-                                    <div className="fctpctcTxDetails" key={i}>
-                                        <ul>
-                                            <li id='fctpctcTxBlock'><p>{data.transaction_block}</p></li>
-                                            <li id='fctpctcTxHash'><p><TextSlicer text={`${data.transaction_hash}`} maxLength={40} /></p></li>
-                                            <li id='fctpctcTxReceiver'><p>{data.receiver_address}</p></li>
-                                            <li id='fctpctcTxAmount'><p>{data.transaction_amount} {data.transaction_token}</p></li>
-                                        </ul>
+                                {(TXERATransactions.length === 0) ? <>
+                                    <div className="fctpctcEmpty">
+                                        <span>
+                                            <p>No TXERA Sent</p>
+                                        </span>
                                     </div>
-                                ))}
+                                </>:<>
+                                    {TXERATransactions.slice(0, 20).map((data, i) => (
+                                        <div className="fctpctcTxDetails" key={i}>
+                                            <ul>
+                                                <li id='fctpctcTxBlock'><p>{data.transaction_block}</p></li>
+                                                <li id='fctpctcTxHash'><p><TextSlicer text={`${data.transaction_hash}`} maxLength={40} /></p></li>
+                                                <li id='fctpctcTxReceiver'><p>{data.receiver_address}</p></li>
+                                                <li id='fctpctcTxAmount'><p>{data.transaction_amount} {data.transaction_token}</p></li>
+                                            </ul>
+                                        </div>
+                                    ))}
+                                </>}
                             </div>
                         </div>
                         <div className="fctpct mint">
