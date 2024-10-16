@@ -94,6 +94,7 @@ const TestnetFaucet = () => {
         }
 
         const formRequestTXERADetails = {
+            username: userLoggedData.myXeraUsername,
             txHash: `XERA${txHash}`,
             sender: "TXERA Faucet",
             receiver: userLoggedData.myXeraAddress,
