@@ -112,6 +112,7 @@ const TestnetFaucet = () => {
     
             if (responseMessage.success) {
                 setTxResponse(responseMessage.message);
+                hashData(formRequestTXERADetails);
                 fetchXERAAssets();
                 const timeoutId = setTimeout(() => {
                     setTxResponse("");
