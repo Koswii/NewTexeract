@@ -117,13 +117,13 @@ const TestnetFaucet = () => {
                 fetchXERAAssets();
                 const timeoutId = setTimeout(() => {
                     setTxResponse("");
-                }, 5000);
+                }, 10000);
                 return () => clearTimeout(timeoutId);
             } else {
                 setTxResponse(responseMessage.message);
                 const timeoutId = setTimeout(() => {
                     setTxResponse("");
-                }, 5000);
+                }, 10000);
                 return () => clearTimeout(timeoutId);
             }
         } catch (error) {
