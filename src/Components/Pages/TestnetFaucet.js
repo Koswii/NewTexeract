@@ -111,19 +111,21 @@ const TestnetFaucet = () => {
             const submitTXERARequest = await axios.post(TXERASendReqAPI, formRequestTXERADetails);
             const responseMessage = submitTXERARequest.data;
     
-            if (responseMessage.success) {
+            if (responseMessage.success === 'true') {
                 setTxResponse(responseMessage.message);
                 hashData(formRequestTXERADetails);
                 fetchXERAAssets();
+
                 const timeoutId = setTimeout(() => {
                     setTxResponse("");
-                }, 10000);
+                }, 8000);
                 return () => clearTimeout(timeoutId);
+
             } else {
                 setTxResponse(responseMessage.message);
                 const timeoutId = setTimeout(() => {
                     setTxResponse("");
-                }, 10000);
+                }, 8000);
                 return () => clearTimeout(timeoutId);
             }
         } catch (error) {
