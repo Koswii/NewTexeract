@@ -14,6 +14,7 @@ import {
     RiTelegramFill,
     RiArrowDownSFill,
     RiArrowUpSFill,
+    RiExchange2Line 
 } from "react-icons/ri";
 import { 
     TbSwitchHorizontal,
@@ -32,6 +33,7 @@ import {
     TbExternalLink,  
     TbSendOff,
     TbSend,  
+    TbDeviceIpadDollar,
 } from "react-icons/tb";
 import { 
     PiCoins 
@@ -346,11 +348,11 @@ const Profile = () => {
     
     return (
         <div className='mainContainer profile'>
-            {windowReload && <div className="profileReload">
+            <div className={windowReload ? "profileReload active" :  "profileReload disable"}>
                 <div>
                     <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
                 </div>
-            </div>}
+            </div>
             <section className="profilePageContainer top">
                 <div className="profilePageContent left">
                     <div className="prfpclHeader">
@@ -419,8 +421,13 @@ const Profile = () => {
                                     <h6>{userLoggedData.myXeraAddress}</h6>
                                 </div>
                                 <div className="prfpchrcBalance">
-                                    <h3>0 XERA</h3>
                                     <p>BALANCE</p>
+                                    <h3>0.00 XERA</h3>
+                                    <div className="prfpchrcbFunctions">
+                                        <button className='disabled'><TbDeviceIpadDollar className='faIcons'/> BUY</button>
+                                        <button className='disabled'><TbSend className='faIcons'/> SEND</button>
+                                        <button className='disabled'><TbExchange className='faIcons'/> SWAP</button>
+                                    </div>
                                 </div>
                                 <div className="prfpchrcStats">
                                     <div className="prfpchrcs Followers">
@@ -467,34 +474,6 @@ const Profile = () => {
                                     </span>
                                 </div>
                             </div>}
-                            {/* <div className="prfpchrContents transactToken">
-                                {!viewProfileTokens ?
-                                    <button id='prfpchrcAssetBtn' onClick={handleViewProfileTokens}><PiCoins className='faIcons'/><RiArrowDownSFill className='faIcons'/></button>:
-                                    <button id='prfpchrcAssetBtn' onClick={handleHideProfileTokens}><PiCoins className='faIcons'/><RiArrowUpSFill className='faIcons'/></button>
-                                }
-                                <div className={viewProfileTokens ? "prfpchrcAssetList active" : "prfpchrcAssetList"}>
-                                    <ul>
-                                        {tokenBalances.map((data, i) => (
-                                            <li key={i}>
-                                                <span id='prfpchrcaLogo'>
-                                                    <img src={require(`../assets/imgs/TokenLogos/${data.token_logo}`)} alt="" />
-                                                </span>
-                                                <span id='prfpchrcaDetails'>
-                                                    <h6>{data.token_name}</h6>
-                                                    <p>{data.totalBalance} {data.token_symbol}</p>
-                                                </span>
-                                                <span id="prfpchrcaValue">
-                                                    <h6>$ {data.token_price}</h6>
-                                                    <p>- %</p>
-                                                </span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <div className="prfpchrcToken">
-                                    
-                                </div>
-                            </div> */}
                         </div>
                     </div>
                 </div>

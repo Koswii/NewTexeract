@@ -136,11 +136,11 @@ const TestnetFaucet = () => {
 
     return (
         <div className='mainContainer faucet'>
-            {windowReload && <div className="profileReload">
+            <div className={windowReload ? "profileReload active" :  "profileReload disable"}>
                 <div>
                     <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
                 </div>
-            </div>}
+            </div>
             <section className="faucetPageContainer top">
                 <div className="faucetPageContent top">
                     <h4>TXERA FAUCET</h4>

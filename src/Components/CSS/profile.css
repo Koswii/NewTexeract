@@ -35,18 +35,28 @@ h6{
 }
 
 
+
+
 .profileReload{
     height: 100vh;
     width: 100%;
     background: black;
     position: fixed;
-    top: 0;
-    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 5;
+    z-index: 999;
     text-align: center;
+}
+.profileReload.active{
+    top: 0;
+    left: 0;
+    transition: 600ms ease;
+}
+.profileReload.disable{
+    top: -100%;
+    left: 0;
+    transition: 800ms ease;
 }
 .profileReload img{
     height: 10vw;
@@ -256,14 +266,13 @@ h6{
     font-family: 'Lexend Peta', sans-serif;
     opacity: 30%;
     transition: 400ms ease;
-    cursor: not-allowed;
+    cursor: pointer;
 }
 .prfpchrNav button.active{
     opacity: 100%;
     transition: 400ms ease;
     background: white;
     color: black;
-    cursor: pointer;
 }
 
 
@@ -280,11 +289,14 @@ h6{
 .prfpchrContents.notAvailable{
     background: rgb(20, 20, 20);
 }
+
+
 .prfpchrContents.transactToken{
     background: url('../assets/imgs/dashboadBG05.png') no-repeat center;
     background-size: cover;
     border: solid 2px rgb(20, 20, 20);
     overflow: hidden;
+    padding: 0;
 }
 .prfpchrContents button#prfpchrcAssetBtn{
     position: absolute;
@@ -308,7 +320,6 @@ h6{
     padding: 2%;
     opacity: 0;
     transition: 400ms ease;
-    z-index: 5;
 }
 .prfpchrcAssetList.active{
     height: 13vw;
@@ -316,6 +327,7 @@ h6{
     transition: 400ms ease;
     overflow-y: scroll;
     overflow-x: hidden;
+    z-index: 5;
 }
 .prfpchrcAssetList ul{
     height: auto;
@@ -398,13 +410,55 @@ h6{
     color: gray;
 }
 .prfpchrcBalance{
-    height: 6vw;
+    height: auto;
     width: 100%;
-    margin: 5% 0;
+    padding-top: 5%;
+    padding-bottom: 20%;
+    position: relative;
+}
+.prfpchrcBalance h3{
+    font-size: 2.5vw;
 }
 .prfpchrcBalance p{
-    font-size: 0.7vw;
+    font-size: 0.6vw;
     font-family: 'Lexend Peta', sans-serif;
+    color: gray;
+}
+.prfpchrcbFunctions{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 3%;
+}
+.prfpchrcbFunctions button{
+    width: 20%;
+    padding: 1.5% 2%;
+    margin-right: 1%;
+    border: solid 2px white;
+    border-radius: 10px;
+    outline: none;
+    background: none;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+    transition: 400ms ease;
+    cursor: not-allowed;
+}
+.prfpchrcbFunctions button .faIcons{
+    margin-right: 10%;
+}
+.prfpchrcbFunctions button.active:hover{
+    background: white;
+    color: black;
+    opacity: 100%;
+    transition: 400ms ease;
 }
 .prfpchrcStats{
     height: 5vw;
@@ -458,20 +512,6 @@ h6{
 .prfpchrcsf div span img{
     height: 100%;
 }
-
-
-.prfpchrcToken{
-    height: 100%;
-    width: 100%;
-    padding: 5% 10%;
-}
-
-
-
-
-
-
-
 
 
 

@@ -54,11 +54,11 @@ const Leaderboards = () => {
 
     return (
         <div className='mainContainer leaderboards'>
-            {windowReload && <div className="profileReload">
+            <div className={windowReload ? "profileReload active" :  "profileReload disable"}>
                 <div>
                     <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
                 </div>
-            </div>}
+            </div>
             <section className="leaderboardsPageContainer top">
                 <div className="leaderboardsPageContent top">
                     <h4>LEADERBOARDS</h4>

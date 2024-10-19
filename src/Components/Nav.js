@@ -154,7 +154,7 @@ const Nav = () => {
           <div className="navContent left">
               <Link to="/">
                 <img src={require('./assets/imgs/TexeractLogoWhite.png')} alt="" />
-                {/* <h4>TEXERACT NETWORK</h4> */}
+                {/* <h4>TEXERACT</h4> */}
               </Link>
           </div>
           <div className="navContent right">
