@@ -678,7 +678,7 @@ const Profile = () => {
                                     <p>TASK 6</p>
                                 </div>
                                 <div className="ppcmalccTask">
-                                    <h6><span>1,250 XP</span><br />SEND TXERA<br />EVERY 6 HOURS</h6>
+                                    <h6><span>1,250 XP</span><br />SEND TXERA<br />EVERY 12 HOURS</h6>
                                     <button disabled>CLAIM</button>
                                 </div>
                             </div>
@@ -687,7 +687,7 @@ const Profile = () => {
                                     <p>TASK 7</p>
                                 </div>
                                 <div className="ppcmalccTask">
-                                    <h6><span>1,250 XP</span><br />SWAP TXERA/TETH<br />EVERY 6 HOURS</h6>
+                                    <h6><span>1,250 XP</span><br />SWAP TXERA/TETH<br />EVERY 12 HOURS</h6>
                                     <button disabled>CLAIM</button>
                                 </div>
                             </div>
@@ -696,7 +696,7 @@ const Profile = () => {
                                     <p>TASK 8</p>
                                 </div>
                                 <div className="ppcmalccTask">
-                                    <h6><span>1,250 XP</span><br />SWAP TXERA/TSOL<br />EVERY 6 HOURS</h6>
+                                    <h6><span>1,250 XP</span><br />SWAP TXERA/TSOL<br />EVERY 12 HOURS</h6>
                                     <button disabled>CLAIM</button>
                                 </div>
                             </div>
