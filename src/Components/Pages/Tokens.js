@@ -66,6 +66,15 @@ const Tokens = () => {
                     </div>
                 </div>
             </section>
+            <section className='tokensPageContainer mid'>
+                <div className="tokensPageContent mid">
+                    <div className="tknspcmContent">
+                        <div className="tknspcmc left">
+
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     )
 }

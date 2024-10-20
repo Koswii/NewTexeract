@@ -43,7 +43,7 @@ section.faucetPageContainer.top{
     position: relative;
 }
 .faucetPageContent.top{
-    height: 100vh;
+    height: auto;
     width: 100%;
     padding: 2vw 7%;
     padding-top: 12vh;
@@ -81,7 +81,7 @@ section.faucetPageContainer.top{
     border-radius: 1vw;
 }
 .fctpct.dashboard{
-    height: 35vw;
+    height: 32vw;
     width: 65%;
 }
 .fctpctTitle{
@@ -115,7 +115,7 @@ section.faucetPageContainer.top{
     font-family: 'Lexend Peta', sans-serif;
 }
 .fctpctContainer{
-    height: 26vw;
+    height: 23.5vw;
     width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -182,7 +182,7 @@ section.faucetPageContainer.top{
 
 
 .fctpct.mint{
-    height: 35vw;
+    height: 32vw;
     width: 30%;
     padding: 2% 4%;
     position: relative;
@@ -193,7 +193,7 @@ section.faucetPageContainer.top{
 .fctpct.mint img#fctpctTokenLogo{
     height: 15vw;
     display: flex;
-    margin: 15% auto;
+    margin: 7% auto;
 }
 .fctpct.mint p#fctpctNote{
     font-size: 0.6vw;
@@ -249,10 +249,10 @@ section.faucetPageContainer.top{
     cursor: pointer;
 }
 .fctpctTokenDetails{
-    height: 35vw;
+    height: 32vw;
     width: 100%;
     position: absolute;
-    top: -35vw;
+    top: -32vw;
     left: 0;
     background: rgba(10, 10, 10, 0.9);
     backdrop-filter: blur(15px);

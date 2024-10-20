@@ -72,12 +72,13 @@ section.leaderboardsPageContainer.top{
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: top;
     margin-top: 2%;
 }
 .tknspctc{
     height: auto;
     padding: 2%;
+    padding-bottom: 0;
 }
 .tknspctc.left{
     height: auto;
@@ -180,7 +181,7 @@ section.leaderboardsPageContainer.top{
 
 
 .tknspctc.right{
-    height: 35vw;
+    height: 32vw;
     width: 30%;
     padding: 2% 4%;
     position: relative;
@@ -191,7 +192,7 @@ section.leaderboardsPageContainer.top{
 .tknspctc.right img#tknspctcrrToken{
     height: 15vw;
     display: flex;
-    margin: 12% auto;
+    margin: 7% auto;
 }
 .tknspctc.right h5{
     text-align: center;
@@ -209,3 +210,28 @@ section.leaderboardsPageContainer.top{
 
 
 
+
+
+
+
+section.leaderboardsPageContainer.mid{
+    height: auto;
+    width: 100%;
+    position: relative;
+}
+.tokensPageContent.mid{
+    height: auto;
+    width: 100%;
+    padding: 0 7%;
+}
+.tknspcmContent{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+}
+.tknspcmc.left{
+    height: auto;
+    width: 65%;
+}
