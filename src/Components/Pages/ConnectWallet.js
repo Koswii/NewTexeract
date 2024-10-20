@@ -201,6 +201,7 @@ const ConnectWallet = () => {
     const submitBindWalletDetails = async (walletDetails) => {
 
         const formBindWalletDetails = {
+            xeraUsername: userLoggedData.myXeraUsername,
             xeraWallet: userLoggedData.myXeraAddress,
             ethWallet: walletDetails.ethWallet || ethBasedWallet,
             solWallet: walletDetails.solWallet || solBasedWallet,
