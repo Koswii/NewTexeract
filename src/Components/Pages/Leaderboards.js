@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "../CSS/leaderboards.css";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -30,27 +30,45 @@ const TextFormatter = ({ text = '' }) => {
 
     return <>{formattedText}</>;
 };
-const formatNumberToK = (num) => {
+const formatNumber = (num) => {
     if (typeof num !== 'number' || isNaN(num)) {
       return '';
     }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(num % 1000 === 0 ? 0 : 1) + 'K';
+    if (num >= 1_000_000) {
+      return (num / 1_000_000).toFixed(num % 1_000_000 === 0 ? 0 : 1) + 'M';
+    } else if (num >= 1_000) {
+      return (num / 1_000).toFixed(num % 1_000 === 0 ? 0 : 1) + 'K';
     }
     return num.toString();
 };
 const NumberFormatter = ({ number }) => {
-    return <>{(number > 0) ? <>{formatNumberToK(number)}</> : 0}</>;
+    return <>{number > 0 ? formatNumber(number) : 0}</>;
 };
 const Leaderboards = () => {
     const {
         dataLoading,
-        xeraUserNumber,
         windowReload,
         userLoggedData,
         xeraReferralCounts,
+        processedData
     } = XERAWalletData();
-    
+    const [currentPage, setCurrentPage] = useState(1);
+    const dataPerPage = 20; // Display 25 data per page
+    const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername))
+    const myCurrentRank = myCurrentData?.rank
+
+
+    // Calculate the index range for the current page
+    const indexOfLastItem = currentPage * dataPerPage;
+    const indexOfFirstItem = indexOfLastItem - dataPerPage;
+    const currentData = processedData.slice(indexOfFirstItem, indexOfLastItem);
+    // Calculate total number of pages
+    const totalPages = Math.ceil(processedData.length / dataPerPage);
+    // Handle page change
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
 
     return (
         <div className='mainContainer leaderboards'>
@@ -65,14 +83,16 @@ const Leaderboards = () => {
                     <div className="lbrdpcTop1">
                         <div className="lbrdpct participants">
                             <span>
-                                <h3><NumberFormatter number={xeraUserNumber}/></h3>
+                                <h3><NumberFormatter number={processedData.length}/></h3>
                                 <h2><MdGroup className='faIcons'/></h2>
                             </span>
                             <p>Total Participants</p>
                         </div>
                         <div className="lbrdpct user">
                             <span>
-                                <h3>{userLoggedData ? '0' : '-'}</h3>
+                                <h3>{userLoggedData ? 
+                                    <>{!dataLoading ? myCurrentRank : '-'}</> : '-'}
+                                </h3>
                                 <h2><MdLeaderboard className='faIcons'/></h2>
                             </span>
                             <p>My Current Rank</p>
@@ -95,111 +115,117 @@ const Leaderboards = () => {
                         </div>
                     </div>
                     <div className="lbrdpcTop2">
-                        <div className="lbrdpct2 top1">
-                            <div className='lbrdpct2t1Header'>
-                                <div className='lbrdpct2t1hNFT'>
-                                    <span>
-                                        <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-                                    </span>
-                                    <p>1</p>
+                        {processedData.slice(0, 1).map((data, i) => (
+                            <div className="lbrdpct2 top1" key={i}>
+                                <div className='lbrdpct2t1Header'>
+                                    <div className='lbrdpct2t1hNFT'>
+                                        <span>
+                                            <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                        </span>
+                                        <p>{data.rank}</p>
+                                    </div>
+                                    <div className='lbrdpct2t1hName'>
+                                        <h5><TextFormatter text={`${data.username}`} /></h5>
+                                        <p><TextSlicer text={`${data.xera_wallet}`} maxLength={25} /></p>
+                                    </div>
                                 </div>
-                                <div className='lbrdpct2t1hName'>
-                                    <h5>None</h5>
-                                    <p>XERA---</p>
+                                <div className="lbrdpct2t1Contents">
+                                    <div>
+                                        <h4>0</h4>
+                                        <p>NODES</p>
+                                    </div>
+                                    <div>
+                                        <h4><NumberFormatter number={data.referralTaskCount}/></h4>
+                                        <p>REFERRALS</p>
+                                    </div>
+                                    <div>
+                                        <h4><NumberFormatter number={data.totalPoints}/></h4>
+                                        <p>XP POINTS</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="lbrdpct2t1Contents">
-                                <div>
-                                    <h4>0</h4>
-                                    <p>NODES</p>
-                                </div>
-                                <div>
-                                    <h4>0</h4>
-                                    <p>POINTS</p>
-                                </div>
-                                <div>
-                                    <h4>0</h4>
-                                    <p>REFERRALS</p>
-                                </div>
-                            </div>
-                            <div className="lbrdpct2t1Rewards">
-                                <p>REWARDS</p>
-                                <div>
-                                    <h5>0</h5>
-                                    <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="lbrdpct2 top2">
-                            <div className='lbrdpct2ttHeader'>
-                                <div className='lbrdpct2tthNFT'>
-                                    <span>
-                                        <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-                                    </span>
-                                    <p>2</p>
-                                </div>
-                                <div className='lbrdpct2tthName'>
-                                    <h5>None</h5>
-                                    <p>XERA---</p>
+                                <div className="lbrdpct2t1Rewards">
+                                    <p>REWARDS</p>
+                                    <div>
+                                        <h5>0</h5>
+                                        <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
+                                    </div>
                                 </div>
                             </div>
-                            <div className="lbrdpct2ttContents">
-                                <div>
-                                    <h5>0</h5>
-                                    <p>NODES</p>
+                        ))}
+                        {processedData.slice(1, 2).map((data, i) => (
+                            <div className="lbrdpct2 top2" key={i}>
+                                <div className='lbrdpct2ttHeader'>
+                                    <div className='lbrdpct2tthNFT'>
+                                        <span>
+                                            <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                        </span>
+                                        <p>{data.rank}</p>
+                                    </div>
+                                    <div className='lbrdpct2tthName'>
+                                        <h5><TextFormatter text={`${data.username}`} /></h5>
+                                        <p><TextSlicer text={`${data.xera_wallet}`} maxLength={15} /></p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h5>0</h5>
-                                    <p>POINTS</p>
+                                <div className="lbrdpct2ttContents">
+                                    <div>
+                                        <h5>0</h5>
+                                        <p>NODES</p>
+                                    </div>
+                                    <div>
+                                        <h5><NumberFormatter number={data.referralTaskCount}/></h5>
+                                        <p>REFERRALS</p>
+                                    </div>
+                                    <div>
+                                        <h5><NumberFormatter number={data.totalPoints}/></h5>
+                                        <p>XP POINTS</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h5>0</h5>
-                                    <p>REFERRALS</p>
-                                </div>
-                            </div>
-                            <div className="lbrdpct2ttRewards">
-                                <p>REWARDS</p>
-                                <div>
-                                    <h5>0</h5>
-                                    <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="lbrdpct2 top3">
-                            <div className='lbrdpct2ttHeader'>
-                                <div className='lbrdpct2tthNFT'>
-                                    <span>
-                                        <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-                                    </span>
-                                    <p>3</p>
-                                </div>
-                                <div className='lbrdpct2tthName'>
-                                    <h5>None</h5>
-                                    <p>XERA---</p>
-                                </div>
-                            </div>
-                            <div className="lbrdpct2ttContents">
-                                <div>
-                                    <h5>0</h5>
-                                    <p>NODES</p>
-                                </div>
-                                <div>
-                                    <h5>0</h5>
-                                    <p>POINTS</p>
-                                </div>
-                                <div>
-                                    <h5>0</h5>
-                                    <p>REFERRALS</p>
+                                <div className="lbrdpct2ttRewards">
+                                    <p>REWARDS</p>
+                                    <div>
+                                        <h5>0</h5>
+                                        <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
+                                    </div>
                                 </div>
                             </div>
-                            <div className="lbrdpct2ttRewards">
-                                <p>REWARDS</p>
-                                <div>
-                                    <h5>0</h5>
-                                    <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
+                        ))}
+                        {processedData.slice(2, 3).map((data, i) => (
+                            <div className="lbrdpct2 top3" key={i}>
+                                <div className='lbrdpct2ttHeader'>
+                                    <div className='lbrdpct2tthNFT'>
+                                        <span>
+                                            <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                        </span>
+                                        <p>{data.rank}</p>
+                                    </div>
+                                    <div className='lbrdpct2tthName'>
+                                        <h5><TextFormatter text={`${data.username}`} /></h5>
+                                        <p><TextSlicer text={`${data.xera_wallet}`} maxLength={15} /></p>
+                                    </div>
+                                </div>
+                                <div className="lbrdpct2ttContents">
+                                    <div>
+                                        <h5>0</h5>
+                                        <p>NODES</p>
+                                    </div>
+                                    <div>
+                                        <h5><NumberFormatter number={data.referralTaskCount}/></h5>
+                                        <p>REFERRALS</p>
+                                    </div>
+                                    <div>
+                                        <h5><NumberFormatter number={data.totalPoints}/></h5>
+                                        <p>XP POINTS</p>
+                                    </div>
+                                </div>
+                                <div className="lbrdpct2ttRewards">
+                                    <p>REWARDS</p>
+                                    <div>
+                                        <h5>0</h5>
+                                        <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ))}
                         <div className="lbrdpct2 referral">
                             <h6>TOP 20 REFERRER</h6>
                             <div className="lbrdpct2rContainer">
@@ -300,19 +326,47 @@ const Leaderboards = () => {
                             <li id='ldrbrdspcmhParticipants'><h6>PARTICIPANT</h6></li>
                             <li id='ldrbrdspcmhNodes'><h6>NODES</h6></li>
                             <li id='ldrbrdspcmhReferrals'><h6>REFERRALS</h6></li>
-                            <li id='ldrbrdspcmhPoints'><h6>PONTS</h6></li>
+                            <li id='ldrbrdspcmhPoints'><h6>POINTS</h6></li>
                             <li id='ldrbrdspcmhRewards'><h6>REWARDS</h6></li>
                         </ul>
                     </div>
                     <div className="ldrbrdspcmContent">
-                        <div className="ldrbrdspcmcEmpty">
-                            <span>
-                                <p>The Ranking has not started yet</p>
-                            </span>
-                        </div>
+                        {(dataLoading) ?
+                            <div className="ldrbrdspcmcEmpty">
+                                <span>
+                                    <p>Retrieving Latest Rankings...</p>
+                                </span>
+                            </div>:<>
+                                {currentData.map((data, i) => (
+                                    <ul key={i}>
+                                        <li id='ldrbrdspcmcRank'><p>{data.rank}</p></li>
+                                        <li id='ldrbrdspcmcParticipant'>
+                                            <span>
+                                                {(data.display) ? 
+                                                    <img src="" alt="" />:
+                                                    <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                                }
+                                            </span>
+                                            <div>
+                                                <h6><TextFormatter text={`${data.username}`} /></h6>
+                                                <p>{data.xera_wallet}</p>
+                                            </div>
+                                        </li>
+                                        <li id='ldrbrdspcmcNode'><p>0</p></li>
+                                        <li id='ldrbrdspcmcReferral'><p>{data.referralTaskCount}</p></li>
+                                        <li id='ldrbrdspcmcPoints'><p>{data.totalPoints} XP</p></li>
+                                        <li id='ldrbrdspcmcRewards'><p>0 XERA</p></li>
+                                    </ul>
+                                ))}
+                            </>
+                        }
                     </div>
                     <div className="ldrbrdspcmPage">
-                        <button>1</button>
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <button className={currentPage === index + 1 ? 'active' : ''} key={index + 1} onClick={() => handlePageChange(index + 1)}>
+                                {index + 1}
+                            </button>
+                        ))}
                     </div>
                 </div>
             </section>

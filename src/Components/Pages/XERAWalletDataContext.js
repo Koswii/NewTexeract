@@ -29,12 +29,14 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [xeraUserList, setXeraUserList] = useState([]);
     const [xeraUserNumber, setXeraUserNumber] = useState([]);
     const [xeraUserProfile, setXeraUserProfile] = useState([]);
+    const [xeraUsersProfiles, setXeraUsersProfiles] = useState([]);
     const [xeraUserWallets, setXeraUserWallets] = useState([]);
-    const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
+    // const [xeraUserReferrals, setXeraUserReferrals] = useState([]);
     const [xeraReferralCounts, setReferralCounts] = useState([]);
     const [xeraUserAirdrops, setXeraUserAirdrops] = useState([]);
     const [xeraUserFollowings, setXeraUserFollowings] = useState([]);
     const [dataLoading, setDataLoading] = useState(false);
+    
 
 
     const fetchXERAAssets = async () => {
@@ -50,8 +52,6 @@ export const XERAWalletDataProvider = ({ children }) => {
         const xeraAssetTokenRes = await axios.get(XERAAssetTokenListAPI);
         setViewXERATokenList(xeraAssetTokenRes.data);
     }
-
-
 
     const fetchXERAData1 = async () => {
         setDataLoading(true)
@@ -74,18 +74,16 @@ export const XERAWalletDataProvider = ({ children }) => {
                 
                         // Combine data based on the same 'xera_wallet'
                         const combinedData = userListData.map(user => {
-                            // const userWallet = userWalletsListData.find(wallet => wallet.xera_wallet === user.xera_wallet);
                             const displayData = displayListData.find(display => display.xera_wallet === user.xera_wallet);
-                            
                             return {
                                 ...user,
-                                // wallets: userWallet ? userWallet : null, // Attach the matching wallet data
-                                display: displayData ? displayData: null // Attach the matching display data
+                                display: displayData ? displayData.xera_nft_meta : null // Attach the matching display data
                             };
                         });
                 
                         // Set the combined data to state
                         setXeraUserList(combinedData);
+                        setXeraUsersProfiles(combinedData);
                         setXeraUserNumber(combinedData.length)
 
                         // Fetch airdrops list
@@ -138,18 +136,13 @@ export const XERAWalletDataProvider = ({ children }) => {
                     display: displayData ? displayData.xera_nft_meta : null // Attach the matching display data
                 };
             });
+            
+            setXeraUsersProfiles(combinedData);
 
             // Fetch profile data once
-            const userListResponse = await axios.get(XERACreateWalletAccountAPI);
-            const profileData = userListResponse.data.find(user => user.xera_wallet === userLoggedData.myXeraAddress);
+            const profileData = combinedData.find(user => user.xera_wallet === userLoggedData.myXeraAddress);
             setXeraUserProfile(profileData);
-            setXeraUserNumber(userListResponse.data.length)
-            
-
-            // Fetch referrals list
-            const referralsResponse = await axios.get(XERAReferralsListAPI);
-            const userReferralsListData = referralsResponse.data;
-            setXeraUserReferrals(userReferralsListData);
+            setXeraUserNumber(combinedData.length);
 
             // Fetch followings list
             const followingsResponse = await axios.get(XERAFollowingListAPI);
@@ -239,9 +232,59 @@ export const XERAWalletDataProvider = ({ children }) => {
         fetchXERAData1();
         fetchXERAData2();
 
-        
         return () => clearTimeout(timeoutId);
     }, []);
+
+    
+    const [processedData, setProcessedData] = useState([]);
+    useEffect(() => {
+        const processTaskData = () => {
+            const result = {};
+
+            xeraUserAirdrops.forEach(({ username, xera_task, xera_points }) => {
+                if (!result[username]) {
+                result[username] = { username, totalPoints: 0, referralTaskCount: 0 };
+                }
+                result[username].totalPoints += Number(xera_points);
+        
+                // Count "Referral Task"
+                if (xera_task === "Referral Task") {
+                result[username].referralTaskCount += 1;
+                }
+            });
+    
+            // Convert result to an array
+            let sortedData = Object.values(result).map((item) => {
+                // Find the corresponding user profile from xeraUsersProfiles
+                const userProfile = xeraUsersProfiles.find(
+                (profile) => profile.username === item.username
+                );
+
+                // Merge the profile data with the ranking data
+                return userProfile ? { ...item, ...userProfile } : null;
+            });
+
+            // Filter out entries without xera_wallet and re-sort by totalPoints
+            sortedData = sortedData
+                .filter((item) => item && item.xera_wallet)
+                .sort((a, b) => b.totalPoints - a.totalPoints);
+
+            // Add rank after filtering and sorting
+            const rankedData = sortedData.map((item, index) => ({
+                ...item,
+                rank: index + 1,
+            }));
+
+            setProcessedData(rankedData);
+        };
+    
+        processTaskData();
+    }, [xeraUserAirdrops, xeraUsersProfiles]);
+
+
+
+
+
 
 
     if(
@@ -273,7 +316,7 @@ export const XERAWalletDataProvider = ({ children }) => {
             setViewConnectWallet,
             xeraUserWallets,
             xeraUserList,
-            xeraUserReferrals,
+            processedData,
             xeraReferralCounts,
             xeraUserAirdrops,
             xeraUserFollowings,

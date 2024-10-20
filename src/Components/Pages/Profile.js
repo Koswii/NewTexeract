@@ -59,17 +59,19 @@ const TextFormatter = ({ text = '' }) => {
 
     return <>{formattedText}</>;
 };
-const formatNumberToK = (num) => {
+const formatNumber = (num) => {
     if (typeof num !== 'number' || isNaN(num)) {
       return '';
     }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(num % 1000 === 0 ? 0 : 1) + 'K';
+    if (num >= 1_000_000) {
+      return (num / 1_000_000).toFixed(num % 1_000_000 === 0 ? 0 : 1) + 'M';
+    } else if (num >= 1_000) {
+      return (num / 1_000).toFixed(num % 1_000 === 0 ? 0 : 1) + 'K';
     }
     return num.toString();
 };
 const NumberFormatter = ({ number }) => {
-    return <>{formatNumberToK(number)}</>;
+    return <>{number > 0 ? formatNumber(number) : 0}</>;
 };
 const ScrambleTextUsername = ({ targetText, scrambleSpeed = 50, revealSpeed = 200 }) => {
     const [scrambledText, setScrambledText] = useState('');
@@ -146,9 +148,8 @@ const Profile = () => {
         xeraUserList,
         xeraUserProfile,
         xeraUserWallets,
-        xeraUserReferrals,
         xeraReferralCounts,
-        xeraUserAirdrops,
+        processedData,
         xeraUserFollowings,
     } = XERAWalletData();
     const {
@@ -250,9 +251,11 @@ const Profile = () => {
         setViewProfileTokens(false);
     }
 
-    const userTotalReferral = xeraUserReferrals.filter(user => user.xera_referral === userLoggedData.myXeraUsername)
     const userTotalFollowers = xeraUserFollowings.filter(user => user.following === userLoggedData.myXeraUsername)
-    
+    const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername))
+    const myCurrentPoints = myCurrentData?.totalPoints
+    const myCurrentReferrals = myCurrentData?.referralTaskCount
+
     const submitXUsernameDetails = async () => {
         setXVerifyingLoader(true);
         if (!twitterUsername) {
@@ -450,11 +453,11 @@ const Profile = () => {
                                     </div>
                                     <div className="prfpchrcs Referrals">
                                         <p>Referrals</p>
-                                        <h5><NumberFormatter number={userTotalReferral.length}/></h5>
+                                        <h5><NumberFormatter number={myCurrentReferrals}/></h5>
                                     </div>
                                     <div className="prfpchrcs Points">
                                         <p>XERA Points</p>
-                                        <h5><NumberFormatter number={0}/></h5>
+                                        <h5><NumberFormatter number={myCurrentPoints}/></h5>
                                     </div>
                                 </div>
                             </div>}
@@ -839,11 +842,18 @@ const Profile = () => {
                             <span id='ppcmtctExternal'><h6></h6></span>
                         </div>
                         <div className="ppcmtcTransaction">
-                            {(UserTransactions.length === 0) ? <>
+                            {(UserTransactions.length === 0) && <>
                                 <div className="ppcmtctEmpty">
                                     <span>
                                         <h6><TbReceiptOff className='faIcons'/></h6>
                                         <p>No Transaction Yet</p>
+                                    </span>
+                                </div>
+                            </>}
+                            {(dataLoading) ? <>
+                                <div className="ppcmtctEmpty">
+                                    <span>
+                                        <p>Loading Transactions...</p>
                                     </span>
                                 </div>
                             </>:<>
