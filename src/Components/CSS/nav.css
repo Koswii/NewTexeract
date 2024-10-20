@@ -463,8 +463,12 @@ section.footerContent{
     text-decoration: none;
     opacity: 50%;
     transition: 400ms ease;
+    cursor: not-allowed;
 }
-.fcontent.right div a:hover{
+.fcontent.right div a.active{
+    cursor: pointer;
+}
+.fcontent.right div a.active:hover{
     opacity: 100%;
     transition: 400ms ease;
 }

@@ -36,7 +36,7 @@ const Footer = () => {
           <div>
             <h6>DEPLOYMENT</h6>
             <ul>
-              <li><Link to="/TestnetFaucet">TXERA Faucet</Link></li>
+              <li><Link to="/TestnetFaucet" className='active'>TXERA Faucet</Link></li>
               <li><Link>Deploy DApp</Link></li>
               <li><Link>Mint Token</Link></li>
               <li><Link>Mint NFT</Link></li>
@@ -57,7 +57,7 @@ const Footer = () => {
           <div>
             <h6>RESOURCES</h6>
             <ul>
-              <li><Link to='/Leaderboards'>Leaderboards</Link></li>
+              <li><Link to='/Leaderboards' className='active'>Leaderboards</Link></li>
               <li><Link>Tokenomics</Link></li>
               <li><Link>Ecosystem</Link></li>
               <li><Link>Whitepaper</Link></li>
