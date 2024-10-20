@@ -40,17 +40,24 @@ export const XERAWalletDataProvider = ({ children }) => {
 
 
     const fetchXERAAssets = async () => {
-        // Fetch Texeract Network Transactions
-        const xeraTransactions = await axios.get(XERATransactionListAPI);
-        let sortedTransactions = xeraTransactions.data.sort((a, b) => 
-            new Date(b.transaction_date) - new Date(a.transaction_date) // Descending order
-        );
-        setViewXERATransactionList(sortedTransactions);
+        setDataLoading(true)
+        try {
+            // Fetch Texeract Network Transactions
+            const xeraTransactions = await axios.get(XERATransactionListAPI);
+            let sortedTransactions = xeraTransactions.data.sort((a, b) => 
+                new Date(b.transaction_date) - new Date(a.transaction_date) // Descending order
+            );
+            setViewXERATransactionList(sortedTransactions);
 
 
-        // Fetch XERA Token Asset
-        const xeraAssetTokenRes = await axios.get(XERAAssetTokenListAPI);
-        setViewXERATokenList(xeraAssetTokenRes.data);
+            // Fetch XERA Token Asset
+            const xeraAssetTokenRes = await axios.get(XERAAssetTokenListAPI);
+            setViewXERATokenList(xeraAssetTokenRes.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setDataLoading(false);
+        }
     }
 
     const fetchXERAData1 = async () => {

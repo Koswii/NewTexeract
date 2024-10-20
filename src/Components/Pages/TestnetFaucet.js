@@ -56,7 +56,10 @@ const TestnetFaucet = () => {
             </div>
             <section className="faucetPageContainer top">
                 <div className="faucetPageContent top">
-                    <h4>TXERA FAUCET</h4>
+                    <div className="fctpcHeader">
+                        <h4>TXERA FAUCET</h4>
+                        <h6>Claim Test Tokens with the Testnet XERA Faucet</h6>
+                    </div>
                     <div className="fctpcTop">
                         <div className="fctpct dashboard">
                             <div className="fctpctHeader">

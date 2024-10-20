@@ -52,8 +52,17 @@ section.faucetPageContainer.top{
         url('../assets/imgs/profileBG.png') no-repeat top;
     background-size: cover;
 }
-.faucetPageContent.top h4{
+
+.fctpcHeader{
+    height: auto;
+    width: 100%;
+}
+.fctpcHeader h4{
     font-family: 'Lexend Peta', sans-serif;
+}
+.fctpcHeader h6{
+    font-size: 0.7vw;
+    font-weight: 400;
 }
 .fctpcTop{
     height: auto;
@@ -61,7 +70,7 @@ section.faucetPageContainer.top{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1%;
+    margin-top: 2%;
 }
 .fctpct{
     height: auto;

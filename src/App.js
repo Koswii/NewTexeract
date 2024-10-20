@@ -10,6 +10,7 @@ import { TelegramDataProvider } from './Components/Pages/TelegramDataContext';
 
 import Home from './Components/Pages/Home'
 import Leaderboards from './Components/Pages/Leaderboards';
+import Tokens from './Components/Pages/Tokens';
 import Profile from './Components/Pages/Profile';
 
 
@@ -40,6 +41,7 @@ function App() {
             }
 
 
+            <Route path="/Tokens" element={<Tokens/>}/>
             <Route path="/TestnetFaucet" element={<TestnetFaucet/>}/>
             <Route path="*" element={<Home/>}/>
           </Routes>

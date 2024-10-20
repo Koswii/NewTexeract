@@ -46,8 +46,8 @@ const Footer = () => {
           <div>
             <h6>FEATURES</h6>
             <ul>
+              <li><Link to='/Tokens' className='active'>Tokens</Link></li>
               <li><Link>DApps</Link></li>
-              <li><Link>Tokens</Link></li>
               <li><Link>Nodes</Link></li>
               <li><Link>Wallet</Link></li>
               <li><Link>Bridge</Link></li>

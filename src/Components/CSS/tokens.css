@@ -1,0 +1,211 @@
+h1, h2, h3, h4, h5, h6, p{
+    color: white;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
+p{
+    font-size: 0.9vw;
+}
+h1{
+    font-size: 10vw;
+}
+h2{
+    font-size: 5vw;
+}
+h3{
+    font-size: 4vw;
+}
+h4{
+    font-size: 2vw;
+}
+h5{
+    font-size: 1.5vw;
+}
+h6{
+    font-size: 1vw;
+}
+
+
+.mainContainer.tokens{
+    height: auto;
+    width: 100%;
+    background: black;
+    padding-bottom: 10vw;
+}
+
+
+
+
+
+section.leaderboardsPageContainer.top{
+    height: auto;
+    width: 100%;
+    position: relative;
+}
+.tokensPageContent.top{
+    height: auto;
+    width: 100%;
+    padding: 2vw 7%;
+    padding-top: 12vh;
+    background: 
+        linear-gradient(transparent, black 100%),
+        url('../assets/imgs/profileBG.png') no-repeat top;
+    background-size: cover;
+}
+.tknspcHeader{
+    height: auto;
+    width: 100%;
+    text-align: center;
+}
+.tknspcHeader h4{
+    font-family: 'Lexend Peta', sans-serif;
+}
+.tknspcHeader h6{
+    font-size: 0.7vw;
+    font-weight: 400;
+}
+
+
+.tknspctContent{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-top: 2%;
+}
+.tknspctc{
+    height: auto;
+    padding: 2%;
+}
+.tknspctc.left{
+    height: auto;
+    width: 65%;
+}
+.tknspctclSearch{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.tknspctclSearch input{
+    width: 55%;
+    border: solid 2px white;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 0.7vw;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-right: 1%;
+    background: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+.tknspctclSearch button{
+    width: 20%;
+    border: solid 2px white;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 0.7vw;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: 400ms ease;
+    cursor: pointer;
+}
+.tknspctclSearch button:hover{
+    color: black;
+    background: white;
+    transition: 400ms ease;
+}
+.tknspctclTokens{
+    height: auto;
+    width: 100%;
+    margin-top: 5%;
+}
+.tknspctcltCurrent{
+    height: auto;
+    width: 100%;
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: top;
+}
+.tknspctcltcLoading{
+    height: 9.5vw;
+    width: 49%;
+    margin-bottom: 2%;
+    border-radius: 1vw;
+    background: 
+      linear-gradient(90deg,#0001 33%,#0005 50%,#0001 66%)
+      #808080;
+    background-size:300% 100%;
+    animation: l1 1s infinite linear;
+}
+.tknspctcltc{
+    height: auto;
+    width: 49%;
+    margin-bottom: 2%;
+    border-radius: 1vw;
+    padding: 3%;
+    background: rgb(20, 20, 20);
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+.tknspctcltc img{
+    height: 5vw;
+}
+.tknspctcltcInfo{
+    height: auto;
+    width: 70%;
+}
+.tknspctcltcInfo h6{
+    font-size: 0.8vw;
+    font-family: 'Lexend Peta', sans-serif;
+}
+.tknspctcltcInfo h6 span{
+    font-weight: 400;
+    font-size: 0.7vw;
+}
+.tknspctcltcInfo p{
+    margin-top: 2%;
+    font-size: 0.6vw;
+}
+
+
+
+.tknspctc.right{
+    height: 35vw;
+    width: 30%;
+    padding: 2% 4%;
+    position: relative;
+    overflow: hidden;
+    background: url('../assets/imgs/dashboadBG05.png') no-repeat center;
+    background-size: cover;
+}
+.tknspctc.right img#tknspctcrrToken{
+    height: 15vw;
+    display: flex;
+    margin: 12% auto;
+}
+.tknspctc.right h5{
+    text-align: center;
+}
+.tknspctc.right p{
+    font-size: 0.6vw;
+    font-family: 'Lexend Peta', sans-serif;
+    opacity: 50%;
+    text-align: center;
+    margin-top: 5%;
+}
+
+
+
+
+
+
