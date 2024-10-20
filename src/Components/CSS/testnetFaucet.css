@@ -199,7 +199,12 @@ section.faucetPageContainer.top{
     text-align: center;
     margin-top: 5%;
 }
-.fctpct.mint button#claimTXERA{
+
+.fctpctmTXERA{
+    height: auto;
+    width: 100%;
+}
+.fctpctmTXERA button{
     width: 100%;
     padding: 10px 5%;
     text-decoration: none;
@@ -215,7 +220,7 @@ section.faucetPageContainer.top{
     margin-top: 10%;
     cursor: pointer;
 }
-.fctpct.mint button#claimTXERA:hover{
+.fctpctmTXERA button:hover{
     opacity: 100%;
     background: white;
     color: black;

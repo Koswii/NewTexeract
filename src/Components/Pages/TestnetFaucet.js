@@ -6,7 +6,7 @@ import { XERAWalletData } from './XERAWalletDataContext';
 import { 
     TbInfoCircle,    
 } from "react-icons/tb";
-
+import ClaimTXERA from './ClaimTXERA';
 
 
 const TextSlicer = ({ text = '', maxLength }) => {
@@ -33,17 +33,10 @@ const TestnetFaucet = () => {
     }, []);
 
     
-    const TXERASendReqAPI = process.env.REACT_APP_XERA_ASSET_TXERA_SEND_API;
     const [viewTXERAInfo, setViewTXERAInfo] = useState(false)
-    const [txHash, setTxHash] = useState("");
-    const [txResponse, setTxResponse] = useState("");
     const TXERAInfo = viewXERATokenList?.find(token => token.token_symbol === "TXERA") || {};
     const TXERATransactions = viewXERATransactionList?.filter(sender => sender.sender_address === "TXERA Faucet") || {};
-
-
-    const handleViewCreateWallet = () => {
-        setViewLoginAccount(true);
-    }
+    
     const handleViewTXERAInfo = () => {
         setViewTXERAInfo(true);
         const timeoutId = setTimeout(() => {
@@ -52,86 +45,6 @@ const TestnetFaucet = () => {
         return () => clearTimeout(timeoutId);
     }
 
-
-    // Function to hash data using SHA-256
-    const hashData = async (data) => {
-        if(!userLoggedData){
-            return;
-        }
-
-        const encoder = new TextEncoder();
-        const dataString = JSON.stringify(data); // Serialize to string
-        const encodedData = encoder.encode(dataString); // Convert to Uint8Array
-
-        // Use Web Crypto API to generate the hash
-        const hashBuffer = await crypto.subtle.digest("SHA-256", encodedData);
-        const hashArray = Array.from(new Uint8Array(hashBuffer)); // Convert to byte array
-        const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join(''); // Convert to hex string
-
-        setTxHash(hashHex); // Store the hash in state
-    };
-    const formRequestTXERADetails = {
-        txBlock: "Genesis",
-        sender: "TXERA Faucet",
-        receiver: userLoggedData ? userLoggedData.myXeraAddress : '',
-        command: "Claim",
-        amount: 1,
-        token: TXERAInfo.token_symbol,
-        tokenId: TXERAInfo.token_id,
-        validator: "XERA Validator",
-        txLocalDate: new Date()
-    };
-    // Hash the data on component mount
-    useEffect(() => {
-        if(!userLoggedData){
-            return;
-        }
-        hashData(formRequestTXERADetails);
-    }, []); // Run once on mount
-    const claimTXERAToken = async () => {
-        if(!userLoggedData){
-            return;
-        }
-
-        const formRequestTXERADetails = {
-            username: userLoggedData.myXeraUsername,
-            txHash: `XERA${txHash}`,
-            sender: "TXERA Faucet",
-            receiver: userLoggedData.myXeraAddress,
-            command: "Claim",
-            amount: 1,
-            token: TXERAInfo.token_symbol,
-            tokenId: TXERAInfo.token_id,
-        };
-
-        // const jsonReqTXERADetails = JSON.stringify(formRequestTXERADetails);
-        // console.log(jsonReqTXERADetails);
-
-        try {
-            const submitTXERARequest = await axios.post(TXERASendReqAPI, formRequestTXERADetails);
-            const responseMessage = submitTXERARequest.data;
-    
-            if (responseMessage.success === 'true') {
-                setTxResponse(responseMessage.message);
-                hashData(formRequestTXERADetails);
-                fetchXERAAssets();
-
-                const timeoutId = setTimeout(() => {
-                    setTxResponse("");
-                }, 8000);
-                return () => clearTimeout(timeoutId);
-
-            } else {
-                setTxResponse(responseMessage.message);
-                const timeoutId = setTimeout(() => {
-                    setTxResponse("");
-                }, 8000);
-                return () => clearTimeout(timeoutId);
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };
 
 
     return (
@@ -182,10 +95,9 @@ const TestnetFaucet = () => {
                             <button id='fctpctTokenInfo' onClick={handleViewTXERAInfo}><TbInfoCircle className='faIcons'/></button>
                             <img id='fctpctTokenLogo' src={require('../assets/imgs/TexeractCoinRealistic7.png')} alt="" />
                             <p id='fctpctNote'>Each account is eligible to claim 1 TXERA tokens every 12 hours, exclusively for Airdrop tasks, DApp deployment, and future development testing.</p>
-                            {userLoggedData ? 
-                                <button id='claimTXERA' onClick={claimTXERAToken}>CLAIM TXERA TOKEN</button>:
-                                <button id='claimTXERA' onClick={handleViewCreateWallet}>CLAIM TXERA TOKEN</button>
-                            }
+                            <div className="fctpctmTXERA">
+                                <ClaimTXERA/>
+                            </div>
                             <div className={viewTXERAInfo ? "fctpctTokenDetails active" : "fctpctTokenDetails"}>
                                 <div className="fctpcttdHeader">
                                     <img src={require('../assets/imgs/TexeractCoinRealistic7.png')} alt="" />
@@ -208,7 +120,6 @@ const TestnetFaucet = () => {
                                     </div>
                                 </div>
                             </div>
-                            <p id='fctpctResponse'>{txResponse}</p>
                         </div>
                     </div>
                 </div>

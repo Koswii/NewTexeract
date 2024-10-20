@@ -162,9 +162,9 @@ const Nav = () => {
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleViewFullNav}><p>EXPLORE</p></button>:
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleHideFullNav}><p>EXPLORE</p></button>} */}
 
-            <Link className='navCrBtn dapps'><p>DAPPS</p></Link>
-            <Link className='navCrBtn nodes'><p>NODES</p></Link>
-            <Link className='navCrBtn marketplace'><p>MARKETPLACE</p></Link>
+            <Link className='navCrBtn dapps disabled'><p>DAPPS</p></Link>
+            <Link className='navCrBtn nodes disabled'><p>NODES</p></Link>
+            <Link className='navCrBtn marketplace disabled'><p>MARKETPLACE</p></Link>
             <Link className='navCrBtn leaderboards' to='/Leaderboards'><p>LEADERBOARDS</p></Link>
             {(userLoggedData === null) ? <>
               <button className='navCrBtn connect' onClick={handleViewCreateWallet}><p>CREATE WALLET</p><TbWallet className='faIcons'/></button>

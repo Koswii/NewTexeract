@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom';
 import "../CSS/profile.css";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -34,10 +35,13 @@ import {
     TbSendOff,
     TbSend,  
     TbDeviceIpadDollar,
+    TbCircleArrowDownLeft,
 } from "react-icons/tb";
 import { 
     PiCoins 
 } from "react-icons/pi";
+import ClaimTXERA from './ClaimTXERA';
+
 
 const TextSlicer = ({ text = '', maxLength }) => {
     const truncatedText = text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
@@ -71,7 +75,7 @@ const formatNumber = (num) => {
   
     if (num >= 1_000_000) {
       return truncateDecimal(num / 1_000_000, 1) + 'M';
-    } else if (num >= 1_000) {
+    } else if (num >= 100_000) {
       return truncateDecimal(num / 1_000, 1) + 'K';
     }
     
@@ -167,6 +171,7 @@ const Profile = () => {
         telegramStatus,
         verifyingLoader,
     } = TelegramData();
+    const navigate = useNavigate();
     
     const XERAAirdropTwitterAPI = process.env.REACT_APP_XERA_USER_AIRDROP_X_API;
     
@@ -350,7 +355,9 @@ const Profile = () => {
         setViewConnectWallet(true);
     }
 
-
+    const handleClaimTXERA = () => {
+        navigate('/TestnetFaucet')
+    }
 
 
     
@@ -436,6 +443,7 @@ const Profile = () => {
                                     <div className="prfpchrcbFunctions">
                                         <button className='disabled'><TbDeviceIpadDollar className='faIcons'/> BUY</button>
                                         <button className='disabled'><TbSend className='faIcons'/> SEND</button>
+                                        <button className='disabled'><TbCircleArrowDownLeft  className='faIcons'/> RECEIVE</button>
                                         <button className='disabled'><TbExchange className='faIcons'/> SWAP</button>
                                     </div>
                                 </div>
@@ -556,11 +564,11 @@ const Profile = () => {
                                     <p>TASK 2</p>
                                 </div>
                                 <div className="ppcmalccTask">
-                                    <h6>JOIN TELEGRAM<br />COMMUNITY</h6>
+                                    <h6><span>10,000 XP</span><br />JOIN TELEGRAM<br />COMMUNITY</h6>
                                     {userTelegramStatus ?
                                         <p>COMPLETED</p>:
                                         <a href='https://t.me/TexeractNetworkCommunity' target='blank'>
-                                            <button onClick={handleAirdropTask2}>EXECUTE</button>
+                                            <button onClick={handleAirdropTask2} className='active'>EXECUTE</button>
                                         </a>
                                     }
                                 </div>
@@ -590,14 +598,14 @@ const Profile = () => {
                                     <p>TASK 3</p>
                                 </div>
                                 <div className="ppcmalccTask">
-                                    <h6>VISIT AND<br />FOLLOW X</h6>
+                                    <h6><span>10,000 XP</span><br />VISIT AND<br />FOLLOW X</h6>
                                     {userXStatus ?
                                         <>
                                             {(userXStatus === 'pending') && <p id='pendingTask'>PENDING</p>}
                                             {(userXStatus === 'ok') && <p>COMPLETED</p>}
                                         </>:
                                         <a href='https://twitter.com/TexeractNetwork' target='blank'>
-                                            <button onClick={handleAirdropTask3}>EXECUTE</button>
+                                            <button onClick={handleAirdropTask3} className='active'>EXECUTE</button>
                                         </a>
                                     }
                                 </div>
@@ -635,13 +643,13 @@ const Profile = () => {
                                     <p>TASK 4</p>
                                 </div>
                                 <div className="ppcmalccTask">
-                                    <h6>BIND YOUR<br />CRYTO WALLET</h6>
+                                    <h6><span>10,000 XP</span><br />BIND YOUR<br />CRYTO WALLET</h6>
                                     {userWalletStatus ?
                                         <>
                                             {xeraUserWallets.eth_wallet && <p id='connectedNetwork'><TbCurrencyEthereum className='faIcons'/>CONNECTED</p>}
                                             {xeraUserWallets.sol_wallet && <p id='connectedNetwork'><TbCurrencySolana className='faIcons'/>CONNECTED</p>}
                                         </>
-                                        :<button onClick={handleBindWallet}>CONNECT</button>
+                                        :<button onClick={handleBindWallet} className='active'>CONNECT</button>
                                     }
                                 </div>
                                 <div className={!viewBindDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
@@ -656,28 +664,40 @@ const Profile = () => {
                                     {xeraUserWallets.sol_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencySolana className='faIcons'/> Solana Wallet Address</p>}
                                 </div>
                             </div>
-                            <div className="ppcmalcContent hidden">
-                                <div>
-                                    <h6><TbLock className='faIcons'/></h6>
-                                    <p>TASK LOCKED</p>
+                            <div className="ppcmalcContent testnetXERA active">
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 5</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />CLAIM TXERA<br />EVERY 12 HOURS</h6>
+                                    <button onClick={handleClaimTXERA} className='active'>CLAIM</button>
                                 </div>
                             </div>
-                            <div className="ppcmalcContent hidden">
-                                <div>
-                                    <h6><TbLock className='faIcons'/></h6>
-                                    <p>TASK LOCKED</p>
+                            <div className="ppcmalcContent testnetXERA">
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 6</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />SEND TXERA<br />EVERY 6 HOURS</h6>
+                                    <button disabled>CLAIM</button>
                                 </div>
                             </div>
-                            <div className="ppcmalcContent hidden">
-                                <div>
-                                    <h6><TbLock className='faIcons'/></h6>
-                                    <p>TASK LOCKED</p>
+                            <div className="ppcmalcContent testnetXERA">
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 7</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />SWAP TXERA/TETH<br />EVERY 6 HOURS</h6>
+                                    <button disabled>CLAIM</button>
                                 </div>
                             </div>
-                            <div className="ppcmalcContent hidden">
-                                <div>
-                                    <h6><TbLock className='faIcons'/></h6>
-                                    <p>TASK LOCKED</p>
+                            <div className="ppcmalcContent testnetXERA">
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 8</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />SWAP TXERA/TSOL<br />EVERY 6 HOURS</h6>
+                                    <button disabled>CLAIM</button>
                                 </div>
                             </div>
                         </div>
