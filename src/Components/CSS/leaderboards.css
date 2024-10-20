@@ -209,8 +209,11 @@ section.leaderboardsPageContainer.top{
     width: 30%;
     margin-right: 3%;
 }
+.lbrdpct2t1Contents h4{
+    font-size: 1.5vw;
+}
 .lbrdpct2t1Contents p{
-    font-size: 0.6vw;
+    font-size: 0.5vw;
     font-family: 'Lexend Peta', sans-serif;
     opacity: 50%;
 }
@@ -318,8 +321,11 @@ section.leaderboardsPageContainer.top{
     width: 30%;
     margin-right: 3%;
 }
+.lbrdpct2ttContents h5{
+    font-size: 1.3vw;
+}
 .lbrdpct2ttContents p{
-    font-size: 0.5vw;
+    font-size: 0.4vw;
     font-family: 'Lexend Peta', sans-serif;
     opacity: 50%;
 }

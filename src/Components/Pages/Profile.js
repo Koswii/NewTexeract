@@ -63,11 +63,18 @@ const formatNumber = (num) => {
     if (typeof num !== 'number' || isNaN(num)) {
       return '';
     }
+  
+    const truncateDecimal = (value, decimals) => {
+      const factor = Math.pow(10, decimals);
+      return Math.floor(value * factor) / factor;
+    };
+  
     if (num >= 1_000_000) {
-      return (num / 1_000_000).toFixed(num % 1_000_000 === 0 ? 0 : 1) + 'M';
+      return truncateDecimal(num / 1_000_000, 1) + 'M';
     } else if (num >= 1_000) {
-      return (num / 1_000).toFixed(num % 1_000 === 0 ? 0 : 1) + 'K';
+      return truncateDecimal(num / 1_000, 1) + 'K';
     }
+    
     return num.toString();
 };
 const NumberFormatter = ({ number }) => {
