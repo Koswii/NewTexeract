@@ -59,7 +59,7 @@ const ClaimTXERA = () => {
         hashData(formRequestTXERADetails);
     }, []); // Run once on mount
     const claimTXERAToken = async () => {
-        if(!userLoggedData){
+        if(!userLoggedData || !txHash){
             return;
         }
 
