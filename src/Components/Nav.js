@@ -121,30 +121,6 @@ const Nav = () => {
     <nav>
       <div className="mainNavContainer">
         
-        {viewFullNavigation && <div className={viewFullNavigation ? "navContainerFull active" :  "navContainerFull"}>
-          <div className="navcContentf left">
-            <div className='navccflImage'>
-              <img src={require('../Components/assets/imgs/TestnetPhases/XERAPhase1.png')} alt="" />
-            </div>
-            <div className="navccflPhase">
-              <div>
-                <h5>PHASE 1</h5>
-                <p>Texeract Network Testnet</p>
-              </div>
-              <div>
-                <img src={require('../Components/assets/imgs/TexeractLogoWhite.png')} alt="" />
-              </div>
-            </div>
-          </div>
-          <div className="navcContentf right">
-            {/* <div className="navccfrSoon">
-              <p>XERAScan will be live Soon!</p>
-            </div> */}
-            <div className="navccfrSelections">
-              <Link><h6>Metaverse</h6></Link>
-            </div>
-          </div>
-        </div>}
         {viewWalletCreate && <CreateWallet />}
         {viewLoginAccount && <LoginAccount />}
         {viewConnectWallet && <ConnectWallet />}
