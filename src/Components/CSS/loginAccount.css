@@ -395,4 +395,119 @@ h6{
 
 
 
+@media screen and (max-width: 500px){
+    .navLoginContent{
+        width: 80%;
+        border-radius: 2vw;
+        padding: 5% 2%;
+    }
+    .navLoginContent button#closeLoginAccount{
+        top: 2vw;
+        right: 2vw;
+        font-size: 3vw;
+    }
+    .nclcHeader img{
+        height: 8vw;
+        margin-right: 3%;
+    }
+    .nclcHeader h6{
+        font-size: 3vw;
+    }
+    .nclcHeader p{
+        font-size: 2vw;
+    }
 
+
+
+
+    .nclcContents{
+        height: auto;
+        width: 100%;
+    }
+
+    .nclccBasics div p{
+        font-size: 2vw;
+    }
+    .nclccBasics div p#nclccnNote{
+        font-size: 2vw;
+    }
+    .nclccBasics div input{
+        font-size: 2vw;
+    }
+    .nclccBasics div button.xeraPassword{
+        font-size: 2vw;
+    }
+    .nclccLoginBtn button{
+        font-size: 2vw;
+    }
+    .nclccSlice p{
+        font-size: 2vw;
+    }
+    .nclccCreateWallet{
+        bottom: 5vw;
+    }
+    .nclccXeraWallet button{
+        font-size: 2vw;
+    }
+    .nclccCreateWallet p{
+        font-size: 2vw;
+    }
+    .nclccXeraError{
+        margin: 5% 0;
+    }
+    .nclccXeraError p{
+        color: red;
+        font-size: 2vw;
+    }
+
+
+    .nclccBack{
+        top: 3vw;
+        left: 3vw;
+    }
+    .nclccBack button{
+        font-size: 5vw;
+        line-height: 3vw;
+    }
+    .nclccNav button{
+        font-size: 2vw;
+    }
+    .nclccnBody p{
+        font-size: 2vw;
+    }
+
+
+    .nclccnbInputs div h6{
+        font-size: 3vw;
+    }
+    .nclccnbInputs div input{
+        width: 80%;
+        font-size: 3vw;
+    }
+
+
+
+
+    .nclccnbInputs{
+        height: 60vw;
+    }
+    .nclccnbTextArea{
+        height: 60vw;
+    }
+    .nclccnbTextArea textarea{
+        height: 95%;
+        font-size: 2vw;
+        padding: 10px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+}

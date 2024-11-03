@@ -19,6 +19,9 @@ import {
   TbSquareRoundedArrowDownFilled,
   TbLogout  
 } from "react-icons/tb";
+import { 
+  RiArrowDownSFill 
+} from "react-icons/ri";
 import { Link, useNavigate } from 'react-router-dom';
 import CreateWallet from './Pages/CreateWallet';
 import LoginAccount from './Pages/LoginAccount';
@@ -142,6 +145,7 @@ const Nav = () => {
             <Link className='navCrBtn nodes disabled'><p>NODES</p></Link>
             <Link className='navCrBtn marketplace disabled'><p>MARKETPLACE</p></Link>
             <Link className='navCrBtn leaderboards' to='/Leaderboards'><p>LEADERBOARDS</p></Link>
+            <button id='nvctntrMobile'><RiArrowDownSFill className='faIcons'/></button>
             {(userLoggedData === null) ? <>
               <button className='navCrBtn connect' onClick={handleViewCreateWallet}><p>CREATE WALLET</p><TbWallet className='faIcons'/></button>
               <button className='navCrBtn login' onClick={handleViewLoginWallet}><TbUserCircle className='faIcons'/></button>

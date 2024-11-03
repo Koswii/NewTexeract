@@ -426,5 +426,121 @@ h6{
 
 
 
+@media screen and (max-width: 500px){
+    .navWalletSuccess{
+        width: 80%;
+        border-radius: 2vw;
+        padding: 5% 2%;
+    }
+    .navWalletSuccess button#closeCreateWallet{
+        top: 2vw;
+        right: 2vw;
+        font-size: 3vw;
+    }
+    .nwsContainer img{
+        height: 15vw;
+        margin-bottom: 5%;
+    }
+    .nwsContainer h6{
+        font-size: 3vw;
+    }
+    .nwsContainer h6 span{
+        font-weight: 600;
+        font-size: 2vw;
+    }
+    .nwsContainer button{
+        font-size: 2vw;
+        margin-top: 10%;
+    }
 
+
+
+
+
+
+
+
+
+    .navWalletContent{
+        width: 80%;
+        border-radius: 2vw;
+        padding: 5% 2%;
+    }
+    .navWalletContent button#closeCreateWallet{
+        top: 2vw;
+        right: 2vw;
+        font-size: 3vw;
+    }
+    .ncwcHeader img{
+        height: 8vw;
+        margin-right: 3%;
+    }
+    .ncwcHeader h6{
+        font-size: 3vw;
+    }
+    .ncwcHeader p{
+        font-size: 2vw;
+    }
+
+
+    .ncwcNavDots span{
+        height: 4vw;
+        width: 4vw;
+    }
+    .ncwcNavDots img{
+        height: 4vw;
+        width: 4vw;
+    }
+    .ncwcNavContent p{
+        margin: 2vw;
+        font-size: 2vw;
+    }
+    .ncwcContents{
+        height: 90vw;
+        width: 100%;
+    }
+    .ncwcContents .ncwcc h6{
+        font-size: 3vw;
+    }
+    .ncwcContents .ncwcc p{
+        font-size: 2vw;
+    }
+    .ncwcccaContent label{
+        font-size: 2vw;
+    }
+    .ncwcccaContent label span{
+        font-size: 2vw;
+        font-style: italic;
+    }
+    .ncwcccaContent input{
+        font-size: 2vw;
+        margin-top: 1.5%;
+    }
+
+    .ncwcNote p{
+        font-size: 2vw;
+        padding: 0 10%;
+    }
+    .ncwcButtons button{
+        font-size: 2vw;
+    }
+
+
+    .ncwccsp div{
+        height: 4vw;
+        margin: 2%;
+    }
+    .ncwccsp div h5{
+        font-size: 3vw;
+    }
+    .ncwccsp div h5 span{
+        font-size: 2vw;
+    }
+
+
+
+
+
+
+}
 

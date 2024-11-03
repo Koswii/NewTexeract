@@ -26,16 +26,12 @@ nav{
 
 
 .navContainer{
-    height: 8vh;
+    height: 4vw;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 7%;
-    /* background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px); */
     animation: fade-in-down 1s ease;
 }
 .navContainer.mobile{
@@ -93,7 +89,18 @@ nav{
     color: white;
     font-family: 'Lexend Peta', sans-serif;
 }
-
+.navContent.right button#nvctntrMobile{
+    background: none;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+    margin-right: 5%;
+}
 
 
 
@@ -250,14 +257,6 @@ nav{
 
 
 
-
-
-
-
-
-
-
-
 .footerContainer{
     height: auto;
     width: 100%;
@@ -386,4 +385,125 @@ section.footerContentBot{
     align-items: center;
     padding: 0.5% 7%;
     background: rgb(20, 20, 20);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 500px){
+    .navContainer{
+        height: 15vw;
+        width: 100%;
+        padding: 0 5%;
+    }
+    .navContent.left a img{
+        height: 11vw;
+    }
+    .navContent.right{
+        width: auto;
+    }
+    .navContent.right a.navCrBtn.dapps,
+    .navContent.right a.navCrBtn.nodes,
+    .navContent.right a.navCrBtn.marketplace,
+    .navContent.right a.navCrBtn.leaderboards{
+        display: none;
+    }
+    .navContent.right button#nvctntrMobile{
+        display: flex;
+        font-size: 6vw;
+    }
+    .navContent.right button.navCrBtn p{
+        font-size: 3vw;
+        width: 45vw;
+    }
+    .navContent.right button.navCrBtn.connect{
+        padding: 5px;
+    }
+    .navContent.right button.navCrBtn.connect .faIcons{
+        display: none;
+    }
+    .navContent.right button.navCrBtn.login .faIcons{
+        font-size: 7vw;
+    }
+
+
+
+
+
+
+    section.footerContent{
+        display: block;
+        padding: 10% 7%;
+    }
+    .fcontent.left{
+        width: 100%;
+    }
+    .fcontent.left div{
+        justify-content: center;
+    }
+    .fcontent.left div img{
+        height: 7vw;
+        margin-right: 3%;
+    }
+    .fcontent.left div h5{
+        font-size: 3vw;
+    }
+    .fcontent.left p{
+        width: 100%;
+        font-size: 2.5vw;
+        text-align: center;
+    }
+    .fcontent.left div input{
+        font-size: 2.5vw;
+        margin-right: 2%;
+    }
+    .fcontent.left div button{
+        font-size: 2.5vw;
+        border-radius: 10px;
+    }
+    .fcontent.left div a{
+        font-size: 5vw;
+        margin: 0 2.5%;
+        cursor: pointer;
+    }
+
+
+    .fcontent.right{
+        display: none;
+    }
+
+    section.footerContentBot{
+        padding: 2% 7%;
+    }
+    section.footerContentBot p{
+        font-size: 3vw;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
