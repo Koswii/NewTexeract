@@ -141,7 +141,7 @@ const Home = () => {
                 <Link onClick={handleViewCreateWallet}>Get Started</Link>:
                 <Link to={`/p/${userLoggedData.myXeraAddress}`}>Get Started</Link>
               }
-              <Link onClick={handleViewXERATopics}>Learn More</Link>
+              <Link onClick={handleViewXERATopics} id='homepct1BtnsLearn'>Learn More</Link>
             </div>
           </div>
           <div className="homepct1LearnContainer">

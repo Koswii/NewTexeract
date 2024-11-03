@@ -770,7 +770,9 @@ section.homePageContainer.mid6{
         font-size: 2vw;
         margin: 0 2%;
     }
-
+    .homepct1Btns a#homepct1BtnsLearn{
+        display: none;
+    }
 
 
     .homepct1LearnContainer{
@@ -778,6 +780,7 @@ section.homePageContainer.mid6{
         width: 100%;
         padding: 0 7%;
         padding-bottom: 10%;
+        display: none;
     }
     .homepct1LearnContainer button{
         font-size: 5vw;
