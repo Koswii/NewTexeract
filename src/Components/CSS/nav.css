@@ -408,15 +408,15 @@ section.footerContentBot{
 
 @media screen and (max-width: 500px){
     .navContainer{
-        height: 15vw;
+        height: auto;
         width: 100%;
-        padding: 0 5%;
+        padding: 2% 5%;
     }
     .navContent.left a img{
-        height: 11vw;
+        height: 10vw;
     }
     .navContent.right{
-        width: auto;
+        width: 80%;
     }
     .navContent.right a.navCrBtn.dapps,
     .navContent.right a.navCrBtn.nodes,
