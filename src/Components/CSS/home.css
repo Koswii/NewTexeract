@@ -767,7 +767,7 @@ section.homePageContainer.mid6{
     }
     .homepct1Btns a{
         padding: 10px 5%;
-        font-size: 2vw;
+        font-size: 2.5vw;
         margin: 0 2%;
     }
     .homepct1Btns a#homepct1BtnsLearn{
@@ -820,10 +820,10 @@ section.homePageContainer.mid6{
         padding: 10% 5%;
     }
     .homePageContent.mid1 p{
-        font-size: 2vw;
+        font-size: 2.5vw;
     }
     .hmpcm1Contents img{
-        height: 5vw;
+        height: 5.5vw;
         margin: 4% 5%;
     }
 
@@ -839,24 +839,24 @@ section.homePageContainer.mid6{
         height: auto;
         display: block;
         border-radius: 2vw;
-        padding: 5% 10%;
+        padding: 5%;
         margin-bottom: 7%;
     }
     .hpcm2Contents.left{
         width: 100%;
     }
     .hpcm2Contents.left h4{
-        font-size: 4vw;
+        font-size: 3.5vw;
         line-height: 4vw;
         text-align: center;
+        margin-bottom: 2%;
     }
     .hpcm2Contents.left h6{
-        font-size: 2.5vw;
-        text-align: center;
-        margin: 3% 0;
+        display: none;
     }
     .hpcm2Contents.left p{
-        font-size: 2vw;
+        font-size: 2.5vw;
+        text-align: center;
     }
     .hpcm2Contents.right{
         display: none;
@@ -874,7 +874,7 @@ section.homePageContainer.mid6{
         width: 100%;
     }
     .hpcm3cl{
-        height: 35vw;
+        height: 40vw;
         width: 47%;
         border-radius: 1vw;
         border-top-left-radius: 2vw;
@@ -885,18 +885,18 @@ section.homePageContainer.mid6{
         font-size: 2vw;
     }
     .hpcm3cl img{
-        height: 25vw;
-        top: -20%;
+        height: 30vw;
+        top: -18%;
         right: -5%;
         z-index: 2;
     }
     .hpcm3cl img#hpcm3clMint{
-        height: 15vw;
+        height: 20vw;
         top: -5%;
         right: -5%;
     }
     .hpcm3cl div{
-        height: 23vw;
+        height: 25vw;
     }
     .hpcm3cl div h5{
         font-size: 3vw;
@@ -904,7 +904,7 @@ section.homePageContainer.mid6{
         margin-bottom: 5%;
     }
     .hpcm3cl div p{
-        font-size: 2vw;
+        font-size: 2.5vw;
     }
 
 
@@ -918,16 +918,17 @@ section.homePageContainer.mid6{
         text-align: center;
     }
     .hpcm3Contents.right p{
-        font-size: 2vw;
+        font-size: 2.5vw;
         text-align: center;
     }
     .hpcm3Contents.right div{
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
     }
     .hpcm3Contents.right a{
-        font-size: 2vw;
+        font-size: 2.1vw;
+        margin: 0;
     }
 
 
@@ -950,8 +951,8 @@ section.homePageContainer.mid6{
         margin-top: 10%;
     }
     .hpcm4Contents.right h4{
-        font-size: 4vw;
-        line-height: 4vw;
+        font-size: 4.5vw;
+        line-height: 5vw;
         text-align: center;
     }
     .hpcm4Contents.right h6{
@@ -959,7 +960,7 @@ section.homePageContainer.mid6{
         text-align: center;
     }
     .hpcm4Contents.right p{
-        font-size: 2vw;
+        font-size: 2.5vw;
         text-align: center;
     }
 
@@ -977,12 +978,12 @@ section.homePageContainer.mid6{
         margin: 4% 0;
     }
     .homePageContent.mid5 h4{
-        font-size: 5vw;
-        line-height: 4vw;
+        font-size: 5.5vw;
+        line-height: 5vw;
         margin-bottom: 5%;
     }
     .homePageContent.mid5 p{
-        font-size: 2vw;
+        font-size: 2.5vw;
         font-family: 'Lexend Peta', sans-serif;
         font-weight: 400;
     }
@@ -998,11 +999,11 @@ section.homePageContainer.mid6{
         height: 15vw;
     }
     .homePageContent.mid6 h5{
-        font-size: 2.5vw;
+        font-size: 3vw;
         margin: 2% 0;
     }
     .homePageContent.mid6 p{
-        font-size: 2vw;
+        font-size: 2.5vw;
     }
 
 

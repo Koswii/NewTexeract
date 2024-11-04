@@ -12,6 +12,24 @@ const Tokens = () => {
         dataLoading,
         viewXERATokenList
     } = XERAWalletData();
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredProducts, setFilteredProducts] = useState(viewXERATokenList);
+
+    // Handle search input change
+    const handleSearchChange = (e) => {
+        const value = e.target.value.toLowerCase();
+        setSearchTerm(value);
+        
+        const filtered = viewXERATokenList.filter(product =>
+            product.token_name.toLowerCase().includes(value) ||
+            product.token_symbol.toLowerCase().includes(value) ||
+            product.token_id.toLowerCase().includes(value) 
+        );
+        setFilteredProducts(filtered);
+    };
+
+
+
 
     return (
         <div className='mainContainer tokens'>
@@ -29,8 +47,8 @@ const Tokens = () => {
                     <div className="tknspctContent">
                         <div className="tknspctc left">
                             <div className="tknspctclSearch">
-                                <input type="text" placeholder='Search any Texeract Network based token...'/>
-                                <button>Search Token</button>
+                                <input type="text" placeholder='Search any Texeract Network based token...'onChange={handleSearchChange}/>
+                                {/* <button onClick={handleSearchChange}>Search Token</button> */}
                             </div>
                             <div className="tknspctclTokens">
                                 <h5>CURRENT TOKENS</h5>
@@ -41,15 +59,27 @@ const Tokens = () => {
                                         <div className="tknspctcltcLoading"></div>
                                         <div className="tknspctcltcLoading"></div>
                                     </>:<>
-                                        {viewXERATokenList.map((data, i) => (
-                                            <div className="tknspctcltc" key={i}>
-                                                <img src={require(`../assets/imgs/TokenLogos/${data.token_logo}`)} alt="" />
-                                                <div className="tknspctcltcInfo">
-                                                    <h6>{data.token_name} ({data.token_symbol}) <br /><span>{data.token_id}</span></h6>
-                                                    <p>{data.token_info}</p>
+                                        {(filteredProducts.length > 0) ? <>
+                                            {filteredProducts.map((data, i) => (
+                                                <div className="tknspctcltc" key={i}>
+                                                    <img src={require(`../assets/imgs/TokenLogos/${data.token_logo}`)} alt="" />
+                                                    <div className="tknspctcltcInfo">
+                                                        <h6>{data.token_name} ({data.token_symbol}) <br /><span>{data.token_id}</span></h6>
+                                                        <p>{data.token_info}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                        </>:<>
+                                            {viewXERATokenList.map((data, i) => (
+                                                <div className="tknspctcltc" key={i}>
+                                                    <img src={require(`../assets/imgs/TokenLogos/${data.token_logo}`)} alt="" />
+                                                    <div className="tknspctcltcInfo">
+                                                        <h6>{data.token_name} ({data.token_symbol}) <br /><span>{data.token_id}</span></h6>
+                                                        <p>{data.token_info}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </>}
                                     </>}
                                 </div>
                             </div>

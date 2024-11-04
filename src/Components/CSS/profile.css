@@ -1221,7 +1221,12 @@ h6{
 
 
 
-
+@media screen and (max-width: 500px){
+    .profileReload img{
+        height: 15vw;
+        animation: elastic-spin 2s infinite ease;
+    }
+}
 
 
 

@@ -72,3 +72,23 @@ h6{
     font-size: 0.6vw;
     text-shadow: 0 0 15px black;
 }
+
+
+
+
+
+@media screen and (max-width: 500px){
+    .udevContainer{
+        height: 80vw;
+        width: 80%;
+        border-radius: 2vw;
+    }
+    .udevc h4{
+        font-size: 8vw;
+        line-height: 7.5vw;
+        margin-bottom: 2%;
+    }
+    .udevc p{
+        font-size: 2vw;
+    }
+}

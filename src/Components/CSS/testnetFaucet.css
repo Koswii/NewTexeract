@@ -312,7 +312,92 @@ section.faucetPageContainer.top{
 
 
 
+@media screen and (max-width: 500px){
+    .mainContainer.faucet{
+        padding-bottom: 30vw;
+    }
 
+
+    .faucetPageContent.top{
+        padding: 4vw 7%;
+        padding-top: 10vh;
+        background: none;
+    }
+    .fctpcHeader h4{
+        font-size: 4vw;
+        text-align: center;
+    }
+    .fctpcHeader h6{
+        margin-top: 1%;
+        font-size: 2.5vw;
+        text-align: center;
+    }
+    .fctpcTop{
+        display: block;
+        margin-top: 10%;
+    }
+    .fctpct.dashboard{
+        display: none;
+    }
+
+
+
+    .fctpct.mint{
+        height: 120vw;
+        width: 100%;
+        padding: 4%;
+        border-radius: 2vw;
+        overflow: hidden;
+        border: solid 2px rgb(30, 30, 30);
+    }
+    .fctpctTokenDetails{
+        height: 120vw;
+        top: -120vw;
+        border-radius: 2vw;
+    }
+    .fctpct.mint button#fctpctTokenInfo{
+        top: 3vw;
+        right: 3vw;
+        font-size: 5vw;
+    }
+    .fctpcttdi p{
+        font-size: 2.5vw;
+        opacity: 50%;
+        margin: 1% 0;
+    }
+    .fctpct.mint img#fctpctTokenLogo{
+        height: 50vw;
+        margin: 10% auto;
+    }
+    .fctpct.mint p#fctpctNote{
+        font-size: 2.5vw;
+    }
+    .fctpct.mint p#fctpctResponse{
+        font-size: 2.5vw;
+    }
+    .fctpctmTXERA button{
+        font-size: 2.5vw;
+    }
+
+
+    .fctpcttdHeader img{
+        height: 10vw;
+        margin-right: 5%;
+    }
+    .fctpcttdHeader h5{
+        font-size: 4vw;
+    }
+    .fctpcttdHeader h6{
+        font-size: 2.5vw;
+        color: gray;
+    }
+
+
+    .fctpcttdInfo h6{
+        font-size: 3vw;
+    }
+
+}
 
 
 
