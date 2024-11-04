@@ -296,6 +296,7 @@ section.leaderboardsPageContainer.mid{
         width: 100%;
         margin-bottom: 2%;
         border-radius: 2vw;
+        border: solid 2px rgb(30, 30, 30);
     }
 
 
