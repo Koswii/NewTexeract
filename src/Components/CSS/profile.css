@@ -1328,11 +1328,11 @@ h6{
         height: 0vw;
         width: 0%;
         top: 8vw;
-        right: 1vw;
-        border-radius: 1vw;
+        right: 0;
+        border-radius: 2vw;
     }
     .prfpchrcAssetList.active{
-        height: 50vw;
+        height: 57.5vw;
         width: 100%;
     }
     .prfpchrcAssetList ul li span#prfpchrcaLogo{
@@ -1381,6 +1381,7 @@ h6{
     .ppcmAirdrop.left{
         width: 100%;
         padding: 0;
+        background: none;
     }
     .ppcmAirdrop.right{
         display: none;
@@ -1461,9 +1462,46 @@ h6{
     .profilePageContainer.mid{
         padding: 5vw 7%;
     }
-    .ppContentMidTransactions{
-        display: none;
+    .ppContentMidTransactions h5{
+        font-size: 3vw;
     }
+    .ppcmTransactionsContainer{
+        overflow-x: scroll;
+    }
+    .ppcmtcTitle{
+        width: 250vw;
+        margin-top: 5%;
+    }
+    .ppcmtcTitle span h6{
+        font-size: 2.5vw;
+    }
+    .ppcmtcTransaction{
+        height: 50vw;
+        width: 250vw;
+    }
+    .ppcmtctContents ul li p{
+        font-size: 2.3vw;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
