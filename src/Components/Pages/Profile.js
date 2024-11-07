@@ -113,7 +113,7 @@ const ScrambleTextUsername = ({ targetText, scrambleSpeed = 50, revealSpeed = 20
       scrambleInterval();
       return () => clearInterval(interval);
     }, [targetText, scrambleSpeed]);
-    return <h5 style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '1.5vw', fontWeight: '700', color: 'white' }}>{scrambledText}</h5>;
+    return <>{scrambledText}</>;
 };
 // const ScrambleTextAirdrop = ({ targetText, scrambleSpeed = 80, revealSpeed = 200 }) => {
 //     const [scrambledText, setScrambledText] = useState([]);
@@ -434,7 +434,7 @@ const Profile = () => {
                                     </ul>
                                 </div>
                                 <div className="prfpchrcProfile">
-                                    <ScrambleTextUsername targetText={`${ userLoggedData.myXeraUsername}`} scrambleSpeed={80} revealSpeed={200} />
+                                    <h5><ScrambleTextUsername targetText={`${ userLoggedData.myXeraUsername}`} scrambleSpeed={80} revealSpeed={200} /></h5>
                                     <h6>{userLoggedData.myXeraAddress}</h6>
                                 </div>
                                 <div className="prfpchrcBalance">

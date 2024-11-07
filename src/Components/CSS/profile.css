@@ -1226,6 +1226,245 @@ h6{
         height: 15vw;
         animation: elastic-spin 2s infinite ease;
     }
+
+
+    .profilePageContainer.top{
+        padding: 4vw 7%;
+        padding-top: 10vh;
+        background: none;
+        display: block;
+    }
+    .profilePageContent.left{
+        height: 100%;
+        width: 100%;
+        border-radius: 2vw;
+    }
+    .prfpclHeader{
+        height: auto;
+        width: 100%;
+        display: block;
+    }
+    .prfpchead.left{
+        height: 50vh;
+        width: 100%;
+    }
+    .prfpchlImg{
+        height: 100%;
+        width: 100%;
+        border-radius: 2vw;
+    }
+    .prfpchlNFTEmpty span p{
+        font-size: 2.5vw;
+    }
+
+
+
+    .prfpchead.right{
+        height: auto;
+        width: 100%;
+        margin-top: 10%;
+    }
+    .prfpchrNav button{
+        font-size: 2vw;
+    }
+
+
+
+
+
+
+    .profilePageContent.right{
+        display: none;
+    }
+    .prfpchrContents{
+        height: auto;
+        border-radius: 2vw;
+    }
+    .prfpchrContents.notAvailable{
+        height: 67vw;
+    }
+    .prfpchrcEmpty span h6{
+        font-size: 10vw;
+    }
+    .prfpchrcEmpty span p{
+        font-size: 2.3vw;
+    }
+    .prfpchrcProfile{
+        height: 10vw;
+        width: 100%;
+    }
+    .prfpchrcProfile h5{
+        font-size: 5vw;
+    }
+    .prfpchrcProfile h6{
+        font-size: 2.5vw;
+    }
+    .prfpchrcBalance{
+        padding-bottom: 25vw;
+    }
+    .prfpchrcBalance p{
+        font-size: 2.5vw;
+    }
+    .prfpchrcBalance h3{
+        font-size: 10vw;
+    }
+    .prfpchrcbFunctions button{
+        width: auto;
+        padding: 2% 5%;
+        margin-right: 2%;
+        font-size: 2.3vw;
+    }
+    .prfpchrcbFunctions button .faIcons{
+        display: none;
+    }
+
+
+
+    .prfpchrContents button#prfpchrcAssetBtn{
+        top: 0.5vw;
+        font-size: 5vw;
+    }
+    .prfpchrcAssetList{
+        width: 0;
+        top: 8vw;
+        right: 1vw;
+        border-radius: 1vw;
+    }
+    .prfpchrcAssetList.active{
+        height: 50vw;
+        width: 100%;
+    }
+    .prfpchrcAssetList ul li span#prfpchrcaLogo{
+        width: 10vw;
+    }
+    .prfpchrcAssetList ul li img{
+        height: 10vw;
+    }
+    .prfpchrcAssetList ul li h6{
+        font-size: 3vw;
+    }
+    .prfpchrcAssetList ul li p{
+        font-size: 2.5vw;
+    }
+    .prfpchrcStats{
+        height: auto;
+    }
+    .prfpchrcs p{
+        font-size: 2.5vw;
+    }
+    .prfpchrcs h5{
+        font-size: 5vw;
+    }
+    .prfpchrcsf div span{
+        height: 5vw;
+        width: 5vw;
+        background: white;
+        border-radius: 50%;
+        margin-left: -35%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* position: absolute; */
+    }
+
+
+
+
+
+
+
+
+    .ppContentMidAirdrop{
+        display: block;
+    }
+    .ppcmAirdrop.left{
+        width: 100%;
+        padding: 0;
+    }
+    .ppcmAirdrop.right{
+        display: none;
+    }
+
+    .ppcmAirdrop.left h5{
+        font-size: 3vw;
+    }
+    .ppcmalcContent{
+        height: 50vw;
+        width: 48%;
+        border-radius: 2vw;
+        margin-top: 5%;
+    }
+    .ppcmalccDetails{
+        height: 50vw;
+        top: 50vw;
+        border-radius: 2vw;
+        padding: 2vw;
+    }
+    .ppcmalccTitle{
+        top: 1vw;
+        left: 1vw;
+    }
+    .ppcmalccTitle p{
+        font-size: 2.3vw;
+    }
+    .ppcmalcContent button#airdropTaskInfo{
+        top: 1vw;
+        right: 1vw;
+        font-size: 3vw;
+    }
+    .ppcmalccTask{
+        padding: 2vw;
+    }
+    .ppcmalccTask h6 span{
+        font-size: 2.3vw;
+    }
+    .ppcmalccTask h6{
+        font-size: 3.5vw;
+    }
+    .ppcmalccTask p{
+        width: 100%;
+        font-size: 3vw;
+        border-radius: 1vw;
+    }
+    .ppcmalccTask button{
+        width: 100%;
+        font-size: 3vw;
+        border-radius: 1vw;
+    } 
+    .ppcmalccDetails h6{
+        font-size: 3vw;
+    }
+    .ppcmalccDetails p#ppcmalccdStatus{
+        height: auto;
+        font-size: 2.3vw;
+        margin: 2% 0;
+    }
+    .ppcmalccDetails p#ppcmalccdStatus .faIcons{
+        margin-right: 3%;
+        font-size: 2.3vw;
+    }
+    .ppcmalccDetails span{
+        font-size: 2.3vw;
+        line-height: 2.5vw;
+    }
+    .ppcmalccDetails p#ppcmalccdDesription{
+        font-size: 2.3vw;
+    }
+    .ppcmalccDetails p#ppcmalccdError{
+        font-size: 2.3vw;
+    }
+
+
+
+
+    .profilePageContainer.mid{
+        padding: 5vw 7%;
+    }
+    .ppContentMidTransactions{
+        display: none;
+    }
+
+
 }
 
 
