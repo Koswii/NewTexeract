@@ -1325,7 +1325,8 @@ h6{
         font-size: 5vw;
     }
     .prfpchrcAssetList{
-        width: 0;
+        height: 0vw;
+        width: 0%;
         top: 8vw;
         right: 1vw;
         border-radius: 1vw;
