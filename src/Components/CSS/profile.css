@@ -1238,6 +1238,7 @@ h6{
         height: 100%;
         width: 100%;
         border-radius: 2vw;
+        padding: 0;
     }
     .prfpclHeader{
         height: auto;
@@ -1245,8 +1246,7 @@ h6{
         display: block;
     }
     .prfpchead.left{
-        height: 50vh;
-        width: 100%;
+        display: none;
     }
     .prfpchlImg{
         height: 100%;
@@ -1262,7 +1262,7 @@ h6{
     .prfpchead.right{
         height: auto;
         width: 100%;
-        margin-top: 10%;
+        margin-top: 0;
     }
     .prfpchrNav button{
         font-size: 2vw;
