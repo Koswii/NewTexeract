@@ -1388,7 +1388,7 @@ h6{
     }
 
     .ppcmAirdrop.left h5{
-        font-size: 3vw;
+        font-size: 5vw;
     }
     .ppcmalcContent{
         height: 50vw;
@@ -1462,8 +1462,12 @@ h6{
     .profilePageContainer.mid{
         padding: 5vw 7%;
     }
+    .ppContentMidTransactions{
+        background: none;
+        padding: 0;
+    }
     .ppContentMidTransactions h5{
-        font-size: 3vw;
+        font-size: 5vw;
     }
     .ppcmTransactionsContainer{
         overflow-x: scroll;
