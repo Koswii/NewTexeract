@@ -129,7 +129,7 @@ const Nav = () => {
         {viewConnectWallet && <ConnectWallet />}
 
 
-        <div className="navContainer website">
+        <div className="navContainer">
           <div className="navContent left">
               <Link to="/">
                 <img src={require('./assets/imgs/TexeractLogoWhite.png')} alt="" />

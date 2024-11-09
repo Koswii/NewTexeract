@@ -14,7 +14,7 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 997;
+    z-index: 998;
 }
 .mainNavContainer{
     height: auto;
@@ -34,11 +34,8 @@ nav{
     padding: 0 7%;
     animation: fade-in-down 1s ease;
 }
-.navContainer.mobile{
-    display: none;
-}
 
-/* Website */
+
 
 .navContent.left{
     height: auto;
@@ -407,11 +404,6 @@ section.footerContentBot{
 
 
 @media screen and (max-width: 500px){
-    nav{
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
     .navContainer{
         height: auto;
         width: 100%;
