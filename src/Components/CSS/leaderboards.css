@@ -699,10 +699,7 @@ section.leaderboardsPageContainer.mid{
         flex-wrap: wrap;
     }
     .lbrdpct2.top1{
-        height: auto;
-        width: 100%;
-        padding: 5% 4%;
-        border-radius: 2vw;
+        display: none;
     }
 
 
@@ -822,7 +819,7 @@ section.leaderboardsPageContainer.mid{
         width: 8vw;
     }
     .ldrbrdspcmcEmpty{
-        height: 50vw;
+        height: 240vw;
         border-radius: 1vw;
     }
     .ldrbrdspcmcEmpty p{
