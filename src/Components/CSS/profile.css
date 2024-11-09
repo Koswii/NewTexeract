@@ -40,23 +40,26 @@ h6{
 .profileReload{
     height: 100vh;
     width: 100%;
-    background: red;
+    background: black;
     position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
     text-align: center;
 }
 .profileReload.active{
     top: 0;
     left: 0;
-    transition: 600ms ease;
+    opacity: 1;
+    transition: 400ms ease;
+    z-index: 999;
 }
 .profileReload.disable{
     top: -100%;
     left: 0;
-    transition: 800ms ease;
+    opacity: 0;
+    transition: 600ms ease;
+    z-index: 997;
 }
 .profileReload img{
     height: 10vw;

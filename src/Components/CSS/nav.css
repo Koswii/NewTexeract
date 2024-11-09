@@ -408,10 +408,10 @@ section.footerContentBot{
         height: auto;
         width: 100%;
         padding: 2% 5%;
-        /* background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px); */
-        background: white;
+        -webkit-backdrop-filter: blur(5px);
+        /* background: white; */
     }
     .navContent.left a img{
         height: 10vw;
