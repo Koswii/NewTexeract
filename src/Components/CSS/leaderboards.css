@@ -764,6 +764,16 @@ section.leaderboardsPageContainer.mid{
     .lbrdpct2Leader h5{
         font-size: 3vw;
     }
+    .lbrdpct2rRefLeaderLoading{
+        border-radius: 1vw;
+    }
+    .lbrdpct2rRefLeaderLoading span{
+        height: 6vw;
+        width: 6vw;
+    }
+    .lbrdpct2rRefLeader{
+        border-radius: 1vw;
+    }
     .lbrdpct2rRefLeader span{
         height: 6vw;
         width: 6vw;
@@ -797,7 +807,7 @@ section.leaderboardsPageContainer.mid{
         font-size: 2.5vw;
     }
     .ldrbrdspcmContent{
-        height: 110vh;
+        height: 240vw;
         width: 250vw;
     }
     .ldrbrdspcmContent ul li h6{
