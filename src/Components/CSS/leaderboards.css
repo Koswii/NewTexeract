@@ -106,7 +106,8 @@ section.leaderboardsPageContainer.top{
 .lbrdpct img{
     height: 2vw;
 }
-.lbrdpct.duration div{
+.lbrdpctdHeader,
+.lbrdpctdCountDown{
     height: auto;
     width: 48%;
 }
@@ -471,6 +472,10 @@ section.leaderboardsPageContainer.mid{
 .leaderboardsPageContent.mid h5{
     font-family: 'Lexend Peta', sans-serif;
 }
+.leaderboardspcm{
+    height: auto;
+    width: 100%;
+}
 .ldrbrdspcmHeader{
     height: auto;
     width: 100%;
@@ -602,6 +607,7 @@ section.leaderboardsPageContainer.mid{
     height: auto;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: right;
     align-items: center;
     margin-top: 2%;
@@ -622,4 +628,220 @@ section.leaderboardsPageContainer.mid{
     opacity: 100%;
     background: white;
     color: black;
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 500px){
+    .leaderboardsPageContent.top{
+        padding: 4vw 7%;
+        padding-top: 10vh;
+        background: none;
+    }
+    .leaderboardsPageContent.top h4{
+        font-size: 4vw;
+        text-align: center;
+    }
+    .lbrdpcTop1{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10%;
+    }
+    .lbrdpct.participants,
+    .lbrdpct.user,
+    .lbrdpct.token{
+        height: auto;
+        padding: 4%;
+        border-radius: 2vw;
+        width: 32%;
+    }
+    .lbrdpct.duration{
+        height: auto;
+        width: 100%;
+        margin: 2% 0;
+        border-radius: 2vw;
+        padding: 3%;
+    }
+    .lbrdpct h3{
+        font-size: 4vw;
+    }
+    .lbrdpct h2{
+        font-size: 4vw;
+    }
+    .lbrdpct p{
+        font-size: 2vw;
+    }
+    .lbrdpct.duration div h6{
+        font-size: 3vw;
+        margin-bottom: 1%;
+    }
+    .lbrdpctdHeader{
+        width: 55%;
+    }
+    .lbrdpctdCountDown{
+        width: 45%;
+    }
+    .lbrdpctdCountDown span h5{
+        font-size: 3vw;
+    }
+
+
+
+
+    .lbrdpcTop2{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .lbrdpct2.top1{
+        height: auto;
+        width: 100%;
+        padding: 5% 4%;
+        border-radius: 2vw;
+    }
+
+
+    .lbrdpct2t1hNFT span{
+        height: 12vw;
+        width: 12vw;
+    }
+    .lbrdpct2t1hNFT p{
+        height: 5vw;
+        width: 5vw;
+        font-size: 3vw;
+    }
+    .lbrdpct2t1hName h5{
+        font-size: 5vw;
+    }
+    .lbrdpct2t1hName p{
+        font-size: 2.5vw;
+    }
+    .lbrdpct2t1Contents{
+        justify-content: space-between;
+        margin-top: 10%;
+        margin-bottom: 0;
+    }
+    .lbrdpct2t1Contents div{
+        text-align: center;
+    }
+    .lbrdpct2t1Contents h4 {
+        font-size: 4vw;
+        margin-bottom: 3%;
+    }
+    .lbrdpct2t1Contents p{
+        font-size: 2.5vw;
+    }
+    .lbrdpct2t1Rewards{
+        display: none;
+    }
+
+
+    .lbrdpct2.top2,
+    .lbrdpct2.top3{
+        display: none;
+    }
+
+
+
+    .lbrdpct2.referral{
+        height: auto;
+        width: 100%;
+        padding: 3%;
+        margin-top: 3%;
+        border-radius: 2vw;
+    }
+    .lbrdpct2.referral h6{
+        font-size: 3vw;
+    }
+    .lbrdpct2rContainer{
+        height: 40vw;
+    }
+    .lbrdpct2Leader h5{
+        font-size: 3vw;
+    }
+    .lbrdpct2rRefLeader span{
+        height: 6vw;
+        width: 6vw;
+    }
+    .lbrdpct2rName p{
+        font-size: 2.5vw;
+    }
+    .lbrdpct2rCount h5{
+        font-size: 3vw;
+    }
+
+
+
+
+    .leaderboardsPageContent.mid{
+        padding: 3%;
+        border-radius: 2vw;
+    }
+    .leaderboardsPageContent.mid h5{
+        font-size: 4vw;
+        text-align: center;
+    }
+    .leaderboardspcm{
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+    .ldrbrdspcmHeader{
+        width: 250vw;
+    }
+    .ldrbrdspcmHeader ul li h6{
+        font-size: 2.5vw;
+    }
+    .ldrbrdspcmContent{
+        height: 110vh;
+        width: 250vw;
+    }
+    .ldrbrdspcmContent ul li h6{
+        font-size: 3vw;
+    }
+    .ldrbrdspcmContent ul li p{
+        font-size: 2.5vw;
+        opacity: 50%;
+    }
+    .ldrbrdspcmContent ul li#ldrbrdspcmcParticipant span{
+        height: 8vw;
+        width: 8vw;
+    }
+    .ldrbrdspcmcEmpty{
+        height: 50vw;
+        border-radius: 1vw;
+    }
+    .ldrbrdspcmcEmpty p{
+        font-size: 2.5vw;
+    }
+
+
+
+    .ldrbrdspcmPage button{
+        height: 5vw;
+        width: 5vw;
+        font-size: 3vw;
+        border-radius: 5px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

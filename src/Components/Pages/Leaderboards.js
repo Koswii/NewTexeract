@@ -113,12 +113,12 @@ const Leaderboards = () => {
                             <p>Reward Allocation</p>
                         </div>
                         <div className="lbrdpct duration">
-                            <div>
+                            <div className='lbrdpctdHeader'>
                                 <h6>REMAINING TIME FOR<br />AIRDROP PHASE 1 🔥</h6>
                                 <p>Complete all task and claim reward after</p>
                             </div>
                             <div className='lbrdpctdCountDown'>
-                                <Countdown targetDate="2024-11-20T00:00:00" />
+                                <Countdown targetDate="2024-11-30T00:00:00" />
                             </div>
                         </div>
                     </div>
@@ -328,46 +328,48 @@ const Leaderboards = () => {
             <section className="leaderboardsPageContainer mid">
                 <div className="leaderboardsPageContent mid">
                     <h5>GLOBAL RANKING</h5>
-                    <div className="ldrbrdspcmHeader">
-                        <ul>
-                            <li id='ldrbrdspcmhRank'><h6>RANK</h6></li>
-                            <li id='ldrbrdspcmhParticipants'><h6>PARTICIPANT</h6></li>
-                            <li id='ldrbrdspcmhNodes'><h6>NODES</h6></li>
-                            <li id='ldrbrdspcmhReferrals'><h6>REFERRALS</h6></li>
-                            <li id='ldrbrdspcmhPoints'><h6>POINTS</h6></li>
-                            <li id='ldrbrdspcmhRewards'><h6>REWARDS</h6></li>
-                        </ul>
-                    </div>
-                    <div className="ldrbrdspcmContent">
-                        {(dataLoading) ?
-                            <div className="ldrbrdspcmcEmpty">
-                                <span>
-                                    <p>Retrieving Latest Rankings...</p>
-                                </span>
-                            </div>:<>
-                                {currentData.map((data, i) => (
-                                    <ul key={i}>
-                                        <li id='ldrbrdspcmcRank'><p>{data.rank}</p></li>
-                                        <li id='ldrbrdspcmcParticipant'>
-                                            <span>
-                                                {(data.display) ? 
-                                                    <img src="" alt="" />:
-                                                    <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-                                                }
-                                            </span>
-                                            <div>
-                                                <h6><TextFormatter text={`${data.username}`} /></h6>
-                                                <p>{data.xera_wallet}</p>
-                                            </div>
-                                        </li>
-                                        <li id='ldrbrdspcmcNode'><p>0</p></li>
-                                        <li id='ldrbrdspcmcReferral'><p>{data.referralTaskCount}</p></li>
-                                        <li id='ldrbrdspcmcPoints'><p>{data.totalPoints} XP</p></li>
-                                        <li id='ldrbrdspcmcRewards'><p>0 XERA</p></li>
-                                    </ul>
-                                ))}
-                            </>
-                        }
+                    <div className="leaderboardspcm">
+                        <div className="ldrbrdspcmHeader">
+                            <ul>
+                                <li id='ldrbrdspcmhRank'><h6>RANK</h6></li>
+                                <li id='ldrbrdspcmhParticipants'><h6>PARTICIPANT</h6></li>
+                                <li id='ldrbrdspcmhNodes'><h6>NODES</h6></li>
+                                <li id='ldrbrdspcmhReferrals'><h6>REFERRALS</h6></li>
+                                <li id='ldrbrdspcmhPoints'><h6>POINTS</h6></li>
+                                <li id='ldrbrdspcmhRewards'><h6>REWARDS</h6></li>
+                            </ul>
+                        </div>
+                        <div className="ldrbrdspcmContent">
+                            {(dataLoading) ?
+                                <div className="ldrbrdspcmcEmpty">
+                                    <span>
+                                        <p>Retrieving Latest Rankings...</p>
+                                    </span>
+                                </div>:<>
+                                    {currentData.map((data, i) => (
+                                        <ul key={i}>
+                                            <li id='ldrbrdspcmcRank'><p>{data.rank}</p></li>
+                                            <li id='ldrbrdspcmcParticipant'>
+                                                <span>
+                                                    {(data.display) ? 
+                                                        <img src="" alt="" />:
+                                                        <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                                    }
+                                                </span>
+                                                <div>
+                                                    <h6><TextFormatter text={`${data.username}`} /></h6>
+                                                    <p>{data.xera_wallet}</p>
+                                                </div>
+                                            </li>
+                                            <li id='ldrbrdspcmcNode'><p>0</p></li>
+                                            <li id='ldrbrdspcmcReferral'><p>{data.referralTaskCount}</p></li>
+                                            <li id='ldrbrdspcmcPoints'><p>{data.totalPoints} XP</p></li>
+                                            <li id='ldrbrdspcmcRewards'><p>0 XERA</p></li>
+                                        </ul>
+                                    ))}
+                                </>
+                            }
+                        </div>
                     </div>
                     <div className="ldrbrdspcmPage">
                         {Array.from({ length: totalPages }, (_, index) => (
