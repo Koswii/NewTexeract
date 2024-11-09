@@ -256,7 +256,7 @@ const Profile = () => {
         setViewProfileTokens(true);
         const timeoutId = setTimeout(() => {
             setViewProfileTokens(false);
-        }, 10000);
+        }, 60000);
         return () => clearTimeout(timeoutId);
     }
     const handleHideProfileTokens = () => {

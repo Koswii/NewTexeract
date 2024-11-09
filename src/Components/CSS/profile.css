@@ -320,16 +320,17 @@ h6{
     right: 1vw;
     border-radius: 10px;
     background: rgb(20, 20, 20);
-    padding: 2%;
     opacity: 0;
     transition: 400ms ease;
 }
 .prfpchrcAssetList.active{
     height: 13vw;
+    width: 60%;
     opacity: 1;
     transition: 400ms ease;
     overflow-y: scroll;
     overflow-x: hidden;
+    padding: 2%;
     z-index: 5;
 }
 .prfpchrcAssetList ul{
@@ -1225,6 +1226,7 @@ h6{
 
 
 @media screen and (max-width: 500px){
+
     .profileReload img{
         height: 15vw;
         animation: elastic-spin 2s infinite ease;
@@ -1329,7 +1331,7 @@ h6{
     }
     .prfpchrcAssetList{
         height: 0vw;
-        width: 0%;
+        width: 100%;
         top: 8vw;
         right: 0;
         border-radius: 2vw;
@@ -1458,8 +1460,16 @@ h6{
     .ppcmalccDetails p#ppcmalccdError{
         font-size: 2.3vw;
     }
-
-
+    .ppcmalccInputs input{
+        font-size: 2.3vw;
+        border-radius: 1vw;
+        padding: 7px 10px;
+    }
+    .ppcmalccInputs button{
+        font-size: 2.3vw;
+        border-radius: 1vw;
+        padding: 8px 10px;
+    }
 
 
     .profilePageContainer.mid{
