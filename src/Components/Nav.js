@@ -20,7 +20,8 @@ import {
   TbLogout  
 } from "react-icons/tb";
 import { 
-  RiArrowDownSFill 
+  RiArrowDownSFill,
+  RiArrowUpSFill 
 } from "react-icons/ri";
 import { Link, useNavigate } from 'react-router-dom';
 import CreateWallet from './Pages/CreateWallet';
@@ -49,6 +50,7 @@ const Nav = () => {
     setViewConnectWallet,
   } = XERAWalletData();
   const [viewFullNavigation, setViewFullNavigation] = useState(false);
+  const [viewMobileNavigation, setViewMobileNavigation] = useState(false);
   const XERALoginBasicAccountAPI = process.env.REACT_APP_XERA_USER_LOGOUT_API;
 
   const handleViewFullNav = () => {
@@ -94,6 +96,17 @@ const Nav = () => {
     setViewConnectWallet(true);
   }
 
+  const handleViewMobileNavigation = () => {
+    setViewMobileNavigation(true);
+
+    const timeout = setTimeout(() => {
+      setViewMobileNavigation(false)
+    }, 60000);
+    return () => {clearTimeout(timeout);};
+  }
+  const handleHideMobileNavigation = () => {
+    setViewMobileNavigation(false);
+  }
 
 
   useEffect(() => {
@@ -141,11 +154,22 @@ const Nav = () => {
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleViewFullNav}><p>EXPLORE</p></button>:
             <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleHideFullNav}><p>EXPLORE</p></button>} */}
 
+            <div className={viewMobileNavigation ? "navContentrMobile active" : "navContentrMobile disabled"}>
+              <Link to='/Leaderboards' onClick={handleHideMobileNavigation}><p>LEADERBOARDS</p></Link>
+              <Link to='/TestnetFaucet' onClick={handleHideMobileNavigation}><p>TESTNET FAUCET</p></Link>
+              <Link to='/Tokens' onClick={handleHideMobileNavigation}><p>TOKENS</p></Link>
+            </div>
+
+
+
             <Link className='navCrBtn dapps disabled'><p>DAPPS</p></Link>
             <Link className='navCrBtn nodes disabled'><p>NODES</p></Link>
             <Link className='navCrBtn marketplace disabled'><p>MARKETPLACE</p></Link>
             <Link className='navCrBtn leaderboards' to='/Leaderboards'><p>LEADERBOARDS</p></Link>
-            <button id='nvctntrMobile'><RiArrowDownSFill className='faIcons'/></button>
+            {!viewMobileNavigation ? 
+              <button id='nvctntrMobile' onClick={handleViewMobileNavigation}><RiArrowDownSFill className='faIcons'/></button>:
+              <button id='nvctntrMobile' onClick={handleHideMobileNavigation}><RiArrowUpSFill className='faIcons'/></button>
+            }
             {(userLoggedData === null) ? <>
               <button className='navCrBtn connect' onClick={handleViewCreateWallet}><p>CREATE WALLET</p><TbWallet className='faIcons'/></button>
               <button className='navCrBtn login' onClick={handleViewLoginWallet}><TbUserCircle className='faIcons'/></button>

@@ -66,7 +66,46 @@ nav{
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border-radius: 50px;
     box-shadow: 0 0 10px black;
+    position: relative;
 }
+
+
+.navContentrMobile{
+    position: absolute;
+    height: auto;
+    width: 100%;
+    background: white;
+    top: 5vh;
+    left: 0;
+    padding: 5%;
+    background: rgba(20, 20, 20);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 2vw;
+    display: none;
+}
+.navContentrMobile a{
+    text-decoration: none;
+}
+.navContentrMobile a p{
+    font-size: 3vw;
+    font-family: 'Lexend Peta', sans-serif;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.navContentrMobile.active{
+    display: block;
+    transition: 400ms ease;
+    animation: fade-in-down2 1s ease;
+}
+.navContentrMobile.disable{
+    display: none;
+    transition: 600ms ease;
+}
+
+
+
+
 
 
 .navContent.right a.navCrBtn.dapps,
