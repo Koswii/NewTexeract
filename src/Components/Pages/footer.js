@@ -25,11 +25,11 @@ const Footer = () => {
             <button>Subscribe</button>
           </div><br />
           <div>
-            <a><FaTelegramPlane className='faIcons'/></a>
-            <a><FaTelegramPlane className='faIcons'/></a>
-            <a><FaFacebookF className='faIcons'/></a>
-            <a><FaTwitter className='faIcons'/></a>
-            <a><FaTiktok className='faIcons'/></a>
+            <a href='https://t.me/TexeractNetwork' target='blank'><FaTelegramPlane className='faIcons'/></a>
+            <a href='https://t.me/TexeractNetworkCommunity' target='blank'><FaTelegramPlane className='faIcons'/></a>
+            {/* <a><FaFacebookF className='faIcons'/></a> */}
+            <a href='https://twitter.com/TexeractNetwork' target='blank'><FaTwitter className='faIcons'/></a>
+            <a href='https://www.tiktok.com/@xeranetwork' target='blank'><FaTiktok className='faIcons'/></a>
           </div>
         </div>
         <div className="fcontent right">
