@@ -118,7 +118,7 @@ const Leaderboards = () => {
                                 <p>Complete all task and claim reward after</p>
                             </div>
                             <div className='lbrdpctdCountDown'>
-                                <Countdown targetDate="2024-12-25T00:00:00" />
+                                <Countdown targetDate="2024-12-15T00:00:00" />
                             </div>
                         </div>
                     </div>

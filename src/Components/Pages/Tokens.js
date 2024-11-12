@@ -47,7 +47,7 @@ const Tokens = () => {
                     <div className="tknspctContent">
                         <div className="tknspctc left">
                             <div className="tknspctclSearch">
-                                <input type="text" placeholder='Search any Texeract Network based token...'onChange={handleSearchChange}/>
+                                <input type="text" placeholder='Search any Texeract Network based token...' onChange={handleSearchChange}/>
                                 {/* <button onClick={handleSearchChange}>Search Token</button> */}
                             </div>
                             <div className="tknspctclTokens">
