@@ -362,7 +362,9 @@ h6{
     border: solid 2px skyblue;
     transition: 400ms ease;
 }
-
+.ncwcc.verifyWallet p#creationError{
+    color: red;
+}
 
 
 .ncwcNote{

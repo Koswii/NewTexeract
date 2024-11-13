@@ -101,6 +101,7 @@ const CreateWallet = () => {
     const [xeraPasswordErrorResponse, setXERAPasswordErrorResponse] = useState('');
     const [xeraPasswordErrorResponse1, setXERAPasswordErrorResponse1] = useState('');
     const [xeraPasswordResponse, setXERAPasswordResponse] = useState(false);
+    const [xeraCreateErrorResponse, setXERACreateErrorResponse] = useState('');
 
     const [userInputs, setUserInputs] = useState(Array(12).fill(''));
     const [isConfirmed, setIsConfirmed] = useState(false);
@@ -210,7 +211,8 @@ const CreateWallet = () => {
                 setSuccessCreateModal(true)
                 setCreateWalletModal(false)
             } else {
-                console.log(responseMessage.message);
+                // console.log(responseMessage.message);
+                setXERACreateErrorResponse(responseMessage.message)
                 setCreationLoader(false)
             }
     
@@ -475,6 +477,7 @@ const CreateWallet = () => {
                                     </div>
                                 ))}
                             </div>
+                            {xeraCreateErrorResponse && <p id='creationError'>{xeraCreateErrorResponse}</p>}
                         </div>}
                     </div>
                     <div className="ncwcNote">
