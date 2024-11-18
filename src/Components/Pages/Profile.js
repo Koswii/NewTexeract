@@ -419,14 +419,14 @@ const Profile = () => {
                                         {tokenBalances.map((data, i) => (
                                             <li key={i}>
                                                 <span id='prfpchrcaLogo'>
-                                                    <img src={require(`../assets/imgs/TokenLogos/${data.token_logo}`)} alt="" />
+                                                    <img src={require(`../assets/imgs/TokenLogos/${data?.token_logo}`)} alt="" />
                                                 </span>
                                                 <span id='prfpchrcaDetails'>
-                                                    <h6>{data.token_name}</h6>
-                                                    <p>{data.totalBalance} {data.token_symbol}</p>
+                                                    <h6>{data?.token_name}</h6>
+                                                    <p>{data?.totalBalance} {data?.token_symbol}</p>
                                                 </span>
                                                 <span id="prfpchrcaValue">
-                                                    <h6>$ {data.token_price}</h6>
+                                                    <h6>$ {data?.token_price}</h6>
                                                     <p>- %</p>
                                                 </span>
                                             </li>
@@ -434,8 +434,8 @@ const Profile = () => {
                                     </ul>
                                 </div>
                                 <div className="prfpchrcProfile">
-                                    <h5><ScrambleTextUsername targetText={`${ userLoggedData.myXeraUsername}`} scrambleSpeed={80} revealSpeed={200} /></h5>
-                                    <h6>{userLoggedData.myXeraAddress}</h6>
+                                    <h5><ScrambleTextUsername targetText={`${ userLoggedData?.myXeraUsername}`} scrambleSpeed={80} revealSpeed={200} /></h5>
+                                    <h6>{userLoggedData?.myXeraAddress}</h6>
                                 </div>
                                 <div className="prfpchrcBalance">
                                     <p>BALANCE</p>
@@ -455,7 +455,7 @@ const Profile = () => {
                                                 <div>
                                                     {userTotalFollowers.slice(0, 3).map((data, i) => (
                                                         <span key={i}>
-                                                            {data.display.xera_nft_meta ?
+                                                            {data?.display?.xera_nft_meta ?
                                                                 <img key={i} src="" alt="" />:
                                                                 <img key={i} src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
                                                             }
@@ -539,7 +539,7 @@ const Profile = () => {
                     <div className="ppcmAirdrop left">
                         <h5>AIRDROP TASK</h5>
                         <div className="ppcmalContainer">
-                            <div className={userLoggedData.myXeraAddress ? "ppcmalcContent create active" : "ppcmalcContent create"}>
+                            <div className={userLoggedData?.myXeraAddress ? "ppcmalcContent create active" : "ppcmalcContent create"}>
                                 <button id='airdropTaskInfo' onClick={handleAirdropTask1}><TbInfoCircle className='faIcons'/></button>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 1</p>
@@ -551,7 +551,7 @@ const Profile = () => {
                                 <div className={!viewCreateWalleteDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
                                     {/* <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button> */}
                                     <h6>CREATE A<br />XERA WALLET</h6>
-                                    {userLoggedData.myXeraAddress ?
+                                    {userLoggedData?.myXeraAddress ?
                                         <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>:
                                         <p id='ppcmalccdStatus'>TASK 1</p>
                                     }
@@ -646,8 +646,8 @@ const Profile = () => {
                                     <h6><span>10,000 XP</span><br />BIND YOUR<br />CRYTO WALLET</h6>
                                     {userWalletStatus ?
                                         <>
-                                            {xeraUserWallets.eth_wallet && <p id='connectedNetwork'><TbCurrencyEthereum className='faIcons'/>CONNECTED</p>}
-                                            {xeraUserWallets.sol_wallet && <p id='connectedNetwork'><TbCurrencySolana className='faIcons'/>CONNECTED</p>}
+                                            {xeraUserWallets?.eth_wallet && <p id='connectedNetwork'><TbCurrencyEthereum className='faIcons'/>CONNECTED</p>}
+                                            {xeraUserWallets?.sol_wallet && <p id='connectedNetwork'><TbCurrencySolana className='faIcons'/>CONNECTED</p>}
                                         </>
                                         :<button onClick={handleBindWallet} className='active'>CONNECT</button>
                                     }
@@ -660,8 +660,8 @@ const Profile = () => {
                                         <p id='ppcmalccdStatus'>TASK 4</p>
                                     }
                                     <p id='ppcmalccdDesription'>Connect your crypto wallet to seamlessly transact across any blockchain network. <br /> (ETHEREUM or SOLANA Only)</p>
-                                    {xeraUserWallets.eth_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencyEthereum className='faIcons'/> Ethereum Wallet Address</p>}
-                                    {xeraUserWallets.sol_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencySolana className='faIcons'/> Solana Wallet Address</p>}
+                                    {xeraUserWallets?.eth_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencyEthereum className='faIcons'/> Ethereum Wallet Address</p>}
+                                    {xeraUserWallets?.sol_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencySolana className='faIcons'/> Solana Wallet Address</p>}
                                 </div>
                             </div>
                             <div className="ppcmalcContent testnetXERA active">
@@ -836,17 +836,17 @@ const Profile = () => {
                                             <h5>{i+1}</h5>
                                         </div>
                                         <span>
-                                            {data.userBasic.display ? 
+                                            {data?.userBasic?.display ? 
                                                 <img src="" alt="" />:
                                                 <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
                                             }
                                         </span>
                                         <div className='ppcmarcrlName'>
-                                            <h6><TextFormatter text={`${data.userBasic.username}`} /></h6>
-                                            <p><TextSlicer text={`${data.userBasic.xera_wallet}`} maxLength={18} /></p>
+                                            <h6><TextFormatter text={`${data?.userBasic?.username}`} /></h6>
+                                            <p><TextSlicer text={`${data?.userBasic?.xera_wallet}`} maxLength={18} /></p>
                                         </div>
                                         <div className='ppcmarcrlCount'>
-                                            <h5><NumberFormatter number={data.referrals}/></h5>
+                                            <h5><NumberFormatter number={data?.referrals}/></h5>
                                         </div>
                                     </div>
                                 ))}
@@ -887,12 +887,12 @@ const Profile = () => {
                                 {UserTransactions.map((data, i) => (
                                     <div className="ppcmtctContents" key={i}>
                                         <ul>
-                                            <li id='ppcmtctcBlock'><p>{data.transaction_block}</p></li>
-                                            <li id='ppcmtctcHash'><p><TextSlicer text={`${data.transaction_hash}`} maxLength={30} /></p></li>
-                                            <li id='ppcmtctcSender'><p><TextSlicer text={`${data.sender_address}`} maxLength={30} /></p></li>
-                                            <li id='ppcmtctcReceiver'><p><TextSlicer text={`${data.receiver_address}`} maxLength={30} /></p></li>
-                                            <li id='ppcmtctcAsset'><p>{parseFloat(data.transaction_amount).toFixed(2)} {data.transaction_token}</p></li>
-                                            <li id='ppcmtctcInfo'><p>{data.transaction_command}</p></li>
+                                            <li id='ppcmtctcBlock'><p>{data?.transaction_block}</p></li>
+                                            <li id='ppcmtctcHash'><p><TextSlicer text={`${data?.transaction_hash}`} maxLength={30} /></p></li>
+                                            <li id='ppcmtctcSender'><p><TextSlicer text={`${data?.sender_address}`} maxLength={30} /></p></li>
+                                            <li id='ppcmtctcReceiver'><p><TextSlicer text={`${data?.receiver_address}`} maxLength={30} /></p></li>
+                                            <li id='ppcmtctcAsset'><p>{parseFloat(data?.transaction_amount).toFixed(2)} {data?.transaction_token}</p></li>
+                                            <li id='ppcmtctcInfo'><p>{data?.transaction_command}</p></li>
                                             <li id='ppcmtctcExternal'><Link><TbExternalLink className='faIcons'/></Link></li>
                                         </ul>
                                     </div>
