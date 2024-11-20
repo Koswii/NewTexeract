@@ -326,28 +326,20 @@ const Whitepaper = () => {
                     </div>}
                     {viewRoadmap &&<div>
                         <h5>Texeract Network: Roadmap Phases</h5><br />
-                        <h6 className='roadmapPassed'>Phase 1 : TEXERACT NETWORK PLANNING AND DEVELOPMENT - PASSED</h6>
+                        <h6 className='roadmapPassed'>2024 Q1 : TEXERACT NETWORK PLANNING, DEVELOPMENT AND ALPHA PRIVATE TESTNET LAUNCH - PASSED</h6>
                         <p>
                             <ul>
                                 <li>TEXERACT Network Developer assembly</li>
                                 <li>TEXERACT Project Assesment</li>
                                 <li>Community Surveys</li>
-                                <li>Investor Open Funding</li>
-                            </ul>
-                        </p>
-                        <h6 className='roadmapPassed'>Phase 2 : TEXERACT NETWORK ALPHA PRIVATE TESTNET LAUNCH - PASSED</h6>
-                        <p>
-                            <ul>
                                 <li>TEXERACT Testnet Alpha Launching</li>
-                                <li>Community Testnet Events</li>
                                 <li>TEXERACT Bridge Testnet</li>
-                                <li>Community Testnet Events</li>
-                                <li>AI Receits & Layer-2 Solution Testing</li>
                                 <li>Sepolia Tokens to tXERA Coin Bridge</li>
+                                <li>Private Community Testnet Events</li>
                                 <li>XERAScan Explorer Alpha Testnet Launch</li>
                             </ul>
                         </p>
-                        <h6 className='roadmapPassed'>Phase 3 : TEXERACT NETWORK ENHANCEMENTS AND ADJUSTMENTS - PASSED</h6>
+                        <h6 className='roadmapPassed'>2024 Q2 : TEXERACT NETWORK ENHANCEMENTS AND ADJUSTMENTS - PASSED</h6>
                         <p>
                             <ul>
                                 <li>PERFORMANCE (increasing Texeract Network Transaction Speed)</li>
@@ -359,32 +351,54 @@ const Whitepaper = () => {
                                 <li>COMPATIBILITY (adopting more blockchain network setup for network bridging)</li>
                             </ul>
                         </p>
-                        <h6>Phase 4 : TEXERACT NETWORK BETA LAUNCH - ON GOING</h6>
+                        <h6 className='roadmapPassed'>2024 Q3 : TEXERACT NETWORK BETA LAUNCH - PASSED</h6>
                         <p>
                             <ul>
                                 <li>Re-run enhancements and adjustments</li>
                                 <li>XERA Wallet Launching</li>
-                                <li>Texeract Core Feature Launch</li>
                                 <li>TXERA Faucet Launching</li>
-                                <li>Open-Network-Bridging (ETH and SOL)</li>
-                                <li>Community Testnet Events</li>
-                                <li>Claim, Send and Receive Wallet Feature</li>
-                                <li>Genesis Node Airdrop</li>
+                                <li>Open-Network-Connection (ETH and SOL)</li>
+                                <li>Testnet: Claim, Send and Receive Wallet Feature</li>
                             </ul>
                         </p>
-                        <h6>Phase 5 : TEXERACT NETWORK MAINNET LAUNCH</h6>
+                        <h6>2024 Q4 : TEXERACT NETWORK TESTNET PHASE 1 - ON GOING</h6>
+                        <p>
+                            <ul>
+                                <li>Community Testnet Events</li>
+                                <li>Limited Genesis Node Airdrop</li>
+                            </ul>
+                        </p>
+                        <h6>2025 Q1 : TEXERACT NETWORK TESTNET PHASE 2</h6>
+                        <p>
+                            <ul>
+                                <li>Re-run enhancements and adjustments</li>
+                                <li>Community Testnet Events</li>
+                                <li>Marketplace - Node Selling</li>
+                                <li>Private Partners DApp Development</li>
+                                <li>Private Partners Token Minting</li>
+                            </ul>
+                        </p>
+                        <h6>2025 Q2 : TEXERACT NETWORK TESTNET PHASE 3</h6>
+                        <p>
+                            <ul>
+                                <li>Marketplace - Private Partners NFT Selling</li>
+                                <li>Token Generation Event (XERA Coin)</li>
+                            </ul>
+                        </p>
+                        <h6>2025 Q3 : TEXERACT NETWORK LISTING</h6>
+                        <p>
+                            <ul>
+                                <li>Major Exchangers Listing</li>
+                                <li>User Reward Claiming (XERA Coin)</li>
+                            </ul>
+                        </p>
+                        <h6>2025 Q4 : TEXERACT NETWORK MIANNET</h6>
                         <p>
                             <ul>
                                 <li>TEXERACT Mainnet Launching</li>
                                 <li>XERA Wallet network expansion</li>
                                 <li>Smart Contract Open Deployments</li>
                                 <li>Texeract Network Trading Market</li>
-                            </ul>
-                        </p>
-                        <h6>Phase 6 : TEXERACT NETWORK EXPANSION</h6>
-                        <p>
-                            <ul>
-                                <li>Plan to be announced after mainnet</li>
                             </ul>
                         </p>
                     </div>}
