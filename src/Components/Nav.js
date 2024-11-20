@@ -158,6 +158,8 @@ const Nav = () => {
               <Link to='/Leaderboards' onClick={handleHideMobileNavigation}><p>LEADERBOARDS</p></Link>
               <Link to='/TestnetFaucet' onClick={handleHideMobileNavigation}><p>TESTNET FAUCET</p></Link>
               <Link to='/Tokens' onClick={handleHideMobileNavigation}><p>TOKENS</p></Link>
+              <Link to='/Whitepaper' onClick={handleHideMobileNavigation}><p>WHITEPAPER</p></Link>
+              <Link to='/Ecosystem' onClick={handleHideMobileNavigation}><p>ECOSYSTEM</p></Link>
             </div>
 
 

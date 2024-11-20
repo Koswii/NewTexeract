@@ -61,7 +61,7 @@ const Leaderboards = () => {
         processedData
     } = XERAWalletData();
     const [currentPage, setCurrentPage] = useState(1);
-    const dataPerPage = 20; // Display 25 data per page
+    const dataPerPage = 50; // Display 50 data per page
     const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername))
     const myCurrentRank = myCurrentData?.rank
 

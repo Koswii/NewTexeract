@@ -58,9 +58,9 @@ const Footer = () => {
             <h6>RESOURCES</h6>
             <ul>
               <li><Link to='/Leaderboards' className='active'>Leaderboards</Link></li>
+              <li><Link to='/Whitepaper' className='active'>Whitepaper</Link></li>
+              <li><Link to='/Ecosystem' className='active'>Ecosystem</Link></li>
               <li><Link>Tokenomics</Link></li>
-              <li><Link>Ecosystem</Link></li>
-              <li><Link>Whitepaper</Link></li>
               <li><Link>XERAScan</Link></li>
               <li><Link>FAQs</Link></li>
             </ul>

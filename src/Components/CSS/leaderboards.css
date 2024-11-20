@@ -516,6 +516,8 @@ section.leaderboardsPageContainer.mid{
 
 .ldrbrdspcmContent{
     height: 60vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 .ldrbrdspcmContent ul{
     height: auto;
@@ -610,15 +612,18 @@ section.leaderboardsPageContainer.mid{
     flex-wrap: wrap;
     justify-content: right;
     align-items: center;
-    margin-top: 2%;
+    margin-top: 5%;
 }
 .ldrbrdspcmPage button{
-    height: 1.5vw;
-    width: 1.5vw;
-    font-size: 0.7vw;
+    height: 2vw;
+    width: 2vw;
+    font-size: 0.9vw;
     border-radius: 5px;
     background: transparent;
     border: solid 2px white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
     opacity: 50%;
     margin-right: 5px;
@@ -832,6 +837,7 @@ section.leaderboardsPageContainer.mid{
         height: 5vw;
         width: 5vw;
         font-size: 3vw;
+        padding: 4%;
         border-radius: 5px;
     }
 

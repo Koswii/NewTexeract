@@ -1,0 +1,247 @@
+h1, h2, h3, h4, h5, h6, p{
+    color: white;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
+p{
+    font-size: 0.7vw;
+}
+h1{
+    font-size: 10vw;
+}
+h2{
+    font-size: 5vw;
+}
+h3{
+    font-size: 4vw;
+}
+h4{
+    font-size: 2vw;
+}
+h5{
+    font-size: 1.5vw;
+}
+h6{
+    font-size: 1vw;
+}
+
+
+.mainContainer.whitepaper{
+    height: auto;
+    width: 100%;
+    background: black;
+    padding-bottom: 10vw;
+}
+
+
+
+section.texeractWhitepaper{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    height: auto;
+    padding: 5% 10%;
+}
+.txrdContainer.left{
+    height: auto;
+    width: 30%;
+}
+.txrdContainer.left button.mainBtns{
+    background: none;
+    height: 3vw;
+    width: 80%;
+    border: none;
+    outline: none;
+    position: relative;
+    cursor: pointer;
+}
+.txrdContainer.left button.mainBtns h6{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.txrdContainer.left button.mainBtns h6 .faIcons{
+    font-size: 1.5vw;
+}
+.txrdContainer.left button.mainBtns h6 span{
+    position: absolute;
+    top: 0;
+    font-size: 0.7vw;
+    font-weight: 400;
+    color: gray;
+}
+.txrdContainer.left div{
+    height: auto;
+    width: 100%;
+    padding: 3% 10%;
+    margin-bottom: 10%;
+}
+.txrdContainer.left div button{
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    text-align: left;
+    margin: 2% 0;
+    cursor: pointer;
+    opacity: 30%;
+}
+.txrdContainer.left div button.active{
+    opacity: 100%;
+}
+.txrdContainer.left div button:hover{
+    opacity: 100%;
+    transition: 400ms ease;
+}
+.txrdContainer.left div button.hidden{
+    opacity: 30%;
+    cursor: not-allowed;
+}
+
+
+
+.txrdContainer.right{
+    height: auto;
+    width: 65%;
+    padding: 1% 0;
+}
+.txrdContainer.right div{
+    height: auto;
+    width: 100%;
+    /* animation: roll-in-right2 2s ease; */
+}
+.txrdContainer.right div span{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5% 0;
+}
+.txrdContainer.right div span img{
+    height: 20vw;
+}
+.txrdContainer.right div h6{
+    margin: 3% 0;
+}
+.txrdContainer.right div h6.roadmapPassed{
+    color: skyblue;
+}
+/* .txrdContainer.right div h5{
+    margin-bottom: 5%;
+} */
+.txrdContainer.right div p{
+    font-size: 0.7vw;
+}
+.txrdContainer.right div p ul{
+    margin-left: 5%;
+}
+
+
+
+.txrdContainer.mobile{
+    height: auto;
+    width: 100%;
+    margin-bottom: 5%;
+    position: relative;
+    display: none;
+}
+.mobNav{
+    height: auto;
+    width: 10%;
+    position: relative;
+}
+.mobNav h6{
+    font-size: 6vw;
+}
+.mobNavBtn{
+    height: auto;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 2%;
+    background: rgba(20, 20, 20);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 2vw;
+    padding: 10% 3%;
+    padding-top: 5%;
+    animation: fade-in-down2 1s ease;
+}
+.mobNavBtn button{
+    height: auto;
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    text-align: left;
+    padding-left: 3%;
+    margin: 5% 0;
+    opacity: 50%;
+}
+.mobNavBtn button.active{
+    opacity: 100%;
+}
+.mobNavBtn button p{
+    font-size: 3vw;
+    font-family: 'Lexend Peta', sans-serif;
+    text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 500px){
+    .mainContainer.whitepaper{
+        padding-bottom: 30vw;
+    }
+    section.texeractWhitepaper{
+        padding: 5% 7%;
+        padding-top: 10vh;
+        display: block;
+    }
+    .txrdContainer.left{
+        display: none;
+    }
+    .txrdContainer.mobile{
+        display: block;
+    }
+    .txrdContainer.right{
+        width: 100%;
+    }
+    .txrdContainer.right div{
+        animation: none;
+    }
+    .txrdContainer.right div h5{
+        text-align: center;
+        font-size: 4vw;
+        text-transform: uppercase;
+    }
+    .txrdContainer.right div h6{
+        font-size: 2.7vw;
+        line-height: 4vw;
+        margin-bottom: 5%;
+    }
+    .txrdContainer.right div span{
+        margin: 10% 0;
+    }
+    .txrdContainer.right div span img{
+        height: 50vw;
+    }
+    .txrdContainer.right div p{
+        font-size: 2.3vw;
+    }
+    .txrdContainer.right div p ul{
+        margin-bottom: 10%;
+    }
+}
+
+
+

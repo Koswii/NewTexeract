@@ -1,0 +1,256 @@
+h1, h2, h3, h4, h5, h6, p{
+    color: white;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
+p{
+    font-size: 0.9vw;
+}
+h1{
+    font-size: 10vw;
+}
+h2{
+    font-size: 5vw;
+}
+h3{
+    font-size: 4vw;
+}
+h4{
+    font-size: 2vw;
+}
+h5{
+    font-size: 1.5vw;
+}
+h6{
+    font-size: 1vw;
+}
+
+
+.mainContainer.ecosystem{
+    height: auto;
+    width: 100%;
+    background: black;
+    padding-bottom: 10vw;
+}
+
+
+
+
+
+section.texeractEcosystem.top{
+    height: auto;
+    width: 100%;
+    padding: 2vw 7%;
+    padding-top: 12vh;
+    background: 
+        linear-gradient(transparent, black 100%),
+        url('../assets/imgs/profileBG.png') no-repeat top;
+    background-size: cover;
+}
+section.texeractEcosystem.top h2{
+    line-height: 4.5vw;
+}
+.txeContainer1{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.txeContainer1 div{
+    height: auto;
+    width: 55%;
+}
+.txeContainer1 div h3{
+    font-size: 3vw;
+    line-height: 3vw;
+}
+.txeContainer1 div h6{
+    margin: 3% 0;
+    font-size: 0.8vw;
+    text-transform: uppercase;
+}
+.txeContainer1 div span{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.txeContainer1 div span a{
+    padding: 10px 3%;
+    text-decoration: none;
+    color: white;
+    font-size: 0.7vw;
+    border: solid 2px white;
+    margin-right: 2%;
+    border-radius: 50px;
+    font-family: 'Lexend Peta', sans-serif;
+    transition: 400ms ease;
+    opacity: 50%;
+    cursor: not-allowed;
+}
+.txeContainer1 img{
+    height: 25vw;
+}
+.txeContainer1 span{
+    display: none;
+}
+.txeContainer1 img#txec1Mobile{
+    display: none;
+}
+
+
+
+section.texeractEcosystem.mid{
+    height: auto;
+    width: 100%;
+    padding: 3% 7%;
+}
+.txeContainer2{
+    height: auto;
+    width: 100%;
+}
+.txeContainer2 h4{
+    text-align: center;
+    
+}
+.txeContent2{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: top;
+    margin: 3% 0;
+}
+.txeContent2 div{
+    height: auto;
+    width: 24%;
+    background: rgb(20, 20, 20);
+    border-radius: 1vw;
+    padding: 1%;
+    padding-bottom: 2%;
+    margin: 0.5%;
+    transition: 400ms ease;
+    transform: translateY(0);
+    cursor: pointer;
+}
+.txeContent2 div:hover{
+    box-shadow: 0 0 10px rgb(65, 65, 65);
+    transition: 400ms ease;
+    transform: translateY(-10px);
+}
+.txeContent2 div img{
+    width: 100%;
+    background: white;
+    border-radius: 1vw;
+}
+.txeContent2 div p{
+    
+    margin-top: 10%;
+    font-size: 0.7vw;
+}
+
+
+
+.txeContainer3{
+    height: auto;
+    width: 100%;
+    margin-top: 10%;
+}
+.txeContainer3 h6{
+    color: gray;
+    
+}
+.txeContainer3 p{
+    color: gray;
+    margin-top: 2%;
+    
+    font-size: 0.7vw;
+}
+
+
+
+@media screen and (max-width: 500px){
+    .mainContainer.ecosystem{
+        padding-bottom: 30vw;
+    }
+    section.texeractEcosystem.top{
+        padding: 5% 7%;
+        padding-top: 10vh;
+        display: block;
+        background: none;
+    }
+    .txeContainer1{
+        display: block;
+        text-align: center;
+    }
+    .txeContainer1 img{
+        display: none;
+    }
+    .txeContainer1 span{
+        height: auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .txeContainer1 img#txec1Mobile{
+        display: block;
+        height: 70vw;
+    }
+    .txeContainer1 div{
+        width: 100%;
+        margin-top: 5%;
+    }
+    .txeContainer1 div h3{
+        font-size: 5vw;
+        line-height: 6vw;
+    }
+    .txeContainer1 div h6{
+        font-size: 2.5vw;
+        font-weight: 600;
+        margin: 5% 0;
+        text-transform: none;
+    }
+    .txeContainer1 div span{
+        justify-content: center;
+    }
+    .txeContainer1 div span a{
+        padding: 10px 5%;
+        font-size: 2.5vw;
+        margin: 0 2%;
+    }
+    section.texeractEcosystem.mid{
+        padding: 5% 7%;
+    }
+    .txeContainer2 h4{
+        font-size: 5vw;
+    }
+    .txeContent2 {
+        justify-content: space-between;
+        margin: 3% 0;
+    }
+    .txeContent2 div{
+        width: 49%;
+        padding: 3%;
+        margin: 0.5%;
+        box-shadow: none;
+    }
+    .txeContent2 div p{
+        margin-top: 10%;
+        font-size: 2.3vw;
+    }
+    .txeContainer3 {
+        margin-top: 20%;
+    }
+    .txeContainer3 h6{
+        font-size: 3vw;
+    }
+    .txeContainer3 p{
+        font-size: 2.3vw;
+    }
+}
