@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css';
+import Cookies from "js-cookie";
 
 
 import Nav from './Components/Nav'
@@ -26,8 +27,28 @@ import TestnetFaucet from './Components/Pages/TestnetFaucet';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
-  const userLoggedStorageData = localStorage.getItem('userData');
-  const userLoggedData = JSON.parse(userLoggedStorageData)
+
+  const [userLoggedData, setUserLogedData] = useState(null);
+  const userStoredData = Cookies.get('authToken');
+  const jwtDecode = (token) => {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+  
+      return JSON.parse(jsonPayload);
+    } catch (error) {
+      throw new Error('Invalid token specified');
+    }
+  };
+  useEffect(() => {
+    if (userStoredData) {
+      const userDecodedData = jwtDecode(userStoredData);
+      setUserLogedData(userDecodedData?.xeraJWT);
+    }
+  }, []);
   
 
   return (

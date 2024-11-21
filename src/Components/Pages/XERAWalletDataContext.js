@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import Cookies from "js-cookie";
 
 const XERAWalletDataContext = createContext();
 
@@ -13,9 +14,31 @@ export const XERAWalletDataProvider = ({ children }) => {
     const XERAFollowingListAPI = process.env.REACT_APP_XERA_USER_FOLLOWING_LIST_API;
     const XERAReferralsListAPI = process.env.REACT_APP_XERA_USER_REFERRALS_API;
     const XERAAirdropListAPI = process.env.REACT_APP_XERA_USER_AIRDROP_API;
+
+    const [userLoggedData, setUserLogedData] = useState(null);
+    const userStoredData = Cookies.get('authToken');
+    const jwtDecode = (token) => {
+        try {
+          const base64Url = token.split('.')[1];
+          const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join(''));
+      
+          return JSON.parse(jsonPayload);
+        } catch (error) {
+          throw new Error('Invalid token specified');
+        }
+    };
+
+    useEffect(() => {
+        if (userStoredData) {
+            const userDecodedData = jwtDecode(userStoredData);
+            setUserLogedData(userDecodedData.xeraJWT);
+        }
+    }, [userStoredData]);
+
     
-    const userLoggedStorageData = localStorage.getItem('userData');
-    const userLoggedData = JSON.parse(userLoggedStorageData);
 
     const [windowReload, setWindowReload] = useState(false);
 
@@ -60,75 +83,79 @@ export const XERAWalletDataProvider = ({ children }) => {
         }
     }
 
+
     const fetchXERAData1 = async () => {
         setDataLoading(true)
         try {
             // Set up intervals for the first two APIs
             if (!userLoggedData) {
-                const intervalId = setInterval(async () => {
-                    try {
-                        // const [userListResponse, walletsListResponse, displayListResponse] = await Promise.all([
-                            const [userListResponse, displayListResponse] = await Promise.all([
-                            axios.get(XERACreateWalletAccountAPI),
-                            // axios.get(XERAWalletsListAPI),
-                            axios.get(XERADisplayListAPI)
-                        ]);
-                
-                        const userListData = userListResponse.data;
+                // const intervalId = setInterval(async () => {
+                try {
+                    const [userListResponse, displayListResponse] = await Promise.all([
+                        axios.get(XERACreateWalletAccountAPI),
+                        axios.get(XERADisplayListAPI)
+                    ]);
+            
+                    const userListData = userListResponse.data;
 
-                        // const userWalletsListData = walletsListResponse.data;
-                        const displayListData = displayListResponse.data;
-                
-                        // Combine data based on the same 'xera_wallet'
-                        const combinedData = userListData.map(user => {
-                            const displayData = displayListData.find(display => display.xera_wallet === user.xera_wallet);
-                            return {
-                                ...user,
-                                display: displayData ? displayData.xera_nft_meta : null // Attach the matching display data
-                            };
-                        });
-                
-                        // Set the combined data to state
-                        setXeraUserList(combinedData);
-                        setXeraUsersProfiles(combinedData);
-                        setXeraUserNumber(combinedData.length)
+                    // const userWalletsListData = walletsListResponse.data;
+                    const displayListData = displayListResponse.data;
+            
+                    // Combine data based on the same 'xera_wallet'
+                    const combinedData = userListData.map(user => {
+                        const displayData = displayListData.find(display => display.xera_wallet === user.xera_wallet);
+                        return {
+                            ...user,
+                            display: displayData ? displayData.xera_nft_meta : null // Attach the matching display data
+                        };
+                    });
+            
+                    // Set the combined data to state
+                    setXeraUserList(combinedData);
+                    setXeraUsersProfiles(combinedData);
+                    setXeraUserNumber(combinedData.length)
 
-                        // Fetch airdrops list
-                        const airdropsResponse = await axios.get(XERAAirdropListAPI);
-                        const userAirdropsListData = airdropsResponse.data;
-                        setXeraUserAirdrops(userAirdropsListData);
-                        
-                        const referralTaskCounts = userAirdropsListData.reduce((acc, task) => {
-                            if (task.xera_task === 'Referral Task') {
-                            acc[task.username] = (acc[task.username] || 0) + 1;
-                            }
-                            return acc;
-                        }, {});
+                    // Fetch airdrops list
+                    const airdropsResponse = await axios.get(XERAAirdropListAPI);
+                    const userAirdropsListData = airdropsResponse.data;
+                    setXeraUserAirdrops(userAirdropsListData);
+                    
+                    const referralTaskCounts = userAirdropsListData.reduce((acc, task) => {
+                        if (task.xera_task === 'Referral Task') {
+                        acc[task.username] = (acc[task.username] || 0) + 1;
+                        }
+                        return acc;
+                    }, {});
 
-                        // Convert the result into an array of objects for display
-                        const referralCountArray = Object.keys(referralTaskCounts)
-                        .map(username => ({
-                            username,
-                            referrals: referralTaskCounts[username]
-                        }))
-                        .filter(user => user.referrals > 0)  // Filter out users with 0 referrals
-                        .sort((a, b) => b.referrals - a.referrals); // Sort by referrals
-                        const refSumDetails = referralCountArray.map(user => {
-                            const userBasic = combinedData.find(ref => ref.username === user.username)
-                            return {
-                                ...user, userBasic
-                            }
-                        })
-                        setReferralCounts(refSumDetails);
-                        
+                    // Convert the result into an array of objects for display
+                    const referralCountArray = Object.keys(referralTaskCounts)
+                    .map(username => ({
+                        username,
+                        referrals: referralTaskCounts[username]
+                    }))
+                    .filter(user => user.referrals > 0)  // Filter out users with 0 referrals
+                    .sort((a, b) => b.referrals - a.referrals); // Sort by referrals
+                    const refSumDetails = referralCountArray.map(user => {
+                        const userBasic = combinedData.find(ref => ref.username === user.username)
+                        return {
+                            ...user, userBasic
+                        }
+                    })
+                    setReferralCounts(refSumDetails);
+                    
+            
+                } catch (error) {
+                    console.error(error);
+                }
+                // }, 1000);
                 
-                    } catch (error) {
-                        console.error(error);
-                    }
-                }, 1000);
-                
-                return () => clearInterval(intervalId);
+                // return () => clearInterval(intervalId);
             }
+
+
+            
+
+
     
             const [baseListResponse, displayListResponse] = await Promise.all([
                 axios.get(XERACreateWalletAccountAPI),
@@ -147,7 +174,7 @@ export const XERAWalletDataProvider = ({ children }) => {
             setXeraUsersProfiles(combinedData);
 
             // Fetch profile data once
-            const profileData = combinedData.find(user => user.xera_wallet === userLoggedData.myXeraAddress);
+            const profileData = combinedData.find(user => user.xera_wallet === userLoggedData?.myXeraAddress);
             setXeraUserProfile(profileData);
             setXeraUserNumber(combinedData.length);
 
@@ -191,9 +218,9 @@ export const XERAWalletDataProvider = ({ children }) => {
             setReferralCounts(refSumDetails);
 
             // Proceed only if data is present
-            if (userAirdropsListData && userLoggedData.myXeraUsername) {
+            if (userAirdropsListData && userLoggedData?.myXeraUsername) {
                 // Filter and find based on username
-                const userAirdropPhase1 = userAirdropsListData.filter(user => user.username === userLoggedData.myXeraUsername);
+                const userAirdropPhase1 = userAirdropsListData.filter(user => user.username === userLoggedData?.myXeraUsername);
                 const userTelegramVerify = userAirdropPhase1.find(telegram => telegram.xera_telegram_id);
                 const userTwitterVerify = userAirdropPhase1.find(telegram => telegram.xera_twitter_username);
 
@@ -221,26 +248,25 @@ export const XERAWalletDataProvider = ({ children }) => {
         }
         // Fetch profile data once
         const userWalletResponse = await axios.get(XERAWalletsListAPI);
-        const profileWalletData = userWalletResponse.data.find(user => user.xera_wallet === userLoggedData.myXeraAddress);
+        const profileWalletData = userWalletResponse.data.find(user => user.xera_wallet === userLoggedData?.myXeraAddress);
         setXeraUserWallets(profileWalletData);
         if(profileWalletData.eth_wallet || profileWalletData.sol_wallet){
             localStorage.setItem('walletTask', 'completed');
         }
     }
-    
 
+    
+    
     useEffect(() => {
         setWindowReload(true);
         const timeoutId = setTimeout(() => {
             setWindowReload(false);
         }, 5000);
-
-        fetchXERAAssets();
-        fetchXERAData1();
-        fetchXERAData2();
-
+        fetchXERAAssets(userLoggedData);
+        fetchXERAData1(userLoggedData);
+        fetchXERAData2(userLoggedData);
         return () => clearTimeout(timeoutId);
-    }, []);
+    }, [userLoggedData]);
 
     
     const [processedData, setProcessedData] = useState([]);

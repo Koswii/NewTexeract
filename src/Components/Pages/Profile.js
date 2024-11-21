@@ -268,6 +268,7 @@ const Profile = () => {
     const myCurrentPoints = myCurrentData?.totalPoints
     const myCurrentReferrals = myCurrentData?.referralTaskCount
 
+
     const submitXUsernameDetails = async () => {
         setXVerifyingLoader(true);
         if (!twitterUsername) {

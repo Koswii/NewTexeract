@@ -1,11 +1,33 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import Cookies from "js-cookie";
 
 const TelegramDataContext = createContext();
 
 export const TelegramDataProvider = ({ children }) => {
-    const userLoggedStorageData = localStorage.getItem('userData');
-    const userLoggedData = JSON.parse(userLoggedStorageData);
+    const [userLoggedData, setUserLogedData] = useState(null);
+    const userStoredData = Cookies.get('authToken');
+    const jwtDecode = (token) => {
+        try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+    
+        return JSON.parse(jsonPayload);
+        } catch (error) {
+        throw new Error('Invalid token specified');
+        }
+    };
+    useEffect(() => {
+        if (userStoredData) {
+        const userDecodedData = jwtDecode(userStoredData);
+        setUserLogedData(userDecodedData?.xeraJWT);
+        }
+    }, []);
+
+    
     const XERAAirdropTelegramAPI = process.env.REACT_APP_XERA_USER_AIRDROP_TELEGRAM_API;
     const [telegramID, setTelegramID] = useState('');
     const [telegramUsername, setTelegramUsername] = useState('');

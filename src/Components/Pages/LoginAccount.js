@@ -3,6 +3,8 @@ import "../CSS/loginAccount.css";
 import { 
     FaTimes
 } from 'react-icons/fa';
+import axios from "axios";
+import Cookies from "js-cookie";
 import { 
     TbDownload,
     TbEye,
@@ -22,10 +24,12 @@ const LoginAccount = () => {
         setViewLoginAccount
     } = XERAWalletData();
 
+    const baseURI = process.env.REACT_APP_XERA_BASE_URL_API;
     
     const XERALoginBasicAccountAPI = process.env.REACT_APP_XERA_USER_LOGIN_BASIC_API;
     const XERALoginSeedAccountAPI = process.env.REACT_APP_XERA_USER_LOGIN_SEED_API;
     const XERALoginPKAccountAPI = process.env.REACT_APP_XERA_USER_LOGIN_PK_API;
+    const [loginLoader, setLoginLoader] = useState(false);
     const [viewDefaultLogin, setViewDefaultLogin] = useState(true);
     const [viewXeraWalletLogin, setViewXeraWalletLogin] = useState(false);
     const [viewSeedLogin, setViewSeedLogin] = useState(true);
@@ -77,61 +81,75 @@ const LoginAccount = () => {
     const [privateKeyLoginResponse, setPrivateKeyLoginResponse] = useState(false);
 
     
-    const handleUserLoginBasic = (e) => {
-        e.preventDefault();
+    const handleUserLoginBasic = async () => {
+        setLoginLoader(true);
       
         if (!insertUsername || !insertPassword) {
-                setViewLoginResponse(true);
-                setViewLoginMessage('Please fill in all fields.');
-            return;
+            setViewLoginResponse(true);
+            setViewLoginMessage('Please fill in all fields.');
+            setLoginLoader(false);
+
+            const timeoutId = setTimeout(() => {
+                setViewLoginResponse(false);
+                setViewLoginMessage("");
+            }, 3000);
+            return () => clearTimeout(timeoutId);
         }
       
-        fetch(XERALoginBasicAccountAPI, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+
+        const loginInfoDetails = {
             username: insertUsername,
             password: insertPassword,
-          }),
+        }
+
+        axios.post(`${baseURI}/login-basic`, loginInfoDetails, {
+            headers: {
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+            },
+        }).then((response) =>{
+            const successData = response.data.success; 
+            if (successData === true) {
+                const userAuthToken = response.data.authToken
+                Cookies.set('authToken', userAuthToken, { expires: 7 });
+                setViewLoginAccount(false);
+                window.location.reload();
+            }else{
+                setViewLoginMessage(response.data.message)
+            }
         })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success === true) {
-            const combinedUserData = {
-                isLoggedIn: 'true',
-                loginState: 'basic',
-                myXeraUsername: data.username,
-                myXeraAddress: data.xera_wallet
-            };
-            
-            localStorage.setItem('userData', JSON.stringify(combinedUserData));
-            setViewLoginResponse(false);
-            setViewLoginMessage('');
-            window.location.reload();
-          } else {
-            setViewLoginResponse(true);
-            setViewLoginMessage(data.message);
-          }
+        .catch((error) => {
+            const errorData = error.response.data
+            setLoginLoader(false);
+            setViewLoginResponse(true)
+            setViewLoginMessage(errorData.message)
+
+            const timeoutId = setTimeout(() => {
+                setViewLoginResponse(false);
+                setViewLoginMessage("");
+            }, 3000);
+            return () => clearTimeout(timeoutId);
         })
-        .catch(error => console.error('Error:', error));
     };
-    const handleUserLoginSeed = (e) => {
-        e.preventDefault();
+    
+
+
+    const handleUserLoginSeed = async () => {
+        setLoginLoader(true);
       
         if (!seedPhrase1 || !seedPhrase2 || !seedPhrase3 || !seedPhrase4 || !seedPhrase5 || !seedPhrase6 || !seedPhrase7 || !seedPhrase8 || !seedPhrase9 || !seedPhrase10 || !seedPhrase11 || !seedPhrase12) {
                 setSeedPhraseResponse(true);
-                console.log('Please fill in all fields.');
-            return;
+                setViewLoginMessage('Please fill in all fields.');
+                setLoginLoader(false);
+
+                const timeoutId = setTimeout(() => {
+                    setSeedPhraseResponse(false);
+                    setViewLoginMessage("");
+                }, 3000);
+                return () => clearTimeout(timeoutId);
         }
       
-        fetch(XERALoginSeedAccountAPI, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+        const walletSeed = {
             seedWord1: seedPhrase1,
             seedWord2: seedPhrase2,
             seedWord3: seedPhrase3,
@@ -144,66 +162,98 @@ const LoginAccount = () => {
             seedWord10: seedPhrase10,
             seedWord11: seedPhrase11,
             seedWord12: seedPhrase12,
-          }),
+        };
+        const seedPhrase = JSON.stringify(walletSeed);
+
+
+        axios.post(`${baseURI}/login-phrase`, { seedPhrase }, {
+            headers: {
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+            },
+        }).then((response) =>{
+            const successData = response.data.success; 
+            if (successData === true) {
+                const userAuthToken = response.data.authToken
+                Cookies.set('authToken', userAuthToken, { expires: 7 });
+                setSeedPhraseResponse(false);
+                window.location.reload();
+            }else{
+                setSeedPhraseResponse(true)
+                setViewLoginMessage(response.data.message)
+
+                const timeoutId = setTimeout(() => {
+                    setSeedPhraseResponse(false);
+                    setViewLoginMessage("");
+                }, 3000);
+                return () => clearTimeout(timeoutId);
+            }
         })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success === true) {
-            const combinedUserData = {
-                isLoggedIn: 'true',
-                loginState: 'full',
-                myXeraUsername: data.username,
-                myXeraAddress: data.xera_wallet
-            };
-            
-            localStorage.setItem('userData', JSON.stringify(combinedUserData));
-            setSeedPhraseResponse(false);
-            window.location.reload();
-          } else {
-            setSeedPhraseResponse(true);
-            console.log(data.message);
-            
-          }
+        .catch((error) => {
+            const errorData = error.response.data
+            setLoginLoader(false);
+            setSeedPhraseResponse(true)
+            setViewLoginMessage(errorData.message)
+
+            const timeoutId = setTimeout(() => {
+                setSeedPhraseResponse(false);
+                setViewLoginMessage("");
+            }, 3000);
+            return () => clearTimeout(timeoutId);
         })
-        .catch(error => console.error('Error:', error));
     };
-    const handleUserLoginPrivateKey = (e) => {
-        e.preventDefault();
+
+
+
+    const handleUserLoginPrivateKey = async () => {
+        setLoginLoader(true);
       
         if (!privateKeyLogin) {
             setPrivateKeyLoginResponse(true);
-            return;
+            setViewLoginMessage('Please fill in all fields.');
+            setLoginLoader(false);
+
+            const timeoutId = setTimeout(() => {
+                setSeedPhraseResponse(false);
+                setViewLoginMessage("");
+            }, 3000);
+            return () => clearTimeout(timeoutId);
         }
-      
-        fetch(XERALoginPKAccountAPI, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userPrivateKey: privateKeyLogin,
-          }),
+
+
+        const userPK = {
+            privateKey: privateKeyLogin,
+        }
+
+
+        axios.post(`${baseURI}/login-prKey`, userPK, {
+            headers: {
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json',
+            },
+        }).then((response) =>{
+            const successData = response.data.success; 
+            if (successData === true) {
+                const userAuthToken = response.data.authToken
+                Cookies.set('authToken', userAuthToken, { expires: 7 });
+                setPrivateKeyLoginResponse(false);
+                window.location.reload();
+            }else{
+                setViewLoginMessage(response.data.message)
+            }
         })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success === true) {
-            const combinedUserData = {
-                isLoggedIn: 'true',
-                loginState: 'full',
-                myXeraUsername: data.username,
-                myXeraAddress: data.xera_wallet
-            };
-            
-            localStorage.setItem('userData', JSON.stringify(combinedUserData));
-            setPrivateKeyLoginResponse(false);
-            window.location.reload();
-          } else {
-            setPrivateKeyLoginResponse(true);
-            console.log(data.message);
-            
-          }
+        .catch((error) => {
+            const errorData = error.response.data
+            setLoginLoader(false);
+            setPrivateKeyLoginResponse(true)
+            setViewLoginMessage(errorData.message)
+
+            const timeoutId = setTimeout(() => {
+                setPrivateKeyLoginResponse(false);
+                setViewLoginMessage("");
+            }, 3000);
+            return () => clearTimeout(timeoutId);
         })
-        .catch(error => console.error('Error:', error));
     };
 
 
@@ -260,7 +310,10 @@ const LoginAccount = () => {
                             </div>
                         </div>
                         <div className="nclccLoginBtn">
-                            <button className={(insertUsername && insertPassword) ? 'active' : ''} onClick={handleUserLoginBasic}>LOGIN</button>
+                            {!loginLoader ? 
+                                <button className={(insertUsername && insertPassword) ? 'active' : ''} onClick={handleUserLoginBasic}>LOGIN</button>:
+                                <button>LOGGING IN</button>
+                            }
                         </div>
                         <div className="nclccSlice">
                             <hr />
@@ -289,51 +342,51 @@ const LoginAccount = () => {
                         {viewSeedLogin && <div className="nclccnBody seed">
                             <p>Insert XERA Wallet Seed Phrase only.</p>
                             <div className="nclccnbInputs">
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>1.</h6>
                                     <input type="text" placeholder='Word No.1' onChange={(e) => setSeedPhrase1(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>2.</h6>
                                     <input type="text" placeholder='Word No.2' onChange={(e) => setSeedPhrase2(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>3.</h6>
                                     <input type="text" placeholder='Word No.3' onChange={(e) => setSeedPhrase3(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>4.</h6>
                                     <input type="text" placeholder='Word No.4' onChange={(e) => setSeedPhrase4(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>5.</h6>
                                     <input type="text" placeholder='Word No.5' onChange={(e) => setSeedPhrase5(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>6.</h6>
                                     <input type="text" placeholder='Word No.6' onChange={(e) => setSeedPhrase6(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>7.</h6>
                                     <input type="text" placeholder='Word No.7' onChange={(e) => setSeedPhrase7(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>8.</h6>
                                     <input type="text" placeholder='Word No.8' onChange={(e) => setSeedPhrase8(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>9.</h6>
                                     <input type="text" placeholder='Word No.9' onChange={(e) => setSeedPhrase9(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>10.</h6>
                                     <input type="text" placeholder='Word No.10' onChange={(e) => setSeedPhrase10(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>11.</h6>
                                     <input type="text" placeholder='Word No.11' onChange={(e) => setSeedPhrase11(e.target.value)}/>
                                 </div>
-                                <div className={seedPhraseResponse && 'error'}>
+                                <div className={seedPhraseResponse ? 'error' : ''}>
                                     <h6>12.</h6>
                                     <input type="text" placeholder='Word No.12' onChange={(e) => setSeedPhrase12(e.target.value)}/>
                                 </div>
@@ -349,7 +402,7 @@ const LoginAccount = () => {
                         {viewPivateKeyLogin && <div className="nclccnBody private">
                             <p>Insert XERA Wallet Private Key</p>
                             <div className="nclccnbTextArea">
-                                <textarea className={privateKeyLoginResponse && 'error'} name="" id="" placeholder='64 Characters Key Code' onChange={(e) => setPrivateKeyLogin(e.target.value)}></textarea>
+                                <textarea className={privateKeyLoginResponse ? 'error' : ''} name="" id="" placeholder='64 Characters Key Code' onChange={(e) => setPrivateKeyLogin(e.target.value)}></textarea>
                             </div>
                             <div className="nclccLoginBtn">
                                 <button className={privateKeyLogin ? 'active' : ''} disabled={!privateKeyLogin} onClick={handleUserLoginPrivateKey}>LOGIN</button>

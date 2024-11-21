@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "./CSS/nav.css";
+import Cookies from "js-cookie";
 import { 
     FaBars, 
     FaWindowClose,
@@ -49,20 +50,8 @@ const Nav = () => {
     viewConnectWallet, 
     setViewConnectWallet,
   } = XERAWalletData();
-  const [viewFullNavigation, setViewFullNavigation] = useState(false);
   const [viewMobileNavigation, setViewMobileNavigation] = useState(false);
-  const XERALoginBasicAccountAPI = process.env.REACT_APP_XERA_USER_LOGOUT_API;
 
-  const handleViewFullNav = () => {
-    setViewFullNavigation(true);
-    // const timeout = setTimeout(() => {
-    //   setViewFullNavigation(false)
-    // }, 10000); // 10 seconds
-    // return () => {clearTimeout(timeout);};
-  }
-  const handleHideFullNav = () => {
-    setViewFullNavigation(false)
-  }
   const handleViewCreateWallet = () => {
     setViewWalletCreate(true)
   }
@@ -71,26 +60,13 @@ const Nav = () => {
   }
   const handleUserLogout = () => {
     if (!userLoggedData) return;
-    fetch(XERALoginBasicAccountAPI, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        localStorage.removeItem('userData');
-        localStorage.removeItem('telegramTask');
-        localStorage.removeItem('twitterTask');
-        localStorage.removeItem('walletTask');
-        navigate('/')
-        window.location.reload();
-      } else {
-        console.log(data.message)
-      }
-    })
-    .catch(error => console.error('Error:', error));
+    localStorage.removeItem('userData');
+    localStorage.removeItem('telegramTask');
+    localStorage.removeItem('twitterTask');
+    localStorage.removeItem('walletTask');
+    Cookies.remove('authToken')
+    navigate('/')
+    window.location.reload();
   };
   const handleConnectWallet = () => {
     setViewConnectWallet(true);
@@ -107,6 +83,10 @@ const Nav = () => {
   const handleHideMobileNavigation = () => {
     setViewMobileNavigation(false);
   }
+
+
+  // console.log(userLoggedData);
+  
 
 
   useEffect(() => {

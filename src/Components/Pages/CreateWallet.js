@@ -465,7 +465,7 @@ const CreateWallet = () => {
                                                 <input
                                                     type="text"
                                                     className={seedError ? 'active' : ''}
-                                                    id={seedComplete && 'correctSeed'}
+                                                    id={seedComplete ? 'correctSeed' : ''}
                                                     value={userInputs[index]}
                                                     onChange={(e) => handleInputChange(index, e)}
                                                     placeholder={`Word ${data.number}`}
