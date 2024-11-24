@@ -65,7 +65,6 @@ const ClaimTXERA = () => {
     }, []); // Run once on mount
     
     const claimTXERAToken = async () => {
-        console.log(txHash);
         
         if(!userLoggedData || !txHash){
             return;
