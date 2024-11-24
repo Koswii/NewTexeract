@@ -21,51 +21,11 @@ const TestnetFaucet = () => {
         windowReload,
         userLoggedData,
         // fetchXERAAssets,
+        TXERATransactions,
         viewXERATransactionList,
         viewXERATokenList,
     } = XERAWalletData();
-
-
-    const baseURL = process.env.REACT_APP_XERA_BASE_URL_API
-
-
-    const [TXERATransactions,setTXERATransaction] = useState(null)
-    useEffect(() => {
-        const intervalId = setInterval(async () => {
-            fetchTransaction();
-        }, 2000);
-        return () => clearInterval(intervalId);
-    }, []);
-
-    const fetchTransaction = () => {
-        const apikey = process.env.REACT_APP_XERA_API
-
-        const api = {
-            apikey: apikey
-        }
-
-        try {
-            axios.post(`${baseURL}/generate/access-token`,api)
-            .then((res)=>{
-                const accessToken = res.data.accessToken
-                if (res.data.success) {
-
-                    axios.get(`${baseURL}/token/faucet-transaction`,{
-                        headers: {
-                            "Authorization" : `Bearer ${accessToken}`
-                        }
-                    })
-                    .then((response) => {
-                        if (response.data.success) {
-                            setTXERATransaction(response.data.data)
-                        }
-                    })
-                }
-            })
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    
     const [viewTXERAInfo, setViewTXERAInfo] = useState(false)
     const TXERAInfo = viewXERATokenList?.find(token => token.token_symbol === "TXERA") || {};
 

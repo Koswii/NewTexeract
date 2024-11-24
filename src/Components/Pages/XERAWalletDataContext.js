@@ -69,10 +69,48 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [xeraUserAirdrops, setXeraUserAirdrops] = useState([]);
     const [xeraUserFollowings, setXeraUserFollowings] = useState([]);
     const [dataLoading, setDataLoading] = useState(false);
+
+    const [TXERATransactions,setTXERATransaction] = useState(null)
     
 
     const [processedData, setProcessedData] = useState([]);
 
+    useEffect(() => {
+        const intervalId = setInterval(async () => {
+            fetchTransaction();
+        }, 2000);
+        return () => clearInterval(intervalId);
+    }, []);
+
+    const fetchTransaction = () => {
+        const apikey = process.env.REACT_APP_XERA_API
+
+        const api = {
+            apikey: apikey
+        }
+
+        try {
+            axios.post(`${baseURL}/generate/access-token`,api)
+            .then((res)=>{
+                const accessToken = res.data.accessToken
+                if (res.data.success) {
+
+                    axios.get(`${baseURL}/token/faucet-transaction`,{
+                        headers: {
+                            "Authorization" : `Bearer ${accessToken}`
+                        }
+                    })
+                    .then((response) => {
+                        if (response.data.success) {
+                            setTXERATransaction(response.data.data)
+                        }
+                    })
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
     // const fetchXERAAssets = async () => {
     //     setDataLoading(true)
     //     try {
@@ -415,6 +453,7 @@ export const XERAWalletDataProvider = ({ children }) => {
                 xeraReferralCounts,
                 xeraUserAirdrops,
                 xeraUserFollowings,
+                TXERATransactions,
             }}>
             {children}
         </XERAWalletDataContext.Provider>
