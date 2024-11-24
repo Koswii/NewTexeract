@@ -24,7 +24,13 @@ const LoginAccount = () => {
         setViewLoginAccount
     } = XERAWalletData();
 
-    const baseURI = process.env.REACT_APP_XERA_BASE_URL_API;
+    
+    const api = process.env.REACT_APP_XERA_API
+    const baseURL = process.env.REACT_APP_XERA_BASE_URL_API
+
+    const key = {
+        apikey: api
+    }
     
     const XERALoginBasicAccountAPI = process.env.REACT_APP_XERA_USER_LOGIN_BASIC_API;
     const XERALoginSeedAccountAPI = process.env.REACT_APP_XERA_USER_LOGIN_SEED_API;
@@ -97,25 +103,44 @@ const LoginAccount = () => {
         }
       
 
-        const loginInfoDetails = {
-            username: insertUsername,
-            password: insertPassword,
-        }
-
-        axios.post(`${baseURI}/login-basic`, loginInfoDetails, {
-            headers: {
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json',
-            },
-        }).then((response) =>{
-            const successData = response.data.success; 
-            if (successData === true) {
-                const userAuthToken = response.data.authToken
-                Cookies.set('authToken', userAuthToken, { expires: 7 });
-                setViewLoginAccount(false);
-                window.location.reload();
-            }else{
-                setViewLoginMessage(response.data.message)
+        axios.post(`${baseURL}/generate/access-token`, key)
+        .then((res) => {
+            const accessToken = res.data.accessToken
+            const loginInfoDetails = {
+                username: insertUsername,
+                password: insertPassword,
+            }
+    
+            if (res.data.success) {
+                axios.post(`${baseURL}/user/login-basic`, loginInfoDetails, {
+                    headers: {
+                        'Content-Type': 'application/json', 
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+                }).then((response) =>{
+                    const successData = response.data.success; 
+                    if (successData === true) {
+                        const userAuthToken = response.data.authToken
+                        Cookies.set('authToken', userAuthToken, { expires: 7 });
+                        setViewLoginAccount(false);
+                        window.location.reload();
+                    }else{
+                        setViewLoginMessage(response.data.message)
+                    }
+                })
+                .catch((error) => {
+                    const errorData = error.response.data
+                    setLoginLoader(false);
+                    setViewLoginResponse(true)
+                    setViewLoginMessage(errorData.message)
+        
+                    const timeoutId = setTimeout(() => {
+                        setViewLoginResponse(false);
+                        setViewLoginMessage("");
+                    }, 3000);
+                    return () => clearTimeout(timeoutId);
+                })
             }
         })
         .catch((error) => {
@@ -149,44 +174,61 @@ const LoginAccount = () => {
                 return () => clearTimeout(timeoutId);
         }
       
-        const walletSeed = {
-            seedWord1: seedPhrase1,
-            seedWord2: seedPhrase2,
-            seedWord3: seedPhrase3,
-            seedWord4: seedPhrase4,
-            seedWord5: seedPhrase5,
-            seedWord6: seedPhrase6,
-            seedWord7: seedPhrase7,
-            seedWord8: seedPhrase8,
-            seedWord9: seedPhrase9,
-            seedWord10: seedPhrase10,
-            seedWord11: seedPhrase11,
-            seedWord12: seedPhrase12,
-        };
-        const seedPhrase = JSON.stringify(walletSeed);
 
-
-        axios.post(`${baseURI}/login-phrase`, { seedPhrase }, {
-            headers: {
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json',
-            },
-        }).then((response) =>{
-            const successData = response.data.success; 
-            if (successData === true) {
-                const userAuthToken = response.data.authToken
-                Cookies.set('authToken', userAuthToken, { expires: 7 });
-                setSeedPhraseResponse(false);
-                window.location.reload();
-            }else{
-                setSeedPhraseResponse(true)
-                setViewLoginMessage(response.data.message)
-
-                const timeoutId = setTimeout(() => {
-                    setSeedPhraseResponse(false);
-                    setViewLoginMessage("");
-                }, 3000);
-                return () => clearTimeout(timeoutId);
+        axios.post(`${baseURL}/generate/access-token`,key)
+        .then((res) => {
+            const accessToken = res.data.accessToken
+            const walletSeed = {
+                seedWord1: seedPhrase1,
+                seedWord2: seedPhrase2,
+                seedWord3: seedPhrase3,
+                seedWord4: seedPhrase4,
+                seedWord5: seedPhrase5,
+                seedWord6: seedPhrase6,
+                seedWord7: seedPhrase7,
+                seedWord8: seedPhrase8,
+                seedWord9: seedPhrase9,
+                seedWord10: seedPhrase10,
+                seedWord11: seedPhrase11,
+                seedWord12: seedPhrase12,
+            };
+            const seedPhrase = JSON.stringify(walletSeed);
+            
+            if (res.data.success) {
+                axios.post(`${baseURL}/user/login-phrase`, { seedPhrase }, {
+                    headers: {
+                        'Authorization' : `Bearer ${accessToken}` 
+                    },
+                }).then((response) =>{
+                    const successData = response.data.success; 
+                    if (successData === true) {
+                        const userAuthToken = response.data.authToken
+                        Cookies.set('authToken', userAuthToken, { expires: 7 });
+                        setSeedPhraseResponse(false);
+                        window.location.reload();
+                    }else{
+                        setSeedPhraseResponse(true)
+                        setViewLoginMessage(response.data.message)
+        
+                        const timeoutId = setTimeout(() => {
+                            setSeedPhraseResponse(false);
+                            setViewLoginMessage("");
+                        }, 3000);
+                        return () => clearTimeout(timeoutId);
+                    }
+                })
+                .catch((error) => {
+                    const errorData = error.response.data
+                    setLoginLoader(false);
+                    setSeedPhraseResponse(true)
+                    setViewLoginMessage(errorData.message)
+        
+                    const timeoutId = setTimeout(() => {
+                        setSeedPhraseResponse(false);
+                        setViewLoginMessage("");
+                    }, 3000);
+                    return () => clearTimeout(timeoutId);
+                })
             }
         })
         .catch((error) => {
@@ -221,25 +263,44 @@ const LoginAccount = () => {
         }
 
 
-        const userPK = {
-            privateKey: privateKeyLogin,
-        }
-
-
-        axios.post(`${baseURI}/login-prKey`, userPK, {
-            headers: {
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json',
-            },
-        }).then((response) =>{
-            const successData = response.data.success; 
-            if (successData === true) {
-                const userAuthToken = response.data.authToken
-                Cookies.set('authToken', userAuthToken, { expires: 7 });
-                setPrivateKeyLoginResponse(false);
-                window.location.reload();
-            }else{
-                setViewLoginMessage(response.data.message)
+        axios.post(`${baseURL}/generate/access-token`, key)
+        .then((res) => {
+            const accessToken = res.data.accessToken
+            const userPK = {
+                privateKey: privateKeyLogin,
+            }
+    
+    
+            if (res.data.success) {
+                axios.post(`${baseURL}/user/login-prKey`, userPK, {
+                    headers: {
+                        'Content-Type': 'application/json', 
+                        'Accept': 'application/json',
+                        'Authorization' : `Bearer ${accessToken}`
+                    },
+                }).then((response) =>{
+                    const successData = response.data.success; 
+                    if (successData === true) {
+                        const userAuthToken = response.data.authToken
+                        Cookies.set('authToken', userAuthToken, { expires: 7 });
+                        setPrivateKeyLoginResponse(false);
+                        window.location.reload();
+                    }else{
+                        setViewLoginMessage(response.data.message)
+                    }
+                })
+                .catch((error) => {
+                    const errorData = error.response.data
+                    setLoginLoader(false);
+                    setPrivateKeyLoginResponse(true)
+                    setViewLoginMessage(errorData.message)
+        
+                    const timeoutId = setTimeout(() => {
+                        setPrivateKeyLoginResponse(false);
+                        setViewLoginMessage("");
+                    }, 3000);
+                    return () => clearTimeout(timeoutId);
+                })
             }
         })
         .catch((error) => {

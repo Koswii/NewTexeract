@@ -14,8 +14,8 @@ const Tokens = () => {
     } = XERAWalletData();
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredProducts, setFilteredProducts] = useState(viewXERATokenList);
-
     // Handle search input change
+    
     const handleSearchChange = (e) => {
         const value = e.target.value.toLowerCase();
         setSearchTerm(value);
@@ -25,7 +25,10 @@ const Tokens = () => {
             product.token_symbol.toLowerCase().includes(value) ||
             product.token_id.toLowerCase().includes(value) 
         );
+        
         setFilteredProducts(filtered);
+        console.log(filteredProducts.length);
+        
     };
 
 

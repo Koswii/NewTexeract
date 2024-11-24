@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'
 import "../CSS/profile.css";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -173,6 +174,7 @@ const Profile = () => {
     } = TelegramData();
     const navigate = useNavigate();
     
+    const baseURL = process.env.REACT_APP_XERA_BASE_URL_API
     const XERAAirdropTwitterAPI = process.env.REACT_APP_XERA_USER_AIRDROP_X_API;
     
     const userTelegramStatus = localStorage.getItem('telegramTask');
@@ -191,51 +193,122 @@ const Profile = () => {
     const [xAccountStatus, setXAccountStatus] = useState('');
     const [viewXDetails, setViewXDetails] = useState(false);
     const [viewBindDetails, setViewBindDetails] = useState(false);
-    
-    const UserTransactions = viewXERATransactionList?.filter(transactions => (transactions.sender_address ,transactions.receiver_address) === userLoggedData.myXeraAddress) || {};
+    const [UserTransactions,setUserTransactions] = useState(null)
+    const [userTotalFollowers,setUserTotalFollowers] = useState(null)
+    const [userTask,setuserTask] = useState(null)
+    // const UserTransactions = viewXERATransactionList?.filter(transactions => (transactions.sender_address ,transactions.receiver_address) === userLoggedData.myXeraAddress) || {};
 
+
+    // useEffect(() => {
+    //     const calculateBalances = () => {
+            
+    //         const balances = viewXERATokenList.map((token) => {
+    //             const { token_id } = token;
+                
+    //             // Calculate total sent for the current token
+    //             const totalSend = UserTransactions
+    //             .filter((tx) => 
+    //                 tx.transaction_token_id === token_id && 
+    //                 tx.sender_address === userLoggedData.myXeraAddress
+    //             )
+    //             .reduce((total, tx) => total + parseFloat(tx.transaction_amount), 0);
+        
+    //             // Calculate total received for the current token
+    //             const totalReceive = UserTransactions
+    //             .filter((tx) => 
+    //                 tx.transaction_token_id === token_id && 
+    //                 tx.receiver_address === userLoggedData.myXeraAddress
+    //             )
+    //             .reduce((total, tx) => total + parseFloat(tx.transaction_amount), 0);
+        
+    //             // Calculate net balance
+    //             const totalBalance = (totalReceive - totalSend).toFixed(2);
+        
+    //             return { ...token, totalBalance };
+    //         });
+            
+    //         // Only update state if balances have changed
+    //         setTokenBalances((prevBalances) => {
+    //             const hasChanged = JSON.stringify(prevBalances) !== JSON.stringify(balances);
+    //             return hasChanged ? balances : prevBalances;
+    //         });
+    //     };
+    
+    //     calculateBalances();
+    // }, [viewXERATokenList, UserTransactions, userLoggedData]);
+    
 
     useEffect(() => {
-        const calculateBalances = () => {
-            const balances = viewXERATokenList.map((token) => {
-                const { token_id } = token;
-        
-                // Calculate total sent for the current token
-                const totalSend = UserTransactions
-                .filter((tx) => 
-                    tx.transaction_token_id === token_id && 
-                    tx.sender_address === userLoggedData.myXeraAddress
-                )
-                .reduce((total, tx) => total + parseFloat(tx.transaction_amount), 0);
-        
-                // Calculate total received for the current token
-                const totalReceive = UserTransactions
-                .filter((tx) => 
-                    tx.transaction_token_id === token_id && 
-                    tx.receiver_address === userLoggedData.myXeraAddress
-                )
-                .reduce((total, tx) => total + parseFloat(tx.transaction_amount), 0);
-        
-                // Calculate net balance
-                const totalBalance = (totalReceive - totalSend).toFixed(2);
-        
-                return { ...token, totalBalance };
-            });
-        
-            // Only update state if balances have changed
-            setTokenBalances((prevBalances) => {
-                const hasChanged = JSON.stringify(prevBalances) !== JSON.stringify(balances);
-                return hasChanged ? balances : prevBalances;
-            });
-        };
+        fetchBalance();
+        fetchFollowers();
+        fetchTransaction();
+        fetchTask();
+    }, [!userLoggedData])
     
-        calculateBalances();
-    }, [viewXERATokenList, UserTransactions, userLoggedData]);
     
+    const fetchTransaction = () => {
+        const cookies = Cookies.get('authToken')
+        const userwallet = {
+            user: userLoggedData.myXeraAddress
+        }
+        axios.post(`${baseURL}/user/transactions`, userwallet, {
+            headers: {
+                'Authorization': `Bearer ${cookies}`
+            }
+        }).then((res) => {
+            setUserTransactions(res.data.data)
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
 
+    const fetchBalance = () => {
+        const cookies = Cookies.get('authToken')
+        const userwallet = {
+            user: userLoggedData.myXeraAddress
+        }
+        axios.post(`${baseURL}/user/balance`, userwallet, {
+            headers: {
+                'Authorization': `Bearer ${cookies}`
+            }
+        }).then((res) => {
+            setTokenBalances(res.data.data)
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
 
-    
+    const fetchFollowers = () => {
+        const cookies = Cookies.get('authToken')
+        const userwallet = {
+            user: userLoggedData.myXeraAddress
+        }
+        axios.post(`${baseURL}/user/following`, userwallet, {
+            headers: {
+                'Authorization': `Bearer ${cookies}`
+            }
+        }).then((res) => {
+            setUserTotalFollowers(res.data.data.filter(user => user.following === userLoggedData.myXeraUsername))
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
 
+    const fetchTask = () => {
+        const cookies = Cookies.get('authToken')
+        const userwallet = {
+            user: userLoggedData.myXeraUsername
+        }
+        axios.post(`${baseURL}/users/user-tasks/all-task`, userwallet, {
+            headers: {
+                'Authorization': `Bearer ${cookies}`
+            }
+        }).then((res) => {
+            setuserTask(res.data.data)
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
 
     const handleViewProfileOverview = () => {
         setViewProfileOverview(true);
@@ -263,7 +336,7 @@ const Profile = () => {
         setViewProfileTokens(false);
     }
 
-    const userTotalFollowers = xeraUserFollowings.filter(user => user.following === userLoggedData.myXeraUsername)
+    // const userTotalFollowers = xeraUserFollowings.filter(user => user.following === userLoggedData.myXeraUsername)
     const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername))
     const myCurrentPoints = myCurrentData?.totalPoints
     const myCurrentReferrals = myCurrentData?.referralTaskCount
@@ -359,10 +432,6 @@ const Profile = () => {
     const handleClaimTXERA = () => {
         navigate('/TestnetFaucet')
     }
-
-
-    
-
     
     return (
         <div className='mainContainer profile'>
@@ -452,19 +521,23 @@ const Profile = () => {
                                     <div className="prfpchrcs Followers">
                                         <p>Followers</p>
                                         <div className='prfpchrcsf'>
-                                            {userTotalFollowers.length >= 3 &&
-                                                <div>
-                                                    {userTotalFollowers.slice(0, 3).map((data, i) => (
-                                                        <span key={i}>
-                                                            {data?.display?.xera_nft_meta ?
-                                                                <img key={i} src="" alt="" />:
-                                                                <img key={i} src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-                                                            }
-                                                        </span>
-                                                    ))}
-                                                </div>
+                                            {userTotalFollowers && 
+                                                <>
+                                                {userTotalFollowers.length >= 3 &&
+                                                    <div>
+                                                        {userTotalFollowers.slice(0, 3).map((data, i) => (
+                                                            <span key={i}>
+                                                                {data?.display?.xera_nft_meta ?
+                                                                    <img key={i} src="" alt="" />:
+                                                                    <img key={i} src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                                                }
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                }
+                                                <h5><NumberFormatter number={userTotalFollowers.length}/></h5>
+                                                </>
                                             }
-                                            <h5><NumberFormatter number={userTotalFollowers.length}/></h5>
                                         </div>
                                     </div>
                                     <div className="prfpchrcs Referrals">
@@ -559,14 +632,14 @@ const Profile = () => {
                                     <p id='ppcmalccdDesription'>Create your own XERA Wallet to securely store and manage all your future transactions.</p>
                                 </div>
                             </div>
-                            <div className={(userTelegramStatus) ? "ppcmalcContent telegram active" : "ppcmalcContent telegram"}>
+                            <div className={(userTask?.telegramtask) ? "ppcmalcContent telegram active" : "ppcmalcContent telegram"}>
                                 <button id='airdropTaskInfo' onClick={handleAirdropTask2}><TbInfoCircle className='faIcons'/></button>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 2</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>10,000 XP</span><br />JOIN TELEGRAM<br />COMMUNITY</h6>
-                                    {userTelegramStatus ?
+                                    {userTask?.telegramtask ?
                                         <p>COMPLETED</p>:
                                         <a href='https://t.me/TexeractNetworkCommunity' target='blank'>
                                             <button onClick={handleAirdropTask2} className='active'>EXECUTE</button>
@@ -576,12 +649,12 @@ const Profile = () => {
                                 <div className={!viewTelegramDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
                                     {/* <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button> */}
                                     <h6>JOIN TELEGRAM<br />COMMUNITY</h6>
-                                    {userTelegramStatus ?
+                                    {userTask?.telegramtask ?
                                         <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>:
                                         <p id='ppcmalccdStatus'>TASK 2</p>
                                     }
                                     <p id='ppcmalccdDesription'>Join the Texeract Official Telegram Community for updates and user interactions.</p>
-                                    {!userTelegramStatus && <>
+                                    {!userTask?.telegramtask && <>
                                         <div className="ppcmalccInputs">
                                             <input type="number" placeholder='INSERT USER ID' value={telegramID} onChange={(e) => setTelegramID(e.target.value)}/>
                                             {!verifyingLoader ?
@@ -593,17 +666,17 @@ const Profile = () => {
                                     </>}
                                 </div>
                             </div>
-                            <div className={(userXStatus) ? "ppcmalcContent xtwitter active" : "ppcmalcContent xtwitter"}>
+                            <div className={(userTask?.twittertask) ? "ppcmalcContent xtwitter active" : "ppcmalcContent xtwitter"}>
                                 <button id='airdropTaskInfo' onClick={handleAirdropTask3}><TbInfoCircle className='faIcons'/></button>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 3</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>10,000 XP</span><br />VISIT AND<br />FOLLOW X</h6>
-                                    {userXStatus ?
+                                    {userTask?.twittertask ?
                                         <>
-                                            {(userXStatus === 'pending') && <p id='pendingTask'>PENDING</p>}
-                                            {(userXStatus === 'ok') && <p>COMPLETED</p>}
+                                            {(userTask?.twittertask === 'pending') && <p id='pendingTask'>PENDING</p>}
+                                            {(userTask?.twittertask === 'ok') && <p>COMPLETED</p>}
                                         </>:
                                         <a href='https://twitter.com/TexeractNetwork' target='blank'>
                                             <button onClick={handleAirdropTask3} className='active'>EXECUTE</button>
@@ -638,16 +711,16 @@ const Profile = () => {
                                     }
                                 </div>
                             </div>
-                            <div className={(userWalletStatus) ? "ppcmalcContent binding active" : "ppcmalcContent binding"}>
+                            <div className={(userTask?.walletConnect ) ? "ppcmalcContent binding active" : "ppcmalcContent binding"}>
                                 <button id='airdropTaskInfo' onClick={handleAirdropTask4}><TbInfoCircle className='faIcons'/></button>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 4</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>10,000 XP</span><br />BIND YOUR<br />CRYTO WALLET</h6>
-                                    {userWalletStatus ?
+                                    {userTask?.walletConnect ?
                                         <>
-                                            {xeraUserWallets?.eth_wallet && <p id='connectedNetwork'><TbCurrencyEthereum className='faIcons'/>CONNECTED</p>}
+                                            {userTask?.ethWallet === "true" && <p id='connectedNetwork'><TbCurrencyEthereum className='faIcons'/>CONNECTED</p>}
                                             {xeraUserWallets?.sol_wallet && <p id='connectedNetwork'><TbCurrencySolana className='faIcons'/>CONNECTED</p>}
                                         </>
                                         :<button onClick={handleBindWallet} className='active'>CONNECT</button>
@@ -837,17 +910,17 @@ const Profile = () => {
                                             <h5>{i+1}</h5>
                                         </div>
                                         <span>
-                                            {data?.userBasic?.display ? 
+                                            {data?.display ? 
                                                 <img src="" alt="" />:
                                                 <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
                                             }
                                         </span>
                                         <div className='ppcmarcrlName'>
-                                            <h6><TextFormatter text={`${data?.userBasic?.username}`} /></h6>
-                                            <p><TextSlicer text={`${data?.userBasic?.xera_wallet}`} maxLength={18} /></p>
+                                            <h6><TextFormatter text={`${data?.username}`} /></h6>
+                                            <p><TextSlicer text={`${data?.xera_wallet}`} maxLength={18} /></p>
                                         </div>
                                         <div className='ppcmarcrlCount'>
-                                            <h5><NumberFormatter number={data?.referrals}/></h5>
+                                            <h5><NumberFormatter number={data?.count}/></h5>
                                         </div>
                                     </div>
                                 ))}
@@ -870,14 +943,18 @@ const Profile = () => {
                             <span id='ppcmtctExternal'><h6></h6></span>
                         </div>
                         <div className="ppcmtcTransaction">
-                            {(UserTransactions.length === 0) && <>
-                                <div className="ppcmtctEmpty">
-                                    <span>
-                                        <h6><TbReceiptOff className='faIcons'/></h6>
-                                        <p>No Transaction Yet</p>
-                                    </span>
-                                </div>
-                            </>}
+                            {UserTransactions && 
+                            <>
+                                {(UserTransactions.length === 0) && <>
+                                    <div className="ppcmtctEmpty">
+                                        <span>
+                                            <h6><TbReceiptOff className='faIcons'/></h6>
+                                            <p>No Transaction Yet</p>
+                                        </span>
+                                    </div>
+                                </>}
+                                </>
+                            }
                             {(dataLoading) ? <>
                                 <div className="ppcmtctEmpty">
                                     <span>
@@ -885,6 +962,8 @@ const Profile = () => {
                                     </span>
                                 </div>
                             </>:<>
+                                {UserTransactions &&
+                                <>
                                 {UserTransactions.map((data, i) => (
                                     <div className="ppcmtctContents" key={i}>
                                         <ul>
@@ -898,6 +977,8 @@ const Profile = () => {
                                         </ul>
                                     </div>
                                 ))}
+                                </>
+                                }
                             </>}
                         </div>
                     </div>

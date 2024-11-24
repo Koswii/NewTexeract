@@ -76,8 +76,7 @@ const Leaderboards = () => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-
-
+    
     return (
         <div className='mainContainer leaderboards'>
             <div className={windowReload ? "profileReload active" :  "profileReload disable"}>
@@ -305,17 +304,17 @@ const Leaderboards = () => {
                                                 <h5>{i+1}</h5>
                                             </div>
                                             <span>
-                                                {(data?.userBasic?.display?.xera_nft_meta) ? 
+                                                {(data?.xera_nft_meta) ? 
                                                     <img src="" alt="" />:
                                                     <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
                                                 }
                                             </span>
                                             <div className='lbrdpct2rName'>
-                                                <h6><TextFormatter text={`${data?.userBasic?.username}`} /></h6>
-                                                <p><TextSlicer text={`${data?.userBasic?.xera_wallet}`} maxLength={18} /></p>
+                                                <h6><TextFormatter text={`${data?.username}`} /></h6>
+                                                <p><TextSlicer text={`${data?.xera_wallet}`} maxLength={18} /></p>
                                             </div>
                                             <div className='lbrdpct2rCount'>
-                                                <h5><NumberFormatter number={data?.referrals}/></h5>
+                                                <h5><NumberFormatter number={data?.count}/></h5>
                                             </div>
                                         </div>
                                     ))}

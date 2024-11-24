@@ -20,23 +20,55 @@ const TestnetFaucet = () => {
         setViewLoginAccount,
         windowReload,
         userLoggedData,
-        fetchXERAAssets,
+        // fetchXERAAssets,
         viewXERATransactionList,
         viewXERATokenList,
     } = XERAWalletData();
 
+
+    const baseURL = process.env.REACT_APP_XERA_BASE_URL_API
+
+
+    const [TXERATransactions,setTXERATransaction] = useState(null)
     useEffect(() => {
         const intervalId = setInterval(async () => {
-            fetchXERAAssets();
-        }, 1000);
+            fetchTransaction();
+        }, 2000);
         return () => clearInterval(intervalId);
     }, []);
 
-    
+    const fetchTransaction = () => {
+        const apikey = process.env.REACT_APP_XERA_API
+
+        const api = {
+            apikey: apikey
+        }
+
+        try {
+            axios.post(`${baseURL}/generate/access-token`,api)
+            .then((res)=>{
+                const accessToken = res.data.accessToken
+                if (res.data.success) {
+
+                    axios.get(`${baseURL}/token/faucet-transaction`,{
+                        headers: {
+                            "Authorization" : `Bearer ${accessToken}`
+                        }
+                    })
+                    .then((response) => {
+                        if (response.data.success) {
+                            setTXERATransaction(response.data.data)
+                        }
+                    })
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const [viewTXERAInfo, setViewTXERAInfo] = useState(false)
     const TXERAInfo = viewXERATokenList?.find(token => token.token_symbol === "TXERA") || {};
-    const TXERATransactions = viewXERATransactionList?.filter(sender => sender.sender_address === "TXERA Faucet") || {};
-    
+
     const handleViewTXERAInfo = () => {
         setViewTXERAInfo(true);
         const timeoutId = setTimeout(() => {
@@ -73,26 +105,28 @@ const TestnetFaucet = () => {
                                     <li id='fctpcttAmount'><h6>AMOUNT</h6></li>
                                 </ul>
                             </div>
+                            {TXERATransactions &&
                             <div className="fctpctContainer">
-                                {(TXERATransactions.length === 0) ? <>
-                                    <div className="fctpctcEmpty">
-                                        <span>
-                                            <p>No TXERA Sent</p>
-                                        </span>
-                                    </div>
-                                </>:<>
-                                    {TXERATransactions.slice(0, 20).map((data, i) => (
-                                        <div className="fctpctcTxDetails" key={i}>
-                                            <ul>
-                                                <li id='fctpctcTxBlock'><p>{data.transaction_block}</p></li>
-                                                <li id='fctpctcTxHash'><p><TextSlicer text={`${data.transaction_hash}`} maxLength={40} /></p></li>
-                                                <li id='fctpctcTxReceiver'><p>{data.receiver_address}</p></li>
-                                                <li id='fctpctcTxAmount'><p>{data.transaction_amount} {data.transaction_token}</p></li>
-                                            </ul>
+                            {(TXERATransactions.length === 0) ? <>
+                                <div className="fctpctcEmpty">
+                                            <span>
+                                                <p>No TXERA Sent</p>
+                                            </span>
                                         </div>
-                                    ))}
-                                </>}
-                            </div>
+                                    </>:<>
+                                        {TXERATransactions.slice(0, 20).map((data, i) => (
+                                            <div className="fctpctcTxDetails" key={i}>
+                                                <ul>
+                                                    <li id='fctpctcTxBlock'><p>{data.transaction_block}</p></li>
+                                                    <li id='fctpctcTxHash'><p><TextSlicer text={`${data.transaction_hash}`} maxLength={40} /></p></li>
+                                                    <li id='fctpctcTxReceiver'><p>{data.receiver_address}</p></li>
+                                                    <li id='fctpctcTxAmount'><p>{data.transaction_amount} {data.transaction_token}</p></li>
+                                                </ul>
+                                            </div>
+                                        ))}
+                                    </>}
+                                </div>
+                            }
                         </div>
                         <div className="fctpct mint">
                             <button id='fctpctTokenInfo' onClick={handleViewTXERAInfo}><TbInfoCircle className='faIcons'/></button>
