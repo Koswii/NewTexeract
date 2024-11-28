@@ -147,6 +147,7 @@ const Nav = () => {
             <Link className='navCrBtn dapps disabled'><p>DAPPS</p></Link>
             <Link className='navCrBtn nodes disabled'><p>NODES</p></Link>
             <Link className='navCrBtn marketplace disabled'><p>MARKETPLACE</p></Link>
+            <Link className='navCrBtn social disabled'><p>SOCIAL</p></Link>
             <Link className='navCrBtn leaderboards' to='/Leaderboards'><p>LEADERBOARDS</p></Link>
             {!viewMobileNavigation ? 
               <button id='nvctntrMobile' onClick={handleViewMobileNavigation}><RiArrowDownSFill className='faIcons'/></button>:

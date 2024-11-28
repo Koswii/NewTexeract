@@ -812,7 +812,7 @@ const Profile = () => {
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />YT SUBSCRIBE<br />@MikeTamago</h6>
-                                    {(taskInitialComplete === 'Subscribe - @MikeTamago') ?
+                                    {(taskInitialComplete === 'Subscribe - @MikeTamago' || userTask?.subsTamago) ?
                                         <p>COMPLETED</p>:
                                         <a href='https://www.youtube.com/@MikeTamago-' target='blank'><button onClick={() => submitBonusTask('Subscribe - @MikeTamago')}>SUBSCRIBE</button></a>
                                     }
@@ -824,7 +824,7 @@ const Profile = () => {
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />YT SUBSCRIBE<br />@ALROCK</h6>
-                                    {(taskInitialComplete === 'Subscribe - @ALROCK') ?
+                                    {(taskInitialComplete === 'Subscribe - @ALROCK' || userTask?.subsalrock) ?
                                         <p>COMPLETED</p>:
                                         <a href='https://www.youtube.com/@ALROCK' target='blank'><button onClick={() => submitBonusTask('Subscribe - @ALROCK')}>SUBSCRIBE</button></a>
                                     }
@@ -836,7 +836,7 @@ const Profile = () => {
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />X FOLLOW<br />@BRGYTamago</h6>
-                                    {(taskInitialComplete === 'Follow - @BRGYTamago') ?
+                                    {(taskInitialComplete === 'Follow - @BRGYTamago' || userTask?.followTamago) ?
                                         <p>COMPLETED</p>:
                                         <a href='https://x.com/BRGYTamago' target='blank'><button onClick={() => submitBonusTask('Follow - @BRGYTamago')}>FOLLOW</button></a>
                                     }
@@ -848,7 +848,7 @@ const Profile = () => {
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />X FOLLOW<br />@ALrOck14</h6>
-                                    {(taskInitialComplete === 'Follow - @ALrOck14') ?
+                                    {(taskInitialComplete === 'Follow - @ALrOck14' || userTask?.followalrock) ?
                                         <p>COMPLETED</p>:
                                         <a href='https://x.com/ALrOck14' target='blank'><button onClick={() => submitBonusTask('Follow - @ALrOck14')}>FOLLOW</button></a>
                                     }
