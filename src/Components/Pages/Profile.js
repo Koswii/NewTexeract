@@ -437,7 +437,6 @@ const Profile = () => {
             const responseMessage = submitAirdropBonusTaskResponse.data;
     
             if (responseMessage.success) {
-                console.log(responseMessage.message);
                 setTaskInitialComplete(bonusTask);
                 fetchXERAData1();
             } else {
