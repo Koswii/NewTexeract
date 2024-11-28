@@ -88,7 +88,7 @@ const ClaimTXERA = () => {
             .post(TXERASendReqAPI, formRequestTXERADetails)
             .then((res) => {
                 const responseMessage = res.data;
-                console.log(res);
+                // console.log(res);
                 
                 if (responseMessage.success) {
                     setTxResponse(responseMessage.message);
