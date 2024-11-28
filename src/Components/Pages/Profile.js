@@ -431,11 +431,9 @@ const Profile = () => {
             username: userLoggedData.myXeraUsername,
             wallet: userLoggedData.myXeraAddress,
         };
-        
         try {
             const submitAirdropBonusTaskResponse = await axios.post(XERAAirdropBonusTaskAPI, formTaskDetails);
             const responseMessage = submitAirdropBonusTaskResponse.data;
-    
             if (responseMessage.success) {
                 setTaskInitialComplete(bonusTask);
                 fetchXERAData1();
@@ -815,7 +813,7 @@ const Profile = () => {
                                     <h6><span>1,250 XP</span><br />YT SUBSCRIBE<br />@MikeTamago</h6>
                                     {(taskInitialComplete === 'Subscribe - @MikeTamago' || userTask?.subsTamago) ?
                                         <p>COMPLETED</p>:
-                                        <a href='https://www.youtube.com/@MikeTamago-' target='blank'><button onClick={() => submitBonusTask('Subscribe - @MikeTamago')}>SUBSCRIBE</button></a>
+                                        <a href='https://www.youtube.com/@MikeTamago-' target='blank' disabled={taskInitialComplete && userTask?.subsTamago}><button onClick={() => submitBonusTask('Subscribe - @MikeTamago')} disabled={taskInitialComplete}>SUBSCRIBE</button></a>
                                     }
                                 </div>
                             </div>
@@ -827,7 +825,7 @@ const Profile = () => {
                                     <h6><span>1,250 XP</span><br />YT SUBSCRIBE<br />@ALROCK</h6>
                                     {(taskInitialComplete === 'Subscribe - @ALROCK' || userTask?.subsalrock) ?
                                         <p>COMPLETED</p>:
-                                        <a href='https://www.youtube.com/@ALROCK' target='blank'><button onClick={() => submitBonusTask('Subscribe - @ALROCK')}>SUBSCRIBE</button></a>
+                                        <a href='https://www.youtube.com/@ALROCK' target='blank' disabled={taskInitialComplete && userTask?.subsalrock}><button onClick={() => submitBonusTask('Subscribe - @ALROCK')} disabled={taskInitialComplete}>SUBSCRIBE</button></a>
                                     }
                                 </div>
                             </div>
@@ -839,7 +837,7 @@ const Profile = () => {
                                     <h6><span>1,250 XP</span><br />X FOLLOW<br />@BRGYTamago</h6>
                                     {(taskInitialComplete === 'Follow - @BRGYTamago' || userTask?.followTamago) ?
                                         <p>COMPLETED</p>:
-                                        <a href='https://x.com/BRGYTamago' target='blank'><button onClick={() => submitBonusTask('Follow - @BRGYTamago')}>FOLLOW</button></a>
+                                        <a href='https://x.com/BRGYTamago' target='blank' disabled={taskInitialComplete && userTask?.followTamago}><button onClick={() => submitBonusTask('Follow - @BRGYTamago')} disabled={taskInitialComplete}>FOLLOW</button></a>
                                     }
                                 </div>
                             </div>
@@ -851,7 +849,7 @@ const Profile = () => {
                                     <h6><span>1,250 XP</span><br />X FOLLOW<br />@ALrOck14</h6>
                                     {(taskInitialComplete === 'Follow - @ALrOck14' || userTask?.followalrock) ?
                                         <p>COMPLETED</p>:
-                                        <a href='https://x.com/ALrOck14' target='blank'><button onClick={() => submitBonusTask('Follow - @ALrOck14')}>FOLLOW</button></a>
+                                        <a href='https://x.com/ALrOck14' target='blank' disabled={taskInitialComplete && userTask?.followalrock}><button onClick={() => submitBonusTask('Follow - @ALrOck14')} disabled={taskInitialComplete}>FOLLOW</button></a>
                                     }
                                 </div>
                             </div>
