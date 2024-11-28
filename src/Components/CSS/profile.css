@@ -743,6 +743,42 @@ h6{
 
 
 
+.ppcmalcContent.t5{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/TaskNo5.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.t6{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/TaskNo6.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.t7{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/TaskNo7.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.t8{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/TaskNo8.png') no-repeat center;
+    background-size: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .ppcmalcContent button#airdropTaskInfo{
     position: absolute;

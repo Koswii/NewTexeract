@@ -163,6 +163,7 @@ const Profile = () => {
         xeraReferralCounts,
         processedData,
         xeraUserFollowings,
+        fetchXERAData1,
     } = XERAWalletData();
     const {
         telegramID, 
@@ -176,6 +177,7 @@ const Profile = () => {
     
     const baseURL = process.env.REACT_APP_XERA_BASE_URL_API
     const XERAAirdropTwitterAPI = process.env.REACT_APP_XERA_USER_AIRDROP_X_API;
+    const XERAAirdropBonusTaskAPI = process.env.REACT_APP_XERA_USER_AIRDROP_BONUS_API;
     
     const userTelegramStatus = localStorage.getItem('telegramTask');
     const userXStatus = localStorage.getItem('twitterTask');
@@ -419,6 +421,34 @@ const Profile = () => {
         }, 10000);
         return () => clearTimeout(timeoutId);
     }
+
+    const [taskInitialComplete, setTaskInitialComplete] = useState('');
+    const submitBonusTask = async (bonusTask) => {
+        setTaskInitialComplete(bonusTask);
+
+        const formTaskDetails = {
+            taskTitle: bonusTask,
+            username: userLoggedData.myXeraUsername,
+            wallet: userLoggedData.myXeraAddress,
+        };
+        
+        try {
+            const submitAirdropBonusTaskResponse = await axios.post(XERAAirdropBonusTaskAPI, formTaskDetails);
+            const responseMessage = submitAirdropBonusTaskResponse.data;
+    
+            if (responseMessage.success) {
+                console.log(responseMessage.message);
+                setTaskInitialComplete(bonusTask);
+                fetchXERAData1();
+            } else {
+                // console.log(responseMessage.message);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
     const handleCloseAirdropDetails = () => {
         setViewCreateWalletDetails(false)
         setViewTelegramDetails(false)
@@ -740,7 +770,7 @@ const Profile = () => {
                             </div>
                             <div className="ppcmalcContent testnetXERA active">
                                 <div className="ppcmalccTitle">
-                                    <p>TASK 5</p>
+                                    <p>TASK 9</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />CLAIM TXERA<br />EVERY 12 HOURS</h6>
@@ -749,7 +779,7 @@ const Profile = () => {
                             </div>
                             <div className="ppcmalcContent testnetXERA">
                                 <div className="ppcmalccTitle">
-                                    <p>TASK 6</p>
+                                    <p>TASK 10</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />SEND TXERA<br />EVERY 12 HOURS</h6>
@@ -758,7 +788,7 @@ const Profile = () => {
                             </div>
                             <div className="ppcmalcContent testnetXERA">
                                 <div className="ppcmalccTitle">
-                                    <p>TASK 7</p>
+                                    <p>TASK 11</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />SWAP TXERA/TETH<br />EVERY 12 HOURS</h6>
@@ -767,11 +797,62 @@ const Profile = () => {
                             </div>
                             <div className="ppcmalcContent testnetXERA">
                                 <div className="ppcmalccTitle">
-                                    <p>TASK 8</p>
+                                    <p>TASK 12</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />SWAP TXERA/TSOL<br />EVERY 12 HOURS</h6>
                                     <button disabled>SWAP</button>
+                                </div>
+                            </div>
+                        </div><br />
+                        <h5>BONUS AIRDROP TASK</h5>
+                        <div className="ppcmalContainer">
+                            <div className="ppcmalcContent t5 active">
+                                <div className="ppcmalccTitle">
+                                    <p>BONUS TASK 1</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />YT SUBSCRIBE<br />@MikeTamago</h6>
+                                    {(taskInitialComplete === 'Subscribe - @MikeTamago') ?
+                                        <p>COMPLETED</p>:
+                                        <a href='https://www.youtube.com/@MikeTamago-' target='blank'><button onClick={() => submitBonusTask('Subscribe - @MikeTamago')}>SUBSCRIBE</button></a>
+                                    }
+                                </div>
+                            </div>
+                            <div className="ppcmalcContent t6 active">
+                                <div className="ppcmalccTitle">
+                                    <p>BONUS TASK 2</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />YT SUBSCRIBE<br />@ALROCK</h6>
+                                    {(taskInitialComplete === 'Subscribe - @ALROCK') ?
+                                        <p>COMPLETED</p>:
+                                        <a href='https://www.youtube.com/@ALROCK' target='blank'><button onClick={() => submitBonusTask('Subscribe - @ALROCK')}>SUBSCRIBE</button></a>
+                                    }
+                                </div>
+                            </div>
+                            <div className="ppcmalcContent t7 active">
+                                <div className="ppcmalccTitle">
+                                    <p>BONUS TASK 3</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />X FOLLOW<br />@BRGYTamago</h6>
+                                    {(taskInitialComplete === 'Follow - @BRGYTamago') ?
+                                        <p>COMPLETED</p>:
+                                        <a href='https://x.com/BRGYTamago' target='blank'><button onClick={() => submitBonusTask('Follow - @BRGYTamago')}>FOLLOW</button></a>
+                                    }
+                                </div>
+                            </div>
+                            <div className="ppcmalcContent t8 active">
+                                <div className="ppcmalccTitle">
+                                    <p>BONUS TASK 4</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />X FOLLOW<br />@ALrOck14</h6>
+                                    {(taskInitialComplete === 'Follow - @ALrOck14') ?
+                                        <p>COMPLETED</p>:
+                                        <a href='https://x.com/ALrOck14' target='blank'><button onClick={() => submitBonusTask('Follow - @ALrOck14')}>FOLLOW</button></a>
+                                    }
                                 </div>
                             </div>
                         </div>
