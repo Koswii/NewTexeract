@@ -439,6 +439,7 @@ const Profile = () => {
             if (responseMessage.success) {
                 setTaskInitialComplete(bonusTask);
                 fetchXERAData1();
+                window.location.reload();
             } else {
                 // console.log(responseMessage.message);
             }
