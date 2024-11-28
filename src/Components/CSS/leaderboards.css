@@ -682,6 +682,9 @@ section.leaderboardsPageContainer.mid{
     .lbrdpct p{
         font-size: 2vw;
     }
+    .lbrdpct img{
+        height: 5vw;
+    }
     .lbrdpct.duration div h6{
         font-size: 3vw;
         margin-bottom: 1%;
@@ -741,7 +744,6 @@ section.leaderboardsPageContainer.mid{
     .lbrdpct2t1Rewards{
         display: none;
     }
-
 
     .lbrdpct2.top2,
     .lbrdpct2.top3{
