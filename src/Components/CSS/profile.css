@@ -685,9 +685,9 @@ h6{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
-    margin-top: 1%;
+    margin-top: 2%;
 }
 .ppcmalcContent{
     height: 15vw;
@@ -699,7 +699,7 @@ h6{
     padding: 2%;
     transition: 400ms ease;
     position: relative;
-    margin-top: 1.5%;
+    margin: 0.5%;
 }
 .ppcmalcContent:hover{
     filter: grayscale(0);
@@ -1432,12 +1432,17 @@ h6{
 
     .ppcmAirdrop.left h5{
         font-size: 5vw;
+        margin-bottom: 5%;
+        text-align: center;
+    }
+    .ppcmalContainer{
+        height: 100vw;
+        overflow-x: hidden;
     }
     .ppcmalcContent{
         height: 50vw;
-        width: 48%;
+        width: 49%;
         border-radius: 2vw;
-        margin-top: 5%;
     }
     .ppcmalccDetails{
         height: 50vw;
