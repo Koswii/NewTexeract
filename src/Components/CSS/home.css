@@ -364,7 +364,7 @@ section.homePageContainer.mid234{
     box-shadow: 0 0 20px black;
     border-radius: 1vw;
     padding: 3% 5%;
-    margin-bottom: 7%;
+    margin-bottom: 10%;
 }
 .hpcm2Contents.left{
     height: auto;
@@ -406,7 +406,7 @@ section.homePageContainer.mid234{
     justify-content: space-between;
     align-items: center;
     padding: 2% 5%;
-    margin-bottom: 7%;
+    margin-bottom: 10%;
 }
 .hpcm3Contents.left{
     height: auto;
@@ -748,6 +748,25 @@ section.homePageContainer.mid6{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 500px){
     .mainContainer.home{
         padding-bottom: 30vw;
@@ -840,7 +859,6 @@ section.homePageContainer.mid6{
         display: block;
         border-radius: 2vw;
         padding: 5%;
-        margin-bottom: 7%;
     }
     .hpcm2Contents.left{
         width: 100%;
@@ -868,7 +886,6 @@ section.homePageContainer.mid6{
         width: 100%;
         display: block;
         padding: 5% 2%;
-        margin-bottom: 7%;
     }
     .hpcm3Contents.left{
         width: 100%;

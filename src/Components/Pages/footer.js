@@ -60,7 +60,7 @@ const Footer = () => {
               <li><Link to='/Leaderboards' className='active'>Leaderboards</Link></li>
               <li><Link to='/Whitepaper' className='active'>Whitepaper</Link></li>
               <li><Link to='/Ecosystem' className='active'>Ecosystem</Link></li>
-              <li><Link>Tokenomics</Link></li>
+              <li><Link to='/Tokenomics' className='active'>Tokenomics</Link></li>
               <li><Link>XERAScan</Link></li>
               <li><Link>FAQs</Link></li>
             </ul>

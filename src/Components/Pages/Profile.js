@@ -241,6 +241,7 @@ const Profile = () => {
     
 
     useEffect(() => {
+        fetchXERAData1();
         fetchBalance();
         fetchFollowers();
         fetchTransaction();

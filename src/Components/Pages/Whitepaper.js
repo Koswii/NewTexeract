@@ -189,11 +189,31 @@ const Whitepaper = () => {
                 <div className="txrdContainer mobile">
                     <div className="mobNav">
                         {!viewMobNavWP ?
-                        <h6 onClick={handleMobileNav}><RiArrowDownSFill className='faIcons'/></h6>:
-                        <h6 onClick={handleCloseMobileNav}><RiArrowUpSFill className='faIcons'/></h6>}
+                        <h6 onClick={handleMobileNav}><RiArrowDownSFill className='faIcons'/>
+                            <span>
+                                {viewWhat && 'What is Texeract Network?'}
+                                {veiwFork && 'Is it Ethereum Fork?'}
+                                {viewObjestive && 'Texeract Network: The Objectives'}
+                                {viewXERA && 'Texeract Network: XERA Coin'}
+                                {viewRoadmap && 'Texeract Network: Roadmap'}
+                                {viewL2Solution && 'Texeract Network: Layer 2 Solution'}
+                                {viewConsensus && 'Technology Mechanism'}
+                            </span>
+                        </h6>:
+                        <h6 onClick={handleCloseMobileNav}><RiArrowUpSFill className='faIcons'/>
+                            <span>
+                                {viewWhat && 'What is Texeract Network?'}
+                                {veiwFork && 'Is it Ethereum Fork?'}
+                                {viewObjestive && 'Texeract Network: The Objectives'}
+                                {viewXERA && 'Texeract Network: XERA Coin'}
+                                {viewRoadmap && 'Texeract Network: Roadmap'}
+                                {viewL2Solution && 'Texeract Network: Layer 2 Solution'}
+                                {viewConsensus && 'Technology Mechanism'}
+                            </span>
+                        </h6>}
                     </div>
                     {viewMobNavWP &&<div className='mobNavBtn'>
-                        <button onClick={handleViewWhat} className={viewWhat ? 'active' : ''}><p>What is Texeract Network ?</p></button>
+                        <button onClick={handleViewWhat} className={viewWhat ? 'active' : ''}><p>What is Texeract Network?</p></button>
                         <button onClick={handleViewFork} className={veiwFork ? 'active' : ''}><p>Is it Ethereum Fork?</p></button>
                         <button onClick={handleViewObjective} className={viewObjestive ? 'active' : ''}><p>Texeract Network: The Objectives</p></button>
                         <button onClick={handleViewXERA} className={viewXERA ? 'active' : ''}><p>Texeract Network: XERA Coin</p></button>

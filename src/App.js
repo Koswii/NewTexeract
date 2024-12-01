@@ -14,6 +14,7 @@ import Leaderboards from './Components/Pages/Leaderboards';
 import Tokens from './Components/Pages/Tokens';
 import Whitepaper from './Components/Pages/Whitepaper';
 import Ecosystem from './Components/Pages/Ecosystem';
+import Tokenomics from './Components/Pages/Tokenomics';
 
 
 
@@ -71,6 +72,7 @@ function App() {
             <Route path="/Tokens" element={<Tokens/>}/>
             <Route path="/Whitepaper" element={<Whitepaper/>}/>
             <Route path="/Ecosystem" element={<Ecosystem/>}/>
+            <Route path="/Tokenomics" element={<Tokenomics/>}/>
             <Route path="/TestnetFaucet" element={<TestnetFaucet/>}/>
             <Route path="*" element={<Home/>}/>
           </Routes>

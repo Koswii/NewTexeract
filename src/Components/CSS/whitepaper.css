@@ -151,11 +151,27 @@ section.texeractWhitepaper{
 }
 .mobNav{
     height: auto;
-    width: 10%;
+    width: 100%;
     position: relative;
 }
 .mobNav h6{
     font-size: 6vw;
+    display: flex;
+    justify-content: left;
+    align-items: start;
+}
+.mobNav h6 span{
+    height: 6vw;
+    font-weight: 600;
+    font-size: 3.5vw;
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.mobNav h6 .faIcons{
+    margin-right: 3%;
 }
 .mobNavBtn{
     height: auto;
@@ -220,9 +236,7 @@ section.texeractWhitepaper{
         animation: none;
     }
     .txrdContainer.right div h5{
-        text-align: center;
-        font-size: 4vw;
-        text-transform: uppercase;
+        display: none;
     }
     .txrdContainer.right div h6{
         font-size: 2.7vw;

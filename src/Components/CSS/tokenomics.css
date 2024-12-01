@@ -1,0 +1,156 @@
+h1, h2, h3, h4, h5, h6, p{
+    color: white;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
+p{
+    font-size: 0.7vw;
+}
+h1{
+    font-size: 10vw;
+}
+h2{
+    font-size: 5vw;
+}
+h3{
+    font-size: 4vw;
+}
+h4{
+    font-size: 2vw;
+}
+h5{
+    font-size: 1.5vw;
+}
+h6{
+    font-size: 1vw;
+}
+
+
+.mainContainer.tokenomics{
+    height: auto;
+    width: 100%;
+    background: black;
+    padding-bottom: 10vw;
+}
+
+section.tokenomicsPageContainer.top{
+    height: auto;
+    width: 100%;
+    position: relative;
+}
+.tokenomicsPageContent.top{
+    height: auto;
+    width: 100%;
+    padding: 2vw 7%;
+    padding-top: 12vh;
+    background: 
+        linear-gradient(transparent, black 50%),
+        url('../assets/imgs/profileBG.png') no-repeat top;
+    background-size: cover;
+}
+.tknmcspcHeader{
+    height: auto;
+    width: 100%;
+    text-align: center;
+}
+.tknmcspcHeader h4{
+    font-family: 'Lexend Peta', sans-serif;
+}
+.tknmcspcHeader h6{
+    font-size: 0.7vw;
+    font-weight: 400;
+}
+.tknmcspcChart{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-top: 3%;
+}
+.tknmcspccCard{
+    height: auto;
+    width: 25%;
+    padding: 2%;
+    background: rgb(20, 20, 20);
+    border-radius: 1vw;
+}
+.tknmcspccCard h6{
+    font-weight: 600;
+    font-size: 0.7vw;
+    color: gray;
+}
+.tknmcspcccPie{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15% 0;
+}
+.tknmcspcccContent{
+    height: auto;
+    width: 100%;
+}
+.tknmcspcccContent p{
+    font-size: 0.7vw;
+    color: gray;
+    text-align: center;
+}
+.tknmcspcccContent h6{
+    font-size: 1.2vw;
+    color: white;
+    text-align: center;
+}
+
+
+
+.tknmcspccInfos{
+    height: auto;
+    width: 70%;
+}
+.tknmcspcciHeader{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+}
+.tknmcspccihDes{
+    height: auto;
+    width: 50%;
+    padding: 2%;
+    background: rgb(20, 20, 20);
+    border-radius: 1vw;
+}
+.tknmcspccihDes p{
+    font-size: 0.7vw;
+}
+.tknmcspccihVal{
+    width: 24%;
+    padding: 2%;
+    background: rgb(20, 20, 20);
+    border-radius: 1vw;
+    text-align: right;
+}
+.tknmcspccihVal p{
+    color: gray;
+}
+.tknmcspcciContent{
+    height: auto;
+    width: 100%;
+    padding: 3%;
+    background: rgb(20, 20, 20);
+    border-radius: 1vw;
+    margin-top: 2%;
+}
+.tknmcspcciContent ul{
+    margin-top: 1%;
+    margin-bottom: 3%;
+    padding-left: 5%;
+    color: white;
+}
+
+
+
