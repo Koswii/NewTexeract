@@ -17,6 +17,7 @@ const ClaimTXERA = () => {
     const TXERASendReqAPI = process.env.REACT_APP_XERA_ASSET_TXERA_SEND_API;
     const [txHash, setTxHash] = useState("");
     const [txResponse, setTxResponse] = useState("");
+    const [claimingLoader, setClaimingLoader] = useState(false);
     const TXERAInfo = viewXERATokenList?.find(token => token.token_symbol === "TXERA") || {};
     
     const handleViewCreateWallet = () => {
@@ -65,7 +66,7 @@ const ClaimTXERA = () => {
     }, []); // Run once on mount
     
     const claimTXERAToken = async () => {
-        
+        setClaimingLoader(true)
         if(!userLoggedData || !txHash){
             return;
         }
@@ -93,17 +94,21 @@ const ClaimTXERA = () => {
                 if (responseMessage.success) {
                     setTxResponse(responseMessage.message);
                     hashData(formRequestTXERADetails);
+                    setClaimingLoader(false)
                     // fetchXERAAssets();
                     
                     const timeoutId = setTimeout(() => {
                         setTxResponse("");
+                        setClaimingLoader(false)
                     }, 8000);
                     return () => clearTimeout(timeoutId);
     
                 } else {
                     setTxResponse(responseMessage.message);
+                    setClaimingLoader(false)
                     const timeoutId = setTimeout(() => {
                         setTxResponse("");
+                        setClaimingLoader(false)
                     }, 8000);
                     return () => clearTimeout(timeoutId);
                 }
@@ -122,7 +127,12 @@ const ClaimTXERA = () => {
     return (
         <>
             {userLoggedData ? 
-                <button onClick={claimTXERAToken}>CLAIM TXERA TOKEN</button>:
+                <>
+                    {claimingLoader ? 
+                        <button disabled>REQUESTING TXERA...</button>:
+                        <button onClick={claimTXERAToken}>CLAIM TXERA TOKEN</button>
+                    }
+                </>:
                 <button onClick={handleViewCreateWallet}>CLAIM TXERA TOKEN</button>
             }
             <p id='fctpctResponse'>{txResponse}</p>

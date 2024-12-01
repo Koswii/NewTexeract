@@ -5,7 +5,12 @@ import axios from 'axios';
 import { XERAWalletData } from './XERAWalletDataContext';
 
 
-
+const TextSlicer = ({ text = '', maxLength }) => {
+    const truncatedText = text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+    return (
+      <>{truncatedText}</>
+    );
+};
 const Tokens = () => {
     const {
         windowReload,
@@ -68,7 +73,7 @@ const Tokens = () => {
                                                     <img src={require(`../assets/imgs/TokenLogos/${data.token_logo}`)} alt="" />
                                                     <div className="tknspctcltcInfo">
                                                         <h6>{data.token_name} ({data.token_symbol}) <br /><span>{data.token_id}</span></h6>
-                                                        <p>{data.token_info}</p>
+                                                        <p><TextSlicer text={`${data.token_info}`} maxLength={130} /></p>
                                                     </div>
                                                 </div>
                                             ))}
@@ -78,7 +83,7 @@ const Tokens = () => {
                                                     <img src={require(`../assets/imgs/TokenLogos/${data.token_logo}`)} alt="" />
                                                     <div className="tknspctcltcInfo">
                                                         <h6>{data.token_name} ({data.token_symbol}) <br /><span>{data.token_id}</span></h6>
-                                                        <p>{data.token_info}</p>
+                                                        <p><TextSlicer text={`${data.token_info}`} maxLength={130} /></p>
                                                     </div>
                                                 </div>
                                             ))}

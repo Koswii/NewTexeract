@@ -825,7 +825,7 @@ const Profile = () => {
                                             {(taskInitialComplete === 'Subscribe - @MikeTamago') && <p>PENDING</p>}
                                             {userTask?.subsTamago && <p>COMPLETED</p>}
                                         </>:
-                                        <button onClick={() => submitBonusTask('Subscribe - @MikeTamago')} disabled={taskInitialComplete || userTask?.subsTamago}>SUBSCRIBE</button>
+                                        <button onClick={() => submitBonusTask('Subscribe - @MikeTamago')} disabled={taskInitialComplete || userTask?.subsTamago} className='active'>SUBSCRIBE</button>
                                     }
                                 </div>
                             </div>
@@ -840,7 +840,7 @@ const Profile = () => {
                                             {(taskInitialComplete === 'Subscribe - @ALROCK') && <p>PENDING</p>}
                                             {userTask?.subsalrock && <p>COMPLETED</p>}
                                         </>:
-                                        <button onClick={() => submitBonusTask('Subscribe - @ALROCK')} disabled={taskInitialComplete || userTask?.subsalrock}>SUBSCRIBE</button>
+                                        <button onClick={() => submitBonusTask('Subscribe - @ALROCK')} disabled={taskInitialComplete || userTask?.subsalrock} className='active'>SUBSCRIBE</button>
                                     }
                                 </div>
                             </div>
@@ -855,7 +855,7 @@ const Profile = () => {
                                             {(taskInitialComplete === 'Follow - @BRGYTamago') && <p>PENDING</p>}
                                             {userTask?.followTamago && <p>COMPLETED</p>}
                                         </>:
-                                        <button onClick={() => submitBonusTask('Follow - @BRGYTamago')} disabled={taskInitialComplete || userTask?.followTamago}>FOLLOW</button>
+                                        <button onClick={() => submitBonusTask('Follow - @BRGYTamago')} disabled={taskInitialComplete || userTask?.followTamago} className='active'>FOLLOW</button>
                                     }
                                 </div>
                             </div>
@@ -870,7 +870,7 @@ const Profile = () => {
                                             {(taskInitialComplete === 'Follow - @ALrOck14') && <p>PENDING</p>}
                                             {userTask?.followalrock && <p>COMPLETED</p>}
                                         </>:
-                                        <button onClick={() => submitBonusTask('Follow - @ALrOck14')} disabled={taskInitialComplete || userTask?.followalrock}>FOLLOW</button>
+                                        <button onClick={() => submitBonusTask('Follow - @ALrOck14')} disabled={taskInitialComplete || userTask?.followalrock} className='active'>FOLLOW</button>
                                     }
                                 </div>
                             </div>
