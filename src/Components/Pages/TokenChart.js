@@ -25,9 +25,9 @@ export const data = {
   ],
 };
 
-export function Chart({ height = 17, width = 17 }) {
+export function Chart() {
     return (
-        <div style={{ height: `${height}vw`, width: `${width}vw` }}>
+        <div className='chart'>
             <Doughnut
                 data={data}
                 options={{

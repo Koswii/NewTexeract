@@ -21,7 +21,7 @@ const Tokenomics = () => {
             <section className="tokenomicsPageContainer top">
                 <div className="tokenomicsPageContent top">
                     <div className="tknmcspcHeader">
-                        <h4>TEXERACT NETWORK TOKENOMICS</h4>
+                        <h4>XERA COIN TOKENOMICS</h4>
                         <h6>Overview of Texeract Network's Funding and Allocation Plan.</h6>
                     </div>
                     <div className="tknmcspcChart">
