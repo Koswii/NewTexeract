@@ -139,7 +139,7 @@ const Nav = () => {
               <Link to='/TestnetFaucet' onClick={handleHideMobileNavigation}><p>TESTNET FAUCET</p></Link>
               <Link to='/Tokens' onClick={handleHideMobileNavigation}><p>TOKENS</p></Link>
               <Link to='/Whitepaper' onClick={handleHideMobileNavigation}><p>WHITEPAPER</p></Link>
-              <Link to='/Whitepaper' onClick={handleHideMobileNavigation}><p>TOKENOMICS</p></Link>
+              <Link to='/Tokenomics' onClick={handleHideMobileNavigation}><p>TOKENOMICS</p></Link>
               <Link to='/Ecosystem' onClick={handleHideMobileNavigation}><p>ECOSYSTEM</p></Link>
             </div>
 
