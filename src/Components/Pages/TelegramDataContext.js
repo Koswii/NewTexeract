@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from "js-cookie";
+import { XERAWalletData } from './XERAWalletDataContext';
 
 const TelegramDataContext = createContext();
 
@@ -99,6 +100,7 @@ export const TelegramDataProvider = ({ children }) => {
             const memberStatus = response.data.result.status;
             const username = response.data.result.user.username;
             // setJoinedTelegram(true);
+            
             setTelegramUsername(username);
             submitTelegramDetails();
         //   setTelegramStatus(`User @${username} is ${memberStatus} in the group.`); // Will return 'member', 'administrator', etc.

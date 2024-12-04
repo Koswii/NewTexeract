@@ -70,9 +70,9 @@ const Tokenomics = () => {
                                 <ul>
                                     <li><p>25% (250,000,000  XERA Coins) distributed to participants during the testnet phases as a reward for their contributions:</p></li>
                                     <ul>
-                                        <li><p>Testnet Phase 1: 5% (50,000,000 XERA Coins)</p></li>
-                                        <li><p>Testnet Phase 2: 10% (100,000,000 XERA Coins)</p></li>
-                                        <li><p>Testnet Phase 3: 10% (100,000,000 XERA Coins)</p></li>
+                                        <li><p>Testnet Phase 1: 2.5% (25,000,000 XERA Coins)</p></li>
+                                        <li><p>Testnet Phase 2: 7.5% (75,000,000 XERA Coins)</p></li>
+                                        <li><p>Testnet Phase 3: 15% (150,000,000 XERA Coins)</p></li>
                                     </ul>
                                 </ul>
                                 <h6>MAINNET CONTRIBUTORS</h6>

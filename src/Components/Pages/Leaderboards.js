@@ -60,6 +60,8 @@ const Leaderboards = () => {
         xeraReferralCounts,
         processedData
     } = XERAWalletData();
+
+
     const [currentPage, setCurrentPage] = useState(1);
     const dataPerPage = 50; // Display 50 data per page
     const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername))
@@ -70,6 +72,7 @@ const Leaderboards = () => {
     const indexOfLastItem = currentPage * dataPerPage;
     const indexOfFirstItem = indexOfLastItem - dataPerPage;
     const currentData = processedData.slice(indexOfFirstItem, indexOfLastItem);
+
     // Calculate total number of pages
     const totalPages = Math.ceil(processedData.length / dataPerPage);
     // Handle page change
@@ -106,7 +109,7 @@ const Leaderboards = () => {
                         </div>
                         <div className="lbrdpct token">
                             <span>
-                                <h3>50M</h3>
+                                <h3>25M</h3>
                                 <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
                             </span>
                             <p>Reward Allocation</p>

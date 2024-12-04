@@ -116,38 +116,6 @@ const ScrambleTextUsername = ({ targetText, scrambleSpeed = 50, revealSpeed = 20
     }, [targetText, scrambleSpeed]);
     return <>{scrambledText}</>;
 };
-// const ScrambleTextAirdrop = ({ targetText, scrambleSpeed = 80, revealSpeed = 200 }) => {
-//     const [scrambledText, setScrambledText] = useState([]);
-//     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
-  
-//     useEffect(() => {
-//       const lines = targetText.split('\n'); // Split text by line breaks
-//       const scrambleLines = lines.map(() => ''); // Initialize scrambled text for each line
-//       let iteration = 0;
-  
-//       const scrambleInterval = setInterval(() => {
-//         setScrambledText((prev) => {
-//           return lines.map((line, index) => {
-//             const progress = iteration / (targetText.length * 2);
-//             const scrambled = line
-//               .split('')
-//               .map((char, i) => (i < progress * line.length ? char : characters[Math.floor(Math.random() * characters.length)]))
-//               .join('');
-//             return scrambled;
-//           });
-//         });
-  
-//         iteration++;
-//         if (iteration > targetText.length * 2) clearInterval(scrambleInterval);
-//       }, scrambleSpeed);
-  
-//       return () => clearInterval(scrambleInterval);
-//     }, [targetText, scrambleSpeed]);
-
-//     return <h6 style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '1vw', fontWeight: '700', color: 'white',textAlign: 'left', whiteSpace: 'pre-line' }}>{scrambledText.join('\n')}</h6>;
-// };
-
-
 const Profile = () => {
     const {
         viewConnectWallet, 
