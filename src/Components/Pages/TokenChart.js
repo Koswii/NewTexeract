@@ -1,17 +1,24 @@
 import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale } from 'chart.js'; // Import necessary components
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale, // Needed for category scaling
+  LinearScale, // Needed for linear scaling
+} from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
-// Register all required components
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale);
+// Register components
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale);
 
 export const data = {
   labels: [
-    '60,000,000 XERA Coin', 
-    '40,000,000 XERA Coin', 
-    '50,000,000 XERA Coin', 
-    '250,000,000 XERA Coin', 
-    '500,000,000 XERA Coin'
+    '60,000,000 XERA Coin',
+    '40,000,000 XERA Coin',
+    '50,000,000 XERA Coin',
+    '250,000,000 XERA Coin',
+    '500,000,000 XERA Coin',
   ],
   datasets: [
     {
