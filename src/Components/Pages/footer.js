@@ -9,6 +9,14 @@ import {
   FaDiscord
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { 
+  RiSearchLine,
+  RiTelegram2Line,
+  RiTwitterXFill,
+  RiBlueskyLine,
+  RiTiktokFill,
+  RiFacebookFill    
+} from "@remixicon/react";
 
 const Footer = () => {
   return (
@@ -25,11 +33,12 @@ const Footer = () => {
             <button>Subscribe</button>
           </div><br />
           <div>
-            <a href='https://t.me/TexeractNetwork' target='blank'><FaTelegramPlane className='faIcons'/></a>
-            <a href='https://t.me/TexeractNetworkCommunity' target='blank'><FaTelegramPlane className='faIcons'/></a>
-            {/* <a><FaFacebookF className='faIcons'/></a> */}
-            <a href='https://twitter.com/TexeractNetwork' target='blank'><FaTwitter className='faIcons'/></a>
-            <a href='https://www.tiktok.com/@xeranetwork' target='blank'><FaTiktok className='faIcons'/></a>
+            <a href='https://t.me/TexeractNetwork' target='blank'><RiTelegram2Line className='faIcons'/></a>
+            <a href='https://t.me/TexeractNetworkCommunity' target='blank'><RiTelegram2Line className='faIcons'/></a>
+            <a><RiFacebookFill className='faIcons'/></a>
+            <a href='https://www.tiktok.com/@xeranetwork' target='blank'><RiTiktokFill  className='faIcons'/></a>
+            <a href='https://twitter.com/TexeractNetwork' target='blank'><RiTwitterXFill className='faIcons'/></a>
+            <a href='https://bsky.app/profile/texeractnetwork.bsky.social' target='blank'><RiBlueskyLine className='faIcons'/></a>
           </div>
         </div>
         <div className="fcontent right">

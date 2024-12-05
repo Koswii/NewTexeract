@@ -174,6 +174,7 @@ const Whitepaper = () => {
                         <button className='hidden' disabled><p>NFT Minting</p></button>
                         <button className='hidden' disabled><p>Smart Contract Creation</p></button>
                         <button className='hidden' disabled><p>Stake Pot Transfer</p></button>
+                        <button className='hidden' disabled><p>API Documentation</p></button>
                         <button className='hidden' disabled><p>XERA Moderators</p></button>
                     </div>
                     <button className='mainBtns'><h6>LAYER-2 SOLUTIONS <span>MAINNET</span> <RiArrowDownSFill className='faIcons'/></h6></button>

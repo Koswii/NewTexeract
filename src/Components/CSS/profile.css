@@ -734,6 +734,31 @@ h6{
         url('../assets/imgs/Airdrop/binding.png') no-repeat center;
     background-size: cover;
 }
+.ppcmalcContent.facebook{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/facebook.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.telegram2{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/telegram.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.tiktok{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/tiktok.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.bluesky{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/bluesky.png') no-repeat center;
+    background-size: cover;
+}
+
 .ppcmalcContent.testnetXERA{
     background: 
         linear-gradient(transparent, black 80%),
@@ -743,25 +768,47 @@ h6{
 
 
 
+
+
+
+
+
+
+
+
+
+
 .ppcmalcContent.t5{
     background: 
         linear-gradient(transparent, black 80%),
-        url('../assets/imgs/Airdrop/TaskNo5.png') no-repeat center;
+        url('../assets/imgs/Airdrop/TaskNo9.png') no-repeat center;
     background-size: cover;
 }
 .ppcmalcContent.t6{
     background: 
         linear-gradient(transparent, black 80%),
-        url('../assets/imgs/Airdrop/TaskNo6.png') no-repeat center;
+        url('../assets/imgs/Airdrop/TaskNo10.png') no-repeat center;
     background-size: cover;
 }
 .ppcmalcContent.t7{
     background: 
         linear-gradient(transparent, black 80%),
-        url('../assets/imgs/Airdrop/TaskNo7.png') no-repeat center;
+        url('../assets/imgs/Airdrop/TaskNo5.png') no-repeat center;
     background-size: cover;
 }
 .ppcmalcContent.t8{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/TaskNo6.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.t9{
+    background: 
+        linear-gradient(transparent, black 80%),
+        url('../assets/imgs/Airdrop/TaskNo7.png') no-repeat center;
+    background-size: cover;
+}
+.ppcmalcContent.t10{
     background: 
         linear-gradient(transparent, black 80%),
         url('../assets/imgs/Airdrop/TaskNo8.png') no-repeat center;

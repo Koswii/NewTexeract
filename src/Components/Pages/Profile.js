@@ -146,6 +146,7 @@ const Profile = () => {
     const baseURL = process.env.REACT_APP_XERA_BASE_URL_API
     const XERAAirdropTwitterAPI = process.env.REACT_APP_XERA_USER_AIRDROP_X_API;
     const XERAAirdropBonusTaskAPI = process.env.REACT_APP_XERA_USER_AIRDROP_BONUS_API;
+    const XERAAirdropSocialTaskAPI = process.env.REACT_APP_XERA_USER_AIRDROP_SOCIAL_API;
     
     const userTelegramStatus = localStorage.getItem('telegramTask');
     const userXStatus = localStorage.getItem('twitterTask');
@@ -415,6 +416,41 @@ const Profile = () => {
                     window.location.href = 'https://x.com/BRGYTamago'
                 } else if(bonusTask === 'Follow - @ALrOck14'){
                     window.location.href = 'https://x.com/ALrOck14'
+                } else if(bonusTask === 'Subscribe - @CrypDropPh') {
+                    window.location.href = 'https://www.youtube.com/@CrypDropPh'
+                } else if(bonusTask === 'Subscribe - @kimporsha11'){
+                    window.location.href = 'https://www.youtube.com/@kimporsha11'
+                }
+            } else {
+                // console.log(responseMessage.message);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const submitSocialTask = async (socialTask) => {
+        setTaskInitialComplete(socialTask);
+
+        const formTaskDetails = {
+            taskTitle: socialTask,
+            username: userLoggedData.myXeraUsername,
+            wallet: userLoggedData.myXeraAddress,
+        };
+
+        try {
+            const submitAirdropSocialTaskResponse = await axios.post(XERAAirdropSocialTaskAPI, formTaskDetails);
+            const responseMessage = submitAirdropSocialTaskResponse.data;
+            if (responseMessage.success) {
+                fetchXERAData1();
+
+                if(socialTask === 'Facebook Task') {
+                    window.location.href = 'https://www.facebook.com/texeractnetwork'
+                } else if(socialTask === 'Telegram 2 Task'){
+                    window.location.href = 'https://t.me/TexeractNetwork'
+                } else if(socialTask === 'TikTok Task'){
+                    window.location.href = 'https://www.tiktok.com/@xeranetwork'
+                } else if(socialTask === 'Bluesky Task'){
+                    window.location.href = 'https://bsky.app/profile/texeractnetwork.bsky.social'
                 }
             } else {
                 // console.log(responseMessage.message);
@@ -744,9 +780,69 @@ const Profile = () => {
                                     {xeraUserWallets?.sol_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencySolana className='faIcons'/> Solana Wallet Address</p>}
                                 </div>
                             </div>
-                            <div className="ppcmalcContent testnetXERA active">
+                            <div className={(userTask?.facebooktask ) ? "ppcmalcContent facebook active" : "ppcmalcContent facebook"}>
                                 <div className="ppcmalccTitle">
                                     <p>TASK 5</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />FOLLOW OFFICIAL<br />FACEBOOK PAGE</h6>
+                                    {(taskInitialComplete === 'Facebook Task' || userTask?.facebooktask) ?
+                                        <>
+                                            {(taskInitialComplete === 'Facebook Task') && <p>PENDING</p>}
+                                            {userTask?.facebooktask && <p>COMPLETED</p>}
+                                        </>:
+                                        <button onClick={() => submitSocialTask('Facebook Task')} disabled={taskInitialComplete || userTask?.facebooktask} className='active'>FOLLOW</button>
+                                    }
+                                </div>
+                            </div>
+                            <div className={(userTask?.telegramtask2 ) ? "ppcmalcContent telegram2 active" : "ppcmalcContent telegram2"}>
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 6</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />SUB TELEGRAM<br />ANNOUNCEMENT</h6>
+                                    {(taskInitialComplete === 'Telegram 2 Task' || userTask?.telegramtask2) ?
+                                        <>
+                                            {(taskInitialComplete === 'Telegram 2 Task') && <p>PENDING</p>}
+                                            {userTask?.telegramtask2 && <p>COMPLETED</p>}
+                                        </>:
+                                        <button onClick={() => submitSocialTask('Telegram 2 Task')} disabled={taskInitialComplete || userTask?.telegramtask2} className='active'>SUBSCRIBE</button>
+                                    }
+                                </div>
+                            </div>
+                            <div className={(userTask?.tiktoktask) ? "ppcmalcContent tiktok active" : "ppcmalcContent tiktok"}>
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 7</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />FOLLOW OFFICIAL<br />TIKTOK ACCOUNT</h6>
+                                    {(taskInitialComplete === 'TikTok Task' || userTask?.tiktoktask) ?
+                                        <>
+                                            {(taskInitialComplete === 'TikTok Task') && <p>PENDING</p>}
+                                            {userTask?.tiktoktask && <p>COMPLETED</p>}
+                                        </>:
+                                        <button onClick={() => submitSocialTask('TikTok Task')} disabled={taskInitialComplete || userTask?.tiktoktask} className='active'>FOLLOW</button>
+                                    }
+                                </div>
+                            </div>
+                            <div className={(userTask?.blueskytask ) ? "ppcmalcContent bluesky active" : "ppcmalcContent bluesky"}>
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 8</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />FOLLOW OFFICIAL<br />BLUESKY ACCOUNT</h6>
+                                    {(taskInitialComplete === 'Bluesky Task' || userTask?.blueskytask) ?
+                                        <>
+                                            {(taskInitialComplete === 'Bluesky Task') && <p>PENDING</p>}
+                                            {userTask?.blueskytask && <p>COMPLETED</p>}
+                                        </>:
+                                        <button onClick={() => submitSocialTask('Bluesky Task')} disabled={taskInitialComplete || userTask?.blueskytask} className='active'>FOLLOW</button>
+                                    }
+                                </div>
+                            </div>
+                            <div className="ppcmalcContent testnetXERA active">
+                                <div className="ppcmalccTitle">
+                                    <p>TASK 9</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />CLAIM TXERA<br />EVERY 12 HOURS</h6>
@@ -755,7 +851,7 @@ const Profile = () => {
                             </div>
                             <div className="ppcmalcContent testnetXERA">
                                 <div className="ppcmalccTitle">
-                                    <p>TASK 6</p>
+                                    <p>TASK 10</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />SEND TXERA<br />EVERY 12 HOURS</h6>
@@ -764,7 +860,7 @@ const Profile = () => {
                             </div>
                             <div className="ppcmalcContent testnetXERA">
                                 <div className="ppcmalccTitle">
-                                    <p>TASK 7</p>
+                                    <p>TASK 11</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />SWAP TXERA/TETH<br />EVERY 12 HOURS</h6>
@@ -773,7 +869,7 @@ const Profile = () => {
                             </div>
                             <div className="ppcmalcContent testnetXERA">
                                 <div className="ppcmalccTitle">
-                                    <p>TASK 8</p>
+                                    <p>TASK 12</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />SWAP TXERA/TSOL<br />EVERY 12 HOURS</h6>
@@ -785,7 +881,37 @@ const Profile = () => {
                         <div className="ppcmalContainer">
                             <div className="ppcmalcContent t5 active">
                                 <div className="ppcmalccTitle">
-                                    <p>BONUS TASK 1</p>
+                                    <p>BONUS TASK</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />YT SUBSCRIBE<br />@CrypDropPh</h6>
+                                    {(taskInitialComplete === 'Subscribe - @CrypDropPh' || userTask?.subsCrypdropPh) ?
+                                        <>
+                                            {(taskInitialComplete === 'Subscribe - @CrypDropPh') && <p>PENDING</p>}
+                                            {userTask?.subsCrypdropPh && <p>COMPLETED</p>}
+                                        </>:
+                                        <button onClick={() => submitBonusTask('Subscribe - @CrypDropPh')} disabled={taskInitialComplete || userTask?.subsCrypdropPh} className='active'>SUBSCRIBE</button>
+                                    }
+                                </div>
+                            </div>
+                            <div className="ppcmalcContent t6 active">
+                                <div className="ppcmalccTitle">
+                                    <p>BONUS TASK</p>
+                                </div>
+                                <div className="ppcmalccTask">
+                                    <h6><span>1,250 XP</span><br />YT SUBSCRIBE<br />@kimporsha11</h6>
+                                    {(taskInitialComplete === 'Subscribe - @kimporsha11' || userTask?.subsKimporsha11) ?
+                                        <>
+                                            {(taskInitialComplete === 'Subscribe - @kimporsha11') && <p>PENDING</p>}
+                                            {userTask?.subsKimporsha11 && <p>COMPLETED</p>}
+                                        </>:
+                                        <button onClick={() => submitBonusTask('Subscribe - @kimporsha11')} disabled={taskInitialComplete || userTask?.subsKimporsha11} className='active'>SUBSCRIBE</button>
+                                    }
+                                </div>
+                            </div>
+                            <div className="ppcmalcContent t7 active">
+                                <div className="ppcmalccTitle">
+                                    <p>BONUS TASK</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />YT SUBSCRIBE<br />@MikeTamago</h6>
@@ -798,9 +924,9 @@ const Profile = () => {
                                     }
                                 </div>
                             </div>
-                            <div className="ppcmalcContent t6 active">
+                            <div className="ppcmalcContent t8 active">
                                 <div className="ppcmalccTitle">
-                                    <p>BONUS TASK 2</p>
+                                    <p>BONUS TASK</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />YT SUBSCRIBE<br />@ALROCK</h6>
@@ -813,9 +939,9 @@ const Profile = () => {
                                     }
                                 </div>
                             </div>
-                            <div className="ppcmalcContent t7 active">
+                            <div className="ppcmalcContent t9 active">
                                 <div className="ppcmalccTitle">
-                                    <p>BONUS TASK 3</p>
+                                    <p>BONUS TASK</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />X FOLLOW<br />@BRGYTamago</h6>
@@ -828,9 +954,9 @@ const Profile = () => {
                                     }
                                 </div>
                             </div>
-                            <div className="ppcmalcContent t8 active">
+                            <div className="ppcmalcContent t10 active">
                                 <div className="ppcmalccTitle">
-                                    <p>BONUS TASK 4</p>
+                                    <p>BONUS TASK</p>
                                 </div>
                                 <div className="ppcmalccTask">
                                     <h6><span>1,250 XP</span><br />X FOLLOW<br />@ALrOck14</h6>
