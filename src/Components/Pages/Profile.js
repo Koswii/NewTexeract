@@ -123,6 +123,8 @@ const Profile = () => {
         dataLoading,
         windowReload,
         userLoggedData,
+        userTotalFollowers,
+        tokenBalances,
         viewXERATransactionList,
         viewXERATokenList,
         xeraUserList,
@@ -155,7 +157,6 @@ const Profile = () => {
     const [viewProfileNFTs, setViewProfileNFTs] = useState(false);
     const [viewProfileOnsale, setViewProfileOnsale] = useState(false);
     const [viewProfileTokens, setViewProfileTokens] = useState(false);
-    const [tokenBalances, setTokenBalances] = useState([]);
     const [tokenDetails, setTokenDetails] = useState([]);
     const [viewCreateWalleteDetails, setViewCreateWalletDetails] = useState(false);
     const [viewTelegramDetails, setViewTelegramDetails] = useState(false);
@@ -165,7 +166,6 @@ const Profile = () => {
     const [viewXDetails, setViewXDetails] = useState(false);
     const [viewBindDetails, setViewBindDetails] = useState(false);
     const [UserTransactions,setUserTransactions] = useState(null)
-    const [userTotalFollowers,setUserTotalFollowers] = useState(null)
     const [userTask,setuserTask] = useState(null)
     // const UserTransactions = viewXERATransactionList?.filter(transactions => (transactions.sender_address ,transactions.receiver_address) === userLoggedData.myXeraAddress) || {};
 
@@ -211,8 +211,6 @@ const Profile = () => {
 
     useEffect(() => {
         fetchXERAData1();
-        fetchBalance();
-        fetchFollowers();
         fetchTransaction();
         fetchTask();
     }, [!userLoggedData])
@@ -221,7 +219,7 @@ const Profile = () => {
     const fetchTransaction = () => {
         const cookies = Cookies.get('authToken')
         const userwallet = {
-            user: userLoggedData.myXeraAddress
+            user: userLoggedData?.myXeraAddress
         }
         axios.post(`${baseURL}/user/transactions`, userwallet, {
             headers: {
@@ -234,42 +232,10 @@ const Profile = () => {
         })
     }
 
-    const fetchBalance = () => {
-        const cookies = Cookies.get('authToken')
-        const userwallet = {
-            user: userLoggedData.myXeraAddress
-        }
-        axios.post(`${baseURL}/user/balance`, userwallet, {
-            headers: {
-                'Authorization': `Bearer ${cookies}`
-            }
-        }).then((res) => {
-            setTokenBalances(res.data.data)
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
-    const fetchFollowers = () => {
-        const cookies = Cookies.get('authToken')
-        const userwallet = {
-            user: userLoggedData.myXeraAddress
-        }
-        axios.post(`${baseURL}/user/following`, userwallet, {
-            headers: {
-                'Authorization': `Bearer ${cookies}`
-            }
-        }).then((res) => {
-            setUserTotalFollowers(res.data.data.filter(user => user.following === userLoggedData.myXeraUsername))
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
     const fetchTask = () => {
         const cookies = Cookies.get('authToken')
         const userwallet = {
-            user: userLoggedData.myXeraUsername
+            user: userLoggedData?.myXeraUsername
         }
         axios.post(`${baseURL}/users/user-tasks/all-task`, userwallet, {
             headers: {
@@ -728,17 +694,17 @@ const Profile = () => {
                                 <div className={!viewXDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
                                     {/* <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button> */}
                                     <h6>VISIT AND<br />FOLLOW X</h6>
-                                    {userXStatus ?
+                                    {userTask?.twittertask ?
                                         <p id='ppcmalccdStatus'>
-                                            {(userXStatus === 'pending') && <TbHourglassEmpty className='faIcons pending'/>} 
-                                            {(userXStatus === 'pending') && 'PENDING'}
-                                            {(userXStatus === 'ok') && <TbCircleCheckFilled className='faIcons'/>} 
-                                            {(userXStatus === 'ok') && 'COMPLETED'}
+                                            {(userTask?.twittertask === 'pending') && <TbHourglassEmpty className='faIcons pending'/>} 
+                                            {(userTask?.twittertask === 'pending') && 'PENDING'}
+                                            {(userTask?.twittertask === 'ok') && <TbCircleCheckFilled className='faIcons'/>} 
+                                            {(userTask?.twittertask === 'ok') && 'COMPLETED'}
                                         </p>:
                                         <p id='ppcmalccdStatus'>TASK 3</p>
                                     }
                                     <p id='ppcmalccdDesription'>Stay updated and connected—follow Texeract Network on X (Twitter).</p>
-                                    {!userXStatus && <>
+                                    {!userTask?.twittertask && <>
                                         <div className="ppcmalccInputs">
                                             <input type="text" placeholder='INSERT USERNAME' onChange={(e) => setTwitterUsername(e.target.value)}/>
                                             {!xVerifyingLoader ?
@@ -748,7 +714,7 @@ const Profile = () => {
                                         </div>
                                         <p id='ppcmalccdError'>{xAccountStatus}</p>
                                     </>}
-                                    {userXStatus && 
+                                    {userTask?.twittertask && 
                                         <p id='ppcmalccdDesription'>You must continue following @TexeractNetwork until the end of the event to complete the task.</p>
                                     }
                                 </div>

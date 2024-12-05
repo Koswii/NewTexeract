@@ -60,6 +60,8 @@ export const XERAWalletDataProvider = ({ children }) => {
 
     const [TXERATransactions,setTXERATransaction] = useState(null)
     
+    const [tokenBalances, setTokenBalances] = useState([]);
+    const [userTotalFollowers,setUserTotalFollowers] = useState(null)
 
     const [processedData, setProcessedData] = useState([]);
 
@@ -152,6 +154,36 @@ export const XERAWalletDataProvider = ({ children }) => {
             setDataLoading(false);
         }
     };
+    const fetchBalance = () => {
+        const cookies = Cookies.get('authToken')
+        const userwallet = {
+            user: userLoggedData?.myXeraAddress
+        }
+        axios.post(`${baseURL}/user/balance`, userwallet, {
+            headers: {
+                'Authorization': `Bearer ${cookies}`
+            }
+        }).then((res) => {
+            setTokenBalances(res.data.data)
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+    const fetchFollowers = () => {
+        const cookies = Cookies.get('authToken')
+        const userwallet = {
+            user: userLoggedData?.myXeraAddress
+        }
+        axios.post(`${baseURL}/user/following`, userwallet, {
+            headers: {
+                'Authorization': `Bearer ${cookies}`
+            }
+        }).then((res) => {
+            setUserTotalFollowers(res.data.data.filter(user => user.following === userLoggedData.myXeraUsername))
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
     
     
     useEffect(() => {
@@ -161,6 +193,8 @@ export const XERAWalletDataProvider = ({ children }) => {
         }, 5000);
         // fetchXERAAssets(userLoggedData);
         fetchXERAData1(userLoggedData);
+        fetchBalance(userLoggedData);
+        fetchFollowers(userLoggedData);
         // fetchXERAData2(userLoggedData);
         return () => clearTimeout(timeoutId);
     }, [userLoggedData]);
@@ -188,6 +222,8 @@ export const XERAWalletDataProvider = ({ children }) => {
                 viewXERATokenList,
                 xeraUserNumber,
                 userLoggedData,
+                userTotalFollowers,
+                tokenBalances,
                 xeraUserProfile,
                 viewWalletCreate, 
                 setViewWalletCreate,
