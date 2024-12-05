@@ -112,7 +112,7 @@ const Leaderboards = () => {
                                 <h3>25M</h3>
                                 <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
                             </span>
-                            <p>Reward Allocation</p>
+                            <p>P1 Reward Allocation</p>
                         </div>
                         <div className="lbrdpct duration">
                             <div className='lbrdpctdHeader'>
