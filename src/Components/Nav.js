@@ -130,18 +130,14 @@ const Nav = () => {
               </Link>
           </div>
           <div className="navContent right">
-            {/* {!viewFullNavigation ? 
-            <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleViewFullNav}><p>EXPLORE</p></button>:
-            <button className={viewFullNavigation ? 'navCrBtn dropDown active' : 'navCrBtn dropDown'} onClick={handleHideFullNav}><p>EXPLORE</p></button>} */}
-
-            <div className={viewMobileNavigation ? "navContentrMobile active" : "navContentrMobile disabled"}>
+            {/* <div className={viewMobileNavigation ? "navContentrMobile active" : "navContentrMobile disabled"}>
               <Link to='/Leaderboards' onClick={handleHideMobileNavigation}><p>LEADERBOARDS</p></Link>
               <Link to='/TestnetFaucet' onClick={handleHideMobileNavigation}><p>TESTNET FAUCET</p></Link>
               <Link to='/Tokens' onClick={handleHideMobileNavigation}><p>TOKENS</p></Link>
               <Link to='/Whitepaper' onClick={handleHideMobileNavigation}><p>WHITEPAPER</p></Link>
               <Link to='/Tokenomics' onClick={handleHideMobileNavigation}><p>TOKENOMICS</p></Link>
               <Link to='/Ecosystem' onClick={handleHideMobileNavigation}><p>ECOSYSTEM</p></Link>
-            </div>
+            </div> */}
 
 
 

@@ -57,16 +57,16 @@ nav{
 }
 .navContent.right{
     height: auto;
-    width: 64%;
+    width: auto;
     display: flex;
     justify-content: right;
     align-items: center;
     padding: 0.5% 2%;
+    padding-right: 0.5vw;
     background: rgba(20, 20, 20);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border-radius: 50px;
     box-shadow: 0 0 10px black;
-    position: relative;
 }
 
 
@@ -113,8 +113,7 @@ nav{
 .navContent.right a.navCrBtn.marketplace,
 .navContent.right a.navCrBtn.social,
 .navContent.right a.navCrBtn.leaderboards{
-    margin-right: 5%;
-    margin-left: 2%;
+    margin-right: 3vw;
     text-decoration: none;
     /* cursor: not-allowed; */
     opacity: 50%;
@@ -151,7 +150,6 @@ nav{
     border-radius: 50px;
     background: white;
     color: black;
-    margin-left: 1.5%;
     transition: 400ms ease;
     cursor: pointer;
 }
@@ -214,6 +212,7 @@ nav{
     background: black;
     color: white;
     transition: 400ms ease;
+    margin-left: 0.7vw;
 }
 .navContent.right button.navCrBtn.login .faIcons{
     padding: 3%;
@@ -239,6 +238,7 @@ nav{
     background: none;
     color: white;
     transition: 400ms ease;
+    margin-left: 0.7vw;
 }
 .navContent.right button.navCrBtn.logout .faIcons{
     padding: 3%;
@@ -249,7 +249,7 @@ nav{
 
 
 .navContent.right a.navCrBtn.account{
-    width: 17.5%;
+    width: 9.3vw;
     font-size: 0.7vw;
     padding: 2.3px;
     padding-right: 1.5%;
