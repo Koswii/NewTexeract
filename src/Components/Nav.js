@@ -24,6 +24,7 @@ import {
   RiArrowDownSFill,
   RiArrowUpSFill 
 } from "react-icons/ri";
+import { FaPowerOff } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import CreateWallet from './Pages/CreateWallet';
 import LoginAccount from './Pages/LoginAccount';
@@ -130,14 +131,14 @@ const Nav = () => {
               </Link>
           </div>
           <div className="navContent right">
-            {/* <div className={viewMobileNavigation ? "navContentrMobile active" : "navContentrMobile disabled"}>
+            <div className={viewMobileNavigation ? "navContentrMobile active" : "navContentrMobile disabled"}>
               <Link to='/Leaderboards' onClick={handleHideMobileNavigation}><p>LEADERBOARDS</p></Link>
               <Link to='/TestnetFaucet' onClick={handleHideMobileNavigation}><p>TESTNET FAUCET</p></Link>
               <Link to='/Tokens' onClick={handleHideMobileNavigation}><p>TOKENS</p></Link>
               <Link to='/Whitepaper' onClick={handleHideMobileNavigation}><p>WHITEPAPER</p></Link>
               <Link to='/Tokenomics' onClick={handleHideMobileNavigation}><p>TOKENOMICS</p></Link>
               <Link to='/Ecosystem' onClick={handleHideMobileNavigation}><p>ECOSYSTEM</p></Link>
-            </div> */}
+            </div>
 
 
 
@@ -158,7 +159,7 @@ const Nav = () => {
                 <TbUserCircle className='faIcons'/>
                 <p><TextSlicer text={`${userLoggedData.myXeraAddress}`} maxLength={10} /></p>
               </Link>
-              <button className='navCrBtn logout' onClick={handleUserLogout}><TbLogout className='faIcons'/></button>
+              <button className='navCrBtn logout' onClick={handleUserLogout}><FaPowerOff className='faIcons'/></button>
             </>}
           </div>
         </div>
