@@ -50,7 +50,6 @@ function App() {
       setUserLogedData(userDecodedData?.xeraJWT);
     }
   }, []);
-  
 
   return (
     <XERAWalletDataProvider>
