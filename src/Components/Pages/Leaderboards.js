@@ -42,13 +42,12 @@ const formatNumber = (num) => {
   
     if (num >= 1_000_000) {
       return truncateDecimal(num / 1_000_000, 1) + 'M';
-    } else if (num >= 1_000) {
+    } else if (num >= 100_000) {
       return truncateDecimal(num / 1_000, 1) + 'K';
     }
     
     return num.toString();
 };
-  
 const NumberFormatter = ({ number }) => {
     return <>{number > 0 ? formatNumber(number) : 0}</>;
 };
