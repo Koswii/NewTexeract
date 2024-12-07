@@ -124,7 +124,7 @@ const Profile = () => {
         windowReload,
         userLoggedData,
         userTotalFollowers,
-        tokenBalances,
+        usertokenBalances,
         viewXERATransactionList,
         viewXERATokenList,
         xeraUserList,
@@ -134,6 +134,11 @@ const Profile = () => {
         processedData,
         xeraUserFollowings,
         fetchXERAData1,
+        veiwUnderDevelopment, 
+        userTask,
+        viewLoginAccount, 
+        setViewLoginAccount,
+        fetchTask,
     } = XERAWalletData();
     const {
         telegramID, 
@@ -166,7 +171,6 @@ const Profile = () => {
     const [viewXDetails, setViewXDetails] = useState(false);
     const [viewBindDetails, setViewBindDetails] = useState(false);
     const [UserTransactions,setUserTransactions] = useState(null)
-    const [userTask,setuserTask] = useState(null)
     // const UserTransactions = viewXERATransactionList?.filter(transactions => (transactions.sender_address ,transactions.receiver_address) === userLoggedData.myXeraAddress) || {};
 
 
@@ -227,22 +231,6 @@ const Profile = () => {
             }
         }).then((res) => {
             setUserTransactions(res.data.data)
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
-    const fetchTask = () => {
-        const cookies = Cookies.get('authToken')
-        const userwallet = {
-            user: userLoggedData?.myXeraUsername
-        }
-        axios.post(`${baseURL}/users/user-tasks/all-task`, userwallet, {
-            headers: {
-                'Authorization': `Bearer ${cookies}`
-            }
-        }).then((res) => {
-            setuserTask(res.data.data)
         }).catch((error) => {
             console.log(error);
         })
@@ -494,7 +482,7 @@ const Profile = () => {
                                 <button id='prfpchrcAssetBtn' onClick={handleHideProfileTokens}><PiCoins className='faIcons'/><RiArrowUpSFill className='faIcons'/></button>}
                                 <div className={viewProfileTokens ? "prfpchrcAssetList active" : "prfpchrcAssetList"}>
                                     <ul>
-                                        {tokenBalances.map((data, i) => (
+                                        {usertokenBalances.map((data, i) => (
                                             <li key={i}>
                                                 <span id='prfpchrcaLogo'>
                                                     <img src={require(`../assets/imgs/TokenLogos/${data?.token_logo}`)} alt="" />

@@ -7,15 +7,6 @@ const XERAWalletDataContext = createContext();
 export const XERAWalletDataProvider = ({ children }) => {
 
     
-    const apikey = process.env.REACT_APP_XERA_API
-    const baseURL = process.env.REACT_APP_XERA_BASE_URL_API
-
-    const api = {
-        apikey: apikey
-    }
-
-    const [userLoggedData, setUserLogedData] = useState(null);
-    const userStoredData = Cookies.get('authToken');
     const jwtDecode = (token) => {
         try {
           const base64Url = token.split('.')[1];
@@ -29,14 +20,23 @@ export const XERAWalletDataProvider = ({ children }) => {
           throw new Error('Invalid token specified');
         }
     };
+    const apikey = process.env.REACT_APP_XERA_API
+    const baseURL = process.env.REACT_APP_XERA_BASE_URL_API
+    const cookies = Cookies.get('authToken');
+    const api = {
+        apikey: apikey
+    }
+
+    const [userLoggedData, setUserLogedData] = useState(null);
 
     useEffect(() => {
-        if (userStoredData) {
-            const userDecodedData = jwtDecode(userStoredData);
+        if (cookies) {
+            const userDecodedData = jwtDecode(cookies);
             setUserLogedData(userDecodedData.xeraJWT);
         }
-    }, [!userStoredData]);
+    }, [!cookies]);
 
+    
     
 
     const [windowReload, setWindowReload] = useState(false);
@@ -52,33 +52,23 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [xeraUserNumber, setXeraUserNumber] = useState([]);
     const [xeraUserProfile, setXeraUserProfile] = useState([]);
     const [xeraUsersProfiles, setXeraUsersProfiles] = useState([]);
-    const [xeraUserWallets, setXeraUserWallets] = useState([]);
     const [xeraReferralCounts, setReferralCounts] = useState([]);
-    const [xeraUserAirdrops, setXeraUserAirdrops] = useState([]);
-    const [xeraUserFollowings, setXeraUserFollowings] = useState([]);
     const [dataLoading, setDataLoading] = useState(false);
 
     const [TXERATransactions,setTXERATransaction] = useState(null)
+
     
-    const [tokenBalances, setTokenBalances] = useState([]);
+    const [userTask,setuserTask] = useState(null)
     const [userTotalFollowers,setUserTotalFollowers] = useState(null)
-
+    const [usertokenBalances, setUserTokenBalances] = useState([]);
+    
     const [processedData, setProcessedData] = useState([]);
-
-    useEffect(() => {
-        const intervalId = setInterval(async () => {
-            fetchTransaction();
-        }, 2000);
-        return () => clearInterval(intervalId);
-    }, []);
 
     const fetchTransaction = () => {
         const apikey = process.env.REACT_APP_XERA_API
-
         const api = {
             apikey: apikey
         }
-
         try {
             axios.post(`${baseURL}/generate/access-token`,api)
             .then((res)=>{
@@ -100,14 +90,21 @@ export const XERAWalletDataProvider = ({ children }) => {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
+    useEffect(() => {
+        const intervalId = setInterval(async () => {
+            fetchTransaction();
+        }, 2000);
+        return () => clearInterval(intervalId);
+    }, []);
+
+
     const fetchXERAData1 = async () => {
         setDataLoading(true)
         try {
             axios.post(`${baseURL}/generate/access-token`,api)
             .then((res)=>{
                 const accessToken = res.data.accessToken
-                
                 if (res.data.success) {
                     axios.get(`${baseURL}/users/users-list`,{
                         headers: {
@@ -146,6 +143,8 @@ export const XERAWalletDataProvider = ({ children }) => {
                         setViewXERATokenList(res.data.data)
                         setDataLoading(false)
                     })
+                }else{
+                    return
                 }
             })
         } catch (error) {
@@ -154,50 +153,95 @@ export const XERAWalletDataProvider = ({ children }) => {
             setDataLoading(false);
         }
     };
-    const fetchBalance = () => {
-        const cookies = Cookies.get('authToken')
-        const userwallet = {
-            user: userLoggedData?.myXeraAddress
+    const fetchFollowers = async () => {
+        if (!cookies || !userLoggedData) {
+            return; // Wait until cookies and userLoggedData are ready
         }
-        axios.post(`${baseURL}/user/balance`, userwallet, {
-            headers: {
-                'Authorization': `Bearer ${cookies}`
-            }
-        }).then((res) => {
-            setTokenBalances(res.data.data)
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-    const fetchFollowers = () => {
-        const cookies = Cookies.get('authToken')
-        const userwallet = {
-            user: userLoggedData?.myXeraAddress
+    
+        const userWallet = { user: userLoggedData?.myXeraAddress };
+        try {
+            const res = await axios.post(`${baseURL}/user/following`, userWallet, {
+                headers: { Authorization: `Bearer ${cookies}` },
+            });
+            const followers = res.data.data.filter(
+                (user) => user.following === userLoggedData?.myXeraUsername
+            );
+            return followers; // Return the fetched data
+        } catch (error) {
+            console.error("Error fetching followers:", error);
+            return [];
         }
-        axios.post(`${baseURL}/user/following`, userwallet, {
-            headers: {
-                'Authorization': `Bearer ${cookies}`
-            }
-        }).then((res) => {
-            setUserTotalFollowers(res.data.data.filter(user => user.following === userLoggedData.myXeraUsername))
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
+    };
+    const fetchBalance = async () => {
+        if (!cookies || !userLoggedData) {
+            return; // Wait until cookies and userLoggedData are ready
+        }
+    
+        const userWallet = { user: userLoggedData?.myXeraAddress };
+        try {
+            const res = await axios.post(`${baseURL}/user/balance`, userWallet, {
+                headers: { Authorization: `Bearer ${cookies}` },
+            });
+    
+            // Ensure the returned value is an array
+            return Array.isArray(res.data.data) ? res.data.data : []; 
+        } catch (error) {
+            console.error("Error fetching balance:", error);
+            return []; // Return an empty array in case of an error
+        }
+    };
+    const fetchTask = async () => {
+        if (!cookies || !userLoggedData) {
+            return; // Wait until cookies and userLoggedData are ready
+        }
+    
+        const userWallet = { user: userLoggedData?.myXeraUsername };
+        try {
+            const res = await axios.post(`${baseURL}/users/user-tasks/all-task`, userWallet, {
+                headers: { Authorization: `Bearer ${cookies}` },
+            });
+            return res.data.data; // Return the fetched data
+        } catch (error) {
+            console.error("Error fetching tasks:", error);
+            return [];
+        }
+    };
     
     
     useEffect(() => {
-        setWindowReload(true);
-        const timeoutId = setTimeout(() => {
-            setWindowReload(false);
-        }, 5000);
-        // fetchXERAAssets(userLoggedData);
-        fetchXERAData1(userLoggedData);
-        fetchBalance(userLoggedData);
-        fetchFollowers(userLoggedData);
-        // fetchXERAData2(userLoggedData);
-        return () => clearTimeout(timeoutId);
-    }, [userLoggedData]);
+        if (!cookies || !userLoggedData) {
+            return; // Wait until cookies and userLoggedData are ready
+        }
+
+        const fetchAllData = async () => {
+            try {
+                setWindowReload(true); // Start the loading state
+    
+                // Perform all fetches in parallel
+                const [xeraData, followers, balance, tasks] = await Promise.all([
+                    fetchXERAData1(),
+                    fetchFollowers(),
+                    fetchBalance(),
+                    fetchTask(),
+                ]);
+    
+                // Set state for all fetched data (sequentially, ensuring state updates)
+                setUserTokenBalances(balance);
+                setUserTotalFollowers(followers);
+                setuserTask(tasks);
+                // Assuming fetchXERAData1 updates its data internally
+    
+                // All state updates are complete; now stop the loading state
+                await new Promise((resolve) => setTimeout(resolve, 3000)); // Add a 300ms delay
+                setWindowReload(false); // Turn off reload
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setWindowReload(false); // Stop loading even if there's an error
+            }
+        };
+    
+        fetchAllData(); // Call the async function
+    }, [cookies, userLoggedData]);
 
 
     if(
@@ -215,15 +259,15 @@ export const XERAWalletDataProvider = ({ children }) => {
                 setViewUnderDevelopment,
                 dataLoading,
                 windowReload,
-                // fetchXERAAssets,
                 fetchXERAData1,
-                // fetchXERAData2,
+                fetchTask,
                 viewXERATransactionList,
                 viewXERATokenList,
                 xeraUserNumber,
                 userLoggedData,
                 userTotalFollowers,
-                tokenBalances,
+                userTask,
+                usertokenBalances,
                 xeraUserProfile,
                 viewWalletCreate, 
                 setViewWalletCreate,
@@ -231,12 +275,9 @@ export const XERAWalletDataProvider = ({ children }) => {
                 setViewLoginAccount,
                 viewConnectWallet, 
                 setViewConnectWallet,
-                xeraUserWallets,
                 xeraUserList,
                 processedData,
                 xeraReferralCounts,
-                xeraUserAirdrops,
-                xeraUserFollowings,
                 TXERATransactions,
             }}>
             {children}
