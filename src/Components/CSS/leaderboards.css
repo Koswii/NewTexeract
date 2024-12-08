@@ -627,6 +627,7 @@ section.leaderboardsPageContainer.mid{
     color: white;
     opacity: 50%;
     margin-right: 5px;
+    margin-bottom: 5px;
     cursor: pointer;
 }
 .ldrbrdspcmPage button.active{
