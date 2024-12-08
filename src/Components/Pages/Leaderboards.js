@@ -64,7 +64,7 @@ const Leaderboards = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const dataPerPage = 100; // Display 50 data per page
     const totalUserPointsP1 = processedData.reduce((sum, points) => sum + points.totalPoints, 0);
-    const rewardAllocationP1 = totalUserPointsP1/25000000
+    const rewardAllocationP1 = 25000000/totalUserPointsP1
     const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername))
     const myCurrentRank = myCurrentData?.rank
 
