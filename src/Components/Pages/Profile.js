@@ -518,7 +518,7 @@ const Profile = () => {
                                     <div className="prfpchrcbBalance">
                                         <h3><SimpleNumberFormatter number={`${myPhase1Tokens ? Math.trunc(myPhase1Tokens * 100) / 100 : 0}`} /></h3>
                                         <span>
-                                            <img src={require('../assets/imgs/TexeractCoinRealistic.png')} alt="" />
+                                            <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
                                         </span>
                                     </div>
                                     <div className="prfpchrcbFunctions">
