@@ -266,7 +266,7 @@ const Profile = () => {
     const totalUserPointsP1 = processedData.reduce((sum, points) => sum + points.totalPoints, 0);
     const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername));
     const myPhase1Points = myCurrentData?.totalPoints;
-    const myPhase1Tokens = (totalUserPointsP1/25000000) * myPhase1Points
+    const myPhase1Tokens = (25000000/totalUserPointsP1) * myPhase1Points
     const myCurrentReferrals = myCurrentData?.referralTaskCount;
 
     
