@@ -79,11 +79,11 @@ const formatNumber = (num) => {
     } else if (num >= 100_000) {
       return truncateDecimal(num / 1_000, 1) + 'K';
     }
-    
-    return num.toString();
-};
+  
+    return new Intl.NumberFormat('en-US').format(num); // Adds commas for numbers below 100K
+};  
 const NumberFormatter = ({ number }) => {
-    return <>{number > 0 ? formatNumber(number) : 0}</>;
+    return <>{number > 0 ? formatNumber(number) : '0'}</>;
 };
 const ScrambleTextUsername = ({ targetText, scrambleSpeed = 50, revealSpeed = 200 }) => {
     const [scrambledText, setScrambledText] = useState('');
@@ -115,6 +115,12 @@ const ScrambleTextUsername = ({ targetText, scrambleSpeed = 50, revealSpeed = 20
       return () => clearInterval(interval);
     }, [targetText, scrambleSpeed]);
     return <>{scrambledText}</>;
+};
+const formatNumberWithCommas = (number) => {
+    return new Intl.NumberFormat("en-US").format(number);
+};
+const SimpleNumberFormatter = ({ number }) => {
+    return <>{formatNumberWithCommas(number)}</>;
 };
 const Profile = () => {
     const {
@@ -510,7 +516,7 @@ const Profile = () => {
                                 <div className="prfpchrcBalance">
                                     <p>BALANCE (P1 Rewards)</p>
                                     <div className="prfpchrcbBalance">
-                                        <h3><ScrambleTextUsername targetText={`${myPhase1Tokens ? Math.trunc(myPhase1Tokens * 100) / 100 : 0}`} scrambleSpeed={80} revealSpeed={200} /></h3>
+                                        <h3><SimpleNumberFormatter number={`${myPhase1Tokens ? Math.trunc(myPhase1Tokens * 100) / 100 : 0}`} /></h3>
                                         <span>
                                             <img src={require('../assets/imgs/TexeractCoinRealistic.png')} alt="" />
                                         </span>

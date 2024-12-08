@@ -45,11 +45,18 @@ const formatNumber = (num) => {
     } else if (num >= 100_000) {
       return truncateDecimal(num / 1_000, 1) + 'K';
     }
-    
-    return num.toString();
-};
+  
+    return new Intl.NumberFormat('en-US').format(num); // Adds commas for numbers below 100K
+};  
 const NumberFormatter = ({ number }) => {
-    return <>{number > 0 ? formatNumber(number) : 0}</>;
+    return <>{number > 0 ? formatNumber(number) : '0'}</>;
+};
+
+const formatNumberWithCommas = (number) => {
+    return new Intl.NumberFormat("en-US").format(number);
+};
+const SimpleNumberFormatter = ({ number }) => {
+    return <>{formatNumberWithCommas(number)}</>;
 };
 const Leaderboards = () => {
     const {
@@ -156,9 +163,9 @@ const Leaderboards = () => {
                                     </div>
                                 </div>
                                 <div className="lbrdpct2t1Rewards">
-                                    <p>REWARDS</p>
+                                    <p>P1 REWARDS</p>
                                     <div>
-                                        <h5>0</h5>
+                                        <h5><SimpleNumberFormatter number={`${(rewardAllocationP1 * (data?.totalPoints || 0)).toFixed(2)}`}/></h5>
                                         <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
                                     </div>
                                 </div>
@@ -193,9 +200,9 @@ const Leaderboards = () => {
                                     </div>
                                 </div>
                                 <div className="lbrdpct2ttRewards">
-                                    <p>REWARDS</p>
+                                    <p>P1 REWARDS</p>
                                     <div>
-                                        <h5>0</h5>
+                                        <h5><SimpleNumberFormatter number={`${(rewardAllocationP1 * (data?.totalPoints || 0)).toFixed(2)}`}/></h5>
                                         <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
                                     </div>
                                 </div>
@@ -230,9 +237,9 @@ const Leaderboards = () => {
                                     </div>
                                 </div>
                                 <div className="lbrdpct2ttRewards">
-                                    <p>REWARDS</p>
+                                    <p>P1 REWARDS</p>
                                     <div>
-                                        <h5>0</h5>
+                                        <h5><SimpleNumberFormatter number={`${(rewardAllocationP1 * (data?.totalPoints || 0)).toFixed(2)}`}/></h5>
                                         <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
                                     </div>
                                 </div>
@@ -367,8 +374,8 @@ const Leaderboards = () => {
                                             </li>
                                             <li id='ldrbrdspcmcNode'><p>0</p></li>
                                             <li id='ldrbrdspcmcReferral'><p>{data?.referralTaskCount}</p></li>
-                                            <li id='ldrbrdspcmcPoints'><p>{data?.totalPoints} XP</p></li>
-                                            <li id='ldrbrdspcmcRewards'><p>{(rewardAllocationP1 * (data?.totalPoints || 0)).toFixed(8)} XERA</p></li>
+                                            <li id='ldrbrdspcmcPoints'><p><SimpleNumberFormatter number={data?.totalPoints}/> XP</p></li>
+                                            <li id='ldrbrdspcmcRewards'><p><SimpleNumberFormatter number={`${(rewardAllocationP1 * (data?.totalPoints || 0)).toFixed(8)}`}/> XERA</p></li>
                                         </ul>
                                     ))}
                                 </>
