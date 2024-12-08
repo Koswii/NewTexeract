@@ -420,13 +420,32 @@ h6{
     padding-bottom: 20%;
     position: relative;
 }
-.prfpchrcBalance h3{
-    font-size: 2.5vw;
-}
 .prfpchrcBalance p{
     font-size: 0.6vw;
     font-family: 'Lexend Peta', sans-serif;
     color: gray;
+}
+.prfpchrcbBalance{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.prfpchrcbBalance h3{
+    font-size: 2.5vw;
+    margin-right: 2%;
+}
+.prfpchrcbBalance span{
+    height: 2.2vw;
+    width: 2.2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.prfpchrcbBalance span img{
+    height: 100%;
 }
 .prfpchrcbFunctions{
     height: auto;
@@ -1395,8 +1414,13 @@ h6{
     .prfpchrcBalance p{
         font-size: 2.5vw;
     }
-    .prfpchrcBalance h3{
+    .prfpchrcbBalance h3{
         font-size: 10vw;
+        margin-right: 3%;
+    }
+    .prfpchrcbBalance span{
+        height: 8vw;
+        width: 8vw;
     }
     .prfpchrcbFunctions button{
         width: auto;

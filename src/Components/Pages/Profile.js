@@ -263,9 +263,13 @@ const Profile = () => {
     }
 
     // const userTotalFollowers = xeraUserFollowings.filter(user => user.following === userLoggedData.myXeraUsername)
-    const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername))
-    const myCurrentPoints = myCurrentData?.totalPoints
-    const myCurrentReferrals = myCurrentData?.referralTaskCount
+    const totalUserPointsP1 = processedData.reduce((sum, points) => sum + points.totalPoints, 0);
+    const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername));
+    const myPhase1Points = myCurrentData?.totalPoints;
+    const myPhase1Tokens = (totalUserPointsP1/25000000) * myPhase1Points
+    const myCurrentReferrals = myCurrentData?.referralTaskCount;
+
+    
 
 
     const submitXUsernameDetails = async () => {
@@ -504,8 +508,13 @@ const Profile = () => {
                                     <h6>{userLoggedData?.myXeraAddress}</h6>
                                 </div>
                                 <div className="prfpchrcBalance">
-                                    <p>BALANCE</p>
-                                    <h3>0.00 XERA</h3>
+                                    <p>BALANCE (P1 Rewards)</p>
+                                    <div className="prfpchrcbBalance">
+                                        <h3><ScrambleTextUsername targetText={`${myPhase1Tokens ? Math.trunc(myPhase1Tokens * 100) / 100 : 0}`} scrambleSpeed={80} revealSpeed={200} /></h3>
+                                        <span>
+                                            <img src={require('../assets/imgs/TexeractCoinRealistic.png')} alt="" />
+                                        </span>
+                                    </div>
                                     <div className="prfpchrcbFunctions">
                                         <button className='disabled'><TbDeviceIpadDollar className='faIcons'/> BUY</button>
                                         <button className='disabled'><TbSend className='faIcons'/> SEND</button>
@@ -542,7 +551,7 @@ const Profile = () => {
                                     </div>
                                     <div className="prfpchrcs Points">
                                         <p>XERA Points</p>
-                                        <h5><NumberFormatter number={myCurrentPoints}/></h5>
+                                        <h5><NumberFormatter number={myPhase1Points}/></h5>
                                     </div>
                                 </div>
                             </div>}

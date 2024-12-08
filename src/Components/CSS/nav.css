@@ -73,10 +73,11 @@ nav{
 .navContentrMobile{
     position: absolute;
     height: auto;
-    width: 100%;
+    width: 90%;
     background: white;
-    top: 5vh;
+    top: 14vw;
     left: 0;
+    transform: translate(5%, 0%);
     padding: 5%;
     background: rgba(20, 20, 20);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -94,7 +95,7 @@ nav{
 }
 
 .navContentrMobile.active{
-    display: block;
+    display: none;
     transition: 400ms ease;
     animation: fade-in-down2 1s ease;
 }
@@ -471,6 +472,9 @@ section.footerContentBot{
     .navContent.right button#nvctntrMobile{
         display: flex;
         font-size: 6vw;
+    }
+    .navContentrMobile.active{
+        display: block;
     }
     .navContent.right button.navCrBtn p{
         font-size: 3vw;

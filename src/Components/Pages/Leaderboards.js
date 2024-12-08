@@ -63,6 +63,8 @@ const Leaderboards = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const dataPerPage = 100; // Display 50 data per page
+    const totalUserPointsP1 = processedData.reduce((sum, points) => sum + points.totalPoints, 0);
+    const rewardAllocationP1 = totalUserPointsP1/25000000
     const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername))
     const myCurrentRank = myCurrentData?.rank
 
@@ -71,6 +73,7 @@ const Leaderboards = () => {
     const indexOfLastItem = currentPage * dataPerPage;
     const indexOfFirstItem = indexOfLastItem - dataPerPage;
     const currentData = processedData.slice(indexOfFirstItem, indexOfLastItem);
+    
 
     // Calculate total number of pages
     const totalPages = Math.ceil(processedData.length / dataPerPage);
@@ -337,7 +340,7 @@ const Leaderboards = () => {
                                 <li id='ldrbrdspcmhNodes'><h6>NODES</h6></li>
                                 <li id='ldrbrdspcmhReferrals'><h6>REFERRALS</h6></li>
                                 <li id='ldrbrdspcmhPoints'><h6>POINTS</h6></li>
-                                <li id='ldrbrdspcmhRewards'><h6>REWARDS</h6></li>
+                                <li id='ldrbrdspcmhRewards'><h6>P1 REWARDS</h6></li>
                             </ul>
                         </div>
                         <div className="ldrbrdspcmContent">
@@ -365,7 +368,7 @@ const Leaderboards = () => {
                                             <li id='ldrbrdspcmcNode'><p>0</p></li>
                                             <li id='ldrbrdspcmcReferral'><p>{data?.referralTaskCount}</p></li>
                                             <li id='ldrbrdspcmcPoints'><p>{data?.totalPoints} XP</p></li>
-                                            <li id='ldrbrdspcmcRewards'><p>0 XERA</p></li>
+                                            <li id='ldrbrdspcmcRewards'><p>{(rewardAllocationP1 * (data?.totalPoints || 0)).toFixed(8)} XERA</p></li>
                                         </ul>
                                     ))}
                                 </>
