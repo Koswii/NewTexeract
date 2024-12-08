@@ -73,16 +73,20 @@ nav{
 .navContentrMobile{
     position: absolute;
     height: auto;
-    width: 90%;
-    background: white;
+    width: 100%;
     top: 14vw;
     left: 0;
-    transform: translate(5%, 0%);
+    display: none;
+    padding: 0 5%;
+}
+.navContentrMobile div{
+    height: auto;
+    width: 100%;
     padding: 5%;
     background: rgba(20, 20, 20);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border-radius: 2vw;
-    display: none;
+
 }
 .navContentrMobile a{
     text-decoration: none;

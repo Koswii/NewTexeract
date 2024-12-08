@@ -132,12 +132,14 @@ const Nav = () => {
           </div>
           <div className="navContent right">
             <div className={viewMobileNavigation ? "navContentrMobile active" : "navContentrMobile disabled"}>
-              <Link to='/Leaderboards' onClick={handleHideMobileNavigation}><p>LEADERBOARDS</p></Link>
-              <Link to='/TestnetFaucet' onClick={handleHideMobileNavigation}><p>TESTNET FAUCET</p></Link>
-              <Link to='/Tokens' onClick={handleHideMobileNavigation}><p>TOKENS</p></Link>
-              <Link to='/Whitepaper' onClick={handleHideMobileNavigation}><p>WHITEPAPER</p></Link>
-              <Link to='/Tokenomics' onClick={handleHideMobileNavigation}><p>TOKENOMICS</p></Link>
-              <Link to='/Ecosystem' onClick={handleHideMobileNavigation}><p>ECOSYSTEM</p></Link>
+              <div>
+                <Link to='/Leaderboards' onClick={handleHideMobileNavigation}><p>LEADERBOARDS</p></Link>
+                <Link to='/TestnetFaucet' onClick={handleHideMobileNavigation}><p>TESTNET FAUCET</p></Link>
+                <Link to='/Tokens' onClick={handleHideMobileNavigation}><p>TOKENS</p></Link>
+                <Link to='/Whitepaper' onClick={handleHideMobileNavigation}><p>WHITEPAPER</p></Link>
+                <Link to='/Tokenomics' onClick={handleHideMobileNavigation}><p>TOKENOMICS</p></Link>
+                <Link to='/Ecosystem' onClick={handleHideMobileNavigation}><p>ECOSYSTEM</p></Link>
+              </div>
             </div>
 
 
