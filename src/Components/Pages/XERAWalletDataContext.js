@@ -140,8 +140,8 @@ export const XERAWalletDataProvider = ({ children }) => {
                             "Authorization": `Bearer ${accessToken}`
                         }
                     }).then((res) => {
-                        setViewXERATokenList(res.data.data)
-                        setDataLoading(false)
+                        setViewXERATokenList(res.data.data);
+                        setDataLoading(false);
                     })
                 }else{
                     return
@@ -209,10 +209,6 @@ export const XERAWalletDataProvider = ({ children }) => {
     
     
     useEffect(() => {
-        if (!cookies || !userLoggedData) {
-            return; // Wait until cookies and userLoggedData are ready
-        }
-
         const fetchAllData = async () => {
             try {
                 setWindowReload(true); // Start the loading state
@@ -232,7 +228,7 @@ export const XERAWalletDataProvider = ({ children }) => {
                 // Assuming fetchXERAData1 updates its data internally
     
                 // All state updates are complete; now stop the loading state
-                await new Promise((resolve) => setTimeout(resolve, 3000)); // Add a 300ms delay
+                await new Promise((resolve) => setTimeout(resolve, 5000)); // Add a 5000ms delay
                 setWindowReload(false); // Turn off reload
             } catch (error) {
                 console.error("Error fetching data:", error);
