@@ -18,7 +18,8 @@ const ConnectWallet = () => {
     const {
         userLoggedData,
         setViewConnectWallet,
-        fetchXERAData2,
+        fetchXERAData1,
+        fetchTask
     } = XERAWalletData();
 
 
@@ -82,7 +83,6 @@ const ConnectWallet = () => {
         alert("EVM Wallet not installed!");
         }
     };
-
     // Function to switch the MetaMask network to Ethereum (ChainID 1)
     const switchToEthereumNetwork = async () => {
         try {
@@ -121,7 +121,6 @@ const ConnectWallet = () => {
             setWalletType("Unsupported Network");
         }
     };
-
     // Function to connect to Phantom (Solana)
     // Function to connect to Phantom (Solana)
     const connectPhantom = async () => {
@@ -147,8 +146,6 @@ const ConnectWallet = () => {
             alert("Phantom Wallet not installed!");
         }
     };
-
-
     // Function to detect and connect to the available wallet
     const detectAndConnectWallet = async () => {
         
@@ -217,9 +214,8 @@ const ConnectWallet = () => {
     
             if (responseMessage.success) {
                 console.log(responseMessage.message);
-                localStorage.setItem('walletTask', 'completed');
                 setViewConnectWallet(false)
-                fetchXERAData2();
+                fetchTask();
             } else {
                 console.log(responseMessage.message);
                 setBindErrorResponse(responseMessage.message)
@@ -245,7 +241,7 @@ const ConnectWallet = () => {
                         <h5>CONNECT WALLET TO</h5>
                         <h4>TEXERACT NETWORK</h4>
                     </div>
-                    {!userWalletTask && <button id='triggerConnectWallet' onClick={detectAndConnectWallet}><TbPlugConnected className='faIcons'/></button>}
+                    <button id='triggerConnectWallet' onClick={detectAndConnectWallet}><TbPlugConnected className='faIcons'/></button>
                 </div>
             </div>
         </>

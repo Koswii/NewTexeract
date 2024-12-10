@@ -439,6 +439,7 @@ const Profile = () => {
         navigate('/TestnetFaucet')
     }
     
+
     return (
         <div className='mainContainer profile'>
             <div className={windowReload ? "profileReload active" :  "profileReload disable"}>
@@ -491,7 +492,7 @@ const Profile = () => {
                                 <button id='prfpchrcAssetBtn' onClick={handleViewProfileTokens}><PiCoins className='faIcons'/><RiArrowDownSFill className='faIcons'/></button>:
                                 <button id='prfpchrcAssetBtn' onClick={handleHideProfileTokens}><PiCoins className='faIcons'/><RiArrowUpSFill className='faIcons'/></button>}
                                 <div className={viewProfileTokens ? "prfpchrcAssetList active" : "prfpchrcAssetList"}>
-                                    <ul>
+                                    {usertokenBalances &&<ul>
                                         {usertokenBalances.map((data, i) => (
                                             <li key={i}>
                                                 <span id='prfpchrcaLogo'>
@@ -507,7 +508,7 @@ const Profile = () => {
                                                 </span>
                                             </li>
                                         ))}
-                                    </ul>
+                                    </ul>}
                                 </div>
                                 <div className="prfpchrcProfile">
                                     <h5><ScrambleTextUsername targetText={`${ userLoggedData?.myXeraUsername}`} scrambleSpeed={80} revealSpeed={200} /></h5>
@@ -731,8 +732,8 @@ const Profile = () => {
                                     <h6><span>10,000 XP</span><br />BIND YOUR<br />CRYTO WALLET</h6>
                                     {userTask?.walletConnect ?
                                         <>
-                                            {userTask?.ethWallet === "true" && <p id='connectedNetwork'><TbCurrencyEthereum className='faIcons'/>CONNECTED</p>}
-                                            {xeraUserWallets?.sol_wallet && <p id='connectedNetwork'><TbCurrencySolana className='faIcons'/>CONNECTED</p>}
+                                            {(userTask?.ethWallet === "true") && <p id='connectedNetwork'><TbCurrencyEthereum className='faIcons'/>CONNECTED</p>}
+                                            {(userTask?.solWallet === "true") && <p id='connectedNetwork'><TbCurrencySolana className='faIcons'/>CONNECTED</p>}
                                         </>
                                         :<button onClick={handleBindWallet} className='active'>CONNECT</button>
                                     }
@@ -745,8 +746,8 @@ const Profile = () => {
                                         <p id='ppcmalccdStatus'>TASK 4</p>
                                     }
                                     <p id='ppcmalccdDesription'>Connect your crypto wallet to seamlessly transact across any blockchain network. <br /> (ETHEREUM or SOLANA Only)</p>
-                                    {xeraUserWallets?.eth_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencyEthereum className='faIcons'/> Ethereum Wallet Address</p>}
-                                    {xeraUserWallets?.sol_wallet && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencySolana className='faIcons'/> Solana Wallet Address</p>}
+                                    {(userTask?.ethWallet === "true") && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencyEthereum className='faIcons'/> Ethereum Wallet Address</p>}
+                                    {(userTask?.solWallet === "true") && <p id='ppcmalccdDesription'>You Successfully Connected your <TbCurrencySolana className='faIcons'/> Solana Wallet Address</p>}
                                 </div>
                             </div>
                             <div className={(userTask?.facebooktask ) ? "ppcmalcContent facebook active" : "ppcmalcContent facebook"}>

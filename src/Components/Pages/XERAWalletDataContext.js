@@ -20,6 +20,7 @@ export const XERAWalletDataProvider = ({ children }) => {
           throw new Error('Invalid token specified');
         }
     };
+    const IPChecker = process.env.REACT_APP_XERA_IPINFO
     const apikey = process.env.REACT_APP_XERA_API
     const baseURL = process.env.REACT_APP_XERA_BASE_URL_API
     const cookies = Cookies.get('authToken');
@@ -56,99 +57,42 @@ export const XERAWalletDataProvider = ({ children }) => {
     const [dataLoading, setDataLoading] = useState(false);
 
     const [TXERATransactions,setTXERATransaction] = useState(null)
-
-    
     const [userTask,setuserTask] = useState(null)
     const [userTotalFollowers,setUserTotalFollowers] = useState(null)
     const [usertokenBalances, setUserTokenBalances] = useState([]);
     
     const [processedData, setProcessedData] = useState([]);
 
-    const fetchTransaction = () => {
-        const apikey = process.env.REACT_APP_XERA_API
-        const api = {
-            apikey: apikey
-        }
-        try {
-            axios.post(`${baseURL}/generate/access-token`,api)
-            .then((res)=>{
-                const accessToken = res.data.accessToken
-                if (res.data.success) {
-
-                    axios.get(`${baseURL}/token/faucet-transaction`,{
-                        headers: {
-                            "Authorization" : `Bearer ${accessToken}`
-                        }
-                    })
-                    .then((response) => {
-                        if (response.data.success) {
-                            setTXERATransaction(response.data.data)
-                        }
-                    })
-                }
-            })
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    useEffect(() => {
-        const intervalId = setInterval(async () => {
-            fetchTransaction();
-        }, 2000);
-        return () => clearInterval(intervalId);
-    }, []);
-
-
     const fetchXERAData1 = async () => {
-        setDataLoading(true)
+        setDataLoading(true);
         try {
-            axios.post(`${baseURL}/generate/access-token`,api)
-            .then((res)=>{
-                const accessToken = res.data.accessToken
-                if (res.data.success) {
-                    axios.get(`${baseURL}/users/users-list`,{
-                        headers: {
-                            "Authorization" : `Bearer ${accessToken}`
-                        }
-                    })
-                    .then((response) => {
-                        const allusers = response.data.data
-                        setXeraUserList(allusers)
-                        setXeraUserNumber(allusers.length)
-                    })
-
-                    axios.get(`${baseURL}/users/user-task/referrals`,{
-                        headers: {
-                            "Authorization" : `Bearer ${accessToken}`
-                        }
-                    })
-                    .then((response) => {
-                        setReferralCounts(response.data.data);
-                    })
-                    
-                    axios.get(`${baseURL}/users/user-tasks/ranking`,{
-                        headers: {
-                            "Authorization" : `Bearer ${accessToken}`
-                        }
-                    })
-                    .then((response) => {
-                        setProcessedData(response.data.data);
-                    })
-                    
-                    axios.get(`${baseURL}/token/asset-tokens`,{
-                        headers: {
-                            "Authorization": `Bearer ${accessToken}`
-                        }
-                    }).then((res) => {
-                        setViewXERATokenList(res.data.data);
-                        setDataLoading(false);
-                    })
-                }else{
-                    return
-                }
-            })
+            // Get the access token
+            const tokenResponse = await axios.post(`${baseURL}/generate/access-token`, api);
+            const { accessToken, success } = tokenResponse.data;
+    
+            if (!success) return;
+    
+            // Define headers for future requests
+            const headers = { Authorization: `Bearer ${accessToken}` };
+    
+            // Perform multiple API calls concurrently
+            const [usersListRes, referralsRes, rankingRes, assetTokensRes] = await Promise.all([
+                axios.get(`${baseURL}/users/users-list`, { headers }),
+                axios.get(`${baseURL}/users/user-task/referrals`, { headers }),
+                axios.get(`${baseURL}/users/user-tasks/ranking`, { headers }),
+                axios.get(`${baseURL}/token/asset-tokens`, { headers })
+            ]);
+    
+            // Process responses
+            const allUsers = usersListRes.data.data || [];
+            setXeraUserList(allUsers);
+            setXeraUserNumber(allUsers.length);
+    
+            setReferralCounts(referralsRes.data.data || []);
+            setProcessedData(rankingRes.data.data || []);
+            setViewXERATokenList(assetTokensRes.data.data || []);
         } catch (error) {
-            console.log(error);
+            console.error('Error fetching XERA data:', error);
         } finally {
             setDataLoading(false);
         }
@@ -205,7 +149,49 @@ export const XERAWalletDataProvider = ({ children }) => {
             console.error("Error fetching tasks:", error);
             return [];
         }
+    }
+
+    const fetchTransaction = () => {
+        const apikey = process.env.REACT_APP_XERA_API
+        const api = {
+            apikey: apikey
+        }
+        try {
+            axios.post(`${baseURL}/generate/access-token`,api)
+            .then((res)=>{
+                const accessToken = res.data.accessToken
+                if (res.data.success) {
+
+                    axios.get(`${baseURL}/token/faucet-transaction`,{
+                        headers: {
+                            "Authorization" : `Bearer ${accessToken}`
+                        }
+                    })
+                    .then((response) => {
+                        if (response.data.success) {
+                            setTXERATransaction(response.data.data)
+                        }
+                    })
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
     };
+    // const checkVPN = async () => {
+    //     try {
+    //       const response = await axios.get(`https://api.ipregistry.co/138.199.43.146?key=ira_TTtoHRdyIhFKuyqXVYiAWP3gvOKflL3Eo34Q`);
+    //       const { data } = response;
+    
+    //       console.log({
+    //         isVPN: data.security.is_vpn,
+    //         organization: data.company?.name || "N/A",
+    //         location: `${data.location.city}, ${data.location.country.name}`,
+    //       });
+    //     } catch (err) {
+    //         console.log("Unable to fetch IP information. Please check the IP address or your API key.");
+    //     }
+    //  };
     
     
     useEffect(() => {
@@ -213,31 +199,54 @@ export const XERAWalletDataProvider = ({ children }) => {
             try {
                 setWindowReload(true); // Start the loading state
     
-                // Perform all fetches in parallel
-                const [xeraData, followers, balance, tasks] = await Promise.all([
+                // Perform all fetches and wait for results
+                const fetchRequests = [
                     fetchXERAData1(),
                     fetchFollowers(),
                     fetchBalance(),
                     fetchTask(),
-                ]);
+                ];
     
-                // Set state for all fetched data (sequentially, ensuring state updates)
-                setUserTokenBalances(balance);
-                setUserTotalFollowers(followers);
-                setuserTask(tasks);
-                // Assuming fetchXERAData1 updates its data internally
+                // Wait for all requests to resolve
+                const responses = await Promise.allSettled(fetchRequests);
     
-                // All state updates are complete; now stop the loading state
-                await new Promise((resolve) => setTimeout(resolve, 5000)); // Add a 5000ms delay
-                setWindowReload(false); // Turn off reload
+                // Check for successful requests (status === "fulfilled")
+                const allSuccessful = responses.every(
+                    (response) => response.status === "fulfilled"
+                );
+    
+                if (allSuccessful) {
+                    // Extract data from fulfilled promises
+                    const [xeraData, followers, balance, tasks] = responses.map(
+                        (response) => response.value
+                    );
+    
+                    // Set state with fetched data
+                    setUserTokenBalances(balance);
+                    setUserTotalFollowers(followers);
+                    setuserTask(tasks);
+                    // Assuming fetchXERAData1 handles its internal state update
+                } else {
+                    console.error("One or more requests failed:", responses);
+                }
+    
+                // Add a slight delay to ensure data renders visually
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                setWindowReload(false); // Turn off reload once all requests are resolved
             } catch (error) {
-                console.error("Error fetching data:", error);
-                setWindowReload(false); // Stop loading even if there's an error
+                console.error("Error during fetching data:", error);
+    
+                // Ensure loading is stopped even on error
+                setWindowReload(false);
             }
         };
     
-        fetchAllData(); // Call the async function
+        // Fetch data on component load or dependency change
+        fetchAllData();
+        fetchTransaction();
+        // checkVPN() // Uncomment if required
     }, [cookies, userLoggedData]);
+    
 
 
     if(
@@ -257,6 +266,7 @@ export const XERAWalletDataProvider = ({ children }) => {
                 windowReload,
                 fetchXERAData1,
                 fetchTask,
+                fetchTransaction,
                 viewXERATransactionList,
                 viewXERATokenList,
                 xeraUserNumber,

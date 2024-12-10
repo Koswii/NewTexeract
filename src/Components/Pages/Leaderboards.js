@@ -75,6 +75,10 @@ const Leaderboards = () => {
     const myCurrentData = processedData.find(user => user.username === (userLoggedData && userLoggedData.myXeraUsername))
     const myCurrentRank = myCurrentData?.rank
 
+    const rank1Stats = processedData.slice(0, 1)[0]
+    const rank23Stats = processedData.slice(1, 3)
+    
+
 
     // Calculate the index range for the current page
     const indexOfLastItem = currentPage * dataPerPage;
@@ -134,82 +138,43 @@ const Leaderboards = () => {
                         </div>
                     </div>
                     <div className="lbrdpcTop2">
-                        {processedData.slice(0, 1).map((data, i) => (
-                            <div className="lbrdpct2 top1" key={i}>
-                                <div className='lbrdpct2t1Header'>
-                                    <div className='lbrdpct2t1hNFT'>
-                                        <span>
-                                            <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-                                        </span>
-                                        <p>{data?.rank}</p>
-                                    </div>
-                                    <div className='lbrdpct2t1hName'>
-                                        <h5><TextFormatter text={`${data?.username}`} /></h5>
-                                        <p><TextSlicer text={`${data?.xera_wallet}`} maxLength={25} /></p>
-                                    </div>
+                        <div className="lbrdpct2 top1">
+                            <div className='lbrdpct2t1Header'>
+                                <div className='lbrdpct2t1hNFT'>
+                                    <span>
+                                        <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
+                                    </span>
+                                    <p>{rank1Stats?.rank}</p>
                                 </div>
-                                <div className="lbrdpct2t1Contents">
-                                    <div>
-                                        <h4>0</h4>
-                                        <p>NODES</p>
-                                    </div>
-                                    <div>
-                                        <h4><NumberFormatter number={data?.referralTaskCount}/></h4>
-                                        <p>REFERRALS</p>
-                                    </div>
-                                    <div>
-                                        <h4><NumberFormatter number={data?.totalPoints}/></h4>
-                                        <p>XP POINTS</p>
-                                    </div>
-                                </div>
-                                <div className="lbrdpct2t1Rewards">
-                                    <p>P1 REWARDS</p>
-                                    <div>
-                                        <h5><SimpleNumberFormatter number={`${(rewardAllocationP1 * (data?.totalPoints || 0)).toFixed(2)}`}/></h5>
-                                        <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
-                                    </div>
+                                <div className='lbrdpct2t1hName'>
+                                    <h5><TextFormatter text={`${rank1Stats?.username}`} /></h5>
+                                    <p><TextSlicer text={`${rank1Stats?.xera_wallet}`} maxLength={25} /></p>
                                 </div>
                             </div>
-                        ))}
-                        {processedData.slice(1, 2).map((data, i) => (
+                            <div className="lbrdpct2t1Contents">
+                                <div>
+                                    <h4>0</h4>
+                                    <p>NODES</p>
+                                </div>
+                                <div>
+                                    <h4><NumberFormatter number={rank1Stats?.referralTaskCount}/></h4>
+                                    <p>REFERRALS</p>
+                                </div>
+                                <div>
+                                    <h4><NumberFormatter number={rank1Stats?.totalPoints}/></h4>
+                                    <p>XP POINTS</p>
+                                </div>
+                            </div>
+                            <div className="lbrdpct2t1Rewards">
+                                <p>P1 REWARDS</p>
+                                <div>
+                                    <h5><SimpleNumberFormatter number={`${(rewardAllocationP1 * (rank1Stats?.totalPoints || 0)).toFixed(2)}`}/></h5>
+                                    <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        {rank23Stats.map((data, i) => (
                             <div className="lbrdpct2 top2" key={i}>
-                                <div className='lbrdpct2ttHeader'>
-                                    <div className='lbrdpct2tthNFT'>
-                                        <span>
-                                            <img src={require('../assets/imgs/TexeractLogoWhite.png')} alt="" />
-                                        </span>
-                                        <p>{data?.rank}</p>
-                                    </div>
-                                    <div className='lbrdpct2tthName'>
-                                        <h5><TextFormatter text={`${data?.username}`} /></h5>
-                                        <p><TextSlicer text={`${data?.xera_wallet}`} maxLength={15} /></p>
-                                    </div>
-                                </div>
-                                <div className="lbrdpct2ttContents">
-                                    <div>
-                                        <h5>0</h5>
-                                        <p>NODES</p>
-                                    </div>
-                                    <div>
-                                        <h5><NumberFormatter number={data?.referralTaskCount}/></h5>
-                                        <p>REFERRALS</p>
-                                    </div>
-                                    <div>
-                                        <h5><NumberFormatter number={data?.totalPoints}/></h5>
-                                        <p>XP POINTS</p>
-                                    </div>
-                                </div>
-                                <div className="lbrdpct2ttRewards">
-                                    <p>P1 REWARDS</p>
-                                    <div>
-                                        <h5><SimpleNumberFormatter number={`${(rewardAllocationP1 * (data?.totalPoints || 0)).toFixed(2)}`}/></h5>
-                                        <img src={require('../assets/imgs/TexeractCoinRealistic2.png')} alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                        {processedData.slice(2, 3).map((data, i) => (
-                            <div className="lbrdpct2 top3" key={i}>
                                 <div className='lbrdpct2ttHeader'>
                                     <div className='lbrdpct2tthNFT'>
                                         <span>
