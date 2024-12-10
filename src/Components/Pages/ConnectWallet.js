@@ -19,7 +19,8 @@ const ConnectWallet = () => {
         userLoggedData,
         setViewConnectWallet,
         fetchXERAData1,
-        fetchTask
+        fetchTask,
+        userTask
     } = XERAWalletData();
 
 
@@ -30,7 +31,6 @@ const ConnectWallet = () => {
 
     
     const XERAAddWalletAPI = process.env.REACT_APP_XERA_USER_ADD_WALLETS_API;
-    const userWalletTask = localStorage.getItem("walletTask");
 
     const [walletAccount, setWalletAccount] = useState(null);
     const [ethBasedWallet, setEthBasedWallet] = useState('');
@@ -241,7 +241,7 @@ const ConnectWallet = () => {
                         <h5>CONNECT WALLET TO</h5>
                         <h4>TEXERACT NETWORK</h4>
                     </div>
-                    <button id='triggerConnectWallet' onClick={detectAndConnectWallet}><TbPlugConnected className='faIcons'/></button>
+                    {userTask?.walletConnect && <button id='triggerConnectWallet' onClick={detectAndConnectWallet}><TbPlugConnected className='faIcons'/></button>}
                 </div>
             </div>
         </>
