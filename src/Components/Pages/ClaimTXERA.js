@@ -12,7 +12,8 @@ const ClaimTXERA = () => {
         setViewLoginAccount,
         userLoggedData,
         // fetchXERAAssets,
-        viewXERATokenList
+        viewXERATokenList,
+        fetchTask
     } = XERAWalletData();
     const TXERASendReqAPI = process.env.REACT_APP_XERA_ASSET_TXERA_SEND_API;
     const [txHash, setTxHash] = useState("");
@@ -95,7 +96,7 @@ const ClaimTXERA = () => {
                     setTxResponse(responseMessage.message);
                     hashData(formRequestTXERADetails);
                     setClaimingLoader(false)
-                    // fetchXERAAssets();
+                    fetchTask();
                     
                     const timeoutId = setTimeout(() => {
                         setTxResponse("");

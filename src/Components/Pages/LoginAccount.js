@@ -86,75 +86,69 @@ const LoginAccount = () => {
     const [privateKeyLogin, setPrivateKeyLogin] = useState('');
     const [privateKeyLoginResponse, setPrivateKeyLoginResponse] = useState(false);
 
-    
+    // Utility function to handle temporary messages
+    const showTemporaryMessage = (message) => {
+        setViewLoginResponse(true);
+        setViewLoginMessage(message);
+
+        const timeoutId = setTimeout(() => {
+            setViewLoginResponse(false);
+            setViewLoginMessage('');
+        }, 3000);
+
+        return () => clearTimeout(timeoutId);
+    };
     const handleUserLoginBasic = async () => {
-        setLoginLoader(true);
-      
-        if (!insertUsername || !insertPassword) {
-            setViewLoginResponse(true);
-            setViewLoginMessage('Please fill in all fields.');
-            setLoginLoader(false);
-
-            const timeoutId = setTimeout(() => {
-                setViewLoginResponse(false);
-                setViewLoginMessage("");
-            }, 3000);
-            return () => clearTimeout(timeoutId);
-        }
-      
-
-        axios.post(`${baseURL}/generate/access-token`, key)
-        .then((res) => {
-            const accessToken = res.data.accessToken
+        try {
+            setLoginLoader(true);
+    
+            // Validate input fields
+            if (!insertUsername || !insertPassword) {
+                showTemporaryMessage('Please fill in all fields.');
+                return;
+            }
+    
+            // Generate access token
+            const { data: tokenData } = await axios.post(`${baseURL}/generate/access-token`, key);
+    
+            if (!tokenData.success) {
+                throw new Error('Failed to generate access token.');
+            }
+    
+            const accessToken = tokenData.accessToken;
             const loginInfoDetails = {
                 username: insertUsername,
                 password: insertPassword,
-            }
+            };
     
-            if (res.data.success) {
-                axios.post(`${baseURL}/user/login-basic`, loginInfoDetails, {
-                    headers: {
-                        'Content-Type': 'application/json', 
-                        'Accept': 'application/json',
-                        'Authorization': `Bearer ${accessToken}`
-                    },
-                }).then((response) =>{
-                    const successData = response.data.success; 
-                    if (successData === true) {
-                        const userAuthToken = response.data.authToken
-                        Cookies.set('authToken', userAuthToken, { expires: 7 });
-                        setViewLoginAccount(false);
-                        window.location.reload();
-                    }else{
-                        setViewLoginMessage(response.data.message)
-                    }
-                })
-                .catch((error) => {
-                    const errorData = error.response.data
-                    setLoginLoader(false);
-                    setViewLoginResponse(true)
-                    setViewLoginMessage(errorData.message)
-        
-                    const timeoutId = setTimeout(() => {
-                        setViewLoginResponse(false);
-                        setViewLoginMessage("");
-                    }, 3000);
-                    return () => clearTimeout(timeoutId);
-                })
+            // Configure headers
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${accessToken}`,
+            };
+    
+            // Attempt user login
+            const { data: loginResponse } = await axios.post(
+                `${baseURL}/user/login-basic`,
+                loginInfoDetails,
+                { headers }
+            );
+    
+            if (loginResponse.success) {
+                Cookies.set('authToken', loginResponse.authToken, { expires: 7 });
+                setViewLoginAccount(false);
+                window.location.reload();
+            } else {
+                showTemporaryMessage(loginResponse.message);
             }
-        })
-        .catch((error) => {
-            const errorData = error.response.data
+        } catch (error) {
+            const errorMessage =
+                error.response?.data?.message || 'An unexpected error occurred.';
+            showTemporaryMessage(errorMessage);
+        } finally {
             setLoginLoader(false);
-            setViewLoginResponse(true)
-            setViewLoginMessage(errorData.message)
-
-            const timeoutId = setTimeout(() => {
-                setViewLoginResponse(false);
-                setViewLoginMessage("");
-            }, 3000);
-            return () => clearTimeout(timeoutId);
-        })
+        }
     };
     
 
@@ -244,9 +238,6 @@ const LoginAccount = () => {
             return () => clearTimeout(timeoutId);
         })
     };
-
-
-
     const handleUserLoginPrivateKey = async () => {
         setLoginLoader(true);
       

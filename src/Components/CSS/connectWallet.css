@@ -79,6 +79,7 @@ h6{
     right: 1vw;
     font-size: 1.2vw;
     cursor: pointer;
+    z-index: 2;
 }
 .nccwErrorRes{
     position: absolute;
@@ -109,33 +110,42 @@ h6{
     position: absolute;
     bottom: 0;
     left: 0;
+    text-align: center;
 }
-.nwccwaContainer h5{
+/* .nwccwaContainer h5{
     text-align: left;
-}
+} */
 .nwccwaContainer h4{
-    text-align: left;
+    font-size: 1.9vw;
     line-height: 1.8vw;
 }
-.navContentConnectWallet button#triggerConnectWallet{
+.nwccwaConnectBtn{
     position: absolute;
-    bottom: 1.5vw;
-    right: 1.5vw;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nwccwaConnectBtn button#triggerConnectWallet{
     color: white;
-    background: none;
+    background: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     outline: none;
-    border: solid 2px white;
+    border: solid 0.5vw white;
     border-radius: 50%;
-    height: 3vw;
-    width: 3vw;
-    font-size: 2vw;
+    height: 10vw;
+    width: 10vw;
+    font-size: 8.5vw;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: 400ms ease;
 }
-.navContentConnectWallet button#triggerConnectWallet:hover{
+.nwccwaConnectBtn button#triggerConnectWallet:hover{
+    border: solid 0.5vw black;
     background: white;
     color: black;
     transition: 400ms ease;
@@ -161,15 +171,14 @@ h6{
         font-size: 3.5vw;
     }
     .nwccwaContainer h4 {
-        font-size: 8vw;
+        font-size: 6vw;
         line-height: 8vw;
     }
     .navContentConnectWallet button#triggerConnectWallet{
-        height: 10vw;
-        width: 10vw;
-        bottom: 5vw;
-        right: 5vw;
-        font-size: 10vw;
+        height: 40vw;
+        width: 40vw;
+        font-size: 35vw;
+        border: solid 2vw white;
     }
 
 

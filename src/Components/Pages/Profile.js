@@ -128,6 +128,7 @@ const Profile = () => {
         setViewConnectWallet,
         dataLoading,
         windowReload,
+        setWindowReload,
         userLoggedData,
         userTotalFollowers,
         usertokenBalances,
@@ -220,10 +221,40 @@ const Profile = () => {
     
 
     useEffect(() => {
-        fetchXERAData1();
-        fetchTransaction();
-        fetchTask();
-    }, [!userLoggedData])
+        const handleBeforeUnload = (event) => {
+            setWindowReload(true); // Set loading state on page refresh/reload
+        };
+
+        const handleLoad = () => {
+            setWindowReload(false); // Set loading state to false after page load completes
+            // Run data fetching once page is loaded
+            fetchData();
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload); // Trigger on page refresh/reload
+        window.addEventListener("load", handleLoad); // Trigger after page load completes
+
+        // Cleanup event listeners
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+            window.removeEventListener("load", handleLoad);
+        };
+    }, []); // Empty dependency array ensures this runs only once on mount
+
+
+    const fetchData = async () => {
+        try {
+            await Promise.all([
+                fetchXERAData1(), // Fetch XERA data
+                fetchTask(), // Fetch task data
+            ]);
+            console.log("All data fetched successfully");
+        } catch (error) {
+            console.error("Error during data fetching:", error);
+        } finally {
+            setWindowReload(false); // Stop loading after fetching
+        }
+    };
     
     
     const fetchTransaction = () => {
@@ -238,9 +269,13 @@ const Profile = () => {
         }).then((res) => {
             setUserTransactions(res.data.data)
         }).catch((error) => {
-            console.log(error);
+            // console.log(error);
         })
     }
+
+    useEffect(() => {
+        fetchTransaction();
+    }, []);
 
     const handleViewProfileOverview = () => {
         setViewProfileOverview(true);
@@ -547,7 +582,7 @@ const Profile = () => {
                                                         ))}
                                                     </div>
                                                 }
-                                                <h5><NumberFormatter number={userTotalFollowers.length}/></h5>
+                                                <h5><NumberFormatter number={userTotalFollowers.length || myCurrentReferrals}/></h5>
                                                 </>
                                             }
                                         </div>
@@ -741,7 +776,7 @@ const Profile = () => {
                                 <div className={!viewBindDetails ? "ppcmalccDetails" : "ppcmalccDetails active"}>
                                     {/* <button id='ppcmalccdClose' onClick={handleCloseAirdropDetails}><FaTimes className='faIcons'/></button> */}
                                     <h6>BIND ANY<br />CRYTO WALLET</h6>
-                                    {userWalletStatus ?
+                                    {userTask?.walletConnect ?
                                         <p id='ppcmalccdStatus'><TbCircleCheckFilled className='faIcons'/> COMPLETED</p>:
                                         <p id='ppcmalccdStatus'>TASK 4</p>
                                     }
@@ -947,7 +982,7 @@ const Profile = () => {
                             <Link to='/Leaderboards'><TbArrowUpRight className="faIcons"/></Link>
                         </div>
                         <div className="ppcmarContainer">
-                            {(dataLoading) ? <>
+                            {/* {(dataLoading) ? <>
                                 <div className="ppcmarcRefLeaderLoading">
                                     <div className="ppcmarcrlLeader"></div>
                                     <span></span>
@@ -1068,7 +1103,7 @@ const Profile = () => {
                                     <div className="ppcmarcrlName"></div>
                                     <div className="ppcmarcrlCount"></div>
                                 </div>
-                            </>:<>
+                            </>:<> */}
                                 {xeraReferralCounts.slice(0, 20).map((data, i) => (
                                     <div className="ppcmarcRefLeader" key={i}>
                                         <div className="ppcmarcrlLeader">
@@ -1089,7 +1124,7 @@ const Profile = () => {
                                         </div>
                                     </div>
                                 ))}
-                            </>}
+                            {/* </>} */}
                         </div>
                     </div>
                 </div>

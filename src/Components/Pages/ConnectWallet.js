@@ -241,7 +241,9 @@ const ConnectWallet = () => {
                         <h5>CONNECT WALLET TO</h5>
                         <h4>TEXERACT NETWORK</h4>
                     </div>
-                    {userTask?.walletConnect && <button id='triggerConnectWallet' onClick={detectAndConnectWallet}><TbPlugConnected className='faIcons'/></button>}
+                    <div className="nwccwaConnectBtn">
+                        <button id='triggerConnectWallet' onClick={detectAndConnectWallet}><TbPlugConnected className='faIcons'/></button>
+                    </div>
                 </div>
             </div>
         </>
